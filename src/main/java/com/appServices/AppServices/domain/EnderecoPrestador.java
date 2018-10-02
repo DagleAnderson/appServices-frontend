@@ -1,7 +1,5 @@
 package com.appServices.AppServices.domain;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,9 +10,7 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class EnderecoCliente implements Serializable {
-	private static final long serialVersionUID = 1L;
-	
+public class EnderecoPrestador {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -29,15 +25,15 @@ public class EnderecoCliente implements Serializable {
 	
 	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name="cliente_id")
-	private Cliente cliente;
+	@JoinColumn(name="prestador_id")
+	private Prestador prestador;
 	
-	public EnderecoCliente() {
+	public EnderecoPrestador() {
 		
 	}
 
-	public EnderecoCliente(Integer id, String cidade, String estado, String cep, String bairro, String rua, int numero,
-			String complemento,Cliente cliente) {
+	public EnderecoPrestador(Integer id, String cidade, String estado, String cep, String bairro, String rua, int numero,
+			String complemento,Prestador prestador) {
 		this.id = id;
 		this.cidade = cidade;
 		this.estado = estado;
@@ -46,7 +42,7 @@ public class EnderecoCliente implements Serializable {
 		this.rua = rua;
 		this.numero = numero;
 		this.complemento = complemento;
-		this.cliente = cliente;
+		this.prestador = prestador;
 	}
 
 	@Override
@@ -65,7 +61,7 @@ public class EnderecoCliente implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		EnderecoCliente other = (EnderecoCliente) obj;
+		EnderecoPrestador other = (EnderecoPrestador) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -138,13 +134,14 @@ public class EnderecoCliente implements Serializable {
 		this.complemento = complemento;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
+	public Prestador getPrestador() {
+		return prestador;
 	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setPrestador(Prestador prestador) {
+		this.prestador = prestador;
 	}
 	
 	
-	}
+
+}

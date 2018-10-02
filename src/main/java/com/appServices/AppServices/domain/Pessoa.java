@@ -30,14 +30,18 @@ public class Pessoa implements Serializable {
 	private String rg;
 	private String cpf;
 	private Integer sexo;
-	
+
 	@ElementCollection
 	@CollectionTable(name="TELEFONE")
 	private Set<String> telefones =  new HashSet<>();;
 	
-
+	
 	@OneToOne(cascade=CascadeType.ALL,mappedBy="pessoa")
 	private Cliente cliente;
+	
+	@OneToOne(cascade=CascadeType.ALL,mappedBy="pessoa")
+	private Prestador prestador;
+	
 	
 	public Pessoa() {
 		
