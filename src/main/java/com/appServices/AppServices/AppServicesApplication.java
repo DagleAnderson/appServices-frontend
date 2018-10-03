@@ -10,19 +10,25 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.appServices.AppServices.domain.AreaProfissional;
 import com.appServices.AppServices.domain.Cliente;
+import com.appServices.AppServices.domain.Curriculo;
+import com.appServices.AppServices.domain.Cursos;
 import com.appServices.AppServices.domain.EnderecoCliente;
 import com.appServices.AppServices.domain.EnderecoPrestador;
+import com.appServices.AppServices.domain.Experiencias;
 import com.appServices.AppServices.domain.Pessoa;
 import com.appServices.AppServices.domain.Prestador;
-import com.appServices.AppServices.domain.Servicos;
+import com.appServices.AppServices.domain.Profissao;
 import com.appServices.AppServices.domain.enums.TipoSexo;
 import com.appServices.AppServices.repositories.AreaProfissionalRespository;
 import com.appServices.AppServices.repositories.ClienteRespository;
+import com.appServices.AppServices.repositories.CurriculoRespository;
+import com.appServices.AppServices.repositories.CursosRespository;
 import com.appServices.AppServices.repositories.EnderecoClienteRespository;
 import com.appServices.AppServices.repositories.EnderecoPrestadorRespository;
+import com.appServices.AppServices.repositories.ExperienciasRespository;
 import com.appServices.AppServices.repositories.PessoaRespository;
 import com.appServices.AppServices.repositories.PrestadorRespository;
-import com.appServices.AppServices.repositories.ServicosRespository;
+import com.appServices.AppServices.repositories.ProfissaoRespository;
 
 @SpringBootApplication
 public class AppServicesApplication implements CommandLineRunner {
@@ -46,7 +52,17 @@ public class AppServicesApplication implements CommandLineRunner {
 	private AreaProfissionalRespository areaPorfissionalRepository;
 	
 	@Autowired
-	private ServicosRespository servicosRepository;
+	private ProfissaoRespository servicosRepository;
+	
+	@Autowired
+	private CurriculoRespository curriculoRepository;
+	
+	@Autowired
+	private CursosRespository cursosRespository;
+	
+	@Autowired
+	private ExperienciasRespository experienciasRespository;
+	
 	
 	public static void main(String[] args){
 		SpringApplication.run(AppServicesApplication.class, args);
@@ -75,21 +91,39 @@ public class AppServicesApplication implements CommandLineRunner {
 
 			
 	AreaProfissional areaProf1= new AreaProfissional(null, "Construção e Reforma");		
-	Servicos servico1 = new Servicos(null, "Pintor",areaProf1);
-	Servicos servico2 = new Servicos(null, "Pedreiro",areaProf1);
-	Servicos servico3 = new Servicos(null, "Engenheiro",areaProf1);
-		areaProf1.getServicos().addAll(Arrays.asList(servico1,servico2,servico3));
+	Profissao prof1 = new Profissao(null, "Pintor",areaProf1);
+	Profissao prof2 = new Profissao(null, "Pedreiro",areaProf1);
+	Profissao prof3 = new Profissao(null, "Engenheiro",areaProf1);
+		areaProf1.getServicos().addAll(Arrays.asList(prof1,prof2,prof3));
 		
 		areaPorfissionalRepository.saveAll(Arrays.asList(areaProf1));
-		servicosRepository.saveAll(Arrays.asList(servico1,servico2,servico3));
+		servicosRepository.saveAll(Arrays.asList(prof1,prof2,prof3));
 	
-	Prestador prest1 = new Prestador(null, p2,servico1);	
+	Prestador prest1 = new Prestador(null, p2,prof1);	
 	EnderecoPrestador end2 = new EnderecoPrestador(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio",prest1);
 			prest1.getEndereco().addAll(Arrays.asList(end2));
-	
-			prestadorRepository.saveAll(Arrays.asList(prest1));
-			enderecoPrestadorRepository.saveAll(Arrays.asList(end2));				
 		
+	Curriculo c1 = new Curriculo(null, prest1);
+	Cursos curso1 = new Cursos(null, "Oficina Coral", "Coral Titas Brasil","2 dias", c1);
+	Cursos curso2 = new Cursos(null, "treinamento Suvenil ", "Suvenil tintas","7 dias ", c1);
+	Experiencias exp1 = new Experiencias(null,"Suvinil LTDA", "Pinto","2 anos",c1);
+	c1.getCursos().addAll(Arrays.asList(curso1,curso2));
+	c1.getExperiencias().addAll(Arrays.asList(exp1));
+	
+	prest1.setCurriculo(c1);
+	prestadorRepository.saveAll(Arrays.asList(prest1));
+	enderecoPrestadorRepository.saveAll(Arrays.asList(end2));
+
+	
+	
+	curriculoRepository.saveAll(Arrays.asList(c1));
+	cursosRespository.saveAll(Arrays.asList(curso1,curso2));
+	experienciasRespository.saveAll(Arrays.asList(exp1));
+	
+	
+	
+			
+			
 
 		
 	}

@@ -11,29 +11,32 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
 @Entity
-public class Servicos implements Serializable{
+public class Cursos implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String nome;
+	private String descricao;
+	private String instituicao;
+	private String duracao;
 	
 	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name="areaProfissional_id")
-	private AreaProfissional areaProfissional;
+	@JoinColumn(name="curriculo_id")
+	private Curriculo curriculo;
 	
-	public Servicos() {
+	public Cursos() {
 		
 	}
 
-	public Servicos(Integer id, String nome, AreaProfissional areaProfissional) {
+	public Cursos(Integer id, String descricao, String instituicao,String duracao, Curriculo curriculo) {
 		this.id = id;
-		this.nome = nome;
-		this.areaProfissional = areaProfissional;
+		this.descricao = descricao;
+		this.instituicao = instituicao;
+		this.duracao = duracao;
+		this.curriculo = curriculo;
 	}
 
 	@Override
@@ -52,7 +55,7 @@ public class Servicos implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Servicos other = (Servicos) obj;
+		Cursos other = (Cursos) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -69,23 +72,38 @@ public class Servicos implements Serializable{
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
-	public AreaProfissional getAreaProfissional() {
-		return areaProfissional;
+	public String getInstituicao() {
+		return instituicao;
 	}
 
-	public void setAreaProfissional(AreaProfissional areaProfissional) {
-		this.areaProfissional = areaProfissional;
+	public void setInstituicao(String instituicao) {
+		this.instituicao = instituicao;
 	}
 	
-	
+
+	public String getDuracao() {
+		return duracao;
+	}
+
+	public void setDuracao(String duracao) {
+		this.duracao = duracao;
+	}
+
+	public Curriculo getCurriculo() {
+		return curriculo;
+	}
+
+	public void setCurriculo(Curriculo curriculo) {
+		this.curriculo = curriculo;
+	}
 	
 	
 }

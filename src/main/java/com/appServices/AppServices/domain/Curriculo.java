@@ -9,26 +9,32 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
-public class AreaProfissional implements Serializable{
+public class Curriculo implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private  String nome;
-	@OneToMany(mappedBy="areaProfissional")
-	private List<Profissao> servicos = new ArrayList<>();
 	
-
-	public AreaProfissional() {
+	@OneToOne(mappedBy="curriculo")
+	private Prestador prestador;
+	
+	@OneToMany(mappedBy = "curriculo")
+	private List<Cursos> cursos =new ArrayList<>();
+	
+	@OneToMany(mappedBy = "curriculo")
+	private List<Experiencias> experiencias = new ArrayList<>();
+	
+	public Curriculo() {
 		
 	}
 
-	public AreaProfissional(Integer id, String nome) {
+	public Curriculo(Integer id, Prestador prestador) {
 		this.id = id;
-		this.nome = nome;
+		this.prestador = prestador;
 	}
 
 	@Override
@@ -47,7 +53,7 @@ public class AreaProfissional implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AreaProfissional other = (AreaProfissional) obj;
+		Curriculo other = (Curriculo) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -64,20 +70,28 @@ public class AreaProfissional implements Serializable{
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public Prestador getPrestador() {
+		return prestador;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setPrestador(Prestador prestador) {
+		this.prestador = prestador;
 	}
 
-	public List<Profissao> getServicos() {
-		return servicos;
+	public List<Cursos> getCursos() {
+		return cursos;
 	}
 
-	public void setServicos(List<Profissao> servicos) {
-		this.servicos = servicos;
+	public void setCursos(List<Cursos> cursos) {
+		this.cursos = cursos;
+	}
+
+	public List<Experiencias> getExperiencias() {
+		return experiencias;
+	}
+
+	public void setExperiencias(List<Experiencias> experiencias) {
+		this.experiencias = experiencias;
 	}
 	
 	

@@ -1,48 +1,42 @@
 package com.appServices.AppServices.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Prestador implements Serializable {
+public class Experiencias implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	private String empresa;
+	private String funcao;
+	private String periodo;
 	
-	@OneToOne
-	@JoinColumn(name="pessoa_id")
-	private Pessoa pessoa;
-	
-	@OneToMany(mappedBy = "prestador")
-	private List<EnderecoPrestador> endereco =new  ArrayList<>();
-	
-	@OneToOne
-	@JoinColumn(name="profissao_id")
-	private Profissao profissao;
-	
-	@OneToOne
+	@JsonIgnore
+	@ManyToOne
 	@JoinColumn(name="curriculo_id")
 	private Curriculo curriculo;
-
-
-	public Prestador() {
+	
+	public Experiencias() {
 		
 	}
 
-	public Prestador(Integer id, Pessoa pessoa,Profissao profissao) {
+	public Experiencias(Integer id, String empresa, String funcao, String periodo, Curriculo curriculo) {
 		this.id = id;
-		this.pessoa = pessoa;
-		this.profissao= profissao;
+		this.empresa = empresa;
+		this.funcao = funcao;
+		this.periodo = periodo;
+		this.curriculo=curriculo;
 	}
 
 	@Override
@@ -61,7 +55,7 @@ public class Prestador implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Prestador other = (Prestador) obj;
+		Experiencias other = (Experiencias) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -78,28 +72,28 @@ public class Prestador implements Serializable {
 		this.id = id;
 	}
 
-	public Pessoa getPessoa() {
-		return pessoa;
+	public String getEmpresa() {
+		return empresa;
 	}
 
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
+	public void setEmpresa(String empresa) {
+		this.empresa = empresa;
 	}
 
-	public List<EnderecoPrestador> getEndereco() {
-		return endereco;
+	public String getFuncao() {
+		return funcao;
 	}
 
-	public void setEndereco(List<EnderecoPrestador> endereco) {
-		this.endereco = endereco;
+	public void setFuncao(String funcao) {
+		this.funcao = funcao;
 	}
 
-	public Profissao getProfissao() {
-		return profissao;
+	public String getPeriodo() {
+		return periodo;
 	}
 
-	public void setProfissao(Profissao tipoServico) {
-		this.profissao= tipoServico;
+	public void setPeriodo(String periodo) {
+		this.periodo = periodo;
 	}
 
 	public Curriculo getCurriculo() {
@@ -109,8 +103,9 @@ public class Prestador implements Serializable {
 	public void setCurriculo(Curriculo curriculo) {
 		this.curriculo = curriculo;
 	}
+
+	
 	
 	
 
-	
 }

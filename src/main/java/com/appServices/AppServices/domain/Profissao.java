@@ -1,34 +1,38 @@
 package com.appServices.AppServices.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class AreaProfissional implements Serializable{
+public class Profissao implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private  String nome;
-	@OneToMany(mappedBy="areaProfissional")
-	private List<Profissao> servicos = new ArrayList<>();
-	
+	private String nome;
 
-	public AreaProfissional() {
-		
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "areaProfissional_id")
+	private AreaProfissional areaProfissional;
+
+	public Profissao() {
+
 	}
 
-	public AreaProfissional(Integer id, String nome) {
+	public Profissao(Integer id, String nome, AreaProfissional areaProfissional) {
 		this.id = id;
 		this.nome = nome;
+		this.areaProfissional = areaProfissional;
 	}
 
 	@Override
@@ -47,7 +51,7 @@ public class AreaProfissional implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AreaProfissional other = (AreaProfissional) obj;
+		Profissao other = (Profissao) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -72,13 +76,12 @@ public class AreaProfissional implements Serializable{
 		this.nome = nome;
 	}
 
-	public List<Profissao> getServicos() {
-		return servicos;
+	public AreaProfissional getAreaProfissional() {
+		return areaProfissional;
 	}
 
-	public void setServicos(List<Profissao> servicos) {
-		this.servicos = servicos;
+	public void setAreaProfissional(AreaProfissional areaProfissional) {
+		this.areaProfissional = areaProfissional;
 	}
-	
-	
+
 }
