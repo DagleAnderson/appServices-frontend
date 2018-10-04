@@ -31,6 +31,10 @@ public class Cliente implements Serializable{
 	@OneToMany(mappedBy="cliente")
 	private List<EnderecoCliente> endereco =new ArrayList<>();
 	
+	@OneToMany(mappedBy = "cliente")
+	private List<Avaliacoes> avaliaoes = new ArrayList<>();
+	
+	
 	//private Prestadores_Favoritos favoritos;
 	
 	
@@ -93,6 +97,15 @@ public class Cliente implements Serializable{
 	public void setEndereco(List<EnderecoCliente> endereco) {
 		this.endereco = endereco;
 	}
+
+	public List<Avaliacoes> getAvaliaoes() {
+		return avaliaoes;
+	}
+
+	public void setAvaliaoes(List<Avaliacoes> avaliaoes) {
+		this.avaliaoes = avaliaoes;
+	}
+	
 	
 
 }

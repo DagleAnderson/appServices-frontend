@@ -1,6 +1,7 @@
 package com.appServices.AppServices;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.appServices.AppServices.domain.AreaProfissional;
+import com.appServices.AppServices.domain.Avaliacoes;
 import com.appServices.AppServices.domain.Cliente;
 import com.appServices.AppServices.domain.Curriculo;
 import com.appServices.AppServices.domain.Cursos;
@@ -20,6 +22,7 @@ import com.appServices.AppServices.domain.Prestador;
 import com.appServices.AppServices.domain.Profissao;
 import com.appServices.AppServices.domain.enums.TipoSexo;
 import com.appServices.AppServices.repositories.AreaProfissionalRespository;
+import com.appServices.AppServices.repositories.AvaliacoesRespository;
 import com.appServices.AppServices.repositories.ClienteRespository;
 import com.appServices.AppServices.repositories.CurriculoRespository;
 import com.appServices.AppServices.repositories.CursosRespository;
@@ -62,6 +65,9 @@ public class AppServicesApplication implements CommandLineRunner {
 	
 	@Autowired
 	private ExperienciasRespository experienciasRespository;
+	
+	@Autowired
+	private AvaliacoesRespository avaliacoesRespository;
 	
 	
 	public static void main(String[] args){
@@ -121,7 +127,17 @@ public class AppServicesApplication implements CommandLineRunner {
 	experienciasRespository.saveAll(Arrays.asList(exp1));
 	
 	
+	Avaliacoes aval1 = new Avaliacoes(null, cli1, prest1, 5, "Um dos melhores pintores que ja contratei na vida");
 	
+	
+	 cli1.getAvaliaoes().addAll(Arrays.asList(aval1));
+	 prest1.getAvaliacoes().addAll(Arrays.asList(aval1));
+	 
+	 
+	 
+	 avaliacoesRespository.saveAll(Arrays.asList(aval1));
+	 clienteRespository.saveAll(Arrays.asList(cli1));
+	 prestadorRepository.saveAll(Arrays.asList(prest1));
 			
 			
 
