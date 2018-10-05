@@ -24,5 +24,12 @@ public class ClienteService {
 				);
 		
 	}
+	
+	public Cliente  insert(Cliente obj){
+		obj.setId(null);
+		
+		return clienteRepository.save(obj);
+		
+	}
 }
 

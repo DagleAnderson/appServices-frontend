@@ -22,6 +22,12 @@ public class PrestadorService {
 		return objOp.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Prestador.class.getName())
 				);
+	}
+		
+	public Prestador insert(Prestador obj){
+		obj.setId(null);
+		
+		return  prestadorRepository.save(obj);
 		
 	}
 }
