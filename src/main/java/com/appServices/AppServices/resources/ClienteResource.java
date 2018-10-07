@@ -22,14 +22,14 @@ public class ClienteResource {
 	private ClienteService clienteService;
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id){
-		Cliente objOp = clienteService.buscar(id);
+	public ResponseEntity<Cliente> find(@PathVariable Integer id){
+		Cliente objOp = clienteService.find(id);
 		
 		return ResponseEntity.ok().body(objOp);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> Insert(@RequestBody Cliente obj){
+	public ResponseEntity<Void> insert(@RequestBody Cliente obj){
 		obj = clienteService.insert(obj);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -38,4 +38,21 @@ public class ClienteResource {
 		return ResponseEntity.created(uri).build();
 		
 	}
+	
+	@RequestMapping(value="/{id}",method = RequestMethod.PUT)
+	public ResponseEntity<Void>update(@RequestBody Cliente obj, @PathVariable Integer id){
+		obj.setId(id);
+		obj = clienteService.update(obj);
+		
+		return ResponseEntity.noContent().build();
+	
+	}
+	
+	@RequestMapping(value="/{id}",method = RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable Integer id){
+		clienteService.delete(id);;
+		
+		return ResponseEntity.noContent().build();
+	}
+	
 }

@@ -23,11 +23,12 @@ public class PesssoaResource {
 	private PessoaService pessoaService;
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id){
-		Pessoa objOp = pessoaService.buscar(id);
+	public ResponseEntity<Pessoa> find(@PathVariable Integer id){
+		Pessoa objOp = pessoaService.find(id);
 		
 		return ResponseEntity.ok().body(objOp);
 	}
+	
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> Insert(@RequestBody Pessoa obj){
@@ -37,6 +38,23 @@ public class PesssoaResource {
 				.path("/{id}").buildAndExpand(obj.getId()).toUri();
 		
 		return ResponseEntity.created(uri).build();
-	 
+	}
+	
+	
+	@RequestMapping(value= "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Void> update(@RequestBody Pessoa obj,@PathVariable Integer id){
+		obj.setId(id);
+		
+		obj = pessoaService.update(obj);
+		
+		return ResponseEntity.noContent().build();
+		
+	}
+	
+	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable Integer id){
+		pessoaService.delete(id);
+		
+		return ResponseEntity.noContent().build();	
 	}
 }

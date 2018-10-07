@@ -128,9 +128,6 @@ public class AppServicesApplication implements CommandLineRunner {
 	
 	
 	Avaliacoes aval1 = new Avaliacoes(null, cli1, prest1, 5, "Um dos melhores pintores que ja contratei na vida");
-	
-	
-	 cli1.getAvaliaoes().addAll(Arrays.asList(aval1));
 	 prest1.getAvaliacoes().addAll(Arrays.asList(aval1));
 	 
 	 

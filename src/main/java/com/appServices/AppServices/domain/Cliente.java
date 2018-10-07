@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -31,8 +33,9 @@ public class Cliente implements Serializable{
 	@OneToMany(mappedBy="cliente")
 	private List<EnderecoCliente> endereco =new ArrayList<>();
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
-	private List<Avaliacoes> avaliaoes = new ArrayList<>();
+	private List<Avaliacoes> avaliacoes = new ArrayList<>();
 	
 	
 	//private Prestadores_Favoritos favoritos;
@@ -97,15 +100,6 @@ public class Cliente implements Serializable{
 	public void setEndereco(List<EnderecoCliente> endereco) {
 		this.endereco = endereco;
 	}
-
-	public List<Avaliacoes> getAvaliaoes() {
-		return avaliaoes;
-	}
-
-	public void setAvaliaoes(List<Avaliacoes> avaliaoes) {
-		this.avaliaoes = avaliaoes;
-	}
-	
 	
 
 }

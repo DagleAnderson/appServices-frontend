@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.appServices.AppServices.Service.exception.DataIntegrityException;
 import com.appServices.AppServices.Service.exception.ObjectNotFoundException;
 import com.appServices.AppServices.domain.Pessoa;
 import com.appServices.AppServices.repositories.PessoaRespository;
@@ -15,7 +16,7 @@ public class PessoaService {
 	@Autowired
 	private PessoaRespository pessoaRepository;
 	
-	public Pessoa buscar(Integer id) {
+	public Pessoa find(Integer id) {
 		
 		Optional<Pessoa> objOp = pessoaRepository.findById(id);
 		
@@ -28,6 +29,21 @@ public class PessoaService {
 		obj.setId(null);
 		
 		return  pessoaRepository.save(obj);
+	}
+	
+	public Pessoa update(Pessoa obj){	
+		find(obj.getId());
+		return  pessoaRepository.save(obj);
+			
+	}
+	
+	public void delete(Integer id) {
+		find(id);
+		try {
+		pessoaRepository.deleteById(id);
+		}catch(DataIntegrityException e) {
+			throw new DataIntegrityException("Não é possivel excluir esta Pessoa(chave referenciada)");
+		}
 	}
 }
 
