@@ -1,18 +1,23 @@
 package com.appServices.AppServices.resources;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.appServices.AppServices.Services.PrestadorService;
 import com.appServices.AppServices.domain.Prestador;
+import com.appServices.AppServices.dto.PrestadorDTO;
 
 @RestController
 @RequestMapping(value="/prestador")
@@ -52,5 +57,27 @@ public class PrestadorResource {
 		prestadorService.find(id);
 		
 		return ResponseEntity.noContent().build();
+	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<PrestadorDTO>> findAll(){
+		List<Prestador> objList =prestadorService.findAll();
+		
+		List<PrestadorDTO> listPrestador= objList.stream().map(obj -> new PrestadorDTO(obj)).collect(Collectors.toList());
+		
+		return ResponseEntity.ok().body(listPrestador);
+	}
+	
+	
+	@RequestMapping(value="/page",method = RequestMethod.GET)
+	public ResponseEntity<Page<PrestadorDTO>> findAllPage(
+			@RequestParam(value="page",defaultValue ="0") Integer page, 
+			@RequestParam(value="linesPerPage",defaultValue ="24") Integer linesPerPage){
+		
+		Page<Prestador> objList =prestadorService.findPage(page, linesPerPage);
+		
+		Page<PrestadorDTO> listPrestador= objList.map(obj -> new PrestadorDTO(obj));
+		
+		return ResponseEntity.ok().body(listPrestador);
 	}
 }

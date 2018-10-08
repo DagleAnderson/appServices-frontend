@@ -1,7 +1,9 @@
 package com.appServices.AppServices.resources;
 
 import java.net.URI;
+import java.util.List;
 
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.appServices.AppServices.Services.PessoaService;
 import com.appServices.AppServices.domain.Pessoa;
+import com.appServices.AppServices.dto.PessoaDTO;
 
 @RestController
 @RequestMapping(value="/pessoa")
@@ -31,7 +34,8 @@ public class PesssoaResource {
 	
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> Insert(@RequestBody Pessoa obj){
+	public ResponseEntity<Void> Insert(@Valid @RequestBody PessoaDTO objDTO){
+		Pessoa obj = pessoaService.fromDTO(objDTO);
 		obj = pessoaService.insert(obj);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -57,4 +61,12 @@ public class PesssoaResource {
 		
 		return ResponseEntity.noContent().build();	
 	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<Pessoa>> findAll(){
+		List<Pessoa> objList =pessoaService.findAll();
+		
+		return ResponseEntity.ok().body(objList);
+	}
+	
 }

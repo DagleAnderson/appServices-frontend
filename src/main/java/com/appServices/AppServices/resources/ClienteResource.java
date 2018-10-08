@@ -1,6 +1,7 @@
 package com.appServices.AppServices.resources;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,9 +24,9 @@ public class ClienteResource {
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
 	public ResponseEntity<Cliente> find(@PathVariable Integer id){
-		Cliente objOp = clienteService.find(id);
+		Cliente obj = clienteService.find(id);
 		
-		return ResponseEntity.ok().body(objOp);
+		return ResponseEntity.ok().body(obj);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
@@ -53,6 +54,13 @@ public class ClienteResource {
 		clienteService.delete(id);;
 		
 		return ResponseEntity.noContent().build();
+	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<Cliente>> findAll(){
+		List<Cliente> objList = clienteService.findAll();
+		
+		return ResponseEntity.ok().body(objList);
 	}
 	
 }

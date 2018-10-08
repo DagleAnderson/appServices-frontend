@@ -1,5 +1,6 @@
 package com.appServices.AppServices.Services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,11 @@ public class ClienteService {
 		}catch(DataIntegrityException e) {
 			throw new DataIntegrityException("Não é possivel excluir este cliente(chave referenciada)");
 		}
+	}
+	
+	
+	public List<Cliente> findAll(){
+		return clienteRepository.findAll();
 	}
 }
 

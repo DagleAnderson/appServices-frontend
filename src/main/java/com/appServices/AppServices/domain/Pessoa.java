@@ -24,7 +24,8 @@ public class Pessoa implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String nomeCompleto;
+	private String nome;
+	private String sobrenome;
 	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date dataNascimento;
 	private String rg;
@@ -33,7 +34,7 @@ public class Pessoa implements Serializable {
 
 	@ElementCollection
 	@CollectionTable(name="TELEFONE")
-	private Set<String> telefones =  new HashSet<>();;
+	private Set<String> telefones =  new HashSet<>();
 	
 	
 	@OneToOne(cascade=CascadeType.ALL,mappedBy="pessoa")
@@ -48,9 +49,10 @@ public class Pessoa implements Serializable {
 	}
 	
 
-	public Pessoa(Integer id, String nomeCompleto, Date dataNascimento, String rg, String cpf, TipoSexo sexo) {
+	public Pessoa(Integer id, String nome,String sobrenome, Date dataNascimento, String rg, String cpf, TipoSexo sexo) {
 		this.id = id;
-		this.nomeCompleto = nomeCompleto;
+		this.nome = nome;
+		this.sobrenome=sobrenome;
 		this.dataNascimento = dataNascimento;
 		this.rg = rg;
 		this.cpf = cpf;
@@ -65,12 +67,27 @@ public class Pessoa implements Serializable {
 		this.id = id;
 	}
 
-	public String getNomeCompleto() {
-		return nomeCompleto;
+	
+	public String getNome() {
+		return nome;
 	}
-	public void setNomeCompleto(String nomeCompleto) {
-		this.nomeCompleto = nomeCompleto;
+
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
+
+
+	public String getSobrenome() {
+		return sobrenome;
+	}
+
+
+	public void setSobrenome(String sobrenome) {
+		this.sobrenome = sobrenome;
+	}
+
+
 	public Date getDataNascimento() {
 		return dataNascimento;
 	}
