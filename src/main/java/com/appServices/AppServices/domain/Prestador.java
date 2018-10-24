@@ -25,8 +25,10 @@ public class Prestador implements Serializable {
 	@JoinColumn(name="pessoa_id")
 	private Pessoa pessoa;
 	
-	@OneToMany(mappedBy = "prestador")
-	private List<EnderecoPrestador> endereco =new  ArrayList<>();
+	
+	
+	@OneToOne(cascade=CascadeType.PERSIST,mappedBy="prestador")
+	private EnderecoPrestador endereco;
 	
 	@OneToOne
 	@JoinColumn(name="profissao_id")
@@ -46,7 +48,7 @@ public class Prestador implements Serializable {
 	public Prestador(Integer id, Pessoa pessoa,Profissao profissao) {
 		this.id = id;
 		this.pessoa = pessoa;
-		this.profissao= profissao;
+		this.profissao = profissao;
 	}
 
 	@Override
@@ -90,11 +92,11 @@ public class Prestador implements Serializable {
 		this.pessoa = pessoa;
 	}
 
-	public List<EnderecoPrestador> getEndereco() {
+	public EnderecoPrestador getEndereco() {
 		return endereco;
 	}
 
-	public void setEndereco(List<EnderecoPrestador> endereco) {
+	public void setEndereco(EnderecoPrestador endereco) {
 		this.endereco = endereco;
 	}
 

@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.appServices.AppServices.domain.enums.TipoPessoa;
 import com.appServices.AppServices.domain.enums.TipoSexo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -29,8 +30,10 @@ public class Pessoa implements Serializable {
 	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date dataNascimento;
 	private String rg;
-	private String cpf;
+	private String cpfOuCnpj;
+	private Integer tipoPessoa;
 	private Integer sexo;
+	
 
 	@ElementCollection
 	@CollectionTable(name="TELEFONE")
@@ -49,13 +52,14 @@ public class Pessoa implements Serializable {
 	}
 	
 
-	public Pessoa(Integer id, String nome,String sobrenome, Date dataNascimento, String rg, String cpf, TipoSexo sexo) {
+	public Pessoa(Integer id, String nome,String sobrenome, Date dataNascimento, String rg,String CpfOuCnpj, TipoPessoa tipoPessoa, TipoSexo sexo) {
 		this.id = id;
 		this.nome = nome;
 		this.sobrenome=sobrenome;
 		this.dataNascimento = dataNascimento;
 		this.rg = rg;
-		this.cpf = cpf;
+		this.cpfOuCnpj=CpfOuCnpj;
+		this.tipoPessoa =tipoPessoa.getCod();
 		this.sexo = sexo.getCod();
 	}
 
@@ -100,11 +104,22 @@ public class Pessoa implements Serializable {
 	public void setRg(String rg) {
 		this.rg = rg;
 	}
-	public String getCpf() {
-		return cpf;
+	
+	public String getCpfOuCnpj() {
+		return cpfOuCnpj;
 	}
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+
+
+	public void setCpfOuCnpj(String cpfOuCnpj) {
+		this.cpfOuCnpj = cpfOuCnpj;
+	}
+
+
+	public TipoPessoa getTipoPessoa() {
+		return TipoPessoa.toEnum(tipoPessoa);
+	}
+	public void setTipoPessoa(TipoPessoa tipoPessoa) {
+		this.tipoPessoa = tipoPessoa.getCod();
 	}
 	public TipoSexo getSexo() {
 		return TipoSexo.toEnum(sexo);

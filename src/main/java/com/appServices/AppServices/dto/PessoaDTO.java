@@ -1,7 +1,7 @@
 package com.appServices.AppServices.dto;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,6 +10,7 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 
 import com.appServices.AppServices.domain.Pessoa;
+import com.appServices.AppServices.domain.enums.TipoPessoa;
 import com.appServices.AppServices.domain.enums.TipoSexo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -33,6 +34,9 @@ public class PessoaDTO  implements Serializable {
 		@NotEmpty(message="Preenchimento Obrigatório!")
 		@Length(min=11 , max=11,message=" Seu CPF deve conter no mínimo 11 caracteres")
 		private String cpf;
+		
+		private Integer tipoPessoa;
+
 		private Integer sexo;
 		@NotEmpty(message="Preenchimento Obrigatório!")
 		@Length(min=5 , max=15,message=" O tamanho deve ser entre 5 e 15 caracteres")
@@ -42,14 +46,14 @@ public class PessoaDTO  implements Serializable {
 			
 		}
 		
-
 		public PessoaDTO(Pessoa pessoaObj){
 			this.id = pessoaObj.getId();
 			this.nome = pessoaObj.getNome();
 			this.sobrenome = pessoaObj.getSobrenome();
-			this.dataNascimento =(Date) pessoaObj.getDataNascimento();
+			this.dataNascimento =pessoaObj.getDataNascimento();
 			this.rg = pessoaObj.getRg();
-			this.cpf = pessoaObj.getCpf();
+			this.cpf = pessoaObj.getCpfOuCnpj();
+			this.tipoPessoa = pessoaObj.getTipoPessoa().getCod();
 			this.sexo = pessoaObj.getSexo().getCod();
 		}
 
@@ -100,13 +104,19 @@ public class PessoaDTO  implements Serializable {
 		public void setCpf(String cpf) {
 			this.cpf = cpf;
 		}
+		
+		public TipoPessoa getTipoPessoa() {
+			return TipoPessoa.toEnum(tipoPessoa);
+		}
+		public void setTipoPessoa(TipoPessoa tipoPessoa) {
+			this.tipoPessoa = tipoPessoa.getCod();
+		}
 		public TipoSexo getSexo() {
 			return TipoSexo.toEnum(sexo);
 		}
 		public void setSexo(TipoSexo sexo) {
 			this.sexo =  sexo.getCod();
 		}
-
 
 		public Set<String> getTelefones() {
 			return telefones;

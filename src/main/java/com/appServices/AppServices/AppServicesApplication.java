@@ -1,7 +1,6 @@
 package com.appServices.AppServices;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.appServices.AppServices.domain.AreaProfissional;
+import com.appServices.AppServices.domain.Categoria;
 import com.appServices.AppServices.domain.Avaliacoes;
 import com.appServices.AppServices.domain.Cliente;
 import com.appServices.AppServices.domain.Curriculo;
@@ -20,8 +19,9 @@ import com.appServices.AppServices.domain.Experiencias;
 import com.appServices.AppServices.domain.Pessoa;
 import com.appServices.AppServices.domain.Prestador;
 import com.appServices.AppServices.domain.Profissao;
+import com.appServices.AppServices.domain.enums.TipoPessoa;
 import com.appServices.AppServices.domain.enums.TipoSexo;
-import com.appServices.AppServices.repositories.AreaProfissionalRespository;
+import com.appServices.AppServices.repositories.CategoriaRespository;
 import com.appServices.AppServices.repositories.AvaliacoesRespository;
 import com.appServices.AppServices.repositories.ClienteRespository;
 import com.appServices.AppServices.repositories.CurriculoRespository;
@@ -52,7 +52,7 @@ public class AppServicesApplication implements CommandLineRunner {
 	private EnderecoPrestadorRespository enderecoPrestadorRepository;
 	
 	@Autowired
-	private AreaProfissionalRespository areaPorfissionalRepository;
+	private CategoriaRespository areaPorfissionalRepository;
 	
 	@Autowired
 	private ProfissaoRespository servicosRepository;
@@ -78,9 +78,9 @@ public class AppServicesApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub	
 	SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-	Pessoa p1 = new Pessoa(null,"Dagle Anderson Lima de Sousa",data.parse("22/10/1994 22:00"),"1432756311","063176845960",TipoSexo.MASCULINO);
+	Pessoa p1 = new Pessoa(null,"Dagle"," Anderson",data.parse("22/10/1994 22:00"),"1432756311","063176845960",TipoPessoa.FISICA,TipoSexo.MASCULINO);
 		p1.getTelefones().addAll(Arrays.asList("77-991049498"));
-	Pessoa p2 = new Pessoa(null,"José Feitosa de Sousa",data.parse("05/12/1965 00:00"),"123453678","1234536789", TipoSexo.MASCULINO);	
+	Pessoa p2 = new Pessoa(null,"José ","",data.parse("05/12/1965 00:00"),"123453678","1234536789",TipoPessoa.JURIDICA,TipoSexo.MASCULINO);	
 		p2.getTelefones().addAll(Arrays.asList("77-991489740"));
 		
 		pessoaRepository.saveAll(Arrays.asList(p1,p2));
@@ -96,7 +96,7 @@ public class AppServicesApplication implements CommandLineRunner {
 	
 
 			
-	AreaProfissional areaProf1= new AreaProfissional(null, "Construção e Reforma");		
+	Categoria areaProf1= new Categoria(null, "Construção e Reforma");		
 	Profissao prof1 = new Profissao(null, "Pintor",areaProf1);
 	Profissao prof2 = new Profissao(null, "Pedreiro",areaProf1);
 	Profissao prof3 = new Profissao(null, "Engenheiro",areaProf1);
@@ -107,8 +107,8 @@ public class AppServicesApplication implements CommandLineRunner {
 	
 	Prestador prest1 = new Prestador(null, p2,prof1);	
 	EnderecoPrestador end2 = new EnderecoPrestador(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio",prest1);
-			prest1.getEndereco().addAll(Arrays.asList(end2));
-		
+			prest1.setEndereco(end2);
+			
 	Curriculo c1 = new Curriculo(null, prest1);
 	Cursos curso1 = new Cursos(null, "Oficina Coral", "Coral Titas Brasil","2 dias", c1);
 	Cursos curso2 = new Cursos(null, "treinamento Suvenil ", "Suvenil tintas","7 dias ", c1);

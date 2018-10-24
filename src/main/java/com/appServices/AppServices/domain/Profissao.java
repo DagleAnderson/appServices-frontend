@@ -23,13 +23,13 @@ public class Profissao implements Serializable {
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "areaProfissional_id")
-	private AreaProfissional areaProfissional;
+	private Categoria areaProfissional;
 
 	public Profissao() {
 
 	}
 
-	public Profissao(Integer id, String nome, AreaProfissional areaProfissional) {
+	public Profissao(Integer id, String nome, Categoria areaProfissional) {
 		this.id = id;
 		this.nome = nome;
 		this.areaProfissional = areaProfissional;
@@ -76,11 +76,11 @@ public class Profissao implements Serializable {
 		this.nome = nome;
 	}
 
-	public AreaProfissional getAreaProfissional() {
+	public Categoria getAreaProfissional() {
 		return areaProfissional;
 	}
 
-	public void setAreaProfissional(AreaProfissional areaProfissional) {
+	public void setAreaProfissional(Categoria areaProfissional) {
 		this.areaProfissional = areaProfissional;
 	}
 

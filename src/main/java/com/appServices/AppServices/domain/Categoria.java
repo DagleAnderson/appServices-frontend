@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class AreaProfissional implements Serializable{
+public class Categoria implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -22,11 +22,11 @@ public class AreaProfissional implements Serializable{
 	private List<Profissao> servicos = new ArrayList<>();
 	
 
-	public AreaProfissional() {
+	public Categoria() {
 		
 	}
 
-	public AreaProfissional(Integer id, String nome) {
+	public Categoria(Integer id, String nome) {
 		this.id = id;
 		this.nome = nome;
 	}
@@ -47,7 +47,7 @@ public class AreaProfissional implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AreaProfissional other = (AreaProfissional) obj;
+		Categoria other = (Categoria) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

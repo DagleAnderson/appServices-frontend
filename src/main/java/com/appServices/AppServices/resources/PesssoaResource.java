@@ -2,6 +2,7 @@ package com.appServices.AppServices.resources;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -63,10 +64,11 @@ public class PesssoaResource {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<Pessoa>> findAll(){
+	public ResponseEntity<List<PessoaDTO>> findAll(){
 		List<Pessoa> objList =pessoaService.findAll();
+		List<PessoaDTO> listDto = objList.stream().map(obj -> new PessoaDTO(obj)).collect(Collectors.toList());
 		
-		return ResponseEntity.ok().body(objList);
+		return ResponseEntity.ok().body(listDto);
 	}
 	
 }

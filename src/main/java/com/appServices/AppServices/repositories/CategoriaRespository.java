@@ -3,9 +3,9 @@ package com.appServices.AppServices.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.appServices.AppServices.domain.AreaProfissional;
+import com.appServices.AppServices.domain.Categoria;
 
 @Repository
-public interface AreaProfissionalRespository extends JpaRepository<AreaProfissional, Integer>  {
+public interface CategoriaRespository extends JpaRepository<Categoria, Integer>  {
 
 }
