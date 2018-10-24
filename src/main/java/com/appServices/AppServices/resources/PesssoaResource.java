@@ -47,11 +47,11 @@ public class PesssoaResource {
 	
 	
 	@RequestMapping(value= "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@RequestBody Pessoa obj,@PathVariable Integer id){
+	public ResponseEntity<Void> update(@Valid @RequestBody PessoaDTO objDTO,@PathVariable Integer id){
+		
+		Pessoa obj = pessoaService.fromDTO(objDTO);
 		obj.setId(id);
-		
 		obj = pessoaService.update(obj);
-		
 		return ResponseEntity.noContent().build();
 		
 	}

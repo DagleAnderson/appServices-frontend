@@ -72,9 +72,12 @@ public class PrestadorResource {
 	@RequestMapping(value="/page",method = RequestMethod.GET)
 	public ResponseEntity<Page<PrestadorDTO>> findAllPage(
 			@RequestParam(value="page",defaultValue ="0") Integer page, 
-			@RequestParam(value="linesPerPage",defaultValue ="24") Integer linesPerPage){
+			@RequestParam(value="linesPerPage",defaultValue ="24") Integer linesPerPage,
+			@RequestParam(value="orderBy",defaultValue ="id")	String orderBy,
+			@RequestParam(value="direction",defaultValue ="ASC") String direction
+			){
 		
-		Page<Prestador> objList =prestadorService.findPage(page, linesPerPage);
+		Page<Prestador> objList =prestadorService.findPage(page, linesPerPage,orderBy,direction);
 		
 		Page<PrestadorDTO> listPrestador= objList.map(obj -> new PrestadorDTO(obj));
 		

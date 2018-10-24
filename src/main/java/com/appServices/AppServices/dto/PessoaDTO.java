@@ -29,17 +29,16 @@ public class PessoaDTO  implements Serializable {
 		private Date dataNascimento;
 	
 		@NotEmpty(message="Preenchimento Obrigatório!")
-		@Length(min=11 , max=10,message=" Seu RG deve conter no mínimo 10 caracteres")
+		@Length(min=10 , max=10,message=" Seu RG deve conter no mínimo 10 caracteres")
 		private String rg;
 		@NotEmpty(message="Preenchimento Obrigatório!")
 		@Length(min=11 , max=11,message=" Seu CPF deve conter no mínimo 11 caracteres")
-		private String cpf;
+		private String cpfOuCnpj;
 		
 		private Integer tipoPessoa;
 
 		private Integer sexo;
 		@NotEmpty(message="Preenchimento Obrigatório!")
-		@Length(min=5 , max=15,message=" O tamanho deve ser entre 5 e 15 caracteres")
 		private Set<String> telefones =  new HashSet<>();
 		
 		public PessoaDTO() {
@@ -52,7 +51,7 @@ public class PessoaDTO  implements Serializable {
 			this.sobrenome = pessoaObj.getSobrenome();
 			this.dataNascimento =pessoaObj.getDataNascimento();
 			this.rg = pessoaObj.getRg();
-			this.cpf = pessoaObj.getCpfOuCnpj();
+			this.cpfOuCnpj = pessoaObj.getCpfOuCnpj();
 			this.tipoPessoa = pessoaObj.getTipoPessoa().getCod();
 			this.sexo = pessoaObj.getSexo().getCod();
 		}
@@ -98,11 +97,11 @@ public class PessoaDTO  implements Serializable {
 		public void setRg(String rg) {
 			this.rg = rg;
 		}
-		public String getCpf() {
-			return cpf;
+		public String getcpfOuCnpj() {
+			return cpfOuCnpj;
 		}
-		public void setCpf(String cpf) {
-			this.cpf = cpf;
+		public void setcpfOuCnpj(String cpf) {
+			this.cpfOuCnpj= cpf;
 		}
 		
 		public TipoPessoa getTipoPessoa() {

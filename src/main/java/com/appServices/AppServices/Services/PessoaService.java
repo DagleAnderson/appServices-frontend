@@ -1,5 +1,6 @@
 package com.appServices.AppServices.Services;
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -55,8 +56,11 @@ public class PessoaService {
 	
 	
 	public Pessoa fromDTO(PessoaDTO objDTO) {
-		return new Pessoa(objDTO.getId(), objDTO.getNome(), objDTO.getSobrenome(), objDTO.getDataNascimento(), objDTO.getRg(), objDTO.getCpf(), objDTO
-				.getSexo());
+		
+		Pessoa pessoa = new Pessoa(objDTO.getId(),objDTO.getNome(),objDTO.getSobrenome(), objDTO.getDataNascimento(),objDTO.getRg(), objDTO.getcpfOuCnpj(),objDTO.getTipoPessoa(), objDTO.getSexo());
+		pessoa.getTelefones().addAll(objDTO.getTelefones());
+		
+		return pessoa;
 	}
 	
 }
