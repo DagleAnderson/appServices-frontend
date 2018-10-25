@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.appServices.AppServices.Service.exception.DataIntegrityException;
 import com.appServices.AppServices.Service.exception.ObjectNotFoundException;
 import com.appServices.AppServices.domain.Prestador;
+import com.appServices.AppServices.dto.PrestadorDTO;
 import com.appServices.AppServices.repositories.PrestadorRespository;
 
 @Service
@@ -59,9 +60,14 @@ public class PrestadorService {
 		
 		PageRequest  pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		
-	//PageRequest  pageRequest = PageRequest.of(page, linesPerPage);
-		
 		return prestadorRepository.findAll(pageRequest);
+	}
+	
+	public Prestador fromDTO(PrestadorDTO objDTO) {
+		
+		Prestador prestador = new Prestador();
+		
+		return prestador;
 	}
 }
 
