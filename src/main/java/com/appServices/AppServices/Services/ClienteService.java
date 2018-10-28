@@ -8,18 +8,32 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.appServices.AppServices.Service.exception.DataIntegrityException;
 import com.appServices.AppServices.Service.exception.ObjectNotFoundException;
 import com.appServices.AppServices.domain.Cliente;
+import com.appServices.AppServices.domain.EnderecoCliente;
+import com.appServices.AppServices.domain.Usuario;
+import com.appServices.AppServices.domain.enums.TipoPessoa;
+import com.appServices.AppServices.domain.enums.TipoSexo;
 import com.appServices.AppServices.dto.ClienteDTO;
+import com.appServices.AppServices.dto.ClienteNewDTO;
 import com.appServices.AppServices.repositories.ClienteRespository;
+import com.appServices.AppServices.repositories.EnderecoClienteRespository;
+import com.appServices.AppServices.repositories.UsuarioRespository;
 
 @Service
 public class ClienteService {
 	
 	@Autowired
 	private ClienteRespository repository;
+	
+	@Autowired
+	private UsuarioRespository usuarioRepository;
+	
+	@Autowired
+	private EnderecoClienteRespository enderecoRepository;
 	
 	public Cliente find(Integer id) {
 		
@@ -31,10 +45,14 @@ public class ClienteService {
 		
 	}
 	
+	@Transactional
 	public Cliente  insert(Cliente obj){
 		obj.setId(null);
+		obj = repository.save(obj);		
+		usuarioRepository.save(obj.getUsuario());
+		enderecoRepository.save(obj.getEndereco());
 		
-		return repository.save(obj);
+		return obj;
 		
 	}
 	
@@ -68,6 +86,23 @@ public class ClienteService {
 	public Cliente fromDTO(ClienteDTO objDTO) {
 		
 		Cliente cliente = new Cliente(objDTO.getId(),null);
+		
+		return cliente;
+	}
+	
+	
+	public Cliente fromNewDTO(ClienteNewDTO objDTO) {
+		
+		Usuario usuario = new Usuario(null,objDTO.getNome(),objDTO.getSobrenome(),objDTO.getDataNascimento(),objDTO.getRg(),objDTO.getCpfOuCnpj(),TipoPessoa.toEnum(objDTO.getTipoPessoa()),TipoSexo.toEnum(objDTO.getSexo())); 
+		usuario.getTelefones().add(objDTO.getTelefone1());
+		
+		if(objDTO.getTelesfone2()!=null){
+			usuario.getTelefones().add(objDTO.getTelesfone2());
+		}	
+		Cliente cliente = new Cliente(null, usuario);
+		EnderecoCliente endereco = new EnderecoCliente(null,objDTO.getCidade(),objDTO.getEstado(),objDTO.getCep(),objDTO.getBairro(),objDTO.getRua(),objDTO.getNumero(),objDTO.getComplemento(), cliente);
+		cliente.setEndereco(endereco);
+	
 		
 		return cliente;
 	}

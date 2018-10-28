@@ -45,15 +45,15 @@ public class UsuarioDTO  implements Serializable {
 			
 		}
 		
-		public UsuarioDTO(Usuario pessoaObj){
-			this.id = pessoaObj.getId();
-			this.nome = pessoaObj.getNome();
-			this.sobrenome = pessoaObj.getSobrenome();
-			this.dataNascimento =pessoaObj.getDataNascimento();
-			this.rg = pessoaObj.getRg();
-			this.cpfOuCnpj = pessoaObj.getCpfOuCnpj();
-			this.tipoPessoa = pessoaObj.getTipoPessoa().getCod();
-			this.sexo = pessoaObj.getSexo().getCod();
+		public UsuarioDTO(Usuario usuarioObj){
+			this.id = usuarioObj.getId();
+			this.nome = usuarioObj.getNome();
+			this.sobrenome = usuarioObj.getSobrenome();
+			this.dataNascimento =usuarioObj.getDataNascimento();
+			this.rg = usuarioObj.getRg();
+			this.cpfOuCnpj = usuarioObj.getCpfOuCnpj();
+			this.tipoPessoa = usuarioObj.getTipoPessoa().getCod();
+			this.sexo = usuarioObj.getSexo().getCod();
 		}
 
 		public Integer getId() {

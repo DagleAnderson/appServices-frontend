@@ -5,21 +5,23 @@ import java.util.List;
 import java.util.Optional;
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.appServices.AppServices.Service.exception.DataIntegrityException;
 import com.appServices.AppServices.Service.exception.ObjectNotFoundException;
 import com.appServices.AppServices.domain.Usuario;
 import com.appServices.AppServices.dto.UsuarioDTO;
-import com.appServices.AppServices.repositories.PessoaRespository;
+import com.appServices.AppServices.repositories.UsuarioRespository;
 
 @Service
 public class UsuarioService {
 	
 	@Autowired
-	private PessoaRespository repository;
+	private UsuarioRespository repository;
 	
 	public Usuario find(Integer id) {
 		
@@ -30,6 +32,7 @@ public class UsuarioService {
 				);
 	}
 	
+	@Transactional
 	public Usuario insert(Usuario obj) {
 		obj.setId(null);
 		
@@ -59,11 +62,12 @@ public class UsuarioService {
 	
 	public Usuario fromDTO(UsuarioDTO objDTO) {
 		
-		Usuario pessoa = new Usuario(objDTO.getId(),objDTO.getNome(),objDTO.getSobrenome(), objDTO.getDataNascimento(),objDTO.getRg(), objDTO.getcpfOuCnpj(),objDTO.getTipoPessoa(), objDTO.getSexo());
-		pessoa.getTelefones().addAll(objDTO.getTelefones());
+		Usuario usuario = new Usuario(objDTO.getId(),objDTO.getNome(),objDTO.getSobrenome(), objDTO.getDataNascimento(),objDTO.getRg(), objDTO.getcpfOuCnpj(),objDTO.getTipoPessoa(), objDTO.getSexo());
+		usuario.getTelefones().addAll(objDTO.getTelefones());
 		
-		return pessoa;
+		return usuario;
 	}
+
 	
 	private void updateData(Usuario newObj,Usuario obj) {
 		newObj.setNome(obj.getNome());

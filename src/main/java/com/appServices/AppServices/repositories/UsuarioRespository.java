@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.appServices.AppServices.domain.Usuario;
 
 @Repository
-public interface PessoaRespository extends JpaRepository<Usuario, Integer>  {
+public interface UsuarioRespository extends JpaRepository<Usuario, Integer>  {
 
 }

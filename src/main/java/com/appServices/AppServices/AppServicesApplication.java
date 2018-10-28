@@ -29,7 +29,7 @@ import com.appServices.AppServices.repositories.CursosRespository;
 import com.appServices.AppServices.repositories.EnderecoClienteRespository;
 import com.appServices.AppServices.repositories.EnderecoPrestadorRespository;
 import com.appServices.AppServices.repositories.ExperienciasRespository;
-import com.appServices.AppServices.repositories.PessoaRespository;
+import com.appServices.AppServices.repositories.UsuarioRespository;
 import com.appServices.AppServices.repositories.PrestadorRespository;
 import com.appServices.AppServices.repositories.ProfissaoRespository;
 
@@ -37,7 +37,7 @@ import com.appServices.AppServices.repositories.ProfissaoRespository;
 public class AppServicesApplication implements CommandLineRunner {
 	
 	@Autowired
-	private PessoaRespository pessoaRepository;
+	private UsuarioRespository pessoaRepository;
 	
 	@Autowired
 	private ClienteRespository clienteRespository;
