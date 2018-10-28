@@ -11,62 +11,61 @@ import org.springframework.stereotype.Service;
 
 import com.appServices.AppServices.Service.exception.DataIntegrityException;
 import com.appServices.AppServices.Service.exception.ObjectNotFoundException;
-import com.appServices.AppServices.domain.Pessoa;
-import com.appServices.AppServices.dto.PessoaDTO;
+import com.appServices.AppServices.domain.Usuario;
+import com.appServices.AppServices.dto.UsuarioDTO;
 import com.appServices.AppServices.repositories.PessoaRespository;
 
 @Service
-public class PessoaService {
+public class UsuarioService {
 	
 	@Autowired
-	private PessoaRespository pessoaRepository;
+	private PessoaRespository repository;
 	
-	public Pessoa find(Integer id) {
+	public Usuario find(Integer id) {
 		
-		Optional<Pessoa> objOp = pessoaRepository.findById(id);
+		Optional<Usuario> objOp = repository.findById(id);
 		
 		return objOp.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto não encontrado! Id: " + id + ", Tipo: " + Pessoa.class.getName())
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Usuario.class.getName())
 				);
 	}
 	
-	public Pessoa insert(Pessoa obj) {
+	public Usuario insert(Usuario obj) {
 		obj.setId(null);
 		
-		return  pessoaRepository.save(obj);
+		return  repository.save(obj);
 	}
 	
-	public Pessoa update(Pessoa obj){	
-		Pessoa newObj = find(obj.getId());
+	public Usuario update(Usuario obj){	
+		Usuario newObj = find(obj.getId());
 		updateData(newObj,obj);
-		find(obj.getId());
-		return  pessoaRepository.save(obj);
+		return  repository.save(newObj);
 			
 	}
 	
 	public void delete(Integer id) {
 		find(id);
 		try {
-		pessoaRepository.deleteById(id);
+			repository.deleteById(id);
 		}catch(DataIntegrityViolationException e) {
-			throw new DataIntegrityException("Não é possivel excluir esta Pessoa(chave referenciada)");
+			throw new DataIntegrityException("Não é possivel excluir este usuário(chave referenciada)");
 		}
 	}
 	
-	public List<Pessoa> findAll(){
-		return pessoaRepository.findAll();
+	public List<Usuario> findAll(){
+		return repository.findAll();
 	}
 	
 	
-	public Pessoa fromDTO(PessoaDTO objDTO) {
+	public Usuario fromDTO(UsuarioDTO objDTO) {
 		
-		Pessoa pessoa = new Pessoa(objDTO.getId(),objDTO.getNome(),objDTO.getSobrenome(), objDTO.getDataNascimento(),objDTO.getRg(), objDTO.getcpfOuCnpj(),objDTO.getTipoPessoa(), objDTO.getSexo());
+		Usuario pessoa = new Usuario(objDTO.getId(),objDTO.getNome(),objDTO.getSobrenome(), objDTO.getDataNascimento(),objDTO.getRg(), objDTO.getcpfOuCnpj(),objDTO.getTipoPessoa(), objDTO.getSexo());
 		pessoa.getTelefones().addAll(objDTO.getTelefones());
 		
 		return pessoa;
 	}
 	
-	private void updateData(Pessoa newObj,Pessoa obj) {
+	private void updateData(Usuario newObj,Usuario obj) {
 		newObj.setNome(obj.getNome());
 		newObj.setSobrenome(obj.getSobrenome());
 		newObj.setDataNascimento(obj.getDataNascimento());

@@ -16,7 +16,7 @@ import com.appServices.AppServices.domain.Cursos;
 import com.appServices.AppServices.domain.EnderecoCliente;
 import com.appServices.AppServices.domain.EnderecoPrestador;
 import com.appServices.AppServices.domain.Experiencias;
-import com.appServices.AppServices.domain.Pessoa;
+import com.appServices.AppServices.domain.Usuario;
 import com.appServices.AppServices.domain.Prestador;
 import com.appServices.AppServices.domain.Profissao;
 import com.appServices.AppServices.domain.enums.TipoPessoa;
@@ -78,17 +78,17 @@ public class AppServicesApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub	
 	SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-	Pessoa p1 = new Pessoa(null,"Dagle"," Anderson",data.parse("22/10/1994 22:00"),"1432756311","063176845960",TipoPessoa.FISICA,TipoSexo.MASCULINO);
+	Usuario p1 = new Usuario(null,"Dagle"," Anderson",data.parse("22/10/1994 22:00"),"1432756311","063176845960",TipoPessoa.FISICA,TipoSexo.MASCULINO);
 		p1.getTelefones().addAll(Arrays.asList("77-991049498"));
-	Pessoa p2 = new Pessoa(null,"José ","",data.parse("05/12/1965 00:00"),"123453678","1234536789",TipoPessoa.JURIDICA,TipoSexo.MASCULINO);	
+	Usuario p2 = new Usuario(null,"José ","",data.parse("05/12/1965 00:00"),"123453678","1234536789",TipoPessoa.JURIDICA,TipoSexo.MASCULINO);	
 		p2.getTelefones().addAll(Arrays.asList("77-991489740"));
 		
 		pessoaRepository.saveAll(Arrays.asList(p1,p2));
 		
 		
-	Cliente cli1 = new Cliente(null,p1);	
-	EnderecoCliente end1 = new EnderecoCliente(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio", cli1);	
-			cli1.getEndereco().addAll(Arrays.asList(end1));
+	Cliente cli1 = new Cliente(null,p1);
+	EnderecoCliente end1 = new EnderecoCliente(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio", cli1);
+	cli1.setEndereco(end1);
 	
 			clienteRespository.saveAll(Arrays.asList(cli1));
 			enderecoClienteRespository.saveAll(Arrays.asList(end1));
@@ -105,7 +105,7 @@ public class AppServicesApplication implements CommandLineRunner {
 		areaPorfissionalRepository.saveAll(Arrays.asList(areaProf1));
 		servicosRepository.saveAll(Arrays.asList(prof1,prof2,prof3));
 	
-	Prestador prest1 = new Prestador(null, p2,prof1);	
+	Prestador prest1 = new Prestador(null,"Ceará Pintor","pinturas em geral","domiciliar", p2,prof1);	
 	EnderecoPrestador end2 = new EnderecoPrestador(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio",prest1);
 			prest1.setEndereco(end2);
 			

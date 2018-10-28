@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,18 +28,18 @@ public class Cliente implements Serializable{
 	private Integer id;
 	
 	@OneToOne
-	@JoinColumn(name="pessoa_id")
-	private Pessoa pessoa;
+	@JoinColumn(name="usuario_id")
+	private Usuario usuario;
 	
-	@OneToMany(mappedBy="cliente")
-	private List<EnderecoCliente> endereco =new ArrayList<>();
+	@OneToOne(cascade=CascadeType.PERSIST,mappedBy="cliente")
+	private EnderecoCliente endereco;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
 	private List<Avaliacoes> avaliacoes = new ArrayList<>();
 	
 	
-	//private Prestadores_Favoritos favoritos;
+	//private List<Prestadores_Favoritos> favoritos =new ArrayList<>();
 	
 	
    
@@ -46,9 +47,9 @@ public class Cliente implements Serializable{
 		
 	}
 	
-	public Cliente(Integer id, Pessoa pessoa) {
+	public Cliente(Integer id, Usuario usuario) {
 		this.id = id;
-		this.pessoa = pessoa;
+		this.usuario = usuario;
 	}
 
 	@Override
@@ -85,19 +86,19 @@ public class Cliente implements Serializable{
 		this.id = id;
 	}
 
-	public Pessoa getPessoa() {
-		return pessoa;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
-	public List<EnderecoCliente> getEndereco() {
+	public EnderecoCliente getEndereco() {
 		return endereco;
 	}
 
-	public void setEndereco(List<EnderecoCliente> endereco) {
+	public void setEndereco(EnderecoCliente endereco) {
 		this.endereco = endereco;
 	}
 	

@@ -2,8 +2,6 @@ package com.appServices.AppServices.dto;
 
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.appServices.AppServices.domain.Prestador;
 
@@ -11,12 +9,9 @@ public class PrestadorDTO  implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
-	private String nome;
-	private String sobrenome;
-	private String profissao;
-	private String cidade;
-	private List<Double> avaliacao = new ArrayList<>();
-	
+	private String nomeFantasia;
+	private String slogan;
+	private String localAtendimento;
 	
 	public PrestadorDTO() {
 		
@@ -24,10 +19,9 @@ public class PrestadorDTO  implements Serializable {
 	
 	public PrestadorDTO(Prestador prestadorObj ) {
 		this.id = prestadorObj.getId();
-		this.nome = prestadorObj.getPessoa().getNome();
-		this.sobrenome = prestadorObj.getPessoa().getSobrenome();
-		this.profissao = prestadorObj.getProfissao().getNome();	
-		this.cidade = prestadorObj.getEndereco().getCidade();
+		this.nomeFantasia = prestadorObj.getNomeFantasia();
+		this.slogan =prestadorObj.getSlogan();
+		this.localAtendimento = prestadorObj.getLocalAtendimento();
 	}
 	
 	public Integer getId() {
@@ -36,47 +30,31 @@ public class PrestadorDTO  implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+
 	
-	public String getSobrenome() {
-		return sobrenome;
+	public String getNomeFantasia() {
+		return nomeFantasia;
 	}
 
-	public void setSobrenome(String sobrenome) {
-		this.sobrenome = sobrenome;
+	public void setNomeFantasia(String nomeFantasia) {
+		this.nomeFantasia = nomeFantasia;
 	}
 
-	public String getProfissao() {
-		return profissao;
-	}
-	public void setProfissao(String profissao) {
-		this.profissao = profissao;
+	public String getSlogan() {
+		return slogan;
 	}
 
-	public String getCidade() {
-		return cidade;
+	public void setSlogan(String slogan) {
+		this.slogan = slogan;
 	}
 
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
+	public String getLocalAtendimento() {
+		return localAtendimento;
 	}
 
-	public List<Double> getAvaliacao() {
-		return avaliacao;
+	public void setLocalAtendimento(String localAtendimento) {
+		this.localAtendimento = localAtendimento;
 	}
 
-	public void setAvaliacao(List<Double> avaliacao) {
-	
 		
-		
-		this.avaliacao = avaliacao;
-	}
-	
-	
-	
 }

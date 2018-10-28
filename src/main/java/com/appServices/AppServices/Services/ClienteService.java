@@ -12,18 +12,18 @@ import org.springframework.stereotype.Service;
 import com.appServices.AppServices.Service.exception.DataIntegrityException;
 import com.appServices.AppServices.Service.exception.ObjectNotFoundException;
 import com.appServices.AppServices.domain.Cliente;
-import com.appServices.AppServices.domain.Prestador;
+import com.appServices.AppServices.dto.ClienteDTO;
 import com.appServices.AppServices.repositories.ClienteRespository;
 
 @Service
 public class ClienteService {
 	
 	@Autowired
-	private ClienteRespository clienteRepository;
+	private ClienteRespository repository;
 	
 	public Cliente find(Integer id) {
 		
-		Optional<Cliente> objOp = clienteRepository.findById(id);
+		Optional<Cliente> objOp = repository.findById(id);
 		
 		return objOp.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName())
@@ -34,19 +34,20 @@ public class ClienteService {
 	public Cliente  insert(Cliente obj){
 		obj.setId(null);
 		
-		return clienteRepository.save(obj);
+		return repository.save(obj);
 		
 	}
 	
 	public Cliente update(Cliente obj){		
-		find(obj.getId());
-		return  clienteRepository.save(obj);	
+	    Cliente newObj = find(obj.getId());
+		updateData(newObj,obj);
+	    return  repository.save(newObj);	
 	}
 	
 	public void delete(Integer id) {
 		find(id);
 		try {
-		clienteRepository.deleteById(id);
+			repository.deleteById(id);
 		}catch(DataIntegrityException e) {
 			throw new DataIntegrityException("Não é possivel excluir este cliente(chave referenciada)");
 		}
@@ -54,15 +55,28 @@ public class ClienteService {
 	
 	
 	public List<Cliente> findAll(){
-		return clienteRepository.findAll();
+		return repository.findAll();
 	}
 	
 	public Page<Cliente> findPage(Integer page, Integer linesPerPage,String orderBy,String direction){
 		
 		PageRequest  pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		
-		return clienteRepository.findAll(pageRequest);
+		return repository.findAll(pageRequest);
 	}
 	
+	public Cliente fromDTO(ClienteDTO objDTO) {
+		
+		Cliente cliente = new Cliente(objDTO.getId(),null);
+		
+		return cliente;
+	}
+	
+	private void updateData(Cliente newObj, Cliente obj) {
+		newObj.setId(obj.getId());
+	}
 }
+
+	
+
 

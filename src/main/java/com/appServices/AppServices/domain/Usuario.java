@@ -19,7 +19,7 @@ import com.appServices.AppServices.domain.enums.TipoSexo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-public class Pessoa implements Serializable {
+public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 		
 	@Id
@@ -40,19 +40,19 @@ public class Pessoa implements Serializable {
 	private Set<String> telefones =  new HashSet<>();
 	
 	
-	@OneToOne(cascade=CascadeType.ALL,mappedBy="pessoa")
+	@OneToOne(cascade=CascadeType.ALL,mappedBy="usuario")
 	private Cliente cliente;
 	
-	@OneToOne(cascade=CascadeType.ALL,mappedBy="pessoa")
+	@OneToOne(cascade=CascadeType.ALL,mappedBy="usuario")
 	private Prestador prestador;
 	
 	
-	public Pessoa() {
+	public Usuario() {
 		
 	}
 	
 
-	public Pessoa(Integer id, String nome,String sobrenome, Date dataNascimento, String rg,String CpfOuCnpj, TipoPessoa tipoPessoa, TipoSexo sexo) {
+	public Usuario(Integer id, String nome,String sobrenome, Date dataNascimento, String rg,String CpfOuCnpj, TipoPessoa tipoPessoa, TipoSexo sexo) {
 		this.id = id;
 		this.nome = nome;
 		this.sobrenome=sobrenome;

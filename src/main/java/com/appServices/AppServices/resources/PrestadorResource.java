@@ -24,18 +24,20 @@ import com.appServices.AppServices.dto.PrestadorDTO;
 public class PrestadorResource {
 	
 	@Autowired
-	private PrestadorService prestadorService;
+	private PrestadorService service;
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
 	public ResponseEntity<Prestador> find(@PathVariable Integer id){
-		Prestador objOp = prestadorService.find(id);
+		
+		Prestador objOp = service.find(id);
 		
 		return ResponseEntity.ok().body(objOp);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> inserir(@RequestBody Prestador obj){
-		obj = prestadorService.insert(obj);
+	public ResponseEntity<Void> inserir(@RequestBody PrestadorDTO objDTO){
+		Prestador obj = service.fromDTO(objDTO);
+		obj = service.insert(obj);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		
@@ -45,23 +47,24 @@ public class PrestadorResource {
 	
 
 	@RequestMapping(value="/{id}",method = RequestMethod.PUT)
-	public ResponseEntity<Void>update(@RequestBody Prestador obj, @PathVariable Integer id){
+	public ResponseEntity<Void>update(@RequestBody PrestadorDTO objDTO, @PathVariable Integer id){
+		Prestador obj = service.fromDTO(objDTO);
 		obj.setId(id);
-		obj = prestadorService.update(obj);
+		obj = service.update(obj);
 		return ResponseEntity.noContent().build();
 	
 	}
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id ){
-		prestadorService.find(id);
+		service.find(id);
 		
 		return ResponseEntity.noContent().build();
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<PrestadorDTO>> findAll(){
-		List<Prestador> objList =prestadorService.findAll();
+		List<Prestador> objList =service.findAll();
 		
 		List<PrestadorDTO> listPrestador= objList.stream().map(obj -> new PrestadorDTO(obj)).collect(Collectors.toList());
 		
@@ -77,7 +80,7 @@ public class PrestadorResource {
 			@RequestParam(value="direction",defaultValue ="ASC") String direction
 			){
 		
-		Page<Prestador> objList =prestadorService.findPage(page, linesPerPage,orderBy,direction);
+		Page<Prestador> objList =service.findPage(page, linesPerPage,orderBy,direction);
 		
 		Page<PrestadorDTO> listPrestador= objList.map(obj -> new PrestadorDTO(obj));
 		

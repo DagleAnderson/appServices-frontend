@@ -19,11 +19,11 @@ import com.appServices.AppServices.repositories.PrestadorRespository;
 public class PrestadorService {
 	
 	@Autowired
-	private PrestadorRespository prestadorRepository;
+	private PrestadorRespository repository;
 	
 	public Prestador find(Integer id) {
 		
-		Optional<Prestador> objOp = prestadorRepository.findById(id);
+		Optional<Prestador> objOp = repository.findById(id);
 		
 		return objOp.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Prestador.class.getName())
@@ -33,41 +33,49 @@ public class PrestadorService {
 	public Prestador insert(Prestador obj){
 		obj.setId(null);
 		
-		return  prestadorRepository.save(obj);
+		return  repository.save(obj);
 		
 	}
 	
 	public Prestador update(Prestador obj){
-		find(obj.getId());
-		return  prestadorRepository.save(obj);
+		Prestador newObj =  find(obj.getId());
+		updateData(newObj,obj);
+		return  repository.save(newObj);
 			
 	}
 	
 	public void delete(Integer id) {
 		find(id);
 		try {
-		prestadorRepository.deleteById(id);
+			repository.deleteById(id);
 		}catch(DataIntegrityException e) {
 			throw new DataIntegrityException("Não é possivel excluir este prestador(chave referenciada)");
 		}
 	}
 	
 	public List<Prestador> findAll(){
-		return prestadorRepository.findAll();
+		return repository.findAll();
 	}
 	
 	public Page<Prestador> findPage(Integer page, Integer linesPerPage,String orderBy,String direction){
 		
 		PageRequest  pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		
-		return prestadorRepository.findAll(pageRequest);
+		return repository.findAll(pageRequest);
 	}
 	
 	public Prestador fromDTO(PrestadorDTO objDTO) {
 		
-		Prestador prestador = new Prestador();
-		
+		Prestador prestador = new Prestador(objDTO.getId(),objDTO.getNomeFantasia(),objDTO.getSlogan(),objDTO.getLocalAtendimento(),null,null);
 		return prestador;
 	}
+	
+	private void updateData(Prestador newObj, Prestador obj) {
+	 newObj.setNomeFantasia(obj.getNomeFantasia());
+	 newObj.setSlogan(obj.getSlogan());
+	 newObj.setLocalAtendimento(obj.getLocalAtendimento());
+	}
 }
+
+	
 

@@ -21,11 +21,15 @@ public class Prestador implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	private String  nomeFantasia;	
+	
+	private String slogan;
+	
+	private String localAtendimento;
+	
 	@OneToOne
-	@JoinColumn(name="pessoa_id")
-	private Pessoa pessoa;
-	
-	
+	@JoinColumn(name="usuario_id")
+	private Usuario usuario;
 	
 	@OneToOne(cascade=CascadeType.PERSIST,mappedBy="prestador")
 	private EnderecoPrestador endereco;
@@ -45,9 +49,13 @@ public class Prestador implements Serializable {
 		
 	}
 
-	public Prestador(Integer id, Pessoa pessoa,Profissao profissao) {
+	public Prestador(Integer id,String nomeFantasia,String slogan, String localAtendimento, Usuario usuario,Profissao profissao) {
 		this.id = id;
-		this.pessoa = pessoa;
+
+		this.nomeFantasia = nomeFantasia;
+		this.slogan = slogan;
+		this.localAtendimento = localAtendimento;
+		this.usuario = usuario;
 		this.profissao = profissao;
 	}
 
@@ -83,13 +91,39 @@ public class Prestador implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
+	
 
-	public Pessoa getPessoa() {
-		return pessoa;
+	public String getNomeFantasia() {
+		return nomeFantasia;
 	}
 
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
+	public void setNomeFantasia(String nomeFantasia) {
+		this.nomeFantasia = nomeFantasia;
+	}
+
+	public String getSlogan() {
+		return slogan;
+	}
+
+	public void setSlogan(String slogan) {
+		this.slogan = slogan;
+	}
+
+	public String getLocalAtendimento() {
+		return localAtendimento;
+	}
+
+	public void setLocalAtendimento(String localAtendimento) {
+		this.localAtendimento = localAtendimento;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setPessoa(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public EnderecoPrestador getEndereco() {

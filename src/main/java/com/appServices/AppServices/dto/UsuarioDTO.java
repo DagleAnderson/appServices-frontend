@@ -9,12 +9,12 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.appServices.AppServices.domain.Pessoa;
+import com.appServices.AppServices.domain.Usuario;
 import com.appServices.AppServices.domain.enums.TipoPessoa;
 import com.appServices.AppServices.domain.enums.TipoSexo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class PessoaDTO  implements Serializable {
+public class UsuarioDTO  implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 		private Integer id;
@@ -41,11 +41,11 @@ public class PessoaDTO  implements Serializable {
 		@NotEmpty(message="Preenchimento Obrigatório!")
 		private Set<String> telefones =  new HashSet<>();
 		
-		public PessoaDTO() {
+		public UsuarioDTO() {
 			
 		}
 		
-		public PessoaDTO(Pessoa pessoaObj){
+		public UsuarioDTO(Usuario pessoaObj){
 			this.id = pessoaObj.getId();
 			this.nome = pessoaObj.getNome();
 			this.sobrenome = pessoaObj.getSobrenome();
