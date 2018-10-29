@@ -8,18 +8,43 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.appServices.AppServices.Service.exception.DataIntegrityException;
 import com.appServices.AppServices.Service.exception.ObjectNotFoundException;
+import com.appServices.AppServices.domain.Categoria;
+import com.appServices.AppServices.domain.EnderecoPrestador;
 import com.appServices.AppServices.domain.Prestador;
+import com.appServices.AppServices.domain.Profissao;
+import com.appServices.AppServices.domain.Usuario;
+import com.appServices.AppServices.domain.enums.TipoPessoa;
+import com.appServices.AppServices.domain.enums.TipoSexo;
 import com.appServices.AppServices.dto.PrestadorDTO;
+import com.appServices.AppServices.dto.PrestadorNewDTO;
+import com.appServices.AppServices.repositories.CategoriaRespository;
+import com.appServices.AppServices.repositories.EnderecoPrestadorRespository;
 import com.appServices.AppServices.repositories.PrestadorRespository;
+import com.appServices.AppServices.repositories.ProfissaoRespository;
+import com.appServices.AppServices.repositories.UsuarioRespository;
 
 @Service
 public class PrestadorService {
 	
 	@Autowired
 	private PrestadorRespository repository;
+	
+	@Autowired
+	private UsuarioRespository usuarioRepository;
+	
+	@Autowired
+	private EnderecoPrestadorRespository enderecoRepository;
+	
+	@Autowired
+	private ProfissaoRespository profissaoRepository;
+	
+	@Autowired
+	private CategoriaRespository categoriaRepository;
+	
 	
 	public Prestador find(Integer id) {
 		
@@ -29,11 +54,19 @@ public class PrestadorService {
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Prestador.class.getName())
 				);
 	}
-		
+	
+	@Transactional
 	public Prestador insert(Prestador obj){
 		obj.setId(null);
+		obj = repository.save(obj);
 		
-		return  repository.save(obj);
+		usuarioRepository.save(obj.getUsuario());
+		enderecoRepository.save(obj.getEndereco());
+		profissaoRepository.save(obj.getProfissao());
+		categoriaRepository.save(obj.getProfissao().getCategoria());
+		
+		
+		return  obj ;
 		
 	}
 	
@@ -67,6 +100,24 @@ public class PrestadorService {
 	public Prestador fromDTO(PrestadorDTO objDTO) {
 		
 		Prestador prestador = new Prestador(objDTO.getId(),objDTO.getNomeFantasia(),objDTO.getSlogan(),objDTO.getLocalAtendimento(),null,null);
+		return prestador;
+	}
+	
+	public Prestador fromNewDTO(PrestadorNewDTO objDTO) {
+		Usuario usuario = new Usuario(null,objDTO.getNome(),objDTO.getSobrenome(),objDTO.getDataNascimento(),objDTO.getRg(),objDTO.getCpfOuCnpj(),TipoPessoa.toEnum(objDTO.getTipoPessoa()),TipoSexo.toEnum(objDTO.getSexo())); 
+		usuario.getTelefones().add(objDTO.getTelefone1());
+		
+		if(objDTO.getTelefone2()!=null){
+			usuario.getTelefones().add(objDTO.getTelefone2());
+		}
+				
+		Categoria categoria = new Categoria(null,objDTO.getCategoria());
+		Profissao profissao = new Profissao(null,objDTO.getProfissao(),categoria);
+		Prestador prestador = new Prestador(null,objDTO.getNomeFantasia(),objDTO.getSlogan(),objDTO.getLocalAtendimento(),usuario,profissao);
+		EnderecoPrestador endereco = new EnderecoPrestador(null,objDTO.getCidade() ,objDTO.getEstado(),objDTO.getCep(),objDTO.getBairro(), objDTO.getRua(),objDTO.getNumero(),objDTO.getComplemento(), prestador);
+		
+		prestador.setEndereco(endereco);
+		
 		return prestador;
 	}
 	

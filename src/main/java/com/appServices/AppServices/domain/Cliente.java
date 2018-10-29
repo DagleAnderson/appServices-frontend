@@ -27,15 +27,16 @@ public class Cliente implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	
 	@OneToOne
 	@JoinColumn(name="usuario_id")
 	private Usuario usuario;
 	
-	@OneToOne(cascade=CascadeType.PERSIST,mappedBy="cliente")
+	@OneToOne(cascade=CascadeType.ALL,mappedBy="cliente")
 	private EnderecoCliente endereco;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "cliente")
+	@OneToMany(mappedBy = "cliente",cascade=CascadeType.ALL)
 	private List<Avaliacoes> avaliacoes = new ArrayList<>();
 	
 	

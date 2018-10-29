@@ -40,10 +40,10 @@ public class Usuario implements Serializable {
 	private Set<String> telefones =  new HashSet<>();
 	
 	
-	@OneToOne(cascade=CascadeType.ALL,mappedBy="usuario")
+	@OneToOne(mappedBy = "usuario",cascade=CascadeType.ALL)
 	private Cliente cliente;
 	
-	@OneToOne(cascade=CascadeType.ALL,mappedBy="usuario")
+	@OneToOne(mappedBy = "usuario",cascade=CascadeType.ALL)
 	private Prestador prestador;
 	
 	

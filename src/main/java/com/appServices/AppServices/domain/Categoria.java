@@ -18,7 +18,7 @@ public class Categoria implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private  String nome;
-	@OneToMany(mappedBy="areaProfissional")
+	@OneToMany(mappedBy="categoria")
 	private List<Profissao> servicos = new ArrayList<>();
 	
 

@@ -51,7 +51,7 @@ public class UsuarioService {
 		try {
 			repository.deleteById(id);
 		}catch(DataIntegrityViolationException e) {
-			throw new DataIntegrityException("Não é possivel excluir este usuário(chave referenciada)");
+			throw new DataIntegrityException( e.getMessage());
 		}
 	}
 	

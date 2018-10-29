@@ -18,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.appServices.AppServices.Services.PrestadorService;
 import com.appServices.AppServices.domain.Prestador;
 import com.appServices.AppServices.dto.PrestadorDTO;
+import com.appServices.AppServices.dto.PrestadorNewDTO;
 
 @RestController
 @RequestMapping(value="/prestador")
@@ -35,8 +36,8 @@ public class PrestadorResource {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> inserir(@RequestBody PrestadorDTO objDTO){
-		Prestador obj = service.fromDTO(objDTO);
+	public ResponseEntity<Void> inserir(@RequestBody PrestadorNewDTO objDTO){
+		Prestador obj = service.fromNewDTO(objDTO);
 		obj = service.insert(obj);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
