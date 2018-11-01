@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,6 +35,12 @@ public class Usuario implements Serializable {
 	private Integer tipoPessoa;
 	private Integer sexo;
 	
+	private String login;
+	private String senha;
+	
+	@Column(unique=true)
+	private String email;
+	
 
 	@ElementCollection
 	@CollectionTable(name="TELEFONE")
@@ -52,7 +59,7 @@ public class Usuario implements Serializable {
 	}
 	
 
-	public Usuario(Integer id, String nome,String sobrenome, Date dataNascimento, String rg,String CpfOuCnpj, TipoPessoa tipoPessoa, TipoSexo sexo) {
+	public Usuario(Integer id, String nome,String sobrenome, Date dataNascimento, String rg,String CpfOuCnpj, TipoPessoa tipoPessoa, TipoSexo sexo,String login,String senha,String email) {
 		this.id = id;
 		this.nome = nome;
 		this.sobrenome=sobrenome;
@@ -61,6 +68,9 @@ public class Usuario implements Serializable {
 		this.cpfOuCnpj=CpfOuCnpj;
 		this.tipoPessoa =tipoPessoa.getCod();
 		this.sexo = sexo.getCod();
+		this.login = login;
+		this.senha = senha;
+		this.email = email;
 	}
 
 	public Integer getId() {
@@ -137,6 +147,39 @@ public class Usuario implements Serializable {
 	public void setTelefones(Set<String> telefones) {
 		this.telefones = telefones;
 	}
+
+	
+
+	public String getLogin() {
+		return login;
+	}
+
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+
+	public String getSenha() {
+		return senha;
+	}
+
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	
 	
 	
 

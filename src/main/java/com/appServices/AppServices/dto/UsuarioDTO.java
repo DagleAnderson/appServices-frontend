@@ -41,6 +41,16 @@ public class UsuarioDTO  implements Serializable {
 		@NotEmpty(message="Preenchimento Obrigatório!")
 		private Set<String> telefones =  new HashSet<>();
 		
+		@NotEmpty(message="Preenchimento Obrigatório!")
+		private String login;
+		
+		@NotEmpty(message="Preenchimento Obrigatório!")
+		private String senha;
+		
+		@NotEmpty(message="Preenchimento Obrigatório!")
+		private String email;
+		
+		
 		public UsuarioDTO() {
 			
 		}
@@ -125,6 +135,31 @@ public class UsuarioDTO  implements Serializable {
 		public void setTelefones(Set<String> telefones) {
 			this.telefones = telefones;
 		}
+
+		public String getLogin() {
+			return login;
+		}
+
+		public void setLogin(String login) {
+			this.login = login;
+		}
+
+		public String getSenha() {
+			return senha;
+		}
+
+		public void setSenha(String senha) {
+			this.senha = senha;
+		}
+
+		public String getEmail() {
+			return email;
+		}
+
+		public void setEmail(String email) {
+			this.email = email;
+		}
+		
 		
 
 }

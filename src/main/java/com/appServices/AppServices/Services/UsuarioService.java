@@ -62,7 +62,7 @@ public class UsuarioService {
 	
 	public Usuario fromDTO(UsuarioDTO objDTO) {
 		
-		Usuario usuario = new Usuario(objDTO.getId(),objDTO.getNome(),objDTO.getSobrenome(), objDTO.getDataNascimento(),objDTO.getRg(), objDTO.getcpfOuCnpj(),objDTO.getTipoPessoa(), objDTO.getSexo());
+		Usuario usuario = new Usuario(objDTO.getId(),objDTO.getNome(),objDTO.getSobrenome(), objDTO.getDataNascimento(),objDTO.getRg(), objDTO.getcpfOuCnpj(),objDTO.getTipoPessoa(), objDTO.getSexo(),objDTO.getLogin(),objDTO.getSenha(),objDTO.getEmail());
 		usuario.getTelefones().addAll(objDTO.getTelefones());
 		
 		return usuario;

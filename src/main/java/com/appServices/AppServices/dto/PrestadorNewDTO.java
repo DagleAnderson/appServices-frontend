@@ -3,6 +3,8 @@ package com.appServices.AppServices.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.validation.constraints.NotEmpty;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class PrestadorNewDTO implements Serializable{
@@ -16,6 +18,16 @@ public class PrestadorNewDTO implements Serializable{
 	private String cpfOuCnpj;
 	private Integer tipoPessoa;
 	private Integer sexo;
+	
+	@NotEmpty(message="Preenchimento Obrigatório!")
+	private String login;
+	
+	@NotEmpty(message="Preenchimento Obrigatório!")
+	private String senha;
+	
+	@NotEmpty(message="Preenchimento Obrigatório!")
+	private String email;
+	
 	
 	private String telefone1;
 	private String telefone2;
@@ -111,6 +123,36 @@ public class PrestadorNewDTO implements Serializable{
 
 	public void setSexo(Integer sexo) {
 		this.sexo = sexo;
+	}
+
+	
+	public String getLogin() {
+		return login;
+	}
+
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+
+	public String getSenha() {
+		return senha;
+	}
+
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 

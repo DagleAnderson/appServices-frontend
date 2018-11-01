@@ -93,7 +93,7 @@ public class ClienteService {
 	
 	public Cliente fromNewDTO(ClienteNewDTO objDTO) {
 		
-		Usuario usuario = new Usuario(null,objDTO.getNome(),objDTO.getSobrenome(),objDTO.getDataNascimento(),objDTO.getRg(),objDTO.getCpfOuCnpj(),TipoPessoa.toEnum(objDTO.getTipoPessoa()),TipoSexo.toEnum(objDTO.getSexo())); 
+		Usuario usuario = new Usuario(null,objDTO.getNome(),objDTO.getSobrenome(),objDTO.getDataNascimento(),objDTO.getRg(),objDTO.getCpfOuCnpj(),TipoPessoa.toEnum(objDTO.getTipoPessoa()),TipoSexo.toEnum(objDTO.getSexo()),objDTO.getLogin(),objDTO.getSenha(),objDTO.getEmail()); 
 		usuario.getTelefones().add(objDTO.getTelefone1());
 		
 		if(objDTO.getTelesfone2()!=null){
