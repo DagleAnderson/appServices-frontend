@@ -3,29 +3,61 @@ package com.appServices.AppServices.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import com.appServices.AppServices.Services.Validation.ClienteInsert;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+@ClienteInsert
 public class ClienteNewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	@NotEmpty(message="Preenchimento obrigatório") 	
 	private String nome;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String sobrenome;
+	
+	@NotNull(message="preenchimento obrigatório")
 	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date dataNascimento;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String rg;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String cpfOuCnpj;
+	
+	@NotNull(message="selecione o tipo de pessoa")
 	private Integer tipoPessoa;
+	
+	@NotNull(message="selecione o sexo")
 	private Integer sexo;
-
+	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String telefone1;
+	
 	private String telesfone2;
 	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String cidade;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String estado;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String cep;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String bairro;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String rua;
+	
+	@NotNull(message="preenchimento obrigatório")
 	private int numero;
+
 	private String complemento;
 	
 	
