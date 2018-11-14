@@ -28,8 +28,8 @@ public class Prestador implements Serializable {
 	private String localAtendimento;
 	
 	@OneToOne
-	@JoinColumn(name="usuario_id")
-	private Usuario usuario;
+	@JoinColumn(name="cliente_id")
+	private Cliente cliente;
 	
 	@OneToOne(cascade=CascadeType.PERSIST,mappedBy="prestador")
 	private EnderecoPrestador endereco;
@@ -49,13 +49,13 @@ public class Prestador implements Serializable {
 		
 	}
 
-	public Prestador(Integer id,String nomeFantasia,String slogan, String localAtendimento, Usuario usuario,Profissao profissao) {
+	public Prestador(Integer id,String nomeFantasia,String slogan, String localAtendimento, Cliente cliente,Profissao profissao) {
 		this.id = id;
 
 		this.nomeFantasia = nomeFantasia;
 		this.slogan = slogan;
 		this.localAtendimento = localAtendimento;
-		this.usuario = usuario;
+		this.cliente = cliente;
 		this.profissao = profissao;
 	}
 
@@ -118,12 +118,12 @@ public class Prestador implements Serializable {
 		this.localAtendimento = localAtendimento;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public Cliente getCliente() {
+		return cliente;
 	}
 
-	public void setPessoa(Usuario usuario) {
-		this.usuario = usuario;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 	public EnderecoPrestador getEndereco() {

@@ -1,44 +1,45 @@
 package com.appServices.AppServices.Services.Validation;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.servlet.HandlerMapping;
 
-import com.appServices.AppServices.Services.Validation.utils.BR;
 import com.appServices.AppServices.domain.Cliente;
-import com.appServices.AppServices.domain.enums.TipoPessoa;
-import com.appServices.AppServices.dto.ClienteNewDTO;
+import com.appServices.AppServices.dto.ClienteDTO;
 import com.appServices.AppServices.repositories.ClienteRespository;
 import com.appServices.AppServices.resources.exception.FieldMessage;
 
-public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert, ClienteNewDTO> {
+public class ClienteUpdateValidator implements ConstraintValidator<ClienteUpdate, ClienteDTO> {
 
+	
+	@Autowired // obter parametro da id da  URI
+	private HttpServletRequest request;
+	
 	@Autowired
 	private ClienteRespository repository;
 	
 	
 	@Override
-	public void initialize(ClienteInsert ann) {
+	public void initialize(ClienteUpdate ann) {
 	}
 
 	@Override
-	public boolean isValid(ClienteNewDTO objDto, ConstraintValidatorContext context) {
-
+	public boolean isValid(ClienteDTO objDto, ConstraintValidatorContext context) {
+		
+		@SuppressWarnings("unchecked")
+		Map<String,String> map = (Map<String,String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE); 
+		Integer uriId = Integer.parseInt(map.get("id"));
+		
 		List<FieldMessage> list = new ArrayList<>();
 			
-		if(objDto.getTipoPessoa().equals(TipoPessoa.FISICA.getCod()) &&  !BR.isValidCPF(objDto.getCpfOuCnpj())) {
-			list.add(new FieldMessage("cpfOuCnpj","CPF inválido!"));
-		};
-		
-		
-		if(objDto.getTipoPessoa().equals(TipoPessoa.JURIDICA.getCod()) &&  !BR.isValidCPF(objDto.getCpfOuCnpj())) {
-			list.add(new FieldMessage("cpfOuCnpj","CNPJ inválido!"));
-		};
-		
 		Cliente aux = repository.findByEmail(objDto.getEmail());
-		if(aux != null) {
+		if(aux != null && !aux.getId().equals(uriId)) {
 			list.add(new FieldMessage("email","email já existente"));
 		}
 		

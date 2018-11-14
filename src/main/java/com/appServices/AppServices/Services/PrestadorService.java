@@ -16,16 +16,16 @@ import com.appServices.AppServices.domain.Categoria;
 import com.appServices.AppServices.domain.EnderecoPrestador;
 import com.appServices.AppServices.domain.Prestador;
 import com.appServices.AppServices.domain.Profissao;
-import com.appServices.AppServices.domain.Usuario;
+import com.appServices.AppServices.domain.Cliente;
 import com.appServices.AppServices.domain.enums.TipoPessoa;
 import com.appServices.AppServices.domain.enums.TipoSexo;
 import com.appServices.AppServices.dto.PrestadorDTO;
 import com.appServices.AppServices.dto.PrestadorNewDTO;
 import com.appServices.AppServices.repositories.CategoriaRespository;
+import com.appServices.AppServices.repositories.ClienteRespository;
 import com.appServices.AppServices.repositories.EnderecoPrestadorRespository;
 import com.appServices.AppServices.repositories.PrestadorRespository;
 import com.appServices.AppServices.repositories.ProfissaoRespository;
-import com.appServices.AppServices.repositories.UsuarioRespository;
 
 @Service
 public class PrestadorService {
@@ -34,7 +34,7 @@ public class PrestadorService {
 	private PrestadorRespository repository;
 	
 	@Autowired
-	private UsuarioRespository usuarioRepository;
+	private ClienteRespository clienteRepository;
 	
 	@Autowired
 	private EnderecoPrestadorRespository enderecoRepository;
@@ -60,7 +60,7 @@ public class PrestadorService {
 		obj.setId(null);
 		obj = repository.save(obj);
 		
-		usuarioRepository.save(obj.getUsuario());
+		clienteRepository.save(obj.getCliente());
 		enderecoRepository.save(obj.getEndereco());
 		profissaoRepository.save(obj.getProfissao());
 		categoriaRepository.save(obj.getProfissao().getCategoria());
@@ -104,7 +104,7 @@ public class PrestadorService {
 	}
 	
 	public Prestador fromNewDTO(PrestadorNewDTO objDTO) {
-		Usuario usuario = new Usuario(null,objDTO.getNome(),objDTO.getSobrenome(),objDTO.getDataNascimento(),objDTO.getRg(),objDTO.getCpfOuCnpj(),TipoPessoa.toEnum(objDTO.getTipoPessoa()),TipoSexo.toEnum(objDTO.getSexo()),objDTO.getLogin(),objDTO.getSenha(),objDTO.getEmail()); 
+		Cliente usuario = new Cliente(null,objDTO.getNome(),objDTO.getSobrenome(),objDTO.getDataNascimento(),objDTO.getRg(),objDTO.getCpfOuCnpj(),TipoPessoa.toEnum(objDTO.getTipoPessoa()),TipoSexo.toEnum(objDTO.getSexo()),objDTO.getLogin(),objDTO.getSenha(),objDTO.getEmail()); 
 		usuario.getTelefones().add(objDTO.getTelefone1());
 		
 		if(objDTO.getTelefone2()!=null){

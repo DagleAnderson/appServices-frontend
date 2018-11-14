@@ -38,7 +38,7 @@ public class ClienteNewDTO implements Serializable {
 	@NotEmpty(message="Preenchimento obrigatório")
 	private String telefone1;
 	
-	private String telesfone2;
+	private String telefone2;
 	
 	@NotEmpty(message="Preenchimento obrigatório")
 	private String cidade;
@@ -157,13 +157,13 @@ public class ClienteNewDTO implements Serializable {
 	}
 
 
-	public String getTelesfone2() {
-		return telesfone2;
+	public String getTelefone2() {
+		return telefone2;
 	}
 
 
-	public void setTelesfone2(String telesfone2) {
-		this.telesfone2 = telesfone2;
+	public void setTelefone2(String telefone2) {
+		this.telefone2 = telefone2;
 	}
 
 

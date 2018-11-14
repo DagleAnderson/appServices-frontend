@@ -16,7 +16,6 @@ import com.appServices.AppServices.domain.Cursos;
 import com.appServices.AppServices.domain.EnderecoCliente;
 import com.appServices.AppServices.domain.EnderecoPrestador;
 import com.appServices.AppServices.domain.Experiencias;
-import com.appServices.AppServices.domain.Usuario;
 import com.appServices.AppServices.domain.Prestador;
 import com.appServices.AppServices.domain.Profissao;
 import com.appServices.AppServices.domain.enums.TipoPessoa;
@@ -29,15 +28,11 @@ import com.appServices.AppServices.repositories.CursosRespository;
 import com.appServices.AppServices.repositories.EnderecoClienteRespository;
 import com.appServices.AppServices.repositories.EnderecoPrestadorRespository;
 import com.appServices.AppServices.repositories.ExperienciasRespository;
-import com.appServices.AppServices.repositories.UsuarioRespository;
 import com.appServices.AppServices.repositories.PrestadorRespository;
 import com.appServices.AppServices.repositories.ProfissaoRespository;
 
 @SpringBootApplication
 public class AppServicesApplication implements CommandLineRunner {
-	
-	@Autowired
-	private UsuarioRespository pessoaRepository;
 	
 	@Autowired
 	private ClienteRespository clienteRespository;
@@ -78,19 +73,17 @@ public class AppServicesApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub	
 	SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-	Usuario p1 = new Usuario(null,"Dagle"," Anderson",data.parse("22/10/1994 22:00"),"1432756311","063176845960",TipoPessoa.FISICA,TipoSexo.MASCULINO,"Dagle22","221094","dagle_life@hotmail.com");
-		p1.getTelefones().addAll(Arrays.asList("77-991049498"));
-	Usuario p2 = new Usuario(null,"José ","",data.parse("05/12/1965 00:00"),"123453678","1234536789",TipoPessoa.JURIDICA,TipoSexo.MASCULINO,"Jose22","123","teste@hotmail.com");	
-		p2.getTelefones().addAll(Arrays.asList("77-991489740"));
-		
-		pessoaRepository.saveAll(Arrays.asList(p1,p2));
+	
 		
 		
-	Cliente cli1 = new Cliente(null,p1);
+	Cliente cli1 = new Cliente(null,"Dagle"," Anderson",data.parse("22/10/1994 22:00"),"1432756311","063176845960",TipoPessoa.FISICA,TipoSexo.MASCULINO,"Dagle22","221094","dagle_life@hotmail.com");
+	Cliente cli2 = new Cliente(null,"José ","",data.parse("05/12/1965 00:00"),"123453678","1234536789",TipoPessoa.JURIDICA,TipoSexo.MASCULINO,"Jose22","123","teste@hotmail.com");	
+	cli2.getTelefones().addAll(Arrays.asList("77-991489740"));
+	
 	EnderecoCliente end1 = new EnderecoCliente(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio", cli1);
 	cli1.setEndereco(end1);
 	
-			clienteRespository.saveAll(Arrays.asList(cli1));
+			clienteRespository.saveAll(Arrays.asList(cli1,cli2));
 			enderecoClienteRespository.saveAll(Arrays.asList(end1));
 			
 	
@@ -105,7 +98,7 @@ public class AppServicesApplication implements CommandLineRunner {
 		areaPorfissionalRepository.saveAll(Arrays.asList(areaProf1));
 		servicosRepository.saveAll(Arrays.asList(prof1,prof2,prof3));
 	
-	Prestador prest1 = new Prestador(null,"Ceará Pintor","pinturas em geral","domiciliar", p2,prof1);	
+	Prestador prest1 = new Prestador(null,"Ceará Pintor","pinturas em geral","domiciliar", cli1,prof1);	
 	EnderecoPrestador end2 = new EnderecoPrestador(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio",prest1);
 			prest1.setEndereco(end2);
 			
