@@ -2,10 +2,9 @@ package com.appServices.AppServices.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import com.appServices.AppServices.domain.EnderecoCliente;
+import com.appServices.AppServices.domain.Experiencias;
 
 @Repository
-public interface EnderecoClienteRespository extends JpaRepository<EnderecoCliente, Integer>  {
+public interface ExperienciasRepository extends JpaRepository<Experiencias, Integer>  {
 
 }

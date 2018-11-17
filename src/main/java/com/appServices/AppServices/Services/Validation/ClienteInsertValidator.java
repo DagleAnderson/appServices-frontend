@@ -10,13 +10,13 @@ import com.appServices.AppServices.Services.Validation.utils.BR;
 import com.appServices.AppServices.domain.Cliente;
 import com.appServices.AppServices.domain.enums.TipoPessoa;
 import com.appServices.AppServices.dto.ClienteNewDTO;
-import com.appServices.AppServices.repositories.ClienteRespository;
+import com.appServices.AppServices.repositories.ClienteRepository;
 import com.appServices.AppServices.resources.exception.FieldMessage;
 
 public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert, ClienteNewDTO> {
 
 	@Autowired
-	private ClienteRespository repository;
+	private ClienteRepository repository;
 	
 	
 	@Override

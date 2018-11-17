@@ -2,9 +2,10 @@ package com.appServices.AppServices.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import com.appServices.AppServices.domain.EnderecoPrestador;
+
+import com.appServices.AppServices.domain.Prestador;
 
 @Repository
-public interface EnderecoPrestadorRespository extends JpaRepository<EnderecoPrestador, Integer>  {
+public interface PrestadorRepository extends JpaRepository<Prestador, Integer>  {
 
 }

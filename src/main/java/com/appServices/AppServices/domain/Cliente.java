@@ -61,6 +61,19 @@ public class Cliente implements Serializable {
 	private Prestador prestador;
 	
 	
+	@JsonIgnore
+	@OneToMany(mappedBy = "cliente",cascade = CascadeType.ALL)
+	private List<SolicitacaoServico> solicitacao = new ArrayList<>();
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "cliente",cascade = CascadeType.ALL)
+	private List<Pedido> pedido = new ArrayList<>();
+	
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "cliente",cascade = CascadeType.ALL)
+	private List<orcamento> orcamento = new ArrayList<>();
+	
 	public Cliente() {
 		
 	}

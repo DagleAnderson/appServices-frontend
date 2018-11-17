@@ -12,7 +12,7 @@ import org.springframework.web.servlet.HandlerMapping;
 
 import com.appServices.AppServices.domain.Cliente;
 import com.appServices.AppServices.dto.ClienteDTO;
-import com.appServices.AppServices.repositories.ClienteRespository;
+import com.appServices.AppServices.repositories.ClienteRepository;
 import com.appServices.AppServices.resources.exception.FieldMessage;
 
 public class ClienteUpdateValidator implements ConstraintValidator<ClienteUpdate, ClienteDTO> {
@@ -22,7 +22,7 @@ public class ClienteUpdateValidator implements ConstraintValidator<ClienteUpdate
 	private HttpServletRequest request;
 	
 	@Autowired
-	private ClienteRespository repository;
+	private ClienteRepository repository;
 	
 	
 	@Override

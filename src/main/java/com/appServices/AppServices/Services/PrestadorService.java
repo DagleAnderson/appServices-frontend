@@ -21,29 +21,29 @@ import com.appServices.AppServices.domain.enums.TipoPessoa;
 import com.appServices.AppServices.domain.enums.TipoSexo;
 import com.appServices.AppServices.dto.PrestadorDTO;
 import com.appServices.AppServices.dto.PrestadorNewDTO;
-import com.appServices.AppServices.repositories.CategoriaRespository;
-import com.appServices.AppServices.repositories.ClienteRespository;
-import com.appServices.AppServices.repositories.EnderecoPrestadorRespository;
-import com.appServices.AppServices.repositories.PrestadorRespository;
-import com.appServices.AppServices.repositories.ProfissaoRespository;
+import com.appServices.AppServices.repositories.CategoriaRepository;
+import com.appServices.AppServices.repositories.ClienteRepository;
+import com.appServices.AppServices.repositories.EnderecoPrestadorRepository;
+import com.appServices.AppServices.repositories.PrestadorRepository;
+import com.appServices.AppServices.repositories.ProfissaoRepository;
 
 @Service
 public class PrestadorService {
 	
 	@Autowired
-	private PrestadorRespository repository;
+	private PrestadorRepository repository;
 	
 	@Autowired
-	private ClienteRespository clienteRepository;
+	private ClienteRepository clienteRepository;
 	
 	@Autowired
-	private EnderecoPrestadorRespository enderecoRepository;
+	private EnderecoPrestadorRepository enderecoRepository;
 	
 	@Autowired
-	private ProfissaoRespository profissaoRepository;
+	private ProfissaoRepository profissaoRepository;
 	
 	@Autowired
-	private CategoriaRespository categoriaRepository;
+	private CategoriaRepository categoriaRepository;
 	
 	
 	public Prestador find(Integer id) {

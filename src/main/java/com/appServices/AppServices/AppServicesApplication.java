@@ -20,49 +20,49 @@ import com.appServices.AppServices.domain.Prestador;
 import com.appServices.AppServices.domain.Profissao;
 import com.appServices.AppServices.domain.enums.TipoPessoa;
 import com.appServices.AppServices.domain.enums.TipoSexo;
-import com.appServices.AppServices.repositories.CategoriaRespository;
-import com.appServices.AppServices.repositories.AvaliacoesRespository;
-import com.appServices.AppServices.repositories.ClienteRespository;
-import com.appServices.AppServices.repositories.CurriculoRespository;
-import com.appServices.AppServices.repositories.CursosRespository;
-import com.appServices.AppServices.repositories.EnderecoClienteRespository;
-import com.appServices.AppServices.repositories.EnderecoPrestadorRespository;
-import com.appServices.AppServices.repositories.ExperienciasRespository;
-import com.appServices.AppServices.repositories.PrestadorRespository;
-import com.appServices.AppServices.repositories.ProfissaoRespository;
+import com.appServices.AppServices.repositories.CategoriaRepository;
+import com.appServices.AppServices.repositories.AvaliacoesRepository;
+import com.appServices.AppServices.repositories.ClienteRepository;
+import com.appServices.AppServices.repositories.CurriculoRepository;
+import com.appServices.AppServices.repositories.CursosRepository;
+import com.appServices.AppServices.repositories.EnderecoClienteRepository;
+import com.appServices.AppServices.repositories.EnderecoPrestadorRepository;
+import com.appServices.AppServices.repositories.ExperienciasRepository;
+import com.appServices.AppServices.repositories.PrestadorRepository;
+import com.appServices.AppServices.repositories.ProfissaoRepository;
 
 @SpringBootApplication
 public class AppServicesApplication implements CommandLineRunner {
 	
 	@Autowired
-	private ClienteRespository clienteRespository;
+	private ClienteRepository clienteRespository;
 	
 	@Autowired
-	private EnderecoClienteRespository enderecoClienteRespository;
+	private EnderecoClienteRepository enderecoClienteRespository;
 	
 	@Autowired
-	private PrestadorRespository prestadorRepository;
+	private PrestadorRepository prestadorRepository;
 	
 	@Autowired
-	private EnderecoPrestadorRespository enderecoPrestadorRepository;
+	private EnderecoPrestadorRepository enderecoPrestadorRepository;
 	
 	@Autowired
-	private CategoriaRespository areaPorfissionalRepository;
+	private CategoriaRepository areaPorfissionalRepository;
 	
 	@Autowired
-	private ProfissaoRespository servicosRepository;
+	private ProfissaoRepository servicosRepository;
 	
 	@Autowired
-	private CurriculoRespository curriculoRepository;
+	private CurriculoRepository curriculoRepository;
 	
 	@Autowired
-	private CursosRespository cursosRespository;
+	private CursosRepository cursosRespository;
 	
 	@Autowired
-	private ExperienciasRespository experienciasRespository;
+	private ExperienciasRepository experienciasRespository;
 	
 	@Autowired
-	private AvaliacoesRespository avaliacoesRespository;
+	private AvaliacoesRepository avaliacoesRespository;
 	
 	
 	public static void main(String[] args){

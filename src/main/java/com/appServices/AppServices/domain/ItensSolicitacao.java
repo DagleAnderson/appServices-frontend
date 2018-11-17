@@ -9,35 +9,24 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
-public class Profissao implements Serializable {
+public class ItensSolicitacao  implements Serializable{
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-	private String nome;
-
-	@JsonIgnore
-	@ManyToOne
-	@JoinColumn(name = "categoria_id")
-	private Categoria categoria;
 	
-	@JsonIgnore
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	private String descricao;
+	
 	@ManyToOne
+	@JoinColumn(name="solicitacao_id")
 	private SolicitacaoServico solicitacao;
-
-	public Profissao() {
-
-	}
-
-	public Profissao(Integer id, String nome, Categoria categoria) {
+	
+	public ItensSolicitacao(Integer id, String descricao) {
 		this.id = id;
-		this.nome = nome;
-		this.categoria = categoria;
+		this.descricao = descricao;
 	}
+
 
 	@Override
 	public int hashCode() {
@@ -47,6 +36,7 @@ public class Profissao implements Serializable {
 		return result;
 	}
 
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -55,7 +45,7 @@ public class Profissao implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Profissao other = (Profissao) obj;
+		ItensSolicitacao other = (ItensSolicitacao) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -64,28 +54,29 @@ public class Profissao implements Serializable {
 		return true;
 	}
 
+
 	public Integer getId() {
 		return id;
 	}
+
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
 
-	public Categoria getCategoria() {
-		return categoria;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
-
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-	}
-
+	
+	
+	
+	
+	
+	
 }

@@ -9,34 +9,26 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
-public class Profissao implements Serializable {
+public class ItensPedido implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String nome;
-
-	@JsonIgnore
-	@ManyToOne
-	@JoinColumn(name = "categoria_id")
-	private Categoria categoria;
+	private String descricao;
 	
-	@JsonIgnore
 	@ManyToOne
-	private SolicitacaoServico solicitacao;
-
-	public Profissao() {
-
+	@JoinColumn(name="pedido_id")
+	private Pedido pedido;
+	
+	
+	public ItensPedido() {
 	}
 
-	public Profissao(Integer id, String nome, Categoria categoria) {
+	public ItensPedido(Integer id, String descricao) {
 		this.id = id;
-		this.nome = nome;
-		this.categoria = categoria;
+		this.descricao = descricao;
 	}
 
 	@Override
@@ -55,7 +47,7 @@ public class Profissao implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Profissao other = (Profissao) obj;
+		ItensPedido other = (ItensPedido) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -72,20 +64,13 @@ public class Profissao implements Serializable {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
-
-	public Categoria getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-	}
-
+	
+	
 }

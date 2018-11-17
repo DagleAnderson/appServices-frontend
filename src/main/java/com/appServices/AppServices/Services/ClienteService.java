@@ -19,17 +19,17 @@ import com.appServices.AppServices.domain.enums.TipoPessoa;
 import com.appServices.AppServices.domain.enums.TipoSexo;
 import com.appServices.AppServices.dto.ClienteDTO;
 import com.appServices.AppServices.dto.ClienteNewDTO;
-import com.appServices.AppServices.repositories.ClienteRespository;
-import com.appServices.AppServices.repositories.EnderecoClienteRespository;
+import com.appServices.AppServices.repositories.ClienteRepository;
+import com.appServices.AppServices.repositories.EnderecoClienteRepository;
 
 @Service
 public class ClienteService {
 	
 	@Autowired
-	private ClienteRespository repository;
+	private ClienteRepository repository;
 	
 	@Autowired
-	private EnderecoClienteRespository enderecoRepository;
+	private EnderecoClienteRepository enderecoRepository;
 	
 	public Cliente find(Integer id) {
 		

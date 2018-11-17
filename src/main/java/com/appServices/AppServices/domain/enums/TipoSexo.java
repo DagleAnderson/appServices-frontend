@@ -1,6 +1,6 @@
 package com.appServices.AppServices.domain.enums;
 
-	public enum TipoSexo {
+public enum TipoSexo {
 		MASCULINO(1,"MASCULINO"),
 		FEMININO(2,"FEMININO");
 		
@@ -34,4 +34,4 @@ package com.appServices.AppServices.domain.enums;
 			throw new IllegalArgumentException("id inválido"+cod);	
 		}
 
-	}
+}
