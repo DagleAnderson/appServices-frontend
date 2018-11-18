@@ -1,5 +1,6 @@
 package com.appServices.AppServices.resources;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import com.appServices.AppServices.domain.Curriculo;
 @RequestMapping("prestador/curriculo")
 public class CurriculoResource {
 	
+	@Autowired
 	private CurriculoService service;
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
