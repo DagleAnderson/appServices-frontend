@@ -83,15 +83,18 @@ public class AppServicesApplication implements CommandLineRunner {
 	EnderecoCliente end1 = new EnderecoCliente(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio", cli1);
 	cli1.setEndereco(end1);
 	
+	EnderecoCliente end2 = new EnderecoCliente(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio", cli2);
+	cli2.setEndereco(end2);
+	
 			clienteRespository.saveAll(Arrays.asList(cli1,cli2));
-			enderecoClienteRespository.saveAll(Arrays.asList(end1));
+			enderecoClienteRespository.saveAll(Arrays.asList(end1,end2));
 			
 	
 
 			
 	Categoria areaProf1= new Categoria(null, "Construção e Reforma");		
 	Profissao prof1 = new Profissao(null, "Pintor",areaProf1);
-	Profissao prof2 = new Profissao(null, "Pedreiro",areaProf1);
+	Profissao prof2 = new Profissao(null, "Programador",areaProf1);
 	Profissao prof3 = new Profissao(null, "Engenheiro",areaProf1);
 		areaProf1.getServicos().addAll(Arrays.asList(prof1,prof2,prof3));
 		
@@ -99,24 +102,33 @@ public class AppServicesApplication implements CommandLineRunner {
 		servicosRepository.saveAll(Arrays.asList(prof1,prof2,prof3));
 	
 	Prestador prest1 = new Prestador(null,"Ceará Pintor","pinturas em geral","domiciliar", cli1,prof1);	
-	EnderecoPrestador end2 = new EnderecoPrestador(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio",prest1);
-			prest1.setEndereco(end2);
+	EnderecoPrestador end3 = new EnderecoPrestador(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio",prest1);
+			prest1.setEndereco(end3);
+			
+	Prestador prest2 = new Prestador(null,"Ceará Pintor","pinturas em geral","domiciliar", cli2,prof2);	
+	EnderecoPrestador end4 = new EnderecoPrestador(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio",prest2);
+	prest2.setEndereco(end4);
+			
 			
 	Curriculo c1 = new Curriculo(null, prest1);
+	Curriculo c2 = new Curriculo(null, prest2);
 	Cursos curso1 = new Cursos(null, "Oficina Coral", "Coral Titas Brasil","2 dias", c1);
 	Cursos curso2 = new Cursos(null, "treinamento Suvenil ", "Suvenil tintas","7 dias ", c1);
+	Cursos curso3 = new Cursos(null, "MBA full stack ", "IGTI","1 ano ", c2);
 	Experiencias exp1 = new Experiencias(null,"Suvinil LTDA", "Pinto","2 anos",c1);
-	c1.getCursos().addAll(Arrays.asList(curso1,curso2));
+	c1.getCursos().addAll(Arrays.asList(curso1,curso2,curso3));
 	c1.getExperiencias().addAll(Arrays.asList(exp1));
 	
 	prest1.setCurriculo(c1);
-	prestadorRepository.saveAll(Arrays.asList(prest1));
-	enderecoPrestadorRepository.saveAll(Arrays.asList(end2));
+	prest2.setCurriculo(c2);
+	
+	prestadorRepository.saveAll(Arrays.asList(prest1,prest2));
+	enderecoPrestadorRepository.saveAll(Arrays.asList(end3,end4));
 
 	
 	
-	curriculoRepository.saveAll(Arrays.asList(c1));
-	cursosRespository.saveAll(Arrays.asList(curso1,curso2));
+	curriculoRepository.saveAll(Arrays.asList(c1,c2));
+	cursosRespository.saveAll(Arrays.asList(curso1,curso2,curso3));
 	experienciasRespository.saveAll(Arrays.asList(exp1));
 	
 	

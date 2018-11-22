@@ -18,7 +18,7 @@ public class Cursos implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String descricao;
+	private String curso;
 	private String instituicao;
 	private String duracao;
 	
@@ -31,9 +31,9 @@ public class Cursos implements Serializable{
 		
 	}
 
-	public Cursos(Integer id, String descricao, String instituicao,String duracao, Curriculo curriculo) {
+	public Cursos(Integer id, String curso, String instituicao,String duracao, Curriculo curriculo) {
 		this.id = id;
-		this.descricao = descricao;
+		this.curso = curso;
 		this.instituicao = instituicao;
 		this.duracao = duracao;
 		this.curriculo = curriculo;
@@ -72,12 +72,12 @@ public class Cursos implements Serializable{
 		this.id = id;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public String getCurso() {
+		return curso;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setCurso(String curso) {
+		this.curso = curso;
 	}
 
 	public String getInstituicao() {

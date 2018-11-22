@@ -5,7 +5,7 @@ import com.appServices.AppServices.domain.Cursos;
 public class CursosDTO {
 	
 	private Integer id;
-	private String descricao;
+	private String curso;
 	private String instituicao;
 	private String duracao;
 	
@@ -15,7 +15,7 @@ public class CursosDTO {
 	
 	public CursosDTO(Cursos cursoObj) {
 		this.id = cursoObj.getId();
-		this.descricao =cursoObj.getDescricao();
+		this.curso =cursoObj.getCurso();
 		this.instituicao = cursoObj.getInstituicao();
 		this.duracao = cursoObj.getDuracao();
 	}
@@ -28,12 +28,12 @@ public class CursosDTO {
 		this.id = id;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public String getCurso() {
+		return curso;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setCurso(String curso) {
+		this.curso = curso;
 	}
 
 	public String getInstituicao() {

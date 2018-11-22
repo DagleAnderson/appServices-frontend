@@ -53,7 +53,7 @@ public class CursosService {
 	
 	public Cursos fromDTO(CursosDTO objDTO) {
 		
-		Cursos obj = new Cursos(objDTO.getId(), objDTO.getDescricao(), objDTO.getInstituicao(), objDTO.getDuracao(), null);
+		Cursos obj = new Cursos(objDTO.getId(), objDTO.getCurso(), objDTO.getInstituicao(), objDTO.getDuracao(), null);
 		
 		return obj;
 	}
@@ -62,7 +62,7 @@ public class CursosService {
 	
 	
 	public void updateData(Cursos newObj, Cursos obj){
-		newObj.setDescricao(obj.getDescricao());
+		newObj.setCurso(obj.getCurso());
 		newObj.setDuracao(obj.getDuracao());
 		newObj.setInstituicao(obj.getInstituicao());
 	}
