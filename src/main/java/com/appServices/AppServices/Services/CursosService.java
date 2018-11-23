@@ -6,12 +6,14 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.appServices.AppServices.Service.exception.DataIntegrityException;
 import com.appServices.AppServices.Service.exception.ObjectNotFoundException;
 import com.appServices.AppServices.domain.Cliente;
 import com.appServices.AppServices.domain.Cursos;
 import com.appServices.AppServices.dto.CursosDTO;
+import com.appServices.AppServices.dto.CursosNewDTO;
 import com.appServices.AppServices.repositories.CursosRepository;
 
 @Service
@@ -28,6 +30,15 @@ public class CursosService {
 		return obj.orElseThrow( () -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName())	
 				);
+	}
+	
+	@Transactional
+	public Cursos insert(Cursos obj) {
+		obj.setId(null);
+		
+		obj = repository.save(obj);
+			
+		return  obj; 
 	}
 	
 	public Cursos upadate(Cursos obj) {
@@ -58,7 +69,13 @@ public class CursosService {
 		return obj;
 	}
 	
-	
+	public Cursos fromNewDTO(CursosNewDTO objDto) {
+		
+		
+		Cursos curso = new Cursos(objDto.getId(),objDto.getCurso(), objDto.getInstituicao(), objDto.getDuracao(), null);
+		
+		return curso;
+	}
 	
 	
 	public void updateData(Cursos newObj, Cursos obj){

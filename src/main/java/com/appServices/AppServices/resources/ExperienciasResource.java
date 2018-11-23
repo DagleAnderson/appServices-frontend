@@ -26,10 +26,9 @@ public class ExperienciasResource {
 	@Autowired
 	private ExperienciasService service;
 	
-	@RequestMapping(value="/{idPrestador}/curriculo/{idCurriculo}/experiencia",method = RequestMethod.GET)
+	@RequestMapping(value="/{idPrestador}/curriculo/experiencia",method = RequestMethod.GET)
 	public ResponseEntity<Experiencias> find(
 			@PathVariable Integer idPrestador,
-			@PathVariable Integer idCurriculo,
 			@RequestParam(value="id",defaultValue="0") Integer id){
 
 		Experiencias objList = service.find(id);
@@ -38,11 +37,10 @@ public class ExperienciasResource {
 	
 	
 
-	@RequestMapping(value="/{idPrestador}/curriculo/{idCurriculo}/experiencia",method = RequestMethod.PUT)
+	@RequestMapping(value="/{idPrestador}/curriculo/experiencia",method = RequestMethod.PUT)
 	public ResponseEntity<Experiencias> update(
 			@Valid @RequestBody ExperienciasDTO objDTO, 
 			@PathVariable Integer idPrestador,
-			@PathVariable Integer idCurriculo,
 			@RequestParam(value="id",defaultValue="0") Integer id){
 		
 		Experiencias obj = service.fromDTO(objDTO);
@@ -53,10 +51,9 @@ public class ExperienciasResource {
 		return ResponseEntity.noContent().build();			
 	}
 	
-	@RequestMapping(value="/{idPrestador}/curriculo/{idCurriculo}/experiencia",method = RequestMethod.DELETE)
+	@RequestMapping(value="/{idPrestador}/curriculo/experiencia",method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(
 			@PathVariable Integer idPrestador,
-			@PathVariable Integer idCurriculo,
 			@RequestParam(value="id",defaultValue="0") Integer id){
 		service.delete(id);
 		
@@ -64,11 +61,11 @@ public class ExperienciasResource {
 	}
 	
 	//GET DE TODOS OS CURSOS
-	/**@RequestMapping(value="/{idPrestador}/curriculo/{idCurriculo}/experiencia",method = RequestMethod.GET)
-	public ResponseEntity<List<ExperienciasDTO>> findExperieciasAll(){
+	@RequestMapping(value="/{idPrestador}/curriculo/experiencias",method = RequestMethod.GET)
+	public ResponseEntity<List<ExperienciasDTO>> findAll(){
 		List<Experiencias> objList = service.findAll();
 		List<ExperienciasDTO> listDto = objList.stream().map(obj -> new ExperienciasDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
-	}**/
+	}
 	
 }

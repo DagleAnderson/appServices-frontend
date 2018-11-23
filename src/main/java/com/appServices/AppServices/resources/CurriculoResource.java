@@ -4,11 +4,7 @@ package com.appServices.AppServices.resources;
 
 
 import java.net.URI;
-
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,14 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.appServices.AppServices.Services.CurriculoService;
-import com.appServices.AppServices.Services.CursosService;
-import com.appServices.AppServices.Services.ExperienciasService;
 import com.appServices.AppServices.domain.Curriculo;
-import com.appServices.AppServices.domain.Cursos;
-import com.appServices.AppServices.domain.Experiencias;
 import com.appServices.AppServices.dto.CurriculoNewDTO;
-import com.appServices.AppServices.dto.CursosDTO;
-import com.appServices.AppServices.dto.ExperienciasDTO;
+
 
 @RestController
 @RequestMapping("/prestador")
@@ -35,11 +26,11 @@ public class CurriculoResource {
 	@Autowired
 	private CurriculoService service;
 	
-	@Autowired
-	private CursosService cursoService;
+	//@Autowired
+	//private CursosService cursoService;
 	
-	@Autowired
-	private ExperienciasService expeService;
+	//@Autowired
+	//private ExperienciasService expeService;
 	
 	
 	
@@ -65,8 +56,9 @@ public class CurriculoResource {
 		
 	}
 	
-	//PUT CURSOS
-	@RequestMapping(value="/{idPrestador}/curriculo/",method = RequestMethod.PUT)
+	
+/**	//PUT CURSOS
+	@RequestMapping(value="/{idPrestador}/curriculo",method = RequestMethod.PUT)
 	public ResponseEntity<Cursos> updateCursos(
 			@Valid @RequestBody CursosDTO objDTO, 
 			@PathVariable Integer idPrestador,
@@ -74,27 +66,28 @@ public class CurriculoResource {
 			@RequestParam(value="id",defaultValue="0")Integer curso){
 		
 		Cursos obj = cursoService.fromDTO(objDTO);
-		obj.setId(id);
+		obj.setId(curso);
 		
 		obj = cursoService.upadate(obj);
 		
 		return ResponseEntity.noContent().build();			
-	}
+	}**/
 	
 	
-	//DELETE CURSO
-	@RequestMapping(value="/{idPrestador}/curriculo/",method = RequestMethod.DELETE)
+	/** //DELETE CURSO
+	@RequestMapping(value="/{idPrestador}/curriculo",method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteCurso(
 			@PathVariable Integer idPrestador,
 			@RequestParam(value="id",defaultValue="0") Integer id,
 			@RequestParam(value="id",defaultValue="0")Integer curso){
-		cursoService.delete(id);
+		
+		cursoService.delete(curso);
 		
 		return ResponseEntity.noContent().build();
-	}
+	}**/
 	
 	//PUT EXPERIENCIA
-	@RequestMapping(value="/{idPrestador}/curriculo/",method = RequestMethod.PUT)
+	/**@RequestMapping(value="/{idPrestador}/curriculo",method = RequestMethod.PUT)
 	public ResponseEntity<Experiencias> updateExperiencia(
 			@Valid @RequestBody ExperienciasDTO objDTO, 
 			@PathVariable Integer idPrestador,
@@ -102,24 +95,24 @@ public class CurriculoResource {
 			@RequestParam(value="id",defaultValue="0")Integer experiencia){
 		
 		Experiencias obj = expeService.fromDTO(objDTO);
-		obj.setId(id);
+		obj.setId(experiencia);
 		
 		obj = expeService.update(obj);
 		
 		return ResponseEntity.noContent().build();			
-	}
+	}**/
 	
-	
-	//DELETE  EXPERIENCIA
-	@RequestMapping(value="/{idPrestador}/curriculo/",method = RequestMethod.DELETE)
+	//DELETE EXPERIENCIA
+	/**@RequestMapping(value="/{idPrestador}/curriculo",method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteExperiencia(
 			@PathVariable Integer idPrestador,
-			@PathVariable Integer idCurriculo,
-			@RequestParam(value="id",defaultValue="0") Integer id){
-		expeService.delete(id);
+			@RequestParam(value="id",defaultValue="0") Integer id,
+			@RequestParam(value="id",defaultValue="0")Integer experiencia){
+		
+		expeService.delete(experiencia);
 		
 		return ResponseEntity.noContent().build();
-	}
+	}**/
 
 	
 }

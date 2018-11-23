@@ -3,10 +3,10 @@ package com.appServices.AppServices.Services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.appServices.AppServices.Service.exception.DataIntegrityException;
 import com.appServices.AppServices.Service.exception.ObjectNotFoundException;
 import com.appServices.AppServices.domain.Experiencias;
@@ -16,6 +16,7 @@ import com.appServices.AppServices.repositories.ExperienciasRepository;
 @Service
 public class ExperienciasService {
 
+	@Autowired
 	private ExperienciasRepository repository;
 	
 public Experiencias find(Integer id) {
