@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.appServices.AppServices.Services.ClienteService;
+import com.appServices.AppServices.Services.ProfissaoService;
 import com.appServices.AppServices.Services.SolicitacaoServicoService;
 import com.appServices.AppServices.domain.Cliente;
+import com.appServices.AppServices.domain.Profissao;
 import com.appServices.AppServices.domain.SolicitacaoServico;
 import com.appServices.AppServices.dto.SolicitacaoServicoDTO;
 import com.appServices.AppServices.dto.SolicitacaoServicoNewDTO;
@@ -33,7 +35,8 @@ public class SolicitacaoServicoResource {
 	@Autowired
 	private ClienteService clienteService;
 	
-
+	@Autowired
+	private ProfissaoService profissaoService;
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
 	public ResponseEntity<SolicitacaoServico> find(@PathVariable Integer id){
@@ -51,8 +54,10 @@ public class SolicitacaoServicoResource {
 		
 		Cliente cli = clienteService.find(cliente);
 		
+		Profissao prof = profissaoService.find(profissao) ;
 		
-		SolicitacaoServico obj = service.fromNewDTO(objDTO,cli,null);
+		SolicitacaoServico obj = service.fromNewDTO(objDTO,cli,prof);
+		
 		obj = service.insert(obj);
 		
 		

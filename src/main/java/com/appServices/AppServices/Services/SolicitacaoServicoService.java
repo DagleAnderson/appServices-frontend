@@ -1,9 +1,9 @@
 package com.appServices.AppServices.Services;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import org.assertj.core.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.appServices.AppServices.Service.exception.DataIntegrityException;
 import com.appServices.AppServices.Service.exception.ObjectNotFoundException;
 import com.appServices.AppServices.domain.Cliente;
+import com.appServices.AppServices.domain.ItensSolicitacao;
 import com.appServices.AppServices.domain.Profissao;
 import com.appServices.AppServices.domain.SolicitacaoServico;
 import com.appServices.AppServices.dto.SolicitacaoServicoDTO;
@@ -29,6 +30,7 @@ public class SolicitacaoServicoService {
 	@Autowired
 	private ItensSolicitacaoRepository itensSolicitacaoRepo;	
 
+	@Autowired
 	private ProfissaoRepository profissaoRepository;
 	
 	public SolicitacaoServico find(Integer id) {
@@ -85,6 +87,11 @@ public SolicitacaoServico fromNewDTO(SolicitacaoServicoNewDTO objDTO,Cliente cli
 		
 		SolicitacaoServico SolicitacaoServico = new SolicitacaoServico(objDTO.getId(), objDTO.getProdutoServico(), cliente, profissao);
 		
+		ItensSolicitacao itensSolicitacao1 = new ItensSolicitacao(null, objDTO.getItemSolicitacao1(), SolicitacaoServico);
+		ItensSolicitacao itensSolicitacao2 = new ItensSolicitacao(null, objDTO.getItemSolicitacao2(), SolicitacaoServico);
+		ItensSolicitacao itensSolicitacao3 = new ItensSolicitacao(null, objDTO.getItemSolicitacao3(), SolicitacaoServico);
+		
+		SolicitacaoServico.getItemServico().addAll(Arrays.asList(itensSolicitacao1,itensSolicitacao2,itensSolicitacao3));
 		
 		return SolicitacaoServico;
 	}
