@@ -72,7 +72,7 @@ public class Cliente implements Serializable {
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "cliente",cascade = CascadeType.ALL)
-	private List<orcamento> orcamento = new ArrayList<>();
+	private List<Orcamento> orcamento = new ArrayList<>();
 	
 	public Cliente() {
 		

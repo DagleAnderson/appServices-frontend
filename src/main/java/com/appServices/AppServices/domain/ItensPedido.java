@@ -16,7 +16,8 @@ public class ItensPedido implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String descricao;
+	private String item;
+	private Double valor;
 	
 	@ManyToOne
 	@JoinColumn(name="pedido_id")
@@ -26,9 +27,11 @@ public class ItensPedido implements Serializable {
 	public ItensPedido() {
 	}
 
-	public ItensPedido(Integer id, String descricao) {
+	public ItensPedido(Integer id, String item, Double valor, Pedido pedido) {
 		this.id = id;
-		this.descricao = descricao;
+		this.item = item;
+		this.valor = valor;
+		this.pedido = pedido;
 	}
 
 	@Override
@@ -65,12 +68,30 @@ public class ItensPedido implements Serializable {
 	}
 
 	public String getDescricao() {
-		return descricao;
+		return item;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setDescricao(String item) {
+		this.item = item;
 	}
+
+	public Double getValor() {
+		return valor;
+	}
+
+	public void setValor(Double valor) {
+		this.valor = valor;
+	}
+
+	public Pedido getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
+	}
+	
+	
 	
 	
 }

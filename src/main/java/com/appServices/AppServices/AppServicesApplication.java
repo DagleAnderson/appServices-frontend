@@ -16,8 +16,10 @@ import com.appServices.AppServices.domain.Cursos;
 import com.appServices.AppServices.domain.EnderecoCliente;
 import com.appServices.AppServices.domain.EnderecoPrestador;
 import com.appServices.AppServices.domain.Experiencias;
+import com.appServices.AppServices.domain.ItensSolicitacao;
 import com.appServices.AppServices.domain.Prestador;
 import com.appServices.AppServices.domain.Profissao;
+import com.appServices.AppServices.domain.SolicitacaoServico;
 import com.appServices.AppServices.domain.enums.TipoPessoa;
 import com.appServices.AppServices.domain.enums.TipoSexo;
 import com.appServices.AppServices.repositories.CategoriaRepository;
@@ -28,8 +30,10 @@ import com.appServices.AppServices.repositories.CursosRepository;
 import com.appServices.AppServices.repositories.EnderecoClienteRepository;
 import com.appServices.AppServices.repositories.EnderecoPrestadorRepository;
 import com.appServices.AppServices.repositories.ExperienciasRepository;
+import com.appServices.AppServices.repositories.ItensSolicitacaoRepository;
 import com.appServices.AppServices.repositories.PrestadorRepository;
 import com.appServices.AppServices.repositories.ProfissaoRepository;
+import com.appServices.AppServices.repositories.SolicitacaoServicoRepository;
 
 @SpringBootApplication
 public class AppServicesApplication implements CommandLineRunner {
@@ -63,6 +67,12 @@ public class AppServicesApplication implements CommandLineRunner {
 	
 	@Autowired
 	private AvaliacoesRepository avaliacoesRespository;
+	
+	@Autowired
+	private SolicitacaoServicoRepository solicitacaoRepository;
+	
+	@Autowired
+	private ItensSolicitacaoRepository itensSolicitacaoRepository;
 	
 	
 	public static void main(String[] args){
@@ -121,6 +131,17 @@ public class AppServicesApplication implements CommandLineRunner {
 	
 	prest1.setCurriculo(c1);
 	prest2.setCurriculo(c2);
+	
+	SolicitacaoServico solicitacao = new SolicitacaoServico(null, "computador", cli1, prof1);
+	ItensSolicitacao itensSolicitacao1 = new ItensSolicitacao(null, "5 anos", solicitacao);
+	ItensSolicitacao itensSolicitacao2 = new ItensSolicitacao(null, "lentidao e virus", solicitacao);
+	ItensSolicitacao itensSolicitacao3 = new ItensSolicitacao(null, "formatação", solicitacao);
+	solicitacao.getItemServico().addAll(Arrays.asList(itensSolicitacao1,itensSolicitacao2,itensSolicitacao3));
+
+	
+	solicitacaoRepository.save(solicitacao);
+	
+	itensSolicitacaoRepository.saveAll(Arrays.asList(itensSolicitacao1,itensSolicitacao2,itensSolicitacao3));
 	
 	prestadorRepository.saveAll(Arrays.asList(prest1,prest2));
 	enderecoPrestadorRepository.saveAll(Arrays.asList(end3,end4));

@@ -24,17 +24,21 @@ public class SolicitacaoServico implements Serializable{
 	private Integer id;
 	private String produtoServico;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="cliente_id")
 	private  Cliente cliente;
 	
-	@JsonIgnore
-	@OneToMany(mappedBy = "solicitacao")
+	@OneToMany(mappedBy ="solicitacao")
 	private List<ItensSolicitacao> itemServico = new ArrayList<>();
 	
 	@ManyToOne
 	@JoinColumn(name="profissao_id")
 	private Profissao profissao;
+	
+	public SolicitacaoServico() {
+		
+	}
 	
 	public SolicitacaoServico(Integer id, String produtoServico, Cliente cliente, Profissao profissao) {
 		this.id = id;

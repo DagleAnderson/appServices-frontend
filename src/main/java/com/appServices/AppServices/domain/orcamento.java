@@ -1,6 +1,8 @@
 package com.appServices.AppServices.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,11 +10,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.appServices.AppServices.domain.enums.TipoSituacao;
 
 @Entity
-public class orcamento implements Serializable{
+public class Orcamento implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -27,12 +30,15 @@ public class orcamento implements Serializable{
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
 	
+	@OneToMany(mappedBy="orcamento")
+	private List<itensOrcamento> itensOrcamento = new ArrayList<>(); 
+	
 	private Double total;
 	private Double desconto;
 	private TipoSituacao Situacao;
 	private SolicitacaoServico solicitacao;
 	
-	public orcamento(Integer id, Prestador prestador, Cliente cliente, Double total, Double desc,
+	public Orcamento(Integer id, Prestador prestador, Cliente cliente, Double total, Double desc,
 			TipoSituacao situacao) {
 		this.id = id;
 		this.prestador = prestador;
@@ -62,7 +68,7 @@ public class orcamento implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		orcamento other = (orcamento) obj;
+		Orcamento other = (Orcamento) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -96,6 +102,20 @@ public class orcamento implements Serializable{
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
+	
+	
+
+	public List<itensOrcamento> getItensOrcamento() {
+		return itensOrcamento;
+	}
+
+
+
+	public void setItensOrcamento(List<itensOrcamento> itensOrcamento) {
+		this.itensOrcamento = itensOrcamento;
+	}
+
+
 
 	public Double gettotal() {
 		return total;

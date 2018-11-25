@@ -9,31 +9,31 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
-public class ItensSolicitacao  implements Serializable{
+public class itensOrcamento implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String descricao;
+	private String item;
+	private Double valor;
 	
-	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name="solicitacao_id")
-	private SolicitacaoServico solicitacao;
-	
-	public ItensSolicitacao() {
+	@JoinColumn(name="orcamento_id")
+	private Orcamento orcamento; 
+		
+	public itensOrcamento(){
 		
 	}
 	
-	public ItensSolicitacao(Integer id, String descricao,SolicitacaoServico solicitacao) {
+	public itensOrcamento(Integer id, String item, Double valor, Orcamento orcamento) {
 		this.id = id;
-		this.descricao = descricao;
-		this.solicitacao = solicitacao;
+		this.item = item;
+		this.valor = valor;
+		this.orcamento = orcamento;
 	}
+
 
 
 	@Override
@@ -44,7 +44,6 @@ public class ItensSolicitacao  implements Serializable{
 		return result;
 	}
 
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -53,7 +52,7 @@ public class ItensSolicitacao  implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ItensSolicitacao other = (ItensSolicitacao) obj;
+		itensOrcamento other = (itensOrcamento) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -62,29 +61,37 @@ public class ItensSolicitacao  implements Serializable{
 		return true;
 	}
 
-
 	public Integer getId() {
 		return id;
 	}
-
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-
-	public String getDescricao() {
-		return descricao;
+	public String getItem() {
+		return item;
 	}
 
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setItem(String item) {
+		this.item = item;
 	}
-	
-	
-	
-	
+
+	public Double getValor() {
+		return valor;
+	}
+
+	public void setValor(Double valor) {
+		this.valor = valor;
+	}
+
+	public Orcamento getOrcamento() {
+		return orcamento;
+	}
+
+	public void setOrcamento(Orcamento orcamento) {
+		this.orcamento = orcamento;
+	} 	
 	
 	
 }
