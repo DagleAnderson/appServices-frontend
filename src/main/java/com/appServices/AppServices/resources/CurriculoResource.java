@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -20,30 +19,21 @@ import com.appServices.AppServices.dto.CurriculoNewDTO;
 
 
 @RestController
-@RequestMapping("/prestador")
+@RequestMapping("/Curriculo")
 public class CurriculoResource {
 	
 	@Autowired
-	private CurriculoService service;
+	private CurriculoService service;	
 	
-	//@Autowired
-	//private CursosService cursoService;
-	
-	//@Autowired
-	//private ExperienciasService expeService;
-	
-	
-	
-	@RequestMapping(value="/{idPrestador}/curriculo",method = RequestMethod.GET)
-	public ResponseEntity<Curriculo> find(@PathVariable Integer idPrestador,
-			@RequestParam(value="id",defaultValue="1") Integer id){
+	@RequestMapping(value="/{id}",method = RequestMethod.GET)
+	public ResponseEntity<Curriculo> find(@PathVariable Integer id ){
 		Curriculo objOp = service.find(id);
 		
 		return ResponseEntity.ok().body(objOp);
 		
 	}
 	
-	@RequestMapping(value="/{idPrestador}/curriculo",method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Curriculo> insert(@RequestBody CurriculoNewDTO objDTO){
 		
 		Curriculo obj = service.newFromDTO(objDTO);

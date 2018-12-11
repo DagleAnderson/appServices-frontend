@@ -20,13 +20,13 @@ import com.appServices.AppServices.dto.ExperienciasDTO;
 
 
 @RestController
-@RequestMapping(value="/prestador")
+@RequestMapping(value="/experiencias")
 public class ExperienciasResource {
 
 	@Autowired
 	private ExperienciasService service;
 	
-	@RequestMapping(value="/{idPrestador}/curriculo/experiencia",method = RequestMethod.GET)
+	@RequestMapping(value="{id}",method = RequestMethod.GET)
 	public ResponseEntity<Experiencias> find(
 			@PathVariable Integer idPrestador,
 			@RequestParam(value="id",defaultValue="0") Integer id){
@@ -37,12 +37,8 @@ public class ExperienciasResource {
 	
 	
 
-	@RequestMapping(value="/{idPrestador}/curriculo/experiencia",method = RequestMethod.PUT)
-	public ResponseEntity<Experiencias> update(
-			@Valid @RequestBody ExperienciasDTO objDTO, 
-			@PathVariable Integer idPrestador,
-			@RequestParam(value="id",defaultValue="0") Integer id){
-		
+	@RequestMapping(value="{id}",method = RequestMethod.PUT)
+	public ResponseEntity<Experiencias> update(@Valid @RequestBody ExperienciasDTO objDTO,@PathVariable Integer id){
 		Experiencias obj = service.fromDTO(objDTO);
 		obj.setId(id);
 		
@@ -51,17 +47,15 @@ public class ExperienciasResource {
 		return ResponseEntity.noContent().build();			
 	}
 	
-	@RequestMapping(value="/{idPrestador}/curriculo/experiencia",method = RequestMethod.DELETE)
-	public ResponseEntity<Void> delete(
-			@PathVariable Integer idPrestador,
-			@RequestParam(value="id",defaultValue="0") Integer id){
+	@RequestMapping(value="/{id}",method = RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable Integer id){
 		service.delete(id);
 		
 		return ResponseEntity.noContent().build();
 	}
 	
 	//GET DE TODOS OS CURSOS
-	@RequestMapping(value="/{idPrestador}/curriculo/experiencias",method = RequestMethod.GET)
+	@RequestMapping(value="/{id}",method = RequestMethod.GET)
 	public ResponseEntity<List<ExperienciasDTO>> findAll(){
 		List<Experiencias> objList = service.findAll();
 		List<ExperienciasDTO> listDto = objList.stream().map(obj -> new ExperienciasDTO(obj)).collect(Collectors.toList());

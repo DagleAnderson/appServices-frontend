@@ -74,13 +74,14 @@ public class SolicitacaoServicoService {
 		return repository.findAll();
 	}
 	
-
 	public SolicitacaoServico fromDTO(SolicitacaoServicoDTO objDTO,Cliente cliente, Profissao profissao) {
 
-		SolicitacaoServico solicitacaoServico = new SolicitacaoServico(objDTO.getId(),objDTO.getProdutoServico(),cliente, null);
+		SolicitacaoServico solicitacaoServ = new SolicitacaoServico(objDTO.getId(),objDTO.getProdutoServico(),cliente, null);
 
-		return solicitacaoServico;
+		return solicitacaoServ;
 	}
+	
+	
 	
 public SolicitacaoServico fromNewDTO(SolicitacaoServicoNewDTO objDTO,Cliente cliente, Profissao profissao) {
 		

@@ -49,8 +49,8 @@ public class SolicitacaoServicoResource {
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> Insert(
 			@Valid @RequestBody SolicitacaoServicoNewDTO objDTO,
-			@RequestParam(value="id",defaultValue="1") Integer cliente,
-			@RequestParam(value="id",defaultValue="1") Integer profissao){
+			@RequestParam(value="cliente",defaultValue="0") Integer cliente,
+			@RequestParam(value="profissao",defaultValue="0") Integer profissao){
 		
 		Cliente cli = clienteService.find(cliente);
 		
@@ -72,8 +72,8 @@ public class SolicitacaoServicoResource {
 	@RequestMapping(value= "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(
 			@Valid @RequestBody SolicitacaoServicoDTO objDTO,@PathVariable Integer id,
-			@RequestParam(value="id",defaultValue="1") Integer cliente,
-			@RequestParam(value="id",defaultValue="1") Integer profissao){
+			@RequestParam(value="cliente",defaultValue="0") Integer cliente,
+			@RequestParam(value="profissao",defaultValue="0") Integer profissao){
 		
 		Cliente cli = clienteService.find(cliente);
 	
@@ -93,10 +93,12 @@ public class SolicitacaoServicoResource {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<SolicitacaoServicoDTO>> findAll(){
+	public ResponseEntity<List<SolicitacaoServicoDTO>> findAll(
+			@RequestParam(value="cliente",defaultValue="0") Integer cliente){
 		List<SolicitacaoServico> objList =service.findAll();
 		List<SolicitacaoServicoDTO> listDto = objList.stream().map(obj -> new SolicitacaoServicoDTO(obj)).collect(Collectors.toList());
 		
 		return ResponseEntity.ok().body(listDto);
 	}
+
 }

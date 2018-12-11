@@ -22,21 +22,19 @@ import com.appServices.AppServices.dto.CursosDTO;
 import com.appServices.AppServices.dto.CursosNewDTO;
 
 @RestController
-@RequestMapping(value="/prestador")
+@RequestMapping(value="/Cursos")
 public class CursosResource {
 	@Autowired
 	private CursosService service;
 	
-	@RequestMapping(value="/{idPrestador}/curriculo/curso",method = RequestMethod.GET)
-	public ResponseEntity<Cursos> find(
-			@PathVariable Integer idPrestador,
-			@RequestParam(value="id",defaultValue="0") Integer id){
+	@RequestMapping(value="{/id}",method = RequestMethod.GET)
+	public ResponseEntity<Cursos> find(@RequestParam(value="id",defaultValue="0") Integer id){
 
 		Cursos objList = service.find(id);
 		return ResponseEntity.ok().body(objList);
 	}
 	
-	@RequestMapping(value="/{idPrestador}/curriculo/curso",method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> Insert(@Valid @RequestBody CursosNewDTO objDTO){
 		Cursos obj = service.fromNewDTO(objDTO);
 		obj = service.insert(obj);
@@ -47,7 +45,7 @@ public class CursosResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
-	@RequestMapping(value="/{idPrestador}/curriculo/curso",method = RequestMethod.PUT)
+	@RequestMapping(value="/{id}",method = RequestMethod.PUT)
 	public ResponseEntity<Cursos> update(
 			@Valid @RequestBody CursosDTO objDTO, 
 			@PathVariable Integer idPrestador,
@@ -61,7 +59,7 @@ public class CursosResource {
 		return ResponseEntity.noContent().build();			
 	}
 	
-	@RequestMapping(value="/{idPrestador}/curriculo/curso",method = RequestMethod.DELETE)
+	@RequestMapping(value="/{id}",method = RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(
 			@PathVariable Integer idPrestador,
 			@RequestParam(value="id",defaultValue="0") Integer id){
@@ -71,7 +69,7 @@ public class CursosResource {
 	}
 	
 	//GET DE TODOS OS CURSOS
-	@RequestMapping(value="/{idPrestador}/curriculo/cursos",method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<CursosDTO>> findAll(
 			@RequestParam(value="curriculo",defaultValue="0") Integer curriculo){
 		List<Cursos> objList = service.findAll();
