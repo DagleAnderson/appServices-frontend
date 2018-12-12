@@ -19,7 +19,7 @@ import com.appServices.AppServices.dto.CurriculoNewDTO;
 
 
 @RestController
-@RequestMapping("/Curriculo")
+@RequestMapping("/curriculo")
 public class CurriculoResource {
 	
 	@Autowired

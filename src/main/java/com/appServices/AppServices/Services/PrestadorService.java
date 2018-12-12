@@ -12,13 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.appServices.AppServices.Service.exception.DataIntegrityException;
 import com.appServices.AppServices.Service.exception.ObjectNotFoundException;
-import com.appServices.AppServices.domain.Categoria;
 import com.appServices.AppServices.domain.EnderecoPrestador;
 import com.appServices.AppServices.domain.Prestador;
 import com.appServices.AppServices.domain.Profissao;
 import com.appServices.AppServices.domain.Cliente;
-import com.appServices.AppServices.domain.enums.TipoPessoa;
-import com.appServices.AppServices.domain.enums.TipoSexo;
 import com.appServices.AppServices.dto.PrestadorDTO;
 import com.appServices.AppServices.dto.PrestadorNewDTO;
 import com.appServices.AppServices.repositories.CategoriaRepository;
@@ -97,23 +94,18 @@ public class PrestadorService {
 		return repository.findAll(pageRequest);
 	}
 	
-	public Prestador fromDTO(PrestadorDTO objDTO) {
+	public Prestador fromDTO(PrestadorDTO objDTO,Cliente cliente,Profissao profissao) {
 		
-		Prestador prestador = new Prestador(objDTO.getId(),objDTO.getNomeFantasia(),objDTO.getSlogan(),objDTO.getLocalAtendimento(),null,null);
+		Prestador prestador = new Prestador(objDTO.getId(),objDTO.getNomeFantasia(),objDTO.getSlogan(),objDTO.getLocalAtendimento(),cliente,profissao);
 		return prestador;
 	}
 	
-	public Prestador fromNewDTO(PrestadorNewDTO objDTO) {
-		Cliente usuario = new Cliente(null,objDTO.getNome(),objDTO.getSobrenome(),objDTO.getDataNascimento(),objDTO.getRg(),objDTO.getCpfOuCnpj(),TipoPessoa.toEnum(objDTO.getTipoPessoa()),TipoSexo.toEnum(objDTO.getSexo()),objDTO.getLogin(),objDTO.getSenha(),objDTO.getEmail()); 
-		usuario.getTelefones().add(objDTO.getTelefone1());
+
+	public Prestador fromNewDTO(PrestadorNewDTO objDTO,Cliente cliente,Profissao profissao) {
+			
+	
+		Prestador prestador = new Prestador(null,objDTO.getNomeFantasia(), objDTO.getSlogan(),objDTO.getLocalAtendimento(),cliente, profissao);
 		
-		if(objDTO.getTelefone2()!=null){
-			usuario.getTelefones().add(objDTO.getTelefone2());
-		}
-				
-		Categoria categoria = new Categoria(null,objDTO.getCategoria());
-		Profissao profissao = new Profissao(null,objDTO.getProfissao(),categoria);
-		Prestador prestador = new Prestador(null,objDTO.getNomeFantasia(),objDTO.getSlogan(),objDTO.getLocalAtendimento(),usuario,profissao);
 		EnderecoPrestador endereco = new EnderecoPrestador(null,objDTO.getCidade() ,objDTO.getEstado(),objDTO.getCep(),objDTO.getBairro(), objDTO.getRua(),objDTO.getNumero(),objDTO.getComplemento(), prestador);
 		
 		prestador.setEndereco(endereco);

@@ -7,7 +7,7 @@ public class CurriculoNewDTO {
 	
 	private Integer prestador;
 	
-	private String descricao1;
+	/*private String descricao1;
 	private String instituicao1;
 	private String duracao1;
 	
@@ -17,7 +17,7 @@ public class CurriculoNewDTO {
 	
 	private String descricao3;
 	private String instituicao3;
-	private String duracao3;
+	private String duracao3;*/
 
 	
 	//MÁXIMO 3 EXPERIÊNCIAS POR PRESTADOR
@@ -51,7 +51,7 @@ public class CurriculoNewDTO {
 
 
 
-	public String getDescricao1() {
+/*	public String getDescricao1() {
 		return descricao1;
 	}
 
@@ -122,7 +122,7 @@ public class CurriculoNewDTO {
 	public void setDuracao3(String duracao3) {
 		this.duracao3 = duracao3;
 	}
-
+*/
 	/*public String getEmpresa1() {
 		return empresa1;
 	}

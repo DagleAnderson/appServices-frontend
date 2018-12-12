@@ -12,6 +12,9 @@ public class PrestadorDTO  implements Serializable {
 	private String nomeFantasia;
 	private String slogan;
 	private String localAtendimento;
+	private Integer cliente;
+	private Integer Profissao;
+	
 	
 	public PrestadorDTO() {
 		
@@ -56,5 +59,23 @@ public class PrestadorDTO  implements Serializable {
 		this.localAtendimento = localAtendimento;
 	}
 
+	
+	public Integer getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Integer cliente) {
+		this.cliente = cliente;
+	}
+
+	public Integer getProfissao() {
+		return Profissao;
+	}
+
+	public void setProfissao(Integer profissao) {
+		Profissao = profissao;
+	}
+
+	
 		
 }

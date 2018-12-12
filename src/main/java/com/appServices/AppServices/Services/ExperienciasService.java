@@ -11,6 +11,7 @@ import com.appServices.AppServices.Service.exception.DataIntegrityException;
 import com.appServices.AppServices.Service.exception.ObjectNotFoundException;
 import com.appServices.AppServices.domain.Experiencias;
 import com.appServices.AppServices.dto.ExperienciasDTO;
+import com.appServices.AppServices.dto.ExperienciasNewDTO;
 import com.appServices.AppServices.repositories.ExperienciasRepository;
 
 @Service
@@ -33,8 +34,6 @@ public Experiencias find(Integer id) {
 		obj.setId(null);
 		
 		obj = repository.save(obj);
-		
-		//enderecoRepository.save(obj.getEndereco());
 		
 		
 		return  obj; 
@@ -67,6 +66,15 @@ public Experiencias find(Integer id) {
 		
 		return experiencia;
 	}
+	
+
+	public Experiencias fromNewDTO(ExperienciasNewDTO objDTO) {
+		
+		Experiencias experiencia = new Experiencias(null,objDTO.getEmpresa(),objDTO.getFuncao(),objDTO.getPeriodo(),null);
+		
+		return experiencia;
+	}
+
 
 	public void updateData(Experiencias newObj, Experiencias obj){
 		newObj.setEmpresa(obj.getEmpresa());

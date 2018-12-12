@@ -71,8 +71,7 @@ public class CursosService {
 	
 	public Cursos fromNewDTO(CursosNewDTO objDto) {
 		
-		
-		Cursos curso = new Cursos(objDto.getId(),objDto.getCurso(), objDto.getInstituicao(), objDto.getDuracao(), null);
+		Cursos curso = new Cursos(null,objDto.getCurso(), objDto.getInstituicao(), objDto.getDuracao(), null);
 		
 		return curso;
 	}

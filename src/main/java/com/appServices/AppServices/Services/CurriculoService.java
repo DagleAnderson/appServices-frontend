@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.appServices.AppServices.Service.exception.ObjectNotFoundException;
 import com.appServices.AppServices.domain.Curriculo;
-import com.appServices.AppServices.domain.Cursos;
 import com.appServices.AppServices.domain.Prestador;
 import com.appServices.AppServices.dto.CurriculoNewDTO;
 import com.appServices.AppServices.repositories.CurriculoRepository;
@@ -53,7 +52,7 @@ public class CurriculoService {
 		
 		Curriculo curriculo = new Curriculo(null, prestador);
 	
-		Cursos curso1 = new Cursos(null, objDTO.getDescricao1(),objDTO.getInstituicao1(),objDTO.getDescricao1(), curriculo);
+		/*Cursos curso1 = new Cursos(null, objDTO.getDescricao1(),objDTO.getInstituicao1(),objDTO.getDescricao1(), curriculo);
 		curriculo.getCursos().add(curso1);
 		
 		if((objDTO.getDescricao2()!=null) && (objDTO.getDuracao2()!=null) && (objDTO.getDescricao2())!=null) {
@@ -62,10 +61,9 @@ public class CurriculoService {
 		}
 		if((objDTO.getDescricao3()!=null) && (objDTO.getDuracao3()!=null) && (objDTO.getDescricao3())!=null) {
 			Cursos curso3 = new Cursos(null, objDTO.getDescricao3(),objDTO.getInstituicao3(),objDTO.getDescricao3(), curriculo);
-			curriculo.getCursos().add(curso3);
-		}
-		
-		
+			curriculo.getCursos().add(curso3);	
+		}*/
+	
 		return curriculo;	
 	}
 	

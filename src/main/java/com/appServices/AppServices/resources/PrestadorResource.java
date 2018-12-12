@@ -15,8 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.appServices.AppServices.Services.ClienteService;
 import com.appServices.AppServices.Services.PrestadorService;
+import com.appServices.AppServices.Services.ProfissaoService;
+import com.appServices.AppServices.domain.Cliente;
 import com.appServices.AppServices.domain.Prestador;
+import com.appServices.AppServices.domain.Profissao;
 import com.appServices.AppServices.dto.PrestadorDTO;
 import com.appServices.AppServices.dto.PrestadorNewDTO;
 
@@ -26,6 +30,12 @@ public class PrestadorResource {
 	
 	@Autowired
 	private PrestadorService service;
+	
+	@Autowired
+	private ClienteService clienteService;
+	
+	@Autowired
+	private ProfissaoService profissaoService;
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
 	public ResponseEntity<Prestador> find(@PathVariable Integer id){
@@ -37,7 +47,16 @@ public class PrestadorResource {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> inserir(@RequestBody PrestadorNewDTO objDTO){
-		Prestador obj = service.fromNewDTO(objDTO);
+		
+		//captura de identificador de cliente e profissao para realizar consulta
+		Integer idProfissao = objDTO.getProfissao();
+		Integer idCliente = objDTO.getCliente();
+		
+		Profissao prof = profissaoService.find(idProfissao);
+		
+		Cliente cli = clienteService.find(idCliente);
+		
+		Prestador obj = service.fromNewDTO(objDTO,cli,prof);
 		obj = service.insert(obj);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
@@ -49,7 +68,17 @@ public class PrestadorResource {
 
 	@RequestMapping(value="/{id}",method = RequestMethod.PUT)
 	public ResponseEntity<Void>update(@RequestBody PrestadorDTO objDTO, @PathVariable Integer id){
-		Prestador obj = service.fromDTO(objDTO);
+		
+		//captura de identificador de cliente e profissao para realizar consulta
+		Integer idProfissao = objDTO.getProfissao();
+		Integer idCliente = objDTO.getCliente();
+				
+		Profissao prof = profissaoService.find(idProfissao);
+				
+		Cliente cli = clienteService.find(idCliente);		
+		
+		
+		Prestador obj = service.fromDTO(objDTO,cli,prof);
 		obj.setId(id);
 		obj = service.update(obj);
 		return ResponseEntity.noContent().build();

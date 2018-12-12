@@ -38,7 +38,6 @@ public class Prestador implements Serializable {
 	@JoinColumn(name="profissao_id")
 	private Profissao profissao;
 	
-
 	@OneToOne(cascade=CascadeType.PERSIST,mappedBy="prestador")
 	private Curriculo curriculo;
 
