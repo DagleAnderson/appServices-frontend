@@ -9,8 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-public class itensOrcamento implements Serializable {
+public class ItensOrcamento implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -19,15 +21,16 @@ public class itensOrcamento implements Serializable {
 	private String item;
 	private Double valor;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="orcamento_id")
 	private Orcamento orcamento; 
 		
-	public itensOrcamento(){
+	public ItensOrcamento(){
 		
 	}
 	
-	public itensOrcamento(Integer id, String item, Double valor, Orcamento orcamento) {
+	public ItensOrcamento(Integer id, String item, Double valor, Orcamento orcamento) {
 		this.id = id;
 		this.item = item;
 		this.valor = valor;
@@ -52,7 +55,7 @@ public class itensOrcamento implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		itensOrcamento other = (itensOrcamento) obj;
+		ItensOrcamento other = (ItensOrcamento) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

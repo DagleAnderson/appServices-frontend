@@ -36,6 +36,9 @@ public class SolicitacaoServico implements Serializable{
 	@JoinColumn(name="profissao_id")
 	private Profissao profissao;
 	
+	@OneToMany(mappedBy="solicitacao")
+	private List<Orcamento> orcamento = new ArrayList<>();
+	
 	public SolicitacaoServico() {
 		
 	}
@@ -116,6 +119,15 @@ public class SolicitacaoServico implements Serializable{
 
 	public void setProfissao(Profissao profissao) {
 		this.profissao = profissao;
+	}
+	
+
+	public List<Orcamento> getOrcamento() {
+		return orcamento;
+	}
+
+	public void setOrcamento(List<Orcamento> orcamento) {
+		this.orcamento = orcamento;
 	}
 	
 	

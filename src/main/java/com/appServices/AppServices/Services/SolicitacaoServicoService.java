@@ -38,7 +38,7 @@ public class SolicitacaoServicoService {
 		Optional<SolicitacaoServico> objOp = repository.findById(id);
 
 		return objOp.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto não encontrado! Id: " + id + ", Tipo: " + SolicitacaoServico.class.getName()));
+				"Objeto não encontrado! Id:" + id + ", Tipo: " + SolicitacaoServico.class.getName()));
 	}
 
 	@Transactional

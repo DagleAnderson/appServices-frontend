@@ -50,7 +50,7 @@ public class Cliente implements Serializable {
 	@CollectionTable(name="TELEFONE")
 	private Set<String> telefones =  new HashSet<>();
 	
-	@OneToOne(cascade=CascadeType.ALL,mappedBy="cliente")
+	@OneToOne(mappedBy="cliente",cascade=CascadeType.ALL)
 	private EnderecoCliente endereco;
 	
 	@JsonIgnore

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,8 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.appServices.AppServices.domain.enums.TipoSituacao;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Orcamento implements Serializable{
@@ -22,6 +25,8 @@ public class Orcamento implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	private String produtoServico;
+	
 	@ManyToOne
 	@JoinColumn(name="prestador_id")
 	private Prestador prestador;
@@ -30,22 +35,32 @@ public class Orcamento implements Serializable{
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
 	
-	@OneToMany(mappedBy="orcamento")
-	private List<itensOrcamento> itensOrcamento = new ArrayList<>(); 
+	@OneToMany(mappedBy="orcamento",cascade=CascadeType.ALL)
+	private List<ItensOrcamento> itensOrcamento = new ArrayList<>(); 
 	
 	private Double total;
 	private Double desconto;
-	private TipoSituacao Situacao;
+	private Integer situacao;
+	
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="solicitacao_id")
 	private SolicitacaoServico solicitacao;
 	
-	public Orcamento(Integer id, Prestador prestador, Cliente cliente, Double total, Double desc,
-			TipoSituacao situacao) {
+	public Orcamento() {
+		
+	}
+	
+	public Orcamento(Integer id,String produtoServico, Prestador prestador, Cliente cliente, Double total, Double desc,
+			TipoSituacao situacao,SolicitacaoServico solicitacao) {
 		this.id = id;
+		this.produtoServico = produtoServico;
 		this.prestador = prestador;
 		this.cliente = cliente;
 		this.total = total;
 		this.desconto = desc;
-		this.Situacao = situacao;
+		this.situacao = situacao.getCodigo();
+		this.solicitacao = solicitacao;
 	}
 	
 	
@@ -86,6 +101,20 @@ public class Orcamento implements Serializable{
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
+	
+
+	public String getProdutoServico() {
+		return produtoServico;
+	}
+
+
+
+	public void setProdutoServico(String produtoServico) {
+		this.produtoServico = produtoServico;
+	}
+
+
 
 	public Prestador getPrestador() {
 		return prestador;
@@ -105,23 +134,23 @@ public class Orcamento implements Serializable{
 	
 	
 
-	public List<itensOrcamento> getItensOrcamento() {
+	public List<ItensOrcamento> getItensOrcamento() {
 		return itensOrcamento;
 	}
 
 
 
-	public void setItensOrcamento(List<itensOrcamento> itensOrcamento) {
+	public void setItensOrcamento(List<ItensOrcamento> itensOrcamento) {
 		this.itensOrcamento = itensOrcamento;
 	}
 
 
 
-	public Double gettotal() {
+	public Double getTotal() {
 		return total;
 	}
 
-	public void settotal(Double total) {
+	public void setTotal(Double total) {
 		this.total = total;
 	}
 
@@ -130,15 +159,15 @@ public class Orcamento implements Serializable{
 	}
 
 	public void setDesconto(Double desc) {
-		desconto = desc;
+		this.desconto = desc;
 	}
 
 	public TipoSituacao getSituacao() {
-		return Situacao;
+		return TipoSituacao.toEnum(situacao);
 	}
 
 	public void setSituacao(TipoSituacao situacao) {
-		Situacao = situacao;
+		this.situacao = situacao.getCodigo();
 	}
 
 
