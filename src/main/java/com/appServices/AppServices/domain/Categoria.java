@@ -19,7 +19,7 @@ public class Categoria implements Serializable{
 	private Integer id;
 	private  String nome;
 	@OneToMany(mappedBy="categoria")
-	private List<Profissao> servicos = new ArrayList<>();
+	private List<Profissao> profissoes = new ArrayList<>();
 	
 
 	public Categoria() {
@@ -72,12 +72,12 @@ public class Categoria implements Serializable{
 		this.nome = nome;
 	}
 
-	public List<Profissao> getServicos() {
-		return servicos;
+	public List<Profissao> getProfissoes() {
+		return profissoes;
 	}
 
-	public void setServicos(List<Profissao> servicos) {
-		this.servicos = servicos;
+	public void setProfissoes(List<Profissao> profissoes) {
+		this.profissoes = profissoes;
 	}
 	
 	

@@ -5,12 +5,17 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.appServices.AppServices.Service.exception.DataIntegrityException;
 import com.appServices.AppServices.Service.exception.ObjectNotFoundException;
+import com.appServices.AppServices.domain.Categoria;
 import com.appServices.AppServices.domain.Profissao;
+import com.appServices.AppServices.repositories.CategoriaRepository;
 import com.appServices.AppServices.repositories.ProfissaoRepository;
 
 @Service
@@ -18,6 +23,9 @@ public class ProfissaoService {
 	
 	@Autowired
 	private ProfissaoRepository repository;
+	
+	@Autowired
+	private CategoriaRepository categoriaRepository;
 	
 	public Profissao find(Integer id) {
 		
@@ -58,25 +66,17 @@ public class ProfissaoService {
 	}
 	
 	
-	// MÉTODOS PARA IMPLEMENTAÇÃO FUTURA -- 25/11/2018 -- BY:D'AGLÊ ANDERSON LIMA DE SOUSA
-	
-	/**public Profissao fromDTO(ProfissaoDTO objDTO) {
-		
-		Profissao Profissao = new Profissao(objDTO.getId(),objDTO.getNome(),objDTO.getSobrenome(), objDTO.getDataNascimento(),objDTO.getRg(), objDTO.getcpfOuCnpj(),objDTO.getTipoPessoa(), objDTO.getSexo(),objDTO.getLogin(),objDTO.getSenha(),objDTO.getEmail());
-		
-		return Profissao;
-	}
-
-	public Profissao fromNewDTO(ProfissaoNewDTO objDTO) {
-		
-		Profissao Profissao = new Profissao(null,objDTO.getNome(),objDTO.getSobrenome(), objDTO.getDataNascimento(),objDTO.getRg(), objDTO.getCpfOuCnpj(),TipoPessoa.toEnum(objDTO.getTipoPessoa()),TipoSexo.toEnum(objDTO.getSexo()),objDTO.getLogin(),objDTO.getSenha(),objDTO.getEmail());
-		
-		return Profissao;
-	} **/
-	
 	private void updateData(Profissao newObj,Profissao obj) {
 		newObj.setId(obj.getId());
 		newObj.setNome(obj.getNome());
 		newObj.setCategoria(obj.getCategoria());
+	}
+	
+	public Page<Profissao> search(Integer id,Integer page, Integer linesPerPage,String orderBy,String direction){
+		
+		PageRequest  pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		
+		Optional<Categoria> categorias = categoriaRepository.findById(id); 
+		return repository.search(categorias,pageRequest);
 	}
 }

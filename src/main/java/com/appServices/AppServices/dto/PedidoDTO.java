@@ -1,11 +1,13 @@
 package com.appServices.AppServices.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.appServices.AppServices.domain.Pedido;
 import com.appServices.AppServices.domain.enums.TipoSituacao;
 
-public class PedidoDTO {
+public class PedidoDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	private Integer id;
 	private String produtoServico;

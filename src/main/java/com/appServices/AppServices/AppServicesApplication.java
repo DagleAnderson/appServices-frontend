@@ -85,7 +85,8 @@ public class AppServicesApplication implements CommandLineRunner {
 	SimpleDateFormat data = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 	
 		
-		
+	//Cadastro de Cliente
+	
 	Cliente cli1 = new Cliente(null,"Dagle"," Anderson",data.parse("22/10/1994 22:00"),"1432756311","063176845960",TipoPessoa.FISICA,TipoSexo.MASCULINO,"Dagle22","221094","dagle_life@hotmail.com");
 	Cliente cli2 = new Cliente(null,"José ","",data.parse("05/12/1965 00:00"),"123453678","1234536789",TipoPessoa.JURIDICA,TipoSexo.MASCULINO,"Jose22","123","teste@hotmail.com");	
 	cli2.getTelefones().addAll(Arrays.asList("77-991489740"));
@@ -101,16 +102,28 @@ public class AppServicesApplication implements CommandLineRunner {
 			
 	
 
-			
+	//Cadastro de Categoria e Profissao		
 	Categoria areaProf1= new Categoria(null, "Construção e Reforma");		
 	Profissao prof1 = new Profissao(null, "Pintor",areaProf1);
-	Profissao prof2 = new Profissao(null, "Programador",areaProf1);
+	Profissao prof2 = new Profissao(null, "Arquiteto",areaProf1);
 	Profissao prof3 = new Profissao(null, "Engenheiro",areaProf1);
-		areaProf1.getServicos().addAll(Arrays.asList(prof1,prof2,prof3));
-		
-		areaPorfissionalRepository.saveAll(Arrays.asList(areaProf1));
-		servicosRepository.saveAll(Arrays.asList(prof1,prof2,prof3));
 	
+	Categoria areaProf2= new Categoria(null, "Tecnologia e ELetrônicos");		
+	Profissao prof4 = new Profissao(null, "programador",areaProf2);
+	Profissao prof5 = new Profissao(null, "Técnico em Informatica",areaProf2);
+	Profissao prof6 = new Profissao(null, "Analista de sistemas",areaProf2);
+	
+	Categoria areaProf3= new Categoria(null, "Veículo automotores");		
+	Profissao prof7 = new Profissao(null, "Mecânico",areaProf3);
+	Profissao prof8 = new Profissao(null, "Motorista",areaProf3);
+		areaProf1.getProfissoes().addAll(Arrays.asList(prof1,prof2,prof3));
+		areaProf2.getProfissoes().addAll(Arrays.asList(prof4,prof5,prof6));
+		areaProf3.getProfissoes().addAll(Arrays.asList(prof7,prof8));
+		
+		areaPorfissionalRepository.saveAll(Arrays.asList(areaProf1,areaProf2,areaProf3));
+		servicosRepository.saveAll(Arrays.asList(prof1,prof2,prof3,prof4,prof5,prof6,prof7,prof8));
+	
+	//Cadsatro de Prestador	
 	Prestador prest1 = new Prestador(null,"Ceará Pintor","pinturas em geral","domiciliar", cli1,prof1);	
 	EnderecoPrestador end3 = new EnderecoPrestador(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio",prest1);
 			prest1.setEndereco(end3);
@@ -118,7 +131,8 @@ public class AppServicesApplication implements CommandLineRunner {
 	Prestador prest2 = new Prestador(null,"Ceará Pintor","pinturas em geral","domiciliar", cli2,prof2);	
 	EnderecoPrestador end4 = new EnderecoPrestador(null,"Barreiras","BA", "47800218", "Barreiras I", "Ceilandia", 255, "praça 26 de maio",prest2);
 	prest2.setEndereco(end4);
-			
+	
+	//Cadastro de Curriculo
 			
 	Curriculo c1 = new Curriculo(null, prest1);
 	Curriculo c2 = new Curriculo(null, prest2);
@@ -132,6 +146,8 @@ public class AppServicesApplication implements CommandLineRunner {
 	prest1.setCurriculo(c1);
 	prest2.setCurriculo(c2);
 	
+	//Solicitacao de Servico
+	
 	SolicitacaoServico solicitacao = new SolicitacaoServico(null, "computador", cli1, prof1);
 	ItensSolicitacao itensSolicitacao1 = new ItensSolicitacao(null, "5 anos", solicitacao);
 	ItensSolicitacao itensSolicitacao2 = new ItensSolicitacao(null, "lentidao e virus", solicitacao);
@@ -140,6 +156,10 @@ public class AppServicesApplication implements CommandLineRunner {
 
 	
 	solicitacaoRepository.save(solicitacao);
+	
+	//Avaliações de clientes
+	Avaliacoes aval1 = new Avaliacoes(null, cli1, prest1, 5, "Um dos melhores pintores que ja contratei na vida");
+	 prest1.getAvaliacoes().addAll(Arrays.asList(aval1));
 	
 	itensSolicitacaoRepository.saveAll(Arrays.asList(itensSolicitacao1,itensSolicitacao2,itensSolicitacao3));
 	
@@ -151,10 +171,6 @@ public class AppServicesApplication implements CommandLineRunner {
 	curriculoRepository.saveAll(Arrays.asList(c1,c2));
 	cursosRespository.saveAll(Arrays.asList(curso1,curso2,curso3));
 	experienciasRespository.saveAll(Arrays.asList(exp1));
-	
-	
-	Avaliacoes aval1 = new Avaliacoes(null, cli1, prest1, 5, "Um dos melhores pintores que ja contratei na vida");
-	 prest1.getAvaliacoes().addAll(Arrays.asList(aval1));
 	 
 	 
 	 

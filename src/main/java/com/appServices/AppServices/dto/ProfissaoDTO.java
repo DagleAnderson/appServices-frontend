@@ -1,8 +1,12 @@
 package com.appServices.AppServices.dto;
 
+import java.io.Serializable;
+
 import com.appServices.AppServices.domain.Profissao;
 
-public class ProfissaoDTO {
+
+public class ProfissaoDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
 	private String nome;
