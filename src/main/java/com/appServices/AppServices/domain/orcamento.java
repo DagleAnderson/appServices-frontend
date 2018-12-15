@@ -47,6 +47,10 @@ public class Orcamento implements Serializable{
 	@JoinColumn(name="solicitacao_id")
 	private SolicitacaoServico solicitacao;
 	
+	@JsonIgnore
+	@OneToOne
+	private Pedido pedido;
+	
 	public Orcamento() {
 		
 	}

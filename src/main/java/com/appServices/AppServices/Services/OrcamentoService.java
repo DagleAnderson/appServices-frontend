@@ -18,11 +18,8 @@ import com.appServices.AppServices.domain.enums.TipoSituacao;
 import com.appServices.AppServices.domain.ItensOrcamento;
 import com.appServices.AppServices.dto.OrcamentoDTO;
 import com.appServices.AppServices.dto.OrcamentoNewDTO;
-import com.appServices.AppServices.repositories.ClienteRepository;
 import com.appServices.AppServices.repositories.ItensOrcamentoRepository;
 import com.appServices.AppServices.repositories.OrcamentoRepository;
-import com.appServices.AppServices.repositories.PrestadorRepository;
-import com.appServices.AppServices.repositories.SolicitacaoServicoRepository;
 
 
 @Service
@@ -33,15 +30,6 @@ public class OrcamentoService {
 
 	@Autowired
 	private ItensOrcamentoRepository itensOrcamentoRepo;	
-
-//	@Autowired
-//	private PrestadorRepository prestadorRepository;
-	
-//	@Autowired
-//	private ClienteRepository clienteRepository;
-	
-//	@Autowired
-//	private SolicitacaoServicoRepository solicitacaoRepository;
 	
 	public Orcamento find(Integer id) {
 

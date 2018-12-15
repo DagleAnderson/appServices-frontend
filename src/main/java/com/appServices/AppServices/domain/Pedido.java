@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import com.appServices.AppServices.domain.enums.TipoSituacao;
 
 @Entity
 public class Pedido implements Serializable{
@@ -21,6 +25,8 @@ public class Pedido implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	private String produtoServico;
+	
 	@ManyToOne
 	@JoinColumn(name="prestador_id")
 	private Prestador prestador;
@@ -29,23 +35,31 @@ public class Pedido implements Serializable{
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
 	
-	@OneToMany(mappedBy="pedido")
-	private List<ItensPedido> itens = new ArrayList<>();
-	private Double total;
+	@OneToMany(mappedBy="pedido",cascade = CascadeType.ALL)
+	private List<ItensPedido> itensPedido = new ArrayList<>();
 	private Double desconto;
+	private Double total;
 	private Date data;
+	private Integer situacao;
+	
+	@OneToOne
+	@JoinColumn(name="orcamento_id")
+	private Orcamento orcamento;
 	
 	public Pedido() {
 		
 	}
 
-	public Pedido(Integer id, Prestador prestador, Cliente cliente, Double total, Double desconto, Date data) {
+	public Pedido(Integer id,String produtoServico, Prestador prestador, Cliente cliente, Double total, Double desconto, Date data,TipoSituacao situacao,Orcamento orcamento) {
 		this.id = id;
+		this.produtoServico = produtoServico;
 		this.prestador = prestador;
 		this.cliente = cliente;
 		this.total = total;
 		this.desconto = desconto;
 		this.data = data;
+		this.situacao = situacao.getCodigo();
+		this.orcamento = orcamento;
 	}
 
 	@Override
@@ -81,6 +95,19 @@ public class Pedido implements Serializable{
 		this.id = id;
 	}
 
+	
+	public String getProdutoServico() {
+		return produtoServico;
+	}
+
+	public void setProdutoServico(String produtoServico) {
+		this.produtoServico = produtoServico;
+	}
+
+	public void setItensPedido(List<ItensPedido> itensPedido) {
+		this.itensPedido = itensPedido;
+	}
+
 	public Prestador getPrestador() {
 		return prestador;
 	}
@@ -97,19 +124,19 @@ public class Pedido implements Serializable{
 		this.cliente = cliente;
 	}
 
-	public List<ItensPedido> getItens() {
-		return itens;
+	public List<ItensPedido> getItensPedido() {
+		return itensPedido;
 	}
 
-	public void setItens(List<ItensPedido> itens) {
-		this.itens = itens;
+	public void setItens(List<ItensPedido> itensPedido) {
+		this.itensPedido = itensPedido;
 	}
 
-	public Double gettotal() {
+	public Double getTotal() {
 		return total;
 	}
 
-	public void settotal(Double total) {
+	public void setTotal(Double total) {
 		this.total = total;
 	}
 
@@ -129,6 +156,21 @@ public class Pedido implements Serializable{
 		this.data = data;
 	}
 	
+	public TipoSituacao getSituacao() {
+		return TipoSituacao.toEnum(situacao);
+	}
+
+	public void setSituacao(TipoSituacao situacao) {
+		this.situacao = situacao.getCodigo();
+	}
+
+	public Orcamento getOrcamento() {
+		return orcamento;
+	}
+
+	public void setOrcamento(Orcamento orcamento) {
+		this.orcamento = orcamento;
+	}
 	
 	
 	

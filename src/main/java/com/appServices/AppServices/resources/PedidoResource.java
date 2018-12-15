@@ -19,22 +19,22 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.appServices.AppServices.Services.ClienteService;
 import com.appServices.AppServices.Services.OrcamentoService;
+import com.appServices.AppServices.Services.PedidoService;
 import com.appServices.AppServices.Services.PrestadorService;
-import com.appServices.AppServices.Services.SolicitacaoServicoService;
 import com.appServices.AppServices.domain.Cliente;
 import com.appServices.AppServices.domain.Orcamento;
+import com.appServices.AppServices.domain.Pedido;
 import com.appServices.AppServices.domain.Prestador;
-import com.appServices.AppServices.domain.SolicitacaoServico;
-import com.appServices.AppServices.dto.OrcamentoDTO;
-import com.appServices.AppServices.dto.OrcamentoNewDTO;
+import com.appServices.AppServices.dto.PedidoDTO;
+import com.appServices.AppServices.dto.PedidoNewDTO;
 
 @RestController
-@RequestMapping("/orcamento")
-public class OrcamentoResource implements Serializable{
+@RequestMapping("/pedidos")
+public class PedidoResource implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
-	private OrcamentoService service;
+	private PedidoService service;
 	
 	@Autowired
 	private ClienteService clienteService;
@@ -43,11 +43,11 @@ public class OrcamentoResource implements Serializable{
 	private PrestadorService prestadorService;
 	
 	@Autowired
-	private SolicitacaoServicoService solicitacaoService;
+	private OrcamentoService orcamentoService;
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
-	public ResponseEntity<Orcamento> find(@PathVariable Integer id){
-		Orcamento objOp = service.find(id);
+	public ResponseEntity<Pedido> find(@PathVariable Integer id){
+		Pedido objOp = service.find(id);
 		
 		return ResponseEntity.ok().body(objOp);
 	}
@@ -55,18 +55,18 @@ public class OrcamentoResource implements Serializable{
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> Insert(
-			@Valid @RequestBody OrcamentoNewDTO objDTO,
+			@Valid @RequestBody PedidoNewDTO objDTO,
 			@RequestParam(value="cliente",defaultValue="0") Integer cliente,
 			@RequestParam(value="prestador",defaultValue="0") Integer prestador,
-			@RequestParam(value="solicitacaoServico",defaultValue="0") Integer solicitacao){
+			@RequestParam(value="orcamento",defaultValue="0") Integer orcamento){
 		
 		Cliente cli = clienteService.find(cliente);
 		
 		Prestador prest = prestadorService.find(prestador) ;
 		
-		SolicitacaoServico solicit =solicitacaoService.find(solicitacao); 
+		Orcamento orcam = orcamentoService.find(orcamento); 
 		
-		Orcamento obj = service.fromNewDTO(objDTO, cli, prest,solicit);
+		Pedido obj = service.fromNewDTO(objDTO, cli, prest,orcam);
 		
 		obj = service.insert(obj);
 		
@@ -81,17 +81,16 @@ public class OrcamentoResource implements Serializable{
 	
 	@RequestMapping(value= "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(
-			@Valid @RequestBody OrcamentoDTO objDTO,@PathVariable Integer id,
+			@Valid @RequestBody PedidoDTO objDTO,@PathVariable Integer id,
 			@RequestParam(value="cliente",defaultValue="0") Integer cliente,
 			@RequestParam(value="prestador",defaultValue="0") Integer prestador,
-			@RequestParam(value="solicitacaoServico",defaultValue="0") Integer solicitacao){
+			@RequestParam(value="orcamento",defaultValue="0") Integer orcamento){
 		
 		Cliente cli = clienteService.find(cliente);
 		Prestador prest = prestadorService.find(prestador);
-		
-		SolicitacaoServico solicit =solicitacaoService.find(solicitacao); 
-	
-		Orcamento obj = service.fromDTO(objDTO, cli, prest,solicit);
+		Orcamento orcam = orcamentoService.find(orcamento); 
+
+		Pedido obj = service.fromDTO(objDTO, cli, prest,orcam);
 		obj.setId(id);
 		obj = service.update(obj);
 		
@@ -107,9 +106,9 @@ public class OrcamentoResource implements Serializable{
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<OrcamentoDTO>> findAll(){
-		List<Orcamento> objList =service.findAll();
-		List<OrcamentoDTO> listDto = objList.stream().map(obj -> new OrcamentoDTO(obj)).collect(Collectors.toList());
+	public ResponseEntity<List<PedidoDTO>> findAll(){
+		List<Pedido> objList =service.findAll();
+		List<PedidoDTO> listDto = objList.stream().map(obj -> new PedidoDTO(obj)).collect(Collectors.toList());
 		
 		return ResponseEntity.ok().body(listDto);
 	}

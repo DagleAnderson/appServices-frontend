@@ -1,37 +1,31 @@
 package com.appServices.AppServices.dto;
 
-import com.appServices.AppServices.domain.Orcamento;
-import com.appServices.AppServices.domain.enums.TipoSituacao;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.Date;
 
-public class OrcamentoDTO {
+import com.appServices.AppServices.domain.Pedido;
+import com.appServices.AppServices.domain.enums.TipoSituacao;
+
+public class PedidoDTO {
+
 	private Integer id;
 	private String produtoServico;
-	
-	@JsonIgnore
-	private Integer prestadorId;
-	private String prestadorNome;
-	
-	@JsonIgnore
-	private Integer cliente;
-	
+	private String prestador;
 	private Double desconto;
 	private Double total;
+	private Date data;
 	private Integer situacao;
 	
-	
-	public OrcamentoDTO() {
+	public PedidoDTO() {
 		
 	}
 	
-	public OrcamentoDTO(Orcamento obj) {
+	public PedidoDTO(Pedido obj) {
 		this.id = obj.getId();
 		this.produtoServico = obj.getProdutoServico();
-		this.prestadorId = obj.getPrestador().getId();
-		this.prestadorNome = obj.getPrestador().getNomeFantasia();
-		this.cliente = obj.getCliente().getId();
+		this.prestador = obj.getPrestador().getNomeFantasia();
 		this.desconto = obj.getDesconto();
-		this.total  = obj.getTotal();
+		this.total = obj.getTotal();
+		this.data = obj.getData();
 		this.situacao = obj.getSituacao().getCodigo();
 		
 	}
@@ -52,29 +46,12 @@ public class OrcamentoDTO {
 		this.produtoServico = produtoServico;
 	}
 
-	public Integer getPrestadorId() {
-		return prestadorId;
+	public String getPrestador() {
+		return prestador;
 	}
 
-	public void setPrestadorId(Integer prestadorId) {
-		this.prestadorId = prestadorId;
-	}
-
-	
-	public String getPrestadorNome() {
-		return prestadorNome;
-	}
-
-	public void setPrestadorNome(String prestadorNome) {
-		this.prestadorNome = prestadorNome;
-	}
-
-	public Integer getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(Integer cliente) {
-		this.cliente = cliente;
+	public void setPrestador(String prestador) {
+		this.prestador = prestador;
 	}
 
 	public Double getDesconto() {
@@ -93,6 +70,14 @@ public class OrcamentoDTO {
 		this.total = total;
 	}
 
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
 	public TipoSituacao getSituacao() {
 		return TipoSituacao.toEnum(situacao);
 	}
@@ -100,6 +85,6 @@ public class OrcamentoDTO {
 	public void setSituacao(TipoSituacao situacao) {
 		this.situacao = situacao.getCodigo();
 	}
-
-
+	
+	
 }
