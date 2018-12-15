@@ -73,7 +73,7 @@ public class OrcamentoService {
 	
 	public Orcamento fromDTO(OrcamentoDTO objDTO,Cliente cliente, Prestador prestador,SolicitacaoServico solicitacao) {
 
-		Orcamento orcamento = new Orcamento(objDTO.getId(), objDTO.getProdutoServico(),prestador, cliente,objDTO.getTotal(), objDTO.getDesconto(),TipoSituacao.toEnum(objDTO.getSituacao()),solicitacao);
+		Orcamento orcamento = new Orcamento(objDTO.getId(), objDTO.getProdutoServico(),prestador, cliente,objDTO.getTotal(), objDTO.getDesconto(),objDTO.getSituacao(),solicitacao);
 		return orcamento;
 	}
 	
