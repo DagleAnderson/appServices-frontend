@@ -1,8 +1,6 @@
 package com.appServices.AppServices.resources;
 
 import java.net.URI;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -70,8 +68,8 @@ public class PrestadorResource {
 	public ResponseEntity<Void>update(@RequestBody PrestadorDTO objDTO, @PathVariable Integer id){
 		
 		//captura de identificador de cliente e profissao para realizar consulta
-		Integer idProfissao = objDTO.getProfissao();
-		Integer idCliente = objDTO.getCliente();
+		Integer idProfissao = objDTO.getProfissaoId();
+		Integer idCliente = objDTO.getClienteId();
 				
 		Profissao prof = profissaoService.find(idProfissao);
 				
@@ -92,14 +90,14 @@ public class PrestadorResource {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@RequestMapping(method = RequestMethod.GET)
+	/**@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<PrestadorDTO>> findAll(){
 		List<Prestador> objList =service.findAll();
 		
 		List<PrestadorDTO> listPrestador= objList.stream().map(obj -> new PrestadorDTO(obj)).collect(Collectors.toList());
 		
 		return ResponseEntity.ok().body(listPrestador);
-	}
+	}**/
 	
 	
 	@RequestMapping(value="/page",method = RequestMethod.GET)
@@ -111,6 +109,22 @@ public class PrestadorResource {
 			){
 		
 		Page<Prestador> objList =service.findPage(page, linesPerPage,orderBy,direction);
+		
+		Page<PrestadorDTO> listPrestador= objList.map(obj -> new PrestadorDTO(obj));
+		
+		return ResponseEntity.ok().body(listPrestador);
+	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<Page<PrestadorDTO>> findAllProfissaoPage(
+			@RequestParam(value="profissao",defaultValue ="0") Integer profissao,
+			@RequestParam(value="page",defaultValue ="0") Integer page, 
+			@RequestParam(value="linesPerPage",defaultValue ="24") Integer linesPerPage,
+			@RequestParam(value="orderBy",defaultValue ="id")	String orderBy,
+			@RequestParam(value="direction",defaultValue ="ASC") String direction
+			){
+		
+		Page<Prestador> objList =service.search(profissao, page, linesPerPage, orderBy, direction);
 		
 		Page<PrestadorDTO> listPrestador= objList.map(obj -> new PrestadorDTO(obj));
 		

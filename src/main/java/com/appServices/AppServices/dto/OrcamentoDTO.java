@@ -10,6 +10,7 @@ public class OrcamentoDTO {
 	
 	@JsonIgnore
 	private Integer prestadorId;
+	
 	private String prestadorNome;
 	
 	@JsonIgnore

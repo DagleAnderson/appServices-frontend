@@ -94,6 +94,14 @@ public class PrestadorService {
 		return repository.findAll(pageRequest);
 	}
 	
+	public Page<Prestador> search(Integer idProfissao,Integer page, Integer linesPerPage,String orderBy,String direction){
+		
+		PageRequest  pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		
+		Optional<Profissao> profissao = profissaoRepository.findById(idProfissao); 
+		return repository.search(profissao,pageRequest);
+	}
+	
 	public Prestador fromDTO(PrestadorDTO objDTO,Cliente cliente,Profissao profissao) {
 		
 		Prestador prestador = new Prestador(objDTO.getId(),objDTO.getNomeFantasia(),objDTO.getSlogan(),objDTO.getLocalAtendimento(),cliente,profissao);

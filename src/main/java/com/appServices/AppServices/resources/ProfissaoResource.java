@@ -42,8 +42,8 @@ public class ProfissaoResource {
 		//Integer categoriaDecod = Integer.parseInt(categoria);
 		Page<Profissao> objList =service.search(categoria, page, linesPerPage, orderBy, direction);
 		
-		Page<ProfissaoDTO> listPrestador= objList.map(obj -> new ProfissaoDTO(obj));
+		Page<ProfissaoDTO> listProfissao= objList.map(obj -> new ProfissaoDTO(obj));
 		
-		return ResponseEntity.ok().body(listPrestador);
+		return ResponseEntity.ok().body(listProfissao);
 	}
 }

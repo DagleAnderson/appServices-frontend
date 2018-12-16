@@ -72,11 +72,11 @@ public class ProfissaoService {
 		newObj.setCategoria(obj.getCategoria());
 	}
 	
-	public Page<Profissao> search(Integer id,Integer page, Integer linesPerPage,String orderBy,String direction){
+	public Page<Profissao> search(Integer idCategoria,Integer page, Integer linesPerPage,String orderBy,String direction){
 		
 		PageRequest  pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		
-		Optional<Categoria> categorias = categoriaRepository.findById(id); 
+		Optional<Categoria> categorias = categoriaRepository.findById(idCategoria); 
 		return repository.search(categorias,pageRequest);
 	}
 }

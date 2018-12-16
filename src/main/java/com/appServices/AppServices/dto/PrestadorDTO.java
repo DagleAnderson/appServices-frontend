@@ -4,6 +4,7 @@ package com.appServices.AppServices.dto;
 import java.io.Serializable;
 
 import com.appServices.AppServices.domain.Prestador;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class PrestadorDTO  implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -12,8 +13,14 @@ public class PrestadorDTO  implements Serializable {
 	private String nomeFantasia;
 	private String slogan;
 	private String localAtendimento;
-	private Integer cliente;
-	private Integer Profissao;
+	
+	@JsonIgnore
+	private Integer clienteId;
+	private String clienteNome;
+	
+	@JsonIgnore
+	private Integer profissaoId;
+	private String profissaoNome;
 	
 	
 	public PrestadorDTO() {
@@ -25,6 +32,10 @@ public class PrestadorDTO  implements Serializable {
 		this.nomeFantasia = prestadorObj.getNomeFantasia();
 		this.slogan =prestadorObj.getSlogan();
 		this.localAtendimento = prestadorObj.getLocalAtendimento();
+		this.clienteId = prestadorObj.getCliente().getId();
+		this.clienteNome = prestadorObj.getCliente().getNome();
+		this.profissaoId = prestadorObj.getProfissao().getId();
+		this.profissaoNome = prestadorObj.getProfissao().getNome();
 	}
 	
 	public Integer getId() {
@@ -60,21 +71,41 @@ public class PrestadorDTO  implements Serializable {
 	}
 
 	
-	public Integer getCliente() {
-		return cliente;
+	public Integer getClienteId() {
+		return clienteId;
 	}
 
-	public void setCliente(Integer cliente) {
-		this.cliente = cliente;
+	public void setClienteId(Integer clienteId) {
+		this.clienteId = clienteId;
+	}
+	
+	public String getClienteNome() {
+		return clienteNome;
 	}
 
-	public Integer getProfissao() {
-		return Profissao;
+	public void setClienteNome(String clienteNome) {
+		this.clienteNome = clienteNome;
 	}
 
-	public void setProfissao(Integer profissao) {
-		Profissao = profissao;
+
+	public Integer getProfissaoId() {
+		return profissaoId;
 	}
+
+	public void setProfissaoId(Integer profissaoId) {
+		this.profissaoId = profissaoId;
+	}
+
+
+	public String getProfissaoNome() {
+		return profissaoNome;
+	}
+
+	public void setProfissaoNome(String profissaoNome) {
+		this.profissaoNome = profissaoNome;
+	}
+	
+	
 
 	
 		
