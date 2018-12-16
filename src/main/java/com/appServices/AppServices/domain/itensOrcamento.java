@@ -19,7 +19,11 @@ public class ItensOrcamento implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String item;
+	private Double quantidade;
+	private Double desconto;
 	private Double valor;
+	
+	
 	
 	@JsonIgnore
 	@ManyToOne
@@ -30,9 +34,11 @@ public class ItensOrcamento implements Serializable {
 		
 	}
 	
-	public ItensOrcamento(Integer id, String item, Double valor, Orcamento orcamento) {
+	public ItensOrcamento(Integer id, String item,Double quantidade, Double desconto, Double valor, Orcamento orcamento) {
 		this.id = id;
 		this.item = item;
+		this.quantidade = quantidade;
+		this.desconto =desconto;
 		this.valor = valor;
 		this.orcamento = orcamento;
 	}
@@ -79,6 +85,23 @@ public class ItensOrcamento implements Serializable {
 	public void setItem(String item) {
 		this.item = item;
 	}
+	
+
+	public Double getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(Double quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	public Double getDesconto() {
+		return desconto;
+	}
+
+	public void setDesconto(Double desconto) {
+		this.desconto = desconto;
+	}
 
 	public Double getValor() {
 		return valor;
@@ -94,7 +117,14 @@ public class ItensOrcamento implements Serializable {
 
 	public void setOrcamento(Orcamento orcamento) {
 		this.orcamento = orcamento;
-	} 	
+	} 
+	
+	
+	public double getSubTotal(){
+		return (valor - desconto) * quantidade;
+	}
+	
+	
 	
 	
 }

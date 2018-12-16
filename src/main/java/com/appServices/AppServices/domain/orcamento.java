@@ -38,7 +38,7 @@ public class Orcamento implements Serializable{
 	@OneToMany(mappedBy="orcamento",cascade=CascadeType.ALL)
 	private List<ItensOrcamento> itensOrcamento = new ArrayList<>(); 
 	
-	private Double total;
+
 	private Double desconto;
 	private Integer situacao;
 	
@@ -61,7 +61,6 @@ public class Orcamento implements Serializable{
 		this.produtoServico = produtoServico;
 		this.prestador = prestador;
 		this.cliente = cliente;
-		this.total = total;
 		this.desconto = desc;
 		this.situacao = situacao.getCodigo();
 		this.solicitacao = solicitacao;
@@ -149,15 +148,6 @@ public class Orcamento implements Serializable{
 	}
 
 
-
-	public Double getTotal() {
-		return total;
-	}
-
-	public void setTotal(Double total) {
-		this.total = total;
-	}
-
 	public Double getDesconto() {
 		return desconto;
 	}
@@ -186,6 +176,16 @@ public class Orcamento implements Serializable{
 		this.solicitacao = solicitacao;
 	}
 	
+	
+	public double getValorTotal() {
+		double soma = 0.0;
+		
+		for(ItensOrcamento itensOrc: itensOrcamento ) {
+			soma = soma + itensOrc.getSubTotal();
+		}
+		
+		return soma;
+	}
 	
 	
 	

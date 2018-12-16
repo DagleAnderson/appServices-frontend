@@ -32,7 +32,6 @@ public class OrcamentoDTO {
 		this.prestadorNome = obj.getPrestador().getNomeFantasia();
 		this.cliente = obj.getCliente().getId();
 		this.desconto = obj.getDesconto();
-		this.total  = obj.getTotal();
 		this.situacao = obj.getSituacao().getCodigo();
 		
 	}
@@ -86,12 +85,8 @@ public class OrcamentoDTO {
 		this.desconto = desconto;
 	}
 
-	public Double getTotal() {
-		return total;
-	}
-
-	public void setTotal(Double total) {
-		this.total = total;
+	public Double getTotal(){
+		return  total;
 	}
 
 	public TipoSituacao getSituacao() {

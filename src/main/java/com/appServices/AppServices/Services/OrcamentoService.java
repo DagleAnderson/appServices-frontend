@@ -84,9 +84,9 @@ public Orcamento fromNewDTO(OrcamentoNewDTO objDTO,Cliente cliente, Prestador pr
 		
 	Orcamento orcamento = new Orcamento(objDTO.getId(), objDTO.getProdutoServico(),prestador, cliente,objDTO.getTotal(), objDTO.getDesconto(),TipoSituacao.toEnum(objDTO.getSituacao()),solicitacao);
 		
-		ItensOrcamento itensOrcamento1 = new ItensOrcamento(null, objDTO.getItemOrcamento1(),objDTO.getValorItem1(), orcamento);
-		ItensOrcamento itensOrcamento2 = new ItensOrcamento(null, objDTO.getItemOrcamento2(),objDTO.getValorItem2(), orcamento);
-		ItensOrcamento itensOrcamento3 = new ItensOrcamento(null, objDTO.getItemOrcamento3(),objDTO.getValorItem3(), orcamento);
+		ItensOrcamento itensOrcamento1 = new ItensOrcamento(null,objDTO.getItemOrcamento1(),objDTO.getQuantidade1(),objDTO.getDesconto1(),objDTO.getValorItem1(), orcamento);
+		ItensOrcamento itensOrcamento2 = new ItensOrcamento(null, objDTO.getItemOrcamento2(),objDTO.getQuantidade2(),objDTO.getDesconto2(),objDTO.getValorItem2(), orcamento);
+		ItensOrcamento itensOrcamento3 = new ItensOrcamento(null, objDTO.getItemOrcamento3(),objDTO.getQuantidade3(),objDTO.getDesconto3(),objDTO.getValorItem3(), orcamento);
 		
 		orcamento.getItensOrcamento().addAll(Arrays.asList(itensOrcamento1,itensOrcamento2,itensOrcamento3));
 		
@@ -97,7 +97,6 @@ public Orcamento fromNewDTO(OrcamentoNewDTO objDTO,Cliente cliente, Prestador pr
 		newObj.setId(obj.getId());
 		newObj.setProdutoServico(obj.getProdutoServico());
 		newObj.setDesconto(obj.getDesconto());
-		newObj.setTotal(obj.getTotal());
 		newObj.setSituacao(obj.getSituacao());
 		
 	}

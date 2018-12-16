@@ -8,6 +8,12 @@ public class OrcamentoNewDTO {
 	private String itemOrcamento1;
 	private String itemOrcamento2;
 	private String itemOrcamento3;
+	private Double quantidade1;
+	private Double quantidade2;
+	private Double quantidade3;
+	private Double desconto1;
+	private Double desconto2;
+	private Double desconto3;
 	private Double valorItem1;
 	private Double valorItem2;
 	private Double valorItem3;
@@ -77,6 +83,68 @@ public class OrcamentoNewDTO {
 		this.itemOrcamento3 = itemOrcamento3;
 	}
 	
+	
+	
+	public Double getQuantidade1() {
+		return quantidade1;
+	}
+
+
+	public void setQuantidade1(Double quantidade1) {
+		this.quantidade1 = quantidade1;
+	}
+
+
+	public Double getQuantidade2() {
+		return quantidade2;
+	}
+
+
+	public void setQuantidade2(Double quantidade2) {
+		this.quantidade2 = quantidade2;
+	}
+
+
+	public Double getQuantidade3() {
+		return quantidade3;
+	}
+
+
+	public void setQuantidade3(Double quantidade3) {
+		this.quantidade3 = quantidade3;
+	}
+
+
+	public Double getDesconto1() {
+		return desconto1;
+	}
+
+
+	public void setDesconto1(Double desconto1) {
+		this.desconto1 = desconto1;
+	}
+
+
+	public Double getDesconto2() {
+		return desconto2;
+	}
+
+
+	public void setDesconto2(Double desconto2) {
+		this.desconto2 = desconto2;
+	}
+
+
+	public Double getDesconto3() {
+		return desconto3;
+	}
+
+
+	public void setDesconto3(Double desconto3) {
+		this.desconto3 = desconto3;
+	}
+
+
 	public Double getValorItem1() {
 		return valorItem1;
 	}
