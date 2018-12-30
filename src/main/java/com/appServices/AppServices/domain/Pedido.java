@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.appServices.AppServices.domain.enums.StatusPagamento;
 import com.appServices.AppServices.domain.enums.TipoSituacao;
 
 @Entity
@@ -41,6 +42,7 @@ public class Pedido implements Serializable{
 	private Double total;
 	private Date data;
 	private Integer situacao;
+	private Integer statusPagamento;
 	
 	@OneToOne
 	@JoinColumn(name="orcamento_id")
@@ -50,7 +52,7 @@ public class Pedido implements Serializable{
 		
 	}
 
-	public Pedido(Integer id,String produtoServico, Prestador prestador, Cliente cliente, Double total, Double desconto, Date data,TipoSituacao situacao,Orcamento orcamento) {
+	public Pedido(Integer id,String produtoServico, Prestador prestador, Cliente cliente, Double total, Double desconto, Date data,TipoSituacao situacao,StatusPagamento statusPg,Orcamento orcamento) {
 		this.id = id;
 		this.produtoServico = produtoServico;
 		this.prestador = prestador;
@@ -59,6 +61,7 @@ public class Pedido implements Serializable{
 		this.desconto = desconto;
 		this.data = data;
 		this.situacao = situacao.getCodigo();
+		this.statusPagamento = statusPg.getCod();
 		this.orcamento = orcamento;
 	}
 
@@ -162,6 +165,14 @@ public class Pedido implements Serializable{
 
 	public void setSituacao(TipoSituacao situacao) {
 		this.situacao = situacao.getCodigo();
+	}
+	
+	public StatusPagamento getStatusPagamento() {
+		return StatusPagamento.toEnum(statusPagamento);
+	}
+
+	public void setStatusPagamento(StatusPagamento status) {
+		this.statusPagamento = status.getCod();
 	}
 
 	public Orcamento getOrcamento() {

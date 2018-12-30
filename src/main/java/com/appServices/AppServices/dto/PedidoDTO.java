@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.appServices.AppServices.domain.Pedido;
+import com.appServices.AppServices.domain.enums.StatusPagamento;
 import com.appServices.AppServices.domain.enums.TipoSituacao;
 
 public class PedidoDTO implements Serializable {
@@ -16,6 +17,7 @@ public class PedidoDTO implements Serializable {
 	private Double total;
 	private Date data;
 	private Integer situacao;
+	private Integer statusPagamento;
 	
 	public PedidoDTO() {
 		
@@ -29,6 +31,7 @@ public class PedidoDTO implements Serializable {
 		this.total = obj.getTotal();
 		this.data = obj.getData();
 		this.situacao = obj.getSituacao().getCodigo();
+		this.statusPagamento = obj.getStatusPagamento().getCod();
 		
 	}
 
@@ -87,6 +90,15 @@ public class PedidoDTO implements Serializable {
 	public void setSituacao(TipoSituacao situacao) {
 		this.situacao = situacao.getCodigo();
 	}
+	
+	public StatusPagamento getStatusPagamento() {
+		return StatusPagamento.toEnum(statusPagamento);
+	}
+
+	public void setStatusPagamento(StatusPagamento status) {
+		this.statusPagamento = status.getCod();
+	}
+
 	
 	
 }

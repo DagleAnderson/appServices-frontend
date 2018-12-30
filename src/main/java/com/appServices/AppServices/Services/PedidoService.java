@@ -17,6 +17,7 @@ import com.appServices.AppServices.domain.Orcamento;
 import com.appServices.AppServices.domain.Pedido;
 import com.appServices.AppServices.domain.Prestador;
 import com.appServices.AppServices.domain.SolicitacaoServico;
+import com.appServices.AppServices.domain.enums.StatusPagamento;
 import com.appServices.AppServices.domain.enums.TipoSituacao;
 import com.appServices.AppServices.dto.PedidoDTO;
 import com.appServices.AppServices.dto.PedidoNewDTO;
@@ -73,7 +74,7 @@ public class PedidoService {
 	
 	public Pedido fromDTO(PedidoDTO objDTO,Cliente cliente, Prestador prestador,Orcamento orcamento) {
 
-		Pedido Pedido = new Pedido(objDTO.getId(),objDTO.getProdutoServico(),prestador, cliente,objDTO.getTotal(), objDTO.getDesconto(),objDTO.getData(),objDTO.getSituacao(),orcamento);		
+		Pedido Pedido = new Pedido(objDTO.getId(),objDTO.getProdutoServico(),prestador, cliente,objDTO.getTotal(), objDTO.getDesconto(),objDTO.getData(),objDTO.getSituacao(),objDTO.getStatusPagamento(),orcamento);		
 		return Pedido;
 	}
 	
@@ -82,7 +83,7 @@ public class PedidoService {
 public Pedido fromNewDTO(PedidoNewDTO objDTO,Cliente cliente, Prestador prestador,Orcamento orcamento) {
 		
 		
-	Pedido pedido = new Pedido(objDTO.getId(),objDTO.getProdutoServico(),prestador, cliente,objDTO.getTotal(), objDTO.getDesconto(),objDTO.getData(), TipoSituacao.toEnum(objDTO.getSituacao()),orcamento);
+	Pedido pedido = new Pedido(objDTO.getId(),objDTO.getProdutoServico(),prestador, cliente,objDTO.getTotal(), objDTO.getDesconto(),objDTO.getData(), TipoSituacao.toEnum(objDTO.getSituacao()),StatusPagamento.toEnum(objDTO.getStatusPagamento()),orcamento);
 		
 		ItensPedido itensPedido1 = new ItensPedido(null, objDTO.getItemPedido1(),objDTO.getValorItem1(), pedido);
 		ItensPedido itensPedido2 = new ItensPedido(null, objDTO.getItemPedido2(),objDTO.getValorItem2(), pedido);

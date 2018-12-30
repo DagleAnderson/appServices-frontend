@@ -17,6 +17,7 @@ public class PedidoNewDTO {
 	private Double total;
 	private Date data;
 	private Integer situacao;
+	private Integer statusPagamento;
 	private Integer orcamento;
 	
 	public PedidoNewDTO() {
@@ -137,7 +138,14 @@ public class PedidoNewDTO {
 	public void setSituacao(Integer situacao) {
 		this.situacao = situacao;
 	}
+	
+	public Integer getStatusPagamento() {
+		return statusPagamento;
+	}
 
+	public void setStatusPagamento(Integer statusPagamento) {
+		this.statusPagamento = statusPagamento;
+	}
 
 	public Integer getOrcamento() {
 		return orcamento;
