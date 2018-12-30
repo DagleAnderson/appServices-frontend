@@ -21,8 +21,8 @@ import com.appServices.AppServices.domain.enums.StatusPagamento;
 import com.appServices.AppServices.domain.enums.TipoSituacao;
 import com.appServices.AppServices.dto.PedidoDTO;
 import com.appServices.AppServices.dto.PedidoNewDTO;
+import com.appServices.AppServices.repositories.ItensPedidoRepository;
 import com.appServices.AppServices.repositories.PedidoRepository;
-import com.appServices.AppServices.repositories.itensPedidoRepository;
 
 @Service
 public class PedidoService {
@@ -30,7 +30,7 @@ public class PedidoService {
 	private PedidoRepository repository;
 
 	@Autowired
-	private itensPedidoRepository itensPedidoRepo;	
+	private ItensPedidoRepository itensPedidoRepo;	
 	
 	public Pedido find(Integer id) {
 

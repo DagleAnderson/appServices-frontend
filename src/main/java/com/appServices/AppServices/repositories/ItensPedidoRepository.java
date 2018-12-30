@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.appServices.AppServices.domain.ItensPedido;
 
-public interface itensPedidoRepository extends JpaRepository<ItensPedido, Integer> {
+public interface ItensPedidoRepository extends JpaRepository<ItensPedido, Integer> {
 
 }
