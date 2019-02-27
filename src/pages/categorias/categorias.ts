@@ -18,7 +18,7 @@ import { API_CONFIG } from '../../config/api.config';
 })
 export class CategoriasPage {
 
-  bucketUrl: string =API_CONFIG.bucktBaseURL;
+  bucketUrl: string = API_CONFIG.bucktBaseURL;
   itens : CategoriaDTO[];
   constructor(
     public navCtrl: NavController,
@@ -32,10 +32,7 @@ export class CategoriasPage {
     .subscribe(response =>{
       this.itens = response;  
     },
-    error => {
-    console.log(error);
-
-    });
+    error => {});
   }
 
 }
