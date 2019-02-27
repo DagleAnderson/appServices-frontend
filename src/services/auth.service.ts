@@ -2,11 +2,13 @@ import {Injectable} from "@angular/core";
 import {CredenciaisDTO} from "../models/credenciais.dto";
 import {HttpClient} from "@angular/common/http";
 import {API_CONFIG} from "../config/api.config"; 
+import {StorageService} from "../services/storage.service";
+import {LocalUser} from "../models/local_User";
 
 @Injectable()
 export class  AuthService {
   
-    constructor(public http:HttpClient){
+    constructor(public http:HttpClient,public storage:StorageService){
 
     }
     authenticate(creds : CredenciaisDTO){
@@ -19,4 +21,16 @@ export class  AuthService {
                 }
             )
     }   
+
+    successfullLogin(authorizationvalue : string){
+        let tok = authorizationvalue.substring(7);
+        let user : LocalUser = {
+            token:tok
+        };
+        this.storage.setLocalUser(user);
+    }
+
+    logout(){
+        this.storage.setLocalUser(null);
+    }
 }
