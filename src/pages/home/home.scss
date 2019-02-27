@@ -1,4 +1,5 @@
 page-home {
+   
     ion-content{
     background-image: url("../assets/imgs/tela_inicial.jpg");
     background-size: 100%;
@@ -7,9 +8,12 @@ page-home {
     }
     
     form{
-        margin-top: 110%;  
-        padding-bottom: 2%;
+        background:inherit;
+        width: 84%;
+        margin-top: 110%; 
+        margin-left: 8%; 
+        padding-bottom: 5%;
         position: relative;
         background-color:aliceblue;
-    }
+    }   
 }
