@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ProfissaoDTO } from '../../models/profissao.dto';
+import { ProfissaoService } from '../../services/profissao.service';
 
 /**
  * Generated class for the ProfissaoPage page.
@@ -18,32 +19,18 @@ export class ProfissaoPage {
 
   profissoes : ProfissaoDTO[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public profissaoService:ProfissaoService) {
   }
 
   ionViewDidLoad() {
-    this.profissoes = [
-      {
-        id:"1",
-        nome:"Pintor"
-      },
-      {
-        id:"2",
-        nome:"Pedreiro"
-      },
-      {
-        id:"3",
-        nome:"Mecânico"
-      },
-      {
-        id:"4",
-        nome:"Técnico em Informática"
-      },
-      {
-        id:"5",
-        nome:"Programador"
-      },
-    ]  
+    let categoria_id = this.navParams.get('categoria_id');
+    this.profissaoService.findByCategoria(categoria_id)
+      .subscribe(response =>{
+        this.profissoes=response['content'];
+       },
+      error =>{})
   }
-
 }

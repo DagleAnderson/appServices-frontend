@@ -35,8 +35,8 @@ export class CategoriasPage {
     error => {});
   }
 
-  showProfissoes(){
-    this.navCtrl.push('ProfissaoPage')
+  showProfissoes(categoria_id:string){
+    this.navCtrl.push('ProfissaoPage',{categoria_id:categoria_id})
   }
 
 }
