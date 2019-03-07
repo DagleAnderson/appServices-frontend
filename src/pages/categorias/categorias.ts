@@ -35,4 +35,8 @@ export class CategoriasPage {
     error => {});
   }
 
+  showProfissoes(){
+    this.navCtrl.push('ProfissaoPage')
+  }
+
 }
