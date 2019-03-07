@@ -21,4 +21,15 @@ export class ClienteService{
         let url = `${API_CONFIG.bucktBaseURL}/cp${id}.jpg`
         return this.http.get(url,{responseType:'blob'});
     }
+
+    insert(obj: ClienteDTO){
+        return this.http.post(
+            `${API_CONFIG.baseUrl}/cliente`,
+            obj,
+            {
+                observe:'response',
+                responseType:'text'
+            }
+        )
+    }
 }
