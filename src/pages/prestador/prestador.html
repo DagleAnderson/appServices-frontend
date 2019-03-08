@@ -15,7 +15,7 @@
 
 <ion-content padding>
     <ion-list>
-        <button ion-item *ngFor="let prestador of prestadores">
+        <button ion-item *ngFor="let prestador of prestadores" (click)="showProfilePrestador(prestador.id)">
             <ion-thumbnail item-start>
                 <img class="img-circle" src="{{bucketUrl}}/cat{{prestador.id}}.jpg">
             </ion-thumbnail>

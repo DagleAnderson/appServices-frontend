@@ -1,0 +1,36 @@
+page-profile-prestador {
+    .circle{
+        width: 50%;
+        border-radius: 100%;
+        margin:25% auto 0 auto;
+    }
+
+    #divTitle{
+        padding-top: 10px;
+        border-block-start-style: solid;
+        border-block-start-width: 1px;
+        border-block-start-color: #999;
+        border-block-end-style:solid;
+        border-block-end-width: 1px;
+        border-block-end-color: #999;
+        height: 50px;
+
+    }
+    .buttonfloatLeft{
+        float: left;
+        margin-left: 50px;
+        background: none;
+        font-size: 18px;
+        font-weight: bold;
+        padding-top: 5px;
+    }
+
+    .buttonfloatRight{
+        float: right;
+        margin-right: 50px;
+        font-size: 18px;
+        font-weight: bold;
+        background: none;
+        padding-top: 5px;
+    }
+}

@@ -45,7 +45,7 @@ export class ProfilePage {
       this.navCtrl.setRoot("HomePage");
     }
   }
-
+  
   getImageIfExists(){
     this.clienteService.getImageFromBucket(this.cliente.id)
       .subscribe(response =>{

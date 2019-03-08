@@ -26,10 +26,14 @@ export class PrestadorPage {
 
   ionViewDidLoad() {
     let profissao_id = this.navParams.get('profissao_id');
-    this.prestadorService.findByPrestador(profissao_id)
+    this.prestadorService.findByProfissao(profissao_id)
       .subscribe(response =>{
         this.prestadores=response['content'];
        },
       error =>{})
+  }
+
+  showProfilePrestador(prestador_id:string){
+    this.navCtrl.push('ProfilePrestadorPage',{prestador_id:prestador_id})
   }
 }

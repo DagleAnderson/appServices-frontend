@@ -1,0 +1,27 @@
+<ion-header>
+    <ion-navbar>
+    <button  ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+    </button> 
+      <ion-title>Perfil do Prestador</ion-title>
+    </ion-navbar>
+  </ion-header>
+  <ion-content padding>
+   <ion-avatar>
+       <img class="circle" [src]="prestador?.imageUrl || 'assets/imgs/avatar-blank.png'"> 
+       <h2 text-center>{{prestador?.nomeFantasia}}</h2>
+       <p text-center>{{prestador?.slogan}}</p> 
+       
+       <p text-right style="font-size: 18px;color:red; padding-right:25px;font-weight:bold">Contratar</p>
+    </ion-avatar>
+    <div id="divTitle">
+        <button class="buttonfloatLeft" text-center>Currículo</button>
+        <button class="buttonfloatRight">Portfólio</button>
+    </div>
+
+    <div>
+      <ion-rating [read]="true" (ionClick)="log($event)">
+      </ion-rating>
+    </div>
+  </ion-content>
+  
