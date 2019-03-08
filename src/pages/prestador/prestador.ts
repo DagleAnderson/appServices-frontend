@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { PrestadorDTO } from '../../models/prestador.dto';
+import { PrestadorService } from '../../services/domain/prestador.service';
 
 /**
  * Generated class for the PrestadorPage page.
@@ -14,12 +16,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'prestador.html',
 })
 export class PrestadorPage {
+  
+  prestadores:PrestadorDTO[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams,
+    public prestadorService:PrestadorService) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PrestadorPage');
+    let profissao_id = this.navParams.get('profissao_id');
+    this.prestadorService.findByPrestador(profissao_id)
+      .subscribe(response =>{
+        this.prestadores=response['content'];
+       },
+      error =>{})
   }
-
 }

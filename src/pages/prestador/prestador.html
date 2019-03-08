@@ -9,15 +9,19 @@
       <button  ion-button menuToggle>
           <ion-icon name="menu"></ion-icon>
         </button> 
-    <ion-title>Prestador</ion-title>
+    <ion-title>Prestadores</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
     <ion-list>
-      <button ion-item *ngFor="let item od items">
-        <ion-thumbnail item-start>
-        </ion-thumbnail>
-      </button>
-    </ion-list>  
+        <button ion-item *ngFor="let prestador of prestadores">
+            <ion-thumbnail item-start>
+                <img class="img-circle" src="{{bucketUrl}}/cat{{prestador.id}}.jpg">
+            </ion-thumbnail>
+            <h2>{{prestador.nomeFantasia}}</h2>
+            <p>{{prestador.slogan}}</p>
+            <p>Local do Atendimento: {{prestador.localAtendimento}}</p>
+          </button>
+      </ion-list>   
 </ion-content>

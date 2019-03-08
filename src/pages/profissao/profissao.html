@@ -10,7 +10,7 @@
     
 <ion-content padding>
      <ion-list>
-      <button ion-item *ngFor="let profissao of profissoes">
+      <button ion-item *ngFor="let profissao of profissoes" (click)="showPrestadores(profissao.id)">
           <h2>{{profissao.nome}}</h2>
       </button>
     </ion-list>  

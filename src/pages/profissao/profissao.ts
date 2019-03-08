@@ -33,4 +33,9 @@ export class ProfissaoPage {
        },
       error =>{})
   }
+
+  showPrestadores(profissao_id:string){
+    this.navCtrl.push('PrestadorPage',{profissao_id:profissao_id})
+  }
+
 }
