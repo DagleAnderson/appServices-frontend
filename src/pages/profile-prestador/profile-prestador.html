@@ -10,9 +10,10 @@
    <ion-avatar>
        <img class="circle" [src]="prestador?.imageUrl || 'assets/imgs/avatar-blank.png'"> 
        <h2 text-center>{{prestador?.nomeFantasia}}</h2>
-       <p text-center>{{prestador?.slogan}}</p> 
+       <p text-center>{{prestador?.slogan}}</p>
+        
        
-       <p text-right style="font-size: 18px;color:red; padding-right:25px;font-weight:bold">Contratar</p>
+       <p class="labelAction">Contratar</p>
     </ion-avatar>
     <div id="divTitle">
         <button class="buttonfloatLeft" text-center>Currículo</button>
@@ -20,8 +21,7 @@
     </div>
 
     <div>
-      <ion-rating [read]="true" (ionClick)="log($event)">
-      </ion-rating>
-    </div>
+      <ion-rating [read]="true" (ionClick)="log($event)"></ion-rating>
+    </div>   
   </ion-content>
   

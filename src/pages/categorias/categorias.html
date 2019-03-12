@@ -13,9 +13,13 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding> 
-    <ion-list>
-        <button ion-item *ngFor="let item of itens" (click)= "showProfissoes(item.id)">
+<ion-content padding>
+      <button style="margin-button:15px"   ion-button block (click) = "showSolicitacaoServico()"> Solicitar Orçamento </button>
+      <form  style="margin-bottom: 30px">
+        <input  text-center style="margin-top:15px;width:100%;height:40px;border:1px solid #999999" type="text" name="search" placeholder="Search: Pintor,Pedreiro,Arquiteto...">
+      </form> 
+    <ion-list >
+        <button  ion-item *ngFor="let item of itens" (click)= "showProfissoes(item.id)">
             <ion-thumbnail item-start>
                 <img class="img-circle" src="{{bucketUrl}}/cat{{item.id}}.jpg">
             </ion-thumbnail>

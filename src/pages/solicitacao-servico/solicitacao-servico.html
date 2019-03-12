@@ -1,0 +1,52 @@
+
+<ion-header>
+  <ion-navbar>
+        <button  ion-button menuToggle>
+                <ion-icon name="menu"></ion-icon>
+        </button> 
+    <ion-title>solicitacao de Serviço</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+   <form  [formGroup]="formGroup" (ngSubmit)="requestOrcamento(profissao.id);$event.preventDefault()">
+    <ion-item>
+        <ion-label stacked>Selecione uma categoria*</ion-label>
+            <ion-select formControlName="categoria"  (ionChange)="updateProfissoes()">
+                <ion-option *ngFor="let categoria of categorias;first as f" 
+                 [value]="categoria.id" [selected]="f">{{categoria.nome}}</ion-option>
+            </ion-select>
+    </ion-item> 
+    <ion-item>
+          <ion-label stacked>Selecione um profissional*</ion-label>
+          <ion-select formControlName="profissao">
+              <ion-option *ngFor="let profissao of profissoes;first as f"
+                [value]="profissao.id"
+                >{{profissao.nome}}</ion-option>
+          </ion-select>
+      </ion-item>
+    <ion-item>
+        <ion-label stacked>
+            De qual tipo de produto ou serviço estamos tratando?*
+        </ion-label>
+            <ion-input formControlName="produtoServico" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label stacked>
+            Descreva detalhes do produto ou serviço 
+            (quantidade, marca, modelo, tamanho, defeitos e circunstâncias)*
+        </ion-label>
+            <ion-input formControlName="itemSolicitacao1" type="text"></ion-input>
+    </ion-item>
+        <p class="danger" *ngIf="formGroup.controls.itemSolicitacao1.dirty && formGroup.controls.itemSolicitacao1.errors" margin-left>Valor inválido</p>  
+    <ion-item>   
+        <ion-label stacked>
+            Descreva detalhes do que deseja que este profissional realize.*
+        </ion-label>
+            <ion-input formControlName="itemSolicitacao2" type="text"></ion-input>
+    </ion-item>
+        <p class="danger" *ngIf="formGroup.controls.itemSolicitacao2.dirty && formGroup.controls.itemSolicitacao2.errors" margin-left>Valor inválido</p>  
+   </form> 
+
+   <button ion-button block type="submit"> Solicitar orçamento</button>
+</ion-content>

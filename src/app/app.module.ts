@@ -12,9 +12,10 @@ import {AuthService} from "../services/auth.service";
 import {StorageService} from "../services/storage.service";
 import { ClienteService } from '../services/domain/cliente.service';
 import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
-import { ProfissaoService } from '../services/profissao.service';
+import { ProfissaoService } from '../services/domain/profissao.service';
 import { PrestadorService } from '../services/domain/prestador.service';
 import { IonRatingComponent } from '../components/ion-rating/ion-rating';
+import { SolicitacaoServicoService } from '../services/domain/solicitacaoServico.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { IonRatingComponent } from '../components/ion-rating/ion-rating';
   imports: [
     BrowserModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -40,7 +41,8 @@ import { IonRatingComponent } from '../components/ion-rating/ion-rating';
     StorageService,
     ClienteService,
     ProfissaoService,
-    PrestadorService
+    PrestadorService,
+    SolicitacaoServicoService
   ]
 })
 export class AppModule {}

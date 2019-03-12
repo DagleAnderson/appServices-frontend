@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ProfissaoDTO } from '../../models/profissao.dto';
-import { ProfissaoService } from '../../services/profissao.service';
+import { ProfissaoService } from '../../services/domain/profissao.service';
 
 /**
  * Generated class for the ProfissaoPage page.
@@ -29,7 +29,7 @@ export class ProfissaoPage {
     let categoria_id = this.navParams.get('categoria_id');
     this.profissaoService.findByCategoria(categoria_id)
       .subscribe(response =>{
-        this.profissoes=response['content'];
+        this.profissoes=response['content']; 
        },
       error =>{})
   }

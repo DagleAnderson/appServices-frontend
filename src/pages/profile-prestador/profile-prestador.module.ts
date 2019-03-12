@@ -9,7 +9,9 @@ import { IonRatingComponent } from '../../components/ion-rating/ion-rating';
     IonRatingComponent
   ],
   imports: [
-    IonicPageModule.forChild(ProfilePrestadorPage),
+    IonicPageModule.forChild(ProfilePrestadorPage)
+
+
   ],
 })
 export class ProfilePrestadorPageModule {}

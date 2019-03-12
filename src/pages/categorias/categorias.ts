@@ -39,4 +39,7 @@ export class CategoriasPage {
     this.navCtrl.push('ProfissaoPage',{categoria_id:categoria_id})
   }
 
+  showSolicitacaoServico(){
+    this.navCtrl.push('SolicitacaoServicoPage')
+  }
 }

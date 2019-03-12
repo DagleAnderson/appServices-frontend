@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { FormGroup, FormBuilder,Validators } from '../../../node_modules/@angular/forms';
 import { CidadesService } from '../../services/domain/cidades.service';
 import { EstadoService } from '../../services/domain/estados.service';
-import { Subscriber } from '../../../node_modules/rxjs';
 import { EstadoDTO } from '../../models/estado.dto';
 import { CidadeDTO } from '../../models/cidade.dto';
 import { ClienteService } from '../../services/domain/cliente.service';
@@ -18,7 +17,7 @@ export class SignupPage {
   formGroup: FormGroup;
   estados:EstadoDTO[];
   cidades:CidadeDTO[];
-  s
+  
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -72,7 +71,8 @@ export class SignupPage {
   
   signupUser(){
     console.log(this.formGroup.value);
-    this.formGroup.value.dataNascimento = this.formatDate(this.formGroup.value.dataNascimento);
+     this.formGroup.value.dataNascimento = this.formatDate(this.formGroup.value.dataNascimento);
+     
     console.log(this.formGroup.value);
     this.clienteService.insert(this.formGroup.value)
       .subscribe(respose=>{

@@ -25,7 +25,7 @@ export class IonRatingComponent {
   }
 
   ngAfterViewInit(){
-   this.calc();
+    setTimeout ( () => this.calc());
   }
 
   calc(){
