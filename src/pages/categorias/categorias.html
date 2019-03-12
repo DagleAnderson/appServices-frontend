@@ -9,21 +9,49 @@
     <button  ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>  
-    <ion-title>Categorias</ion-title>
+    <ion-title>Painel</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-      <button style="margin-button:15px"   ion-button block (click) = "showSolicitacaoServico()"> Solicitar Orçamento </button>
-      <form  style="margin-bottom: 30px">
-        <input  text-center style="margin-top:15px;width:100%;height:40px;border:1px solid #999999" type="text" name="search" placeholder="Search: Pintor,Pedreiro,Arquiteto...">
-      </form> 
-    <ion-list >
+      <br/>
+      <button style="margin-button:15px"  ion-button block (click) = "showSolicitacaoServico()"> 
+        Solicite um orçamento
+      </button>
+        <br/><br/>
+    <!--  <ion-list >
         <button  ion-item *ngFor="let item of itens" (click)= "showProfissoes(item.id)">
             <ion-thumbnail item-start>
                 <img class="img-circle" src="{{bucketUrl}}/cat{{item.id}}.jpg">
             </ion-thumbnail>
             <h2>{{item.nome}}</h2>
           </button>
-    </ion-list>      
+    </ion-list>  --> 
+
+     <ion-grid>
+        <ion-row text-center>
+            <ion-col size="3" *ngFor="let item of itens" (click)= "showProfissoes(item.id)">
+                    <ion-thumbnail item-start>
+                        <img class="img-circle" src="{{bucketUrl}}/cat{{item.id}}.jpg">
+                    </ion-thumbnail>
+                    <h5>{{item.nome}}</h5 >
+            </ion-col>
+          </ion-row>
+     </ion-grid>    
+         
+    <!--  <ion-card style="width: 50%;float:inline-end"  *ngFor="let item of itens" (click)= "showProfissoes(item.id)">
+        <ion-card-content>
+            <img class="img-circle" src="{{bucketUrl}}/cat{{item.id}}.jpg">
+        </ion-card-content>
+        <ion-item>
+          <ion-icon name="pin" slot="start"></ion-icon>
+          <ion-label>ion-item in a card, icon left, button right</ion-label>
+          <button fill="outline" slot="end">View</button>
+        </ion-item>
+      </ion-card>--> 
+ 
+    
 </ion-content>
+
+
+
