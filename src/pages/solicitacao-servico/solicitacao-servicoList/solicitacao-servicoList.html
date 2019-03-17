@@ -1,0 +1,27 @@
+
+<ion-header>
+    <ion-navbar>
+          <button  ion-button menuToggle>
+                  <ion-icon name="menu"></ion-icon>
+          </button> 
+      <ion-title >Minhas Solicitações</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding>
+    <br/>    
+    <div class="borderEnd">
+        <h2 text-center>Minhas Solicitações</h2>
+    </div>  
+       
+   <ion-grid>
+      <ion-row text-center>  
+            <button ion-item *ngFor="let item of itens" (click)= " showSolicitacao(item.id)">
+              <h1 style="margin-bottom:10px">Solicitação #{{item.id}}</h1>
+              <p>Produto / Serviço : {{item.produtoServico}} </p>
+              <p>Profissional Solicitado : {{item.profissao}}</p>
+          </button>  
+        </ion-row>
+   </ion-grid>   
+  </ion-content>
+  

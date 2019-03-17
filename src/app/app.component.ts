@@ -26,6 +26,7 @@ export class MyApp {
     this.pages = [
       { title: 'Perfil', component: 'ProfilePage' },
       { title: 'Categarias', component: 'CategoriasPage' },
+      {title: 'Minhas Solicitações',component:'SolicitacaoServicoListPage'},
       { title: 'Sair', component:''}
     ];
 

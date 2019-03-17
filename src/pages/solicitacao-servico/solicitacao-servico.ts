@@ -46,7 +46,8 @@ export class SolicitacaoServicoPage {
       profissao:['',Validators.required],
       produtoServico:['sistema de vendas',[Validators.required,Validators.minLength(5),Validators.maxLength(120)]],
       itemSolicitacao1:['erros de emissão da NFCe',[Validators.required,Validators.minLength(10),Validators.maxLength(255)]],
-      itemSolicitacao2:['correção de envio e tratamento de bugs',[Validators.required,Validators.minLength(10),Validators.maxLength(255)]]
+      itemSolicitacao2:['correção de envio e tratamento de bugs',[Validators.required,Validators.minLength(10),Validators.maxLength(255)]],
+      itemSolicitacao3:['correção de envio e tratamento de bugs',[Validators.required,Validators.minLength(10),Validators.maxLength(255)]]
     });
   }
 
