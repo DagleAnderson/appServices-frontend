@@ -14,8 +14,9 @@ import { ClienteService } from '../services/domain/cliente.service';
 import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
 import { ProfissaoService } from '../services/domain/profissao.service';
 import { PrestadorService } from '../services/domain/prestador.service';
-import { IonRatingComponent } from '../components/ion-rating/ion-rating';
 import { SolicitacaoServicoService } from '../services/domain/solicitacaoServico.service';
+import { OrcamentoService } from '../services/domain/orcamento.service';
+
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { SolicitacaoServicoService } from '../services/domain/solicitacaoServico
     ClienteService,
     ProfissaoService,
     PrestadorService,
-    SolicitacaoServicoService
+    SolicitacaoServicoService,
+    OrcamentoService
   ]
 })
 export class AppModule {}

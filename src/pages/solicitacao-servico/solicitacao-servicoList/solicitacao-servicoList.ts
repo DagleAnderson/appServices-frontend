@@ -18,9 +18,9 @@ import { SolicitacaoServicoService } from '../../../services/domain/solicitacaoS
 })
 export class SolicitacaoServicoListPage {
 
+  solicitacoes : SolicitacaoServicoDTO[];
+  dateFormatBr :string[];
 
-  bucketUrl: string = API_CONFIG.bucktBaseURL;
-  itens : SolicitacaoServicoDTO[];
   constructor(
     public navCtrl: NavController,
      public navParams: NavParams,
@@ -31,7 +31,8 @@ export class SolicitacaoServicoListPage {
   ionViewDidLoad() {
     this.servicoService.findAll()
     .subscribe(response =>{
-      this.itens = response;  
+      this.solicitacoes = response;
+      this.formatDateList(this.solicitacoes);
     },
     error => {});
   }
@@ -39,4 +40,23 @@ export class SolicitacaoServicoListPage {
   showSolicitacao(solicitacao_id:string){
     this.navCtrl.push('SolicitacaoServicoDetailsPage',{solicitacao_id:solicitacao_id})
   }
+
+  showListOrcamentos(solicitacaoId:string){
+    this.navCtrl.push('OrcamentoListSsPage',{solicitacaoId:solicitacaoId})
+  }
+
+  formatDateList(obj:SolicitacaoServicoDTO[]){
+    let dateRead;
+    for(let i=0; i < obj.length;i++){  
+        dateRead = obj[i].data.toString();
+        let yaer = dateRead.substring(0,4);
+        let month= dateRead.substring(5,7);
+        let day =  dateRead.substring(8,10);
+
+        let newDate = day+"/"+month+"/"+yaer
+        
+        console.log(newDate);
+    }
+  }
+  
 }
