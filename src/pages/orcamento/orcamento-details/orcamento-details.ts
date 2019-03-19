@@ -20,7 +20,7 @@ export class OrcamentoDetailsPage {
 
   orcamento : OrcamentoDTO;
   itensOrcamento : ItensOrcamentoDTO[]; 
-  status:boolean;
+  dateFormatBr : string;
 
   constructor(
     public navCtrl: NavController, 
@@ -34,23 +34,23 @@ export class OrcamentoDetailsPage {
     this.orcamentoService.findById(orcamento_id)
       .subscribe(response =>{
         this.orcamento=response;
-        this.statusDoOrcamento(this.orcamento.situacao);
+        this.formatDate(this.orcamento);
         this.itensOrcamento = response['itensOrcamento'];
+
        },   
       error =>{})
-       
-     
-
-
      
   }
-  
-  statusDoOrcamento(obj:string){
-      if(obj == "PENDENTE"){
-          this.status = false;
-        }else{
-          this.status = true;
-        }
-  }
 
+  formatDate(obj:OrcamentoDTO){
+    let dateRead;
+
+        dateRead = obj.data.toString();
+        let yaer = dateRead.substring(0,4);
+        let month= dateRead.substring(5,7);
+        let day =  dateRead.substring(8,10);
+
+        this.dateFormatBr = day+"-"+month+"-"+yaer;
+        console.log(this.dateFormatBr);   
+  }
 }

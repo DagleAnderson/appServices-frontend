@@ -19,6 +19,7 @@ import { ItensSolicitacaoServicoDTO } from '../../../models/ItensSolicitacaoServ
 export class SolicitacaoServicoDetailsPage {
   solicitacao : SolicitacaoServicoDTO;
   itensSolicitacao : ItensSolicitacaoServicoDTO[]; 
+  dateFormatBr : string;
 
   constructor(
     public navCtrl: NavController, 
@@ -32,11 +33,22 @@ export class SolicitacaoServicoDetailsPage {
       .subscribe(response =>{
         this.solicitacao=response;
         this.itensSolicitacao = response['itemServico'];
+        this.formatDate(this.solicitacao)
         this.questionsList();
        },   
       error =>{})
+  }
 
-     
+  formatDate(obj:SolicitacaoServicoDTO){
+    let dateRead;
+
+        dateRead = obj.data.toString();
+        let yaer = dateRead.substring(0,4);
+        let month= dateRead.substring(5,7);
+        let day =  dateRead.substring(8,10);
+
+        this.dateFormatBr = day+"-"+month+"-"+yaer;
+        console.log(this.dateFormatBr);   
   }
 
   questionsList(){

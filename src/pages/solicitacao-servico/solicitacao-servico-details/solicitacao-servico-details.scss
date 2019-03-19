@@ -1,24 +1,26 @@
 page-solicitacao-servico-details {
-    h1{
-        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    h1{ 
         font-size: 16px;
         font-weight: bold;
      }
 
-     p,li{
-        font-size: 20px;
+     p{
+        font-family:Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 14px;
         padding-left:10px;
+        margin-bottom: -10px;
         
      }
 
      .subTitle{
-        
-      font-size: 16px;
-      color: rgb(0, 0, 0);
-      font-weight: bold;
-      
-      border:#0f8bff solid 1px;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      font-size: 14px;
+      color: rgb(75, 75, 75);
+      font-weight:  600;
+      border:#81b7eb solid 0.1px;
       padding-left: 10px;
+      padding-top: 5px;
+      padding-bottom: 5px;
    }
      
      .borderEnd{
@@ -27,7 +29,7 @@ page-solicitacao-servico-details {
         border-block-end-width: 0.8px;  
      }
      div h2{
-        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        font-family:Arial, Helvetica, sans-serif;
         font-size: 20px;
         color: #000000;
         

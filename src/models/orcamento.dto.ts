@@ -6,6 +6,7 @@ export interface OrcamentoDTO{
     id:string;
     produtoServico;string;
     prestador:PrestadorDTO;
+    data:Date;
     cliente:ClienteDTO;
     itemOrcamento:ItensOrcamentoDTO[];
     desconto:number;

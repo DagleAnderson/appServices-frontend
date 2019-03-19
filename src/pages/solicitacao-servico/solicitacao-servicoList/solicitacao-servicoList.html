@@ -13,15 +13,15 @@
     
     <ion-searchbar placeholder=" qual a profissão solicitada?"></ion-searchbar>    
    <ion-grid>
-      <ion-row text-center  *ngFor="let item of solicitacoes">  
-            <button ion-item  (click)="showSolicitacao(item.id)">
-             
+      <ion-row text-center  *ngFor="let item of solicitacoes ;">  
+            <button ion-item  (click)="showSolicitacao(item.id)">   
               <h1 style="margin-bottom:10px">Solicitação #{{item.id}}</h1>
               <p>Produto / Serviço : {{item.produtoServico}} </p>
               <p>Profissional Solicitado : {{item.profissao}}</p>
           </button> 
           <button block  ion-button (click)="showListOrcamentos(item.id)">Ver Orçamentos!</button> 
       </ion-row>
+          
    </ion-grid>   
   </ion-content>
   

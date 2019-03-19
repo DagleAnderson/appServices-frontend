@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { API_CONFIG } from '../../../config/api.config';
 import { SolicitacaoServicoDTO } from '../../../models/solicitacaoServico.dto';
 import { SolicitacaoServicoService } from '../../../services/domain/solicitacaoServico.service';
 
@@ -19,10 +18,9 @@ import { SolicitacaoServicoService } from '../../../services/domain/solicitacaoS
 export class SolicitacaoServicoListPage {
 
   solicitacoes : SolicitacaoServicoDTO[];
-  dateFormatBr :string[];
 
   constructor(
-    public navCtrl: NavController,
+     public navCtrl: NavController,
      public navParams: NavParams,
      public servicoService: SolicitacaoServicoService
     ) {
@@ -32,7 +30,6 @@ export class SolicitacaoServicoListPage {
     this.servicoService.findAll()
     .subscribe(response =>{
       this.solicitacoes = response;
-      this.formatDateList(this.solicitacoes);
     },
     error => {});
   }
@@ -43,20 +40,6 @@ export class SolicitacaoServicoListPage {
 
   showListOrcamentos(solicitacaoId:string){
     this.navCtrl.push('OrcamentoListSsPage',{solicitacaoId:solicitacaoId})
-  }
-
-  formatDateList(obj:SolicitacaoServicoDTO[]){
-    let dateRead;
-    for(let i=0; i < obj.length;i++){  
-        dateRead = obj[i].data.toString();
-        let yaer = dateRead.substring(0,4);
-        let month= dateRead.substring(5,7);
-        let day =  dateRead.substring(8,10);
-
-        let newDate = day+"/"+month+"/"+yaer
-        
-        console.log(newDate);
-    }
   }
   
 }

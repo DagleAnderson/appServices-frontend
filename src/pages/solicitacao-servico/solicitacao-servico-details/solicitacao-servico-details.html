@@ -12,12 +12,14 @@
 <ion-content padding>
     <div>
       <div class="borderEnd">
-        <h2 text-center>Solicitação de Serviço #{{solicitacao?.id}} </h2>
+        <h2 text-center style="background:#0f8bff;color:white ">Solicitação de Serviço #{{solicitacao?.id}} </h2>
       </div> 
         <p class="subTitle">Produto / Serviço </p> 
         <p>{{solicitacao?.produtoServico}} </p> 
         <p class="subTitle">Profissional Solicitado</p>
         <p>{{solicitacao?.profissao.nome}}</p>
+        <p class="subTitle">Data da Solicitação</p>
+        <p> {{dateFormatBr}}</p>
         <h3  text-center>Detalhes da solicitação</h3>
         
         <div ion-item *ngFor="let item of itensSolicitacao;">

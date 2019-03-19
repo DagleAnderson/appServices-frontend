@@ -9,9 +9,10 @@
 </ion-header>
     
 <ion-content padding>
+
      <ion-list>      
         <ion-searchbar placeholder="search"></ion-searchbar>
-      <button ion-item *ngFor="let profissao of profissoes" (click)="showPrestador(profissao.id)">
+      <button ion-item  *ngFor="let profissao of profissoes" (click)="showPrestador(profissao.id)">
           <h2>{{profissao.nome}} </h2>
       </button>
     </ion-list>  
