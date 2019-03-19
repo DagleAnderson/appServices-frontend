@@ -20,10 +20,10 @@
         <p>{{solicitacao?.profissao.nome}}</p>
         <h3  text-center>Detalhes da solicitação</h3>
         
-        <ol  *ngFor="let item of itensSolicitacao;">
-          <li>{{item?.questions}}</li> 
-              <ul type="square"><li>{{item?.descricao}}</li></ul>
-        </ol>      
+        <div ion-item *ngFor="let item of itensSolicitacao;">
+          <h6>{{item?.questions}}</h6> 
+              <p>{{item?.descricao}}</p>
+          </div>    
     </div>     
 
 </ion-content>
