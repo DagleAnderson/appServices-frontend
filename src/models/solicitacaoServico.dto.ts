@@ -12,4 +12,5 @@ export interface SolicitacaoServicoDTO{
     cliente:ClienteDTO;
     prestador:PrestadorDTO;
     orcamento:OrcamentoDTO;
+    statusSolicitacao:string;
 }
