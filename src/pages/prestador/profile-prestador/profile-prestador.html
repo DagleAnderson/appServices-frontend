@@ -72,16 +72,23 @@
 
                         </div>
                         <ion-list>
-                            <div ion-item *ngFor="let avaliacao of avaliacoes;">
+                            <div id="avaliable" ion-item *ngFor="let avaliacao of avaliacoes;">
                                 <ion-thumbnail  item-start>
-                                        <img  style="border:solid" class="img-circle" src="{{bucketUrl}}/cat{{prestador.id}}.jpg">
-                                </ion-thumbnail> 
-                                    <div style="float:left;width:233px;border:solid">
-                                        <h2>{{avaliacao?.cliente.nome}}&nbsp;{{avaliacao?.cliente.sobrenome}}</h2>
-                                        <p>{{avaliacao?.estrelas}}</p>
-                                    </div>    
-                                        <p  class="area-coments">{{avaliacao?.comentario}}</p>
-                                      
+                                        <img  class="img-circle" src="{{bucketUrl}}/cat{{prestador.id}}.jpg">
+                                </ion-thumbnail>    
+                                    <div class="head-avaliable">
+                                        <div >
+                                            <h2>{{avaliacao?.cliente.nome}}&nbsp;{{avaliacao?.cliente.sobrenome}}</h2>
+                                        </div> 
+                                        <div  class="title-rating">
+                                            <ion-rating [read]=false [value]=avaliacao?.estrelas></ion-rating>
+                                            <p  class="area-void"></p>
+                                        </div>
+
+                                        <div>   
+                                            <p  class="area-coments">{{avaliacao?.comentario}}</p>
+                                        </div>
+                                    </div>
                             </div>
                         </ion-list>     
                     </ion-slide>
