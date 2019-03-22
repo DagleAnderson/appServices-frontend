@@ -1,8 +1,13 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { PrestadorDTO } from '../../models/prestador.dto';
-import { PrestadorService } from '../../services/domain/prestador.service';
-import { API_CONFIG } from '../../config/api.config';
+import { PrestadorDTO } from '../../../models/prestador.dto';
+import { PrestadorService } from '../../../services/domain/prestador.service';
+import { API_CONFIG } from '../../../config/api.config';
+import { CurriculoDTO } from '../../../models/curriculo.dto';
+import { CursosDTO } from '../../../models/cursos.dto';
+import { ExperienciasDTO } from '../../../models/experiencias.dto';
+import { AvaliacoesDTO } from '../../../models/avaliacoes.dto';
+import { ClienteDTO } from '../../../models/cliente.dto';
 
 /**
  * Generated class for the ProfilePrestadorPage page.
@@ -19,6 +24,17 @@ import { API_CONFIG } from '../../config/api.config';
 export class ProfilePrestadorPage {
 
   prestador: PrestadorDTO;
+  curriculo:CurriculoDTO;
+  cursos : CursosDTO[];
+  experiencias: ExperienciasDTO[];
+  cliente:ClienteDTO[];
+  avaliacoes: AvaliacoesDTO[];
+
+  bucketUrl: string = API_CONFIG.bucktBaseURL;
+
+  slideOpts = {
+    effect: 'flip'
+  };
 
   constructor(
     public navCtrl: NavController,
@@ -33,6 +49,10 @@ export class ProfilePrestadorPage {
     let prestador_id = this.navParams.get('prestador_id');
     this.prestadorService.findByid(prestador_id)
     .subscribe(response =>{
+        this.curriculo = response['curriculo'];
+        this.cursos = this.curriculo.cursos;
+        this.experiencias = this.curriculo.experiencias;
+        this.avaliacoes = response['avaliacoes'];
         this.prestador = response;
         this.getImageIfExists();
     },

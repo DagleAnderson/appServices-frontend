@@ -1,3 +1,5 @@
+import { CurriculoDTO } from "./curriculo.dto";
+
 export interface PrestadorDTO{
     id:string;
     nomeFantasia:string;
@@ -11,4 +13,6 @@ export interface PrestadorDTO{
 	numero:string;
     complemento:string; 
     imageUrl?:string;
+
+    curriculo:CurriculoDTO;
 }

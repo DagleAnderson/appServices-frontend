@@ -14,7 +14,6 @@ export class ErrorInterceptor implements HttpInterceptor{
     }
    
     intercept(req:HttpRequest<any>, next:HttpHandler): Observable<HttpEvent<any>>{
-        console.log("passou");
         return next.handle(req)
         .catch((error,cought)=>{
 
@@ -26,16 +25,17 @@ export class ErrorInterceptor implements HttpInterceptor{
                 errorObj = JSON.parse(errorObj);
             }
 
-                console.log("Erro detectado pelo interceptor:");
-                console.log(errorObj);
-
             switch(errorObj.status){
-                case 403:
-                    this.handle403();
-                    break;
+               
                 case 401:
                     this.handle401();
                     break;
+                case 403:
+                    this.handle403();
+                    break;
+                case 404:
+                    this.handle404();
+                    break;    
                 case 422:
                     this.handle422(errorObj);
                     break;
@@ -47,23 +47,8 @@ export class ErrorInterceptor implements HttpInterceptor{
             return Observable.throw(errorObj);
         })as any;
     }
-    handle422(errorObj){
-        let alert = this.alertCtrl.create({
-            title:'422:Erro de validação',
-            message:this.listErrors(errorObj.errors),
-            enableBackdropDismiss:false,
-            buttons:[
-                {
-                    text:'ok'
-                }
-            ]
-        })
-        alert.present();
-    }
 
-    handle403(){
-        this.storage.setLocalUser(null);
-    }
+
 
     handle401(){
         let  alert = this.alertCtrl.create({
@@ -76,6 +61,38 @@ export class ErrorInterceptor implements HttpInterceptor{
                 }
             ]
         });
+        alert.present();
+    }
+    
+    handle403(){
+        this.storage.setLocalUser(null);
+    }
+
+    handle404(): any {
+        let  alert = this.alertCtrl.create({
+            title:'Ops:',
+            message:'Nenhum dado foi encontrado!',
+            enableBackdropDismiss:false,
+            buttons:[
+                {
+                    text:'ok'
+                }
+            ]
+        });
+        alert.present();
+    }
+
+    handle422(errorObj){
+        let alert = this.alertCtrl.create({
+            title:'422:Erro de validação',
+            message:this.listErrors(errorObj.errors),
+            enableBackdropDismiss:false,
+            buttons:[
+                {
+                    text:'ok'
+                }
+            ]
+        })
         alert.present();
     }
 

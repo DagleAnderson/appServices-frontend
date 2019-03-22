@@ -7,52 +7,42 @@ page-categorias {
         background-repeat:repeat-y;   
         }
 
+    ion-thumbnail{
+        margin-left: auto;
+        margin-right: auto;
+        width: 90px;
+
+    }
+
+    io-con{
+        margin-left: auto;
+        margin-right: auto;
+    }
+
     .img-circle{
         border-radius: 10%;
         display: block;
         margin-left: auto;
-        margin-right: auto 
+        margin-right: auto;
     }
-
-    
-    .subTitle{
-        font-family: Verdana, Geneva, Tahoma, sans-serif; 
-        font-size: 16px;
-        color: rgb(75, 75, 75);
-        font-weight: bold;
-        border:#81b7eb solid 0.1px;
-        padding-left: 10px;
-        padding-top: 5px;
-        padding-bottom: 5px;
-     }
-       
-
 
     h3,p{
         font-family: Verdana, Geneva, Tahoma, sans-serif; 
-        font-size: 14px;
+        font-size: 12px;
         font-weight: bold;
         color: rgb(75, 75, 75);
      }
      
      .borderEnd{
         border-block-end-style: solid;
-        border-block-end-color:rgb(90, 90, 90);
+        border-block-end-color:#9cbbff ;
         border-block-end-width: 0.8px;  
      }
      div h2{
         font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         font-size: 20px;
-        color: rgb(75, 75, 75);
-         
-        
-       
+        color:#000;
      }
-
-    ion-row{
-        align-items: center;
-        color: rgb(75, 75, 75);
-    }
     
     .datils{
         width: 100%;
@@ -63,7 +53,7 @@ page-categorias {
         margin:0px 5px 10px;
             
         float: left;
-        background: #FFFFFF;
+        background:#fff;
         
        -webkit-box-shadow: 0px 3px 5px 0px rgba(184,175,184,1);
        -moz-box-shadow: 0px 3px 5px 0px rgba(184,175,184,1);

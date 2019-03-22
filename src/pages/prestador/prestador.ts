@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { PrestadorDTO } from '../../models/prestador.dto';
 import { PrestadorService } from '../../services/domain/prestador.service';
-
+import { API_CONFIG } from '../../config/api.config';
 /**
  * Generated class for the PrestadorPage page.
  *
@@ -18,6 +18,7 @@ import { PrestadorService } from '../../services/domain/prestador.service';
 export class PrestadorPage {
   
   prestadores:PrestadorDTO[];
+  bucketUrl: string = API_CONFIG.bucktBaseURL;
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,

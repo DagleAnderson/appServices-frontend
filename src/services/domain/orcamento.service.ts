@@ -14,8 +14,8 @@ export class OrcamentoService{
         return this.http.get<OrcamentoDTO>(`${API_CONFIG.baseUrl}/orcamento/${orcamento_id}`)    
     }
 
-    findBySolicitacao(orcamento_id:string):Observable<OrcamentoDTO[]>{
-       return this.http.get<OrcamentoDTO[]>(`${API_CONFIG.baseUrl}/orcamento/list?solicitacaoServico=${orcamento_id}`);     
+    findBySolicitacao(solicitacao_id:string):Observable<OrcamentoDTO[]>{
+       return this.http.get<OrcamentoDTO[]>(`${API_CONFIG.baseUrl}/orcamento/list?solicitacaoServico=${solicitacao_id}`);     
     }
     
     findAll() : Observable<OrcamentoDTO[]>{

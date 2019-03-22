@@ -5,8 +5,34 @@ page-profile-prestador {
         margin:25% auto 0 auto;
     }
 
+    .img-circle{
+        border:solid;
+        border-radius: 100%;
+        margin-bottom: 45px;
+    }
+
+    .avaliable{
+        float:left;
+        width:233px;
+        border:solid
+    }
+
+    ion-thumbnail {
+        float:left;
+        border:1px solid;
+    }
+
+    .area-coments{
+        height: 80px; 
+        overflow: hidden;
+        white-space: normal; 
+        display: block;
+        border: solid;
+    }
+
     #divTitle{
-        padding-top: 10px;
+        padding-top: 0PX;
+        color:#000;
         border-block-start-style: solid;
         border-block-start-width: 1px;
         border-block-start-color: #999;
@@ -16,22 +42,11 @@ page-profile-prestador {
         height: 50px;
 
     }
-    .buttonfloatLeft{
+    .buttonfloat{
         float: left;
-        margin-left: 50px;
-        background: none;
         font-size: 18px;
-        font-weight: bold;
-        padding-top: 5px;
-    }
+        padding-bottom: 10px;
 
-    .buttonfloatRight{
-        float: right;
-        margin-right: 50px;
-        font-size: 18px;
-        font-weight: bold;
-        background: none;
-        padding-top: 5px;
     }
 
     .labelAction{

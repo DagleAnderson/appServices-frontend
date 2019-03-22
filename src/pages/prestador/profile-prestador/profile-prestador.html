@@ -1,0 +1,91 @@
+<ion-header>
+    <ion-navbar>
+    <button  ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+    </button> 
+      <ion-title>Perfil do Prestador</ion-title>
+    </ion-navbar>
+  </ion-header>
+  <ion-content>
+        <div>
+             <ion-avatar>  
+                <img class="circle" [src]="prestador?.imageUrl || 'assets/imgs/avatar-blank.png'"> 
+                <h2 text-center>{{prestador?.nomeFantasia}}</h2>
+                <p text-center>{{prestador?.slogan}}</p>
+                <div >
+                    <ion-rating [read]="true" (ionClick)="log($event)"></ion-rating>
+                    </div>
+                <button ion-button block clear>Solicitar orçamento</button>
+            </ion-avatar>
+        </div>       
+    
+        <div>
+                <ion-slides>
+                    <ion-slide>
+                        <div id="divTitle">
+                            <h5>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    Currículo
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; >> 
+                            </h5>
+                        </div>
+                        <div>
+                            <h5>Cursos</h5>
+                        </div>  
+                        <div ion-item *ngFor="let curso of cursos;">  
+                        <h2 text-left>{{curso?.curso}}</h2>
+                            <div >
+                                <p>Instituição : {{curso?.instituicao}}</p>
+                                <p>Duração : {{curso?.duracao}}</p>
+                            </div> 
+                        </div> 
+                        <div>
+                            <h5>Experiências</h5>
+                        </div>
+                        <div ion-item *ngFor="let experiencia of experiencias;">  
+                            <h2 text-left>{{experiencia?.funcao}}</h2>
+                            <div >
+                                <p>Empresa : {{experiencia?.empresa}}</p>
+                                <p>Periodo : {{experiencia?.periodo}}</p>
+                            </div> 
+                        </div> 
+                            
+                    </ion-slide>
+                    <ion-slide>
+                        <div  id="divTitle">
+                        <h5>
+                            <<&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                                        Portifílio 
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  >>                        
+                        </h5>
+                        </div>
+                        <h1>Portifólio</h1>
+                    </ion-slide>
+                    <ion-slide>
+                        <div id="divTitle">
+                            
+                            <h5 text-center>
+                                <<&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    Avaliações
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                            </h5>
+
+                        </div>
+                        <ion-list>
+                            <div ion-item *ngFor="let avaliacao of avaliacoes;">
+                                <ion-thumbnail  item-start>
+                                        <img  style="border:solid" class="img-circle" src="{{bucketUrl}}/cat{{prestador.id}}.jpg">
+                                </ion-thumbnail> 
+                                    <div style="float:left;width:233px;border:solid">
+                                        <h2>{{avaliacao?.cliente.nome}}&nbsp;{{avaliacao?.cliente.sobrenome}}</h2>
+                                        <p>{{avaliacao?.estrelas}}</p>
+                                    </div>    
+                                        <p  class="area-coments">{{avaliacao?.comentario}}</p>
+                                      
+                            </div>
+                        </ion-list>     
+                    </ion-slide>
+                </ion-slides>
+        </div>        
+  </ion-content>
+  

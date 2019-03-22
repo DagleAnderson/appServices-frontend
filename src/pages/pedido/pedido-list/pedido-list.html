@@ -1,0 +1,35 @@
+<!--
+  Generated template for the PedidoListPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar>
+        <button  ion-button menuToggle>
+                <ion-icon name="menu"></ion-icon>
+        </button> 
+    <ion-title >Meus Pedidos</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <br/>    
+    <ion-grid>
+        <ion-row text-center>  
+              <button ion-item *ngFor="let pedido of pedidos" (click)= " showPedidos(pedido.id)">
+                <h1 style="margin-bottom:10px">Pedido #{{pedido.id}}</h1>
+                
+                <p>Prestador : {{pedido.prestador}}</p>
+                <p>Produto / Serviço : {{pedido.produtoServico}} </p>
+                <p>Total : {{pedido.total}}</p>
+                <p *ngIf="pedido.situacao == 'FECHADO'">
+                  Status :<b style="color:rgb(0, 199, 10)">{{pedido.statusPagamento}}</b></p>
+                <p *ngIf="pedido.statusPagamento!= 'FECHADO'">
+                  Status do pagamento : <b style="color:red">{{pedido.statusPagamento}}</b></p>
+                <p style="font-weight: bold" text-center>...</p>
+                <p style="float:right;color: blue"> ver detalhes</p>  
+            </button>  
+          </ion-row>
+     </ion-grid>   
+</ion-content>

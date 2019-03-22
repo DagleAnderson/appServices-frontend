@@ -42,12 +42,13 @@ export class SolicitacaoServicoPage {
      public alertCtrl: AlertController) {
 
     this.formGroup = this.formBuider.group({
-      categoria:[1,Validators.required],
+      cliente :['',Validators],
+      categoria:['',Validators.required],
       profissao:['',Validators.required],
-      produtoServico:['sistema de vendas',[Validators.required,Validators.minLength(5),Validators.maxLength(120)]],
-      itemSolicitacao1:['erros de emissão da NFCe',[Validators.required,Validators.minLength(10),Validators.maxLength(255)]],
-      itemSolicitacao2:['correção de envio e tratamento de bugs',[Validators.required,Validators.minLength(10),Validators.maxLength(255)]],
-      itemSolicitacao3:['correção de envio e tratamento de bugs',[Validators.required,Validators.minLength(10),Validators.maxLength(255)]]
+      produtoServico:['',[Validators.required,Validators.minLength(5),Validators.maxLength(120)]],
+      itemSolicitacao1:['',[Validators.required,Validators.minLength(10),Validators.maxLength(255)]],
+      itemSolicitacao2:['',[Validators.required,Validators.minLength(10),Validators.maxLength(255)]],
+      itemSolicitacao3:['',[Validators.required,Validators.minLength(10),Validators.maxLength(255)]]
     });
   }
 
@@ -57,8 +58,6 @@ export class SolicitacaoServicoPage {
   }
 
   requestOrcamento(profissao:string){
-    console.log(this.formGroup.value);
-    // this.formGroup.value.dataNascimento = this.formatDate(this.formGroup.value.dataNascimento); 
     let localUser = this.storage.getLocalUser();
     if(localUser &&  localUser.email){
       this.clienteService.findByEmail(localUser.email)
@@ -66,36 +65,40 @@ export class SolicitacaoServicoPage {
           this.cliente = response;
              this.formGroup = this.formBuider.group({
                 cliente:[this.cliente.id,Validators.required]
-              })
-      
-      this.profissaoService.findById(profissao)
-        .subscribe(response=>{
-              this.profissao = response;
-                this.formGroup = this.formBuider.group({
-                  profissao:[this.profissao.id,Validators.required]
-                })
-           
-              
-        })      
+              })     
+      }, error => {
+        if(error.status == 403){
+          this.navCtrl.setRoot("HomePage");
+        }
       })
+
+      this.profissaoService.findById(profissao)
+      .subscribe(response=>{
+            this.profissao = response;
+              this.formGroup = this.formBuider.group({
+                profissao:[this.profissao.id,Validators.required]
+              })      
+      },erro=>{})  
+     
+      this.formGroup.value.cliente = this.cliente.id;
+      this.formGroup.value.profissao = this.profissao.id;
+      
+     
       this.solicitacaoService.insert(this.formGroup.value)
-      .subscribe(respose=>{
-        console.log(this.formGroup.value);
-        this.showInsertOk();
-      },
-      erro=>{})
+        .subscribe(response=>{
+          console.log(this.formGroup.value);
+             this.showInsertOk();
+      },erro=>{});
 
     }else{
       this.navCtrl.setRoot("HomePage");
     }
-  
-    
   }
 
   showInsertOk(){
     let alert = this.alertCtrl.create({
       title:'Sucesso!',
-      message:"Solicitacão efetuada com sucesso",
+      message:"Pronto sua solicitação foi enviada.Agora é so aguardar os orçamentos!",
       enableBackdropDismiss:false,
       buttons:[
           {

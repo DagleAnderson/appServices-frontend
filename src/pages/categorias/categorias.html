@@ -15,16 +15,16 @@
 
 <ion-content padding>
       <br/>
-      <div class="datils" style="height: 140px;border-radius: 2%;">
-        <p text-center style="display: block; margin-left: auto;margin-right: auto;width: 90%;">
-          Envie uma solicitação para todos os profissionais da área desejada e aguarde seus orçamentos!
-        </p>
-          <button style="width:85%;display: block; margin-left: auto;margin-right: auto "  ion-button block  (click) = "showSolicitacaoServico()"> 
-            Solicite um orçamento
-          </button>
-      </div>      
+      <div class="datils" style="height: 120px;border-radius: 0%;margin-bottom: 20px">
+          <p text-center style="display: block; margin-left: auto;margin-right: auto;width: 90%;">
+            Envie uma solicitação para todos os profissionais da área desejada e aguarde seus orçamentos!
+          </p>
+            <button style="width:85%;display: block; margin-left: auto;margin-right: auto "  ion-button block  outline  (click) = "showSolicitacaoServico()"> 
+              Solicitar orçamentos
+            </button>
+        </div>      
       <div class="borderEnd">
-          <h2>Categorias</h2>
+          <h2 text-center>Categorias</h2>
       </div>  
          
      <ion-grid>
@@ -33,7 +33,7 @@
                     <ion-thumbnail item-start>
                         <img class="img-circle" src="{{bucketUrl}}/cat{{item.id}}.jpg">
                     </ion-thumbnail>
-                    <h3>{{item.nome}}</h3>
+                    <p>{{item.nome}}</p>
             </ion-col>
           </ion-row>
      </ion-grid>   

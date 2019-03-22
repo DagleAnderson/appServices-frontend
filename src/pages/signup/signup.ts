@@ -70,12 +70,9 @@ export class SignupPage {
   }
   
   signupUser(){
-    console.log(this.formGroup.value);
      this.formGroup.value.dataNascimento = this.formatDate(this.formGroup.value.dataNascimento);
-     
-    console.log(this.formGroup.value);
     this.clienteService.insert(this.formGroup.value)
-      .subscribe(respose=>{
+      .subscribe(response=>{
         this.showInsertOk();
       },
       erro=>{})

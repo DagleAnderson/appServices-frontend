@@ -6,7 +6,7 @@
 -->
 <ion-header>
     <ion-navbar>
-      <ion-title>Meus Orçamentos</ion-title>
+      <ion-title>Destalhes do Orçamento</ion-title>
     </ion-navbar>
   </ion-header>
   <ion-content padding>
@@ -30,17 +30,16 @@
           <div *ngFor="let itemOrcamento of itensOrcamento;">  
               <h6>{{itemOrcamento?.item}}</h6>
               <div ion-item>
-                  <p>#{{itemOrcamento?.id}}</p>
-                  <p>Quantidade :{{itemOrcamento?.quantidade}}</p>
-                  <p>Desconto :{{itemOrcamento?.desconto}}</p>
-                  <p>Valor :{{itemOrcamento?.valor}}</p>
-                  <p>sub-Total:{{itemOrcamento?.subTotal}}</p>
+                  <p>Quantidade : {{itemOrcamento?.quantidade}}</p>
+                  <p>Desconto : {{itemOrcamento?.desconto}}</p>
+                  <p>Valor : {{itemOrcamento?.valor}}</p>
+                  <p>sub-Total : {{itemOrcamento?.subTotal}}</p>
               </div> 
            </div>   
-           <p style="font-weight: bold">Desconto geral no orcamento: {{orcamento?.desconto}}</p> 
-           <h3 text-center class="subTitle">Totais do orcamento</h3>
+           <p style="font-weight: bold">Desconto geral no orcamento : {{orcamento?.desconto}}</p> 
+           <h3 text-center class="subTitle">Totais do Orcamento</h3>
            <div  ion-item >
-                <p>Desconto: </p> 
+                <p>Desconto : </p> 
                 <p>Total   : {{orcamento?.total}}</p>
            </div>
 
@@ -56,8 +55,10 @@
            </div>
 
            <div  *ngIf="orcamento?.situacao == 'APROVADO' ">
-              <h6 text-center style="color: rgb(0, 199, 10)">Este orçamento já foi aprovado!</h6>
+              <h6 text-center style="color: rgb(0, 199, 10);font-size: 14px">Este orçamento já foi aprovado!</h6>
            </div>   
+           <br/>
+           <button *ngIf="orcamento?.situacao == 'APROVADO'"  block  ion-button (click)="showPedido(orcamento.id)">Vizualizar Pedido</button> 
       </div>     
   
   </ion-content>

@@ -28,7 +28,7 @@ export class MyApp {
       { title: 'Categarias', component: 'CategoriasPage' },
       {title: 'Minhas Solicitações',component:'SolicitacaoServicoListPage'},
       {title: 'Meus Orçamentos',component:'OrcamentoListPage'},
-      {title: 'Meus Pedidos',component:' '},
+      {title: 'Meus Pedidos',component:'PedidoListPage'},
       { title: 'Sair', component:''}
     ];
 

@@ -6,13 +6,16 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>Minhas Solicitações</ion-title>
+    <ion-title>Destalhes da Solicitação</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
     <div>
-      <div class="borderEnd">
-        <h2 text-center style="background:#0f8bff;color:white ">Solicitação de Serviço #{{solicitacao?.id}} </h2>
+      <div *ngIf="solicitacao?.statusSolicitacao == 'FECHADA'" class="borderEnd ">
+          <h2 style="background: red;color: #ffffff" text-center>Solicitção #{{solicitacao?.id}} </h2>         
+      </div> 
+      <div *ngIf="solicitacao?.statusSolicitacao == 'ABERTA'" class="borderEnd ">
+          <h2 style="background: rgb(0, 199, 10);color: #ffffff" text-center>Solicitação #{{solicitacao?.id}} </h2>         
       </div> 
       <p class="subTitle">Profissional Solicitado</p>
         <p>{{solicitacao?.profissao.nome}}</p>
@@ -20,10 +23,10 @@
         <p>{{solicitacao?.produtoServico}} </p> 
         <p class="subTitle">Data da Solicitação</p>
         <p> {{dateFormatBr}}</p>
-        <h3  text-center>Detalhes da solicitação</h3>
-        
-        <div ion-item *ngFor="let item of itensSolicitacao;">
-          <h6>{{item?.questions}}</h6> 
+
+        <p  class="subTitle" text-center>Questionário da Solicitação</p>
+        <div ion-item style="margin-top: 10px"  *ngFor="let item of itensSolicitacao;">
+              <p>{{item?.questions}}</p>
               <p>{{item?.descricao}}</p>
           </div>    
     </div>     

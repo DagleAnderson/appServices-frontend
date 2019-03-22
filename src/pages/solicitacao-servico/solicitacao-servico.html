@@ -14,19 +14,19 @@
         <ion-label stacked>Selecione uma categoria*</ion-label>
             <ion-select formControlName="categoria"  (ionChange)="updateProfissoes()">
                 <ion-option *ngFor="let categoria of categorias;first as f" 
-                 [value]="categoria.id" [selected]="f">{{categoria.nome}}</ion-option>
+                 [value]="categoria.id" >{{categoria.nome}}</ion-option>
             </ion-select>
     </ion-item> 
     <ion-item>
           <ion-label stacked>Selecione um profissional*</ion-label>
-          <ion-select formControlName="profissao">
+          <ion-select formControlName="profissao" >
               <ion-option *ngFor="let profissao of profissoes;first as f"
-                [value]="profissao.id"
+                [value]="profissao.id"  
                 >{{profissao.nome}}</ion-option>
           </ion-select>
       </ion-item>
     <ion-item>
-        <ion-label stacked>
+        <ion-label  stacked>
             De qual tipo de produto ou serviço estamos tratando?*
         </ion-label>
             <ion-input formControlName="produtoServico" type="text"></ion-input>
@@ -36,25 +36,25 @@
             Descreva detalhes do produto ou serviço <br/>
             (quantidade, marca, modelo, tamanho)*
         </ion-label>
-            <ion-input formControlName="itemSolicitacao1" type="text"></ion-input>
+            <ion-textarea formControlName="itemSolicitacao1" type="text"></ion-textarea>
     </ion-item>
-        <p class="danger" *ngIf="formGroup.controls.itemSolicitacao1.dirty && formGroup.controls.itemSolicitacao1.errors" margin-left>Valor inválido</p>  
+        <p class="danger" *ngIf="formGroup.controls.itemSolicitacao1.dirty && formGroup.controls.itemSolicitacao1.errors" margin-left style="color:red;font-size: 12px">Valor inválido( minimo 10 e máximo 255 caracteres)</p>  
         <ion-item>   
             <ion-label stacked>
-                Descreva em detalhes o defeitos ou circunstâncias do produto ou serviço.*
+                Descreva em detalhes o defeitos ou circunstâncias <br/> do produto ou serviço.*
             </ion-label>
-                <ion-input formControlName="itemSolicitacao2" type="text"></ion-input>
+                <ion-textarea formControlName="itemSolicitacao2" type="text"></ion-textarea>
         </ion-item>
-            <p class="danger" *ngIf="formGroup.controls.itemSolicitacao2.dirty && formGroup.controls.itemSolicitacao2.errors" margin-left>Valor inválido</p>  
+            <p class="danger" *ngIf="formGroup.controls.itemSolicitacao2.dirty && formGroup.controls.itemSolicitacao2.errors" margin-left style="color:red;font-size: 12px">Valor inválido(minimo 10 e máximo 255 caracteres)</p>  
     
         <ion-item>   
         <ion-label stacked>
-            Descreva detalhes do que deseja que este profissional realize.*
+            Descreva detalhes do que deseja que este<br/> profissional realize.*
         </ion-label>
-            <ion-input formControlName="itemSolicitacao3" type="text"></ion-input>
+            <ion-textarea formControlName="itemSolicitacao3" type="text"></ion-textarea>
     </ion-item>
-        <p class="danger" *ngIf="formGroup.controls.itemSolicitacao3.dirty && formGroup.controls.itemSolicitacao3.errors" margin-left>Valor inválido</p>  
+        <p class="danger" *ngIf="formGroup.controls.itemSolicitacao3.dirty && formGroup.controls.itemSolicitacao3.errors" margin-left style="color:red;font-size: 12px">Valor inválido(minimo 10 e máximo 255 caracteres)</p>  
    </form> 
    <br/>
-   <button ion-button block type="submit"> Solicitar orçamento</button>
+   <button ion-button block type="submit" [disabled]="formGroup.invalid"> Solicitar orçamento</button>
 </ion-content>

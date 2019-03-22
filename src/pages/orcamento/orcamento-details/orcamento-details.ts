@@ -21,6 +21,7 @@ export class OrcamentoDetailsPage {
   orcamento : OrcamentoDTO;
   itensOrcamento : ItensOrcamentoDTO[]; 
   dateFormatBr : string;
+  position:number[];
 
   constructor(
     public navCtrl: NavController, 
@@ -36,7 +37,6 @@ export class OrcamentoDetailsPage {
         this.orcamento=response;
         this.formatDate(this.orcamento);
         this.itensOrcamento = response['itensOrcamento'];
-
        },   
       error =>{})
      
@@ -52,5 +52,9 @@ export class OrcamentoDetailsPage {
 
         this.dateFormatBr = day+"-"+month+"-"+yaer;
         console.log(this.dateFormatBr);   
+  }
+
+  showPedido(orcamento_id:string){
+    
   }
 }
