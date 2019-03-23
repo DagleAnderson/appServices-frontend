@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { PrestadorDTO } from '../../../models/prestador.dto';
 import { PrestadorService } from '../../../services/domain/prestador.service';
@@ -8,6 +8,7 @@ import { CursosDTO } from '../../../models/cursos.dto';
 import { ExperienciasDTO } from '../../../models/experiencias.dto';
 import { AvaliacoesDTO } from '../../../models/avaliacoes.dto';
 import { ClienteDTO } from '../../../models/cliente.dto';
+
 
 /**
  * Generated class for the ProfilePrestadorPage page.
@@ -24,11 +25,14 @@ import { ClienteDTO } from '../../../models/cliente.dto';
 export class ProfilePrestadorPage {
 
   prestador: PrestadorDTO;
+  gatilhoMedia : string[] =[' '];
   curriculo:CurriculoDTO;
   cursos : CursosDTO[];
   experiencias: ExperienciasDTO[];
   cliente:ClienteDTO[];
   avaliacoes: AvaliacoesDTO[];
+  
+  
 
   bucketUrl: string = API_CONFIG.bucktBaseURL;
 
@@ -52,9 +56,10 @@ export class ProfilePrestadorPage {
         this.curriculo = response['curriculo'];
         this.cursos = this.curriculo.cursos;
         this.experiencias = this.curriculo.experiencias;
-        this.avaliacoes = response['avaliacoes'];
         this.prestador = response;
+        this.avaliacoes = response['avaliacoes'];
         this.getImageIfExists();
+ 
     },
     error => {
       if(error.status == 403){

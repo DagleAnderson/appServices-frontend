@@ -16,6 +16,7 @@ export class IonRatingComponent {
   @Input() numStars : number = 5;
   @Input() value : number = 0;
   @Input() read: boolean = false;
+  
 
   @Output() ionClick:EventEmitter<number> = new EventEmitter<number>();
   
@@ -25,7 +26,8 @@ export class IonRatingComponent {
   }
 
   ngAfterViewInit(){
-    setTimeout ( () => this.calc());
+    setInterval (() => this.calc());
+
   }
 
   calc(){
@@ -44,8 +46,8 @@ export class IonRatingComponent {
 
   starCliked(index){
     if(!this.read){
-      console.log(index);
       this.value = index + 1;
+      console.log(this.value);
       this.ionClick.emit(this.value);
       this.calc();
     }

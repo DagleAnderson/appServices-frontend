@@ -7,4 +7,5 @@ export interface AvaliacoesDTO{
     prestador:PrestadorDTO;
     estrelas:number;
     comentario:string;
+
 }

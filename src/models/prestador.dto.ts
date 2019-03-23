@@ -15,4 +15,6 @@ export interface PrestadorDTO{
     imageUrl?:string;
 
     curriculo:CurriculoDTO;
+
+    mediaDeAvaliacao:number;
 }
