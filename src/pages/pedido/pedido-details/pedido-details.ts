@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { PedidoService } from '../../../services/domain/pedido.service';
 import { PedidoDTO } from '../../../models/pedido.dto';
 import { ItensPedidoDTO } from '../../../models/ItensPedido.dto';
+import { PrestadorService } from '../../../services/domain/prestador.service';
+import { API_CONFIG } from '../../../config/api.config';
 
 /**
  * Generated class for the PedidoDetailsPage page.
@@ -25,7 +27,8 @@ export class PedidoDetailsPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public pedidoService:PedidoService) {
+    public pedidoService:PedidoService,
+    public prestadorService:PrestadorService) {
   }
 
   ionViewDidLoad() {
@@ -36,10 +39,19 @@ export class PedidoDetailsPage {
         this.pedido=response;
         this.formatDate(this.pedido);
         this.itensPedido = response['itensPedido'];
+        this.getImageIfExists();
 
        },   
       error =>{})
      
+  }
+
+  getImageIfExists(){
+    this.prestadorService.getImageFromBucket(this.pedido.prestador.id)
+      .subscribe(response =>{
+        this.pedido.prestador.imageUrl = `${API_CONFIG.bucktBaseURL}/cp${this.pedido.prestador.id}.jpg`;
+      },
+    error=>{})
   }
 
   formatDate(obj:PedidoDTO){

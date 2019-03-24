@@ -18,14 +18,22 @@
         <div *ngIf="pedido?.statusPagamento == 'FECHADO'" class="borderEnd ">
             <h2 style="background: rgb(0, 199, 10);color: #ffffff" text-center>Pedido #{{pedido?.id}} </h2>         
         </div> 
-          <p class="subTitle">Prestador</p>       
-          <p>{{pedido?.prestador.nomeFantasia}}</p>
-          <p class="subTitle">Produto / Serviço </p> 
+
+        <div>
+            <profile-prestador 
+            [prestador_id]= pedido?.prestador.id 
+            [prestador_nomeFantasia] = pedido?.prestador.nomeFantasia
+            [prestador_slogan] = pedido?.prestador.slogan
+            [prestador_img] ="pedido?.prestador.imageUrl || 'assets/imgs/avatar-blank.png'"
+            ></profile-prestador>
+        </div>     
+        
+           <p class="subTitle">Produto / Serviço </p> 
           <p>{{pedido?.produtoServico}}</p>
           <p class="subTitle">Data do orçamento</p>
           <p> {{dateFormatBr}}</p> 
           <h3 text-center  class="subTitle" >Itens do Pedido</h3>
-          <div *ngFor="let itemOrcamento of itensOrcamento;">  
+          <div *ngFor="let itemPedido of itensPedido;">  
               <h6>{{pedido?.item}}</h6>
               <div ion-item>
                   <p>#{{itemPedido?.id}}</p>

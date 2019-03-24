@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { OrcamentoDTO } from '../../../models/orcamento.dto';
 import { OrcamentoService } from '../../../services/domain/orcamento.service';
 import { ItensOrcamentoDTO } from '../../../models/ItensOrcamento.dto';
+import { PrestadorService } from '../../../services/domain/prestador.service';
+import { API_CONFIG } from '../../../config/api.config';
 
 /**
  * Generated class for the OrcamentoDetailsPage page.
@@ -26,7 +28,8 @@ export class OrcamentoDetailsPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public orcamentoService:OrcamentoService) {
+    public orcamentoService:OrcamentoService,
+    public prestadorService:PrestadorService) {
   }
 
   ionViewDidLoad() {
@@ -37,9 +40,18 @@ export class OrcamentoDetailsPage {
         this.orcamento=response;
         this.formatDate(this.orcamento);
         this.itensOrcamento = response['itensOrcamento'];
+        this.getImageIfExists();
        },   
       error =>{})
      
+  }
+
+  getImageIfExists(){
+    this.prestadorService.getImageFromBucket(this.orcamento.prestador.id)
+      .subscribe(response =>{
+        this.orcamento.prestador.imageUrl = `${API_CONFIG.bucktBaseURL}/cp${this.orcamento.prestador.id}.jpg`;
+      },
+    error=>{})
   }
 
   formatDate(obj:OrcamentoDTO){
@@ -57,4 +69,5 @@ export class OrcamentoDetailsPage {
   showPedido(orcamento_id:string){
     
   }
+
 }
