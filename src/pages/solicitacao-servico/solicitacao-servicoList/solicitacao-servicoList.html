@@ -9,9 +9,16 @@
   </ion-header>
   
   <ion-content padding>
-    <br/>    
+    <br/>  
+    <ion-item style="margin-bottom: 30px">
+        <ion-label stacked> Filtro de vizualiação : </ion-label>
+        <ion-select>
+            <ion-option  [selected]=true>Todas</ion-option>
+            <ion-option  >Abertas</ion-option>
+            <ion-option  >Fechadas</ion-option>
+        </ion-select>
+    </ion-item>  
     
-    <ion-searchbar placeholder=" qual a profissão solicitada?"></ion-searchbar>    
    <ion-grid>
       <ion-row text-center  *ngFor="let item of solicitacoes ;">  
             <button ion-item  (click)="showSolicitacao(item.id)">   
