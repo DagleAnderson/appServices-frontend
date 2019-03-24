@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { PrestadorDTO } from '../../models/prestador.dto';
 import { PrestadorService } from '../../services/domain/prestador.service';
 import { API_CONFIG } from '../../config/api.config';
+import { AvaliacoesDTO } from '../../models/avaliacoes.dto';
 /**
  * Generated class for the PrestadorPage page.
  *
@@ -18,6 +19,7 @@ import { API_CONFIG } from '../../config/api.config';
 export class PrestadorPage {
   
   prestadores:PrestadorDTO[];
+  avaliacoes: AvaliacoesDTO[];
   bucketUrl: string = API_CONFIG.bucktBaseURL;
 
   constructor(public navCtrl: NavController, 
@@ -33,7 +35,7 @@ export class PrestadorPage {
        },
       error =>{})
   }
-
+  
   showProfilePrestador(prestador_id:string){
     this.navCtrl.push('ProfilePrestadorPage',{prestador_id:prestador_id})
   }

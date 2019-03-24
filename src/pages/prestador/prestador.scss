@@ -2,4 +2,22 @@ page-prestador {
   .img-circle{
       border-radius: 50%;
   }
+  ion-rating{
+    font-size: 12px;
+    float: left;
+  }
+
+  .title-rating{
+    border:3px solid;
+    border-color: transparent;
+}
+
+  .area-void{
+    height: 30px; 
+    overflow: hidden;
+    white-space: normal; 
+    display: block;
+    border-color: transparent;
+
+}
 }

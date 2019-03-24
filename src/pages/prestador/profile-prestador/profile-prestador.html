@@ -8,11 +8,15 @@
   </ion-header>
   <ion-content>
         <div>
-            <ion-avatar>  
-                <img class="circle" [src]="prestador?.imageUrl || 'assets/imgs/avatar-blank.png'"> 
-                <h2 text-center>{{prestador?.nomeFantasia}}</h2>
-                <p text-center>{{prestador?.slogan}}</p>
-            </ion-avatar>
+            
+            <profile-prestador 
+            [prestador_id]= prestador?.id 
+            [prestador_nomeFantasia] = prestador?.nomeFantasia
+            [prestador_slogan] = prestador?.slogan
+            [prestador_img] = "prestador?.imageUrl || 'assets/imgs/avatar-blank.png'"
+            ></profile-prestador>
+
+        
             <div>
                     <button ion-button block clear>Solicitar orçamento</button>
                     <ion-rating  [read]=true [value]=prestador?.mediaDeAvaliacao> </ion-rating>
@@ -82,7 +86,7 @@
                                             <h2>{{avaliacao?.cliente.nome}}&nbsp;{{avaliacao?.cliente.sobrenome}}</h2>
                                         </div> 
                                         <div  class="title-rating">
-                                            <ion-rating [read]=true [value]=avaliacao?.estrelas></ion-rating>
+                                              <ion-rating [read]=true [value]=avaliacao?.estrelas></ion-rating>
                                             <p  class="area-void"></p>
                                         </div>  
 

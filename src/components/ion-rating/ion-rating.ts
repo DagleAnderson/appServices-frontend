@@ -1,5 +1,5 @@
 import { Component,Input,Output,EventEmitter } from '@angular/core';
-import { calcBindingFlags } from '@angular/core/src/view/util';
+
 
 /**
  * Generated class for the IonRatingComponent component.
