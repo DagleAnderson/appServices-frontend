@@ -28,7 +28,7 @@
               
               <p>Produto / Serviço : {{orcamento.produtoServico}} </p>
               <p>Prestador : {{orcamento.prestador}}</p>
-              <p>Total : {{orcamento.total}}</p>
+              <p>Total : {{orcamento.total  | currency}}</p>
               <p *ngIf="orcamento.situacao == 'APROVADO'">
                 Status : <b style="color:rgb(0, 199, 10)">{{orcamento.situacao}}</b></p>
               <p *ngIf="orcamento.situacao != 'APROVADO'  && orcamento.situacao != 'ANALISE'">

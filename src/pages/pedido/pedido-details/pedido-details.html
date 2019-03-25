@@ -38,16 +38,16 @@
               <div ion-item>
                   <p>#{{itemPedido?.id}}</p>
                   <p>Quantidade : {{itemPedido?.quantidade}}</p>
-                  <p>Desconto : {{itemPedido?.desconto}}</p>
-                  <p>Valor : {{itemPedido?.valor}}</p>
-                  <p>sub-Total : {{itemPedido?.subTotal}}</p>
+                  <p>Desconto : {{itemPedido?.desconto| currency}}</p>
+                  <p>Valor : {{itemPedido?.valor| currency}}</p>
+                  <p>sub-Total : {{itemPedido?.subTotal| currency}}</p>
               </div> 
            </div>   
-           <p style="font-weight: bold">Desconto geral no pedido : {{pedido?.desconto}}</p> 
+           <p style="font-weight: bold">Desconto geral no pedido : {{pedido?.desconto| currency}}</p> 
            <h3 text-center class="subTitle">Totais do Pedido</h3>
            <div  ion-item >
                 <p>Desconto: </p> 
-                <p>Total   : {{pedido?.total}}</p>
+                <p>Total   : {{pedido?.total| currency}}</p>
            </div>
 
            <div *ngIf="pedido?.statusPagamento != 'FECHADO'">

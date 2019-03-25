@@ -20,6 +20,6 @@ export class ProfissaoService{
     }
 
     findById(profissao_id:string):Observable<ProfissaoDTO>{
-        return this.http.get<ProfissaoDTO>(`${API_CONFIG.baseUrl}/${profissao_id}`)
+        return this.http.get<ProfissaoDTO>(`${API_CONFIG.baseUrl}/profissao/${profissao_id}`)
     }
 }

@@ -3,12 +3,11 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { FormGroup, FormBuilder,Validators } from '../../../node_modules/@angular/forms';
 import { ProfissaoService } from '../../services/domain/profissao.service';
 import { ProfissaoDTO } from '../../models/profissao.dto';
-import { SolicitacaoServicoService } from '../../services/domain/solicitacaoServico.service';
 import { ClienteService } from '../../services/domain/cliente.service';
 import { StorageService } from '../../services/storage.service';
-import { ClienteDTO } from '../../models/cliente.dto';
 import { CategoriaService } from '../../services/domain/categoria.service';
 import { CategoriaDTO } from '../../models/categoria.dto';
+import { SolicitacaoServicoDTO } from '../../models/solicitacaoServico.dto';
 
 /**
  * Generated class for the SolicitacaoServicoPage page.
@@ -27,15 +26,14 @@ export class SolicitacaoServicoPage {
   categorias:CategoriaDTO[];
   profissoes : ProfissaoDTO[];
 
-  cliente : ClienteDTO;
-  profissao:ProfissaoDTO;
+
+  solicitacao : SolicitacaoServicoDTO;
 
   constructor(
     public navCtrl: NavController,
      public navParams: NavParams,
      public formBuider:FormBuilder,
      public profissaoService:ProfissaoService,
-     public solicitacaoService:SolicitacaoServicoService,
      public clienteService : ClienteService,
      public storage :StorageService,
      public categoriaService:CategoriaService,
@@ -45,71 +43,15 @@ export class SolicitacaoServicoPage {
       cliente :['',Validators],
       categoria:['',Validators.required],
       profissao:['',Validators.required],
-      produtoServico:['',[Validators.required,Validators.minLength(5),Validators.maxLength(120)]],
-      itemSolicitacao1:['',[Validators.required,Validators.minLength(10),Validators.maxLength(255)]],
-      itemSolicitacao2:['',[Validators.required,Validators.minLength(10),Validators.maxLength(255)]],
-      itemSolicitacao3:['',[Validators.required,Validators.minLength(10),Validators.maxLength(255)]]
+      produtoServico:['aaaaaaaaaaaaaaaaaaaaaaaaaaa',[Validators.required,Validators.minLength(5),Validators.maxLength(50)]],
+      itemSolicitacao1:['aaaaaaaaaaaaaaaaaaaaaaaaaaa',[Validators.required,Validators.minLength(10),Validators.maxLength(255)]],
+      itemSolicitacao2:['aaaaaaaaaaaaaaaaaaaaaaa',[Validators.required,Validators.minLength(10),Validators.maxLength(255)]],
+      itemSolicitacao3:['aaaaaaaaaaaaaaaaaaaaaaaaa',[Validators.required,Validators.minLength(10),Validators.maxLength(255)]]
     });
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SolicitacaoServicoPage');
     this.showCategorias();
-  }
-
-  requestOrcamento(profissao:string){
-    let localUser = this.storage.getLocalUser();
-    if(localUser &&  localUser.email){
-      this.clienteService.findByEmail(localUser.email)
-        .subscribe(response=>{
-          this.cliente = response;
-             this.formGroup = this.formBuider.group({
-                cliente:[this.cliente.id,Validators.required]
-              })     
-      }, error => {
-        if(error.status == 403){
-          this.navCtrl.setRoot("HomePage");
-        }
-      })
-
-      this.profissaoService.findById(profissao)
-      .subscribe(response=>{
-            this.profissao = response;
-              this.formGroup = this.formBuider.group({
-                profissao:[this.profissao.id,Validators.required]
-              })      
-      },erro=>{})  
-     
-      this.formGroup.value.cliente = this.cliente.id;
-      this.formGroup.value.profissao = this.profissao.id;
-      
-     
-      this.solicitacaoService.insert(this.formGroup.value)
-        .subscribe(response=>{
-          console.log(this.formGroup.value);
-             this.showInsertOk();
-      },erro=>{});
-
-    }else{
-      this.navCtrl.setRoot("HomePage");
-    }
-  }
-
-  showInsertOk(){
-    let alert = this.alertCtrl.create({
-      title:'Sucesso!',
-      message:"Pronto sua solicitação foi enviada.Agora é so aguardar os orçamentos!",
-      enableBackdropDismiss:false,
-      buttons:[
-          {
-            text:'ok',
-            handler:()=>{
-                this.navCtrl.pop();
-            }
-          }
-      ]
-    })
-    alert.present();
   }
 
   showCategorias(){
@@ -131,5 +73,14 @@ export class SolicitacaoServicoPage {
       },
       erro=>{})
   }
+
+  showConfirmation(){
+    this.solicitacao = this.formGroup.value;
+    console.log(this.formGroup.value.profissao);
+    let profissao_id = this.formGroup.value.profissao;
+    this.navCtrl.push('ConfirmationSolicitacaoPage',{
+      solicitacao:this.solicitacao,profissao_id:profissao_id})
+  }
+  
   
 }

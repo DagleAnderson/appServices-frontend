@@ -13,14 +13,12 @@ export class SolicitacaoServicoService{
 
     insert(obj: SolicitacaoServicoDTO){
         return this.http.post(
-            `${API_CONFIG.baseUrl}/solicitacao?cliente=`+obj.cliente.id+"&profissao="+obj.profissao.id,
+            `${API_CONFIG.baseUrl}/solicitacao?cliente=`+obj.cliente+"&profissao="+obj.profissao,
             obj,
             {
                 observe:'response',
                 responseType:'text'
-            },
-
-            
+            },            
         )
     }
 

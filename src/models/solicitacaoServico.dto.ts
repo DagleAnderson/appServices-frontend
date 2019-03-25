@@ -1,17 +1,13 @@
-import { ClienteDTO } from "./cliente.dto";
-import { PrestadorDTO } from "./prestador.dto";
 import { ItensSolicitacaoServicoDTO } from "./ItensSolicitacaoServico.dto";
-import { OrcamentoDTO } from "./orcamento.dto";
-import { ProfissaoDTO } from "./profissao.dto";
 
 export interface SolicitacaoServicoDTO{
     id:string;
     produtoServico:string;
-    data:Date;
-    itensSolicitacaoServico:ItensSolicitacaoServicoDTO[];
-    profissao:ProfissaoDTO;
-    cliente:ClienteDTO;
-    prestador:PrestadorDTO;
-    orcamento:OrcamentoDTO;
+    data:string;
+    itemSolicitacao1:ItensSolicitacaoServicoDTO;
+    itemSolicitacao2:ItensSolicitacaoServicoDTO;
+    itemSolicitacao3:ItensSolicitacaoServicoDTO;
+    profissao:string;
+    cliente:string;
     statusSolicitacao:string;
 }

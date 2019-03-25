@@ -4,12 +4,12 @@
         <button  ion-button menuToggle>
                 <ion-icon name="menu"></ion-icon>
         </button> 
-    <ion-title>solicitacao de Serviço</ion-title>
+    <ion-title>solicitação de Serviço</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-   <form  [formGroup]="formGroup" (ngSubmit)="requestOrcamento(profissao.id);$event.preventDefault()">
+   <form  [formGroup]="formGroup">
     <ion-item>
         <ion-label stacked>Selecione uma categoria*</ion-label>
             <ion-select formControlName="categoria"  (ionChange)="updateProfissoes()">
@@ -56,5 +56,5 @@
         <p class="danger" *ngIf="formGroup.controls.itemSolicitacao3.dirty && formGroup.controls.itemSolicitacao3.errors" margin-left style="color:red;font-size: 12px">Valor inválido(minimo 10 e máximo 255 caracteres)</p>  
    </form> 
    <br/>
-   <button ion-button block type="submit" [disabled]="formGroup.invalid"> Solicitar orçamento</button>
+   <button ion-button block type="submit" [disabled]="formGroup.invalid" (click)="showConfirmation()">próximo</button>
 </ion-content>

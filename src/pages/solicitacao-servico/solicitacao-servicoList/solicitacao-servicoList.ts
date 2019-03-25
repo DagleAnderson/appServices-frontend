@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { SolicitacaoServicoDTO } from '../../../models/solicitacaoServico.dto';
 import { SolicitacaoServicoService } from '../../../services/domain/solicitacaoServico.service';
 

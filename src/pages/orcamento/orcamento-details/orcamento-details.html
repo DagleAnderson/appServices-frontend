@@ -37,16 +37,16 @@
               <h6>{{itemOrcamento?.item}}</h6>
               <div ion-item>
                   <p>Quantidade : {{itemOrcamento?.quantidade}}</p>
-                  <p>Desconto : {{itemOrcamento?.desconto}}</p>
-                  <p>Valor : {{itemOrcamento?.valor}}</p>
-                  <p>sub-Total : {{itemOrcamento?.subTotal}}</p>
+                  <p>Desconto : {{itemOrcamento?.desconto  | currency}}</p>
+                  <p>Valor : {{itemOrcamento?.valor | currency}}</p>
+                  <p>sub-Total : {{itemOrcamento?.subTotal | currency}}</p>
               </div> 
            </div>   
-           <p style="font-weight: bold">Desconto geral no orcamento : {{orcamento?.desconto}}</p> 
+           <p style="font-weight: bold">Desconto geral no orcamento : {{orcamento?.desconto  | currency}}</p> 
            <h3 text-center class="subTitle">Totais do Orcamento</h3>
            <div  ion-item >
                 <p>Desconto : </p> 
-                <p>Total   : {{orcamento?.total}}</p>
+                <p>Total   : {{orcamento?.total  | currency}}</p>
            </div>
 
            <div *ngIf="orcamento?.situacao == 'PENDENTE'" ion-item>

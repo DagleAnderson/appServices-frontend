@@ -31,7 +31,7 @@
                 
                 <p>Prestador : {{pedido.prestador}}</p>
                 <p>Produto / Serviço : {{pedido.produtoServico}} </p>
-                <p>Total : {{pedido.total}}</p>
+                <p>Total : {{pedido.total | currency}}</p>
                 <p *ngIf="pedido.situacao == 'FECHADO'">
                   Status :<b style="color:rgb(0, 199, 10)">{{pedido.statusPagamento}}</b></p>
                 <p *ngIf="pedido.statusPagamento!= 'FECHADO'">
