@@ -34,9 +34,8 @@
           <p> {{dateFormatBr}}</p> 
           <h3 text-center  class="subTitle" >Itens do Pedido</h3>
           <div *ngFor="let itemPedido of itensPedido;">  
-              <h6>{{pedido?.item}}</h6>
+              <h6>{{itemPedido?.item}}</h6>
               <div ion-item>
-                  <p>#{{itemPedido?.id}}</p>
                   <p>Quantidade : {{itemPedido?.quantidade}}</p>
                   <p>Desconto : {{itemPedido?.desconto| currency}}</p>
                   <p>Valor : {{itemPedido?.valor| currency}}</p>

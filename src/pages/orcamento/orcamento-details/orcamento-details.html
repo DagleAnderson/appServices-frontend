@@ -19,19 +19,22 @@
         </div> 
         <div *ngIf="orcamento?.situacao == 'ANALISE'" class="borderEnd ">
             <h2 style="background: rgb(170, 146, 7);color: #ffffff" text-center>Orcamento #{{orcamento?.id}} </h2>         
-        </div> 
-          <div>
-          <profile-prestador 
-          [prestador_id]= orcamento?.prestador.id 
-          [prestador_nomeFantasia] = orcamento?.prestador.nomeFantasia
-          [prestador_slogan] = orcamento?.prestador.slogan
-          [prestador_img] ="orcamento?.prestador.imageUrl || 'assets/imgs/avatar-blank.png'"
-          ></profile-prestador>
-          </div>
+        </div>
+        <button class="buttonPrestador" (click)="viewPerfilPrestador(orcamento?.prestador.id)"> 
+            <div>
+            <profile-prestador 
+            [prestador_id]= orcamento?.prestador.id 
+            [prestador_nomeFantasia] = orcamento?.prestador.nomeFantasia
+            [prestador_slogan] = orcamento?.prestador.slogan
+            [prestador_img] ="orcamento?.prestador.imageUrl || 'assets/imgs/avatar-blank.png'"
+            ></profile-prestador>
+            <h4 style="color:#0f8bff">Visitar Perfil</h4>
+            </div>
+        </button >    
           <p class="subTitle">Produto / Serviço </p> 
           <p>{{orcamento?.produtoServico}}</p>
           <p class="subTitle">Data do orçamento</p>
-          <p> {{dateFormatBr}}</p> 
+          <p> {{orcamento?.data}}</p> 
           <h3 text-center  class="subTitle" >Itens do Orçamento</h3>
           <div *ngFor="let itemOrcamento of itensOrcamento;">  
               <h6>{{itemOrcamento?.item}}</h6>

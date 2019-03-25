@@ -33,13 +33,12 @@ export class SolicitacaoServicoDetailsPage {
       .subscribe(response =>{
         this.solicitacao=response;
         this.itensSolicitacao = response['itemServico'];
-        this.formatDate(this.solicitacao)
         this.questionsList();
        },   
       error =>{})
   }
 
-  formatDate(obj:SolicitacaoServicoDTO){
+  /** formatDate(obj:SolicitacaoServicoDTO){
     let dateRead;
 
         dateRead = obj.data.toString();
@@ -49,7 +48,7 @@ export class SolicitacaoServicoDetailsPage {
 
         this.dateFormatBr = day+"-"+month+"-"+yaer;
         console.log(this.dateFormatBr);   
-  }
+  }*/
 
   questionsList(){
       this.itensSolicitacao[0].questions ="Detalhes do produto ou serviço:" ;

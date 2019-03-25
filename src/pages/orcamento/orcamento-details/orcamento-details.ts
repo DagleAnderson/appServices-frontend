@@ -38,7 +38,6 @@ export class OrcamentoDetailsPage {
     this.orcamentoService.findById(orcamento_id)
       .subscribe(response =>{
         this.orcamento=response;
-        this.formatDate(this.orcamento);
         this.itensOrcamento = response['itensOrcamento'];
         this.getImageIfExists();
        },   
@@ -54,7 +53,7 @@ export class OrcamentoDetailsPage {
     error=>{})
   }
 
-  formatDate(obj:OrcamentoDTO){
+ /**  formatDate(obj:OrcamentoDTO){
     let dateRead;
 
         dateRead = obj.data.toString();
@@ -64,10 +63,11 @@ export class OrcamentoDetailsPage {
 
         this.dateFormatBr = day+"-"+month+"-"+yaer;
         console.log(this.dateFormatBr);   
-  }
+  }*/
 
-  showPedido(orcamento_id:string){
-    
+  viewPerfilPrestador(prestador_id:number){
+    this.navCtrl.push('ProfilePrestadorPage',{prestador_id:prestador_id})
   }
+  
 
 }
