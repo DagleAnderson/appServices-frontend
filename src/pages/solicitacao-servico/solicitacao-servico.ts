@@ -43,9 +43,9 @@ export class SolicitacaoServicoPage {
       cliente :['',Validators],
       categoria:['',Validators.required],
       profissao:['',Validators.required],
-      produtoServico:['aaaaaaaaaaaaaaaaaaaaaaaaaaa',[Validators.required,Validators.minLength(5),Validators.maxLength(50)]],
-      itemSolicitacao1:['aaaaaaaaaaaaaaaaaaaaaaaaaaa',[Validators.required,Validators.minLength(10),Validators.maxLength(255)]],
-      itemSolicitacao2:['aaaaaaaaaaaaaaaaaaaaaaa',[Validators.required,Validators.minLength(10),Validators.maxLength(255)]],
+      produtoServico:['apartamento',[Validators.required,Validators.minLength(5),Validators.maxLength(50)]],
+      itemSolicitacao1:['aaaaaaaaaaaaaaaaaaaaaaaaa',[Validators.required,Validators.minLength(10),Validators.maxLength(255)]],
+      itemSolicitacao2:['aaaaaaaaaaaaaaaaaaaaaaaaa',[Validators.required,Validators.minLength(10),Validators.maxLength(255)]],
       itemSolicitacao3:['aaaaaaaaaaaaaaaaaaaaaaaaa',[Validators.required,Validators.minLength(10),Validators.maxLength(255)]]
     });
   }

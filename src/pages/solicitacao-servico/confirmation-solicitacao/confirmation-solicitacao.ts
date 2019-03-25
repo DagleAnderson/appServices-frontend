@@ -29,6 +29,8 @@ export class ConfirmationSolicitacaoPage {
   itensSolicitacao:ItensSolicitacaoServicoDTO[];
   cliente : ClienteDTO;
   profissao:ProfissaoDTO;
+  
+  confirmation:string;
 
   constructor(
     public navCtrl: NavController,
@@ -92,30 +94,17 @@ export class ConfirmationSolicitacaoPage {
     var data = new Date();
     console.log("data:"+data.getDate()+"/"+"0"+(data.getMonth()+1) +"/"+data.getFullYear())
       this.solicitacaoService.insert(this.solicitacao) 
-      .subscribe(respone =>{
-        console.log(respone.headers.get('location'))
+      .subscribe(response =>{
+        this.confirmation = response.headers.get('location');
       },error =>{
         if (error.status == 403){
           this.navCtrl.setRoot("HomePage");
         }
       });    
    }
+
+   setCategoriasPage(){
+    this.navCtrl.setRoot("CategoriasPage");
+   }
  
-  showInsertOk(){
-    let alert = this.alertCtrl.create({
-      title:'Sucesso!',
-      message:"Pronto, sua solicitação foi enviada.Aguarde seus orçamentos!",
-      enableBackdropDismiss:false,
-      buttons:[
-          {
-            text:'ok',
-            handler:()=>{
-                this.navCtrl.pop();
-            }
-          }
-      ]
-    })
-    alert.present();
-  }
-  
 }
