@@ -20,6 +20,7 @@ export class SolicitacaoServicoDetailsPage {
   solicitacao : SolicitacaoServicoDTO;
   itensSolicitacao : ItensSolicitacaoServicoDTO[]; 
   dateFormatBr : string;
+  viewPrestador : boolean = this.navParams.get("viewPrestador");
 
   constructor(
     public navCtrl: NavController, 

@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { SolicitacaoServicoDTO } from '../../../models/solicitacaoServico.dto';
-import { SolicitacaoServicoService } from '../../../services/domain/solicitacaoServico.service';
-import { ClienteService } from '../../../services/domain/cliente.service';
-import { StorageService } from '../../../services/storage.service';
-import { ClienteDTO } from '../../../models/cliente.dto';
-import { refDTO } from '../../../models/ref.dto';
+import { SolicitacaoServicoDTO } from '../../../../models/solicitacaoServico.dto';
+import { SolicitacaoServicoService } from '../../../../services/domain/solicitacaoServico.service';
+import { ClienteService } from '../../../../services/domain/cliente.service';
+import { StorageService } from '../../../../services/storage.service';
+import { refDTO } from '../../../../models/ref.dto';
+import { ClienteDTO } from '../../../../models/cliente.dto';
 
 /**
- * Generated class for the SolicitacaoServicoPage page.
+ * Generated class for the SolicitacaoReceivedPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -16,14 +16,14 @@ import { refDTO } from '../../../models/ref.dto';
 
 @IonicPage()
 @Component({
-  selector: 'page-solicitacao-servico',
-  templateUrl: 'solicitacao-servicoList.html',
+  selector: 'page-solicitacao-received',
+  templateUrl: 'solicitacao-received.html',
 })
-export class SolicitacaoServicoListPage {
-
+export class SolicitacaoReceivedPage {
   solicitacoes : SolicitacaoServicoDTO[];
-  cliente : refDTO;
-  userId:string;
+  idUser : refDTO;
+  prestador:refDTO;
+  profissao:refDTO;
 
   constructor(
      public navCtrl: NavController,
@@ -35,22 +35,18 @@ export class SolicitacaoServicoListPage {
   }
 
   ionViewDidLoad() {
-    this.getUser();
-   
-  }
-  getUser(){
     let localUser = this.storage.getLocalUser();
         if(localUser &&  localUser.email){
             this.clienteService.findByEmail(localUser.email)
               .subscribe(response =>{
-                  this.cliente={id:response["id"]};
-                  console.log(this.cliente);
+                  this.idUser ={id:response["id"]};
+                  this.prestador =response["prestador"];
 
-                   this.servicoService.findAllByCliente(this.cliente.id)
+                  this.servicoService.findAllByProfissao(this.prestador.id)
                   .subscribe(response =>{
-                  this.solicitacoes = response ["content"];
-              },
-               error => {});  
+                       this.solicitacoes = response ["content"];
+                   },
+                  error => {});
               },
               
               error => {
@@ -66,16 +62,13 @@ export class SolicitacaoServicoListPage {
         }     
   }
 
-  SolicitacaoList(cliente:ClienteDTO){
-    
-  }
-
   showSolicitacao(solicitacao_id:string){
-    this.navCtrl.push('SolicitacaoServicoDetailsPage',{solicitacao_id:solicitacao_id})
+    let viewPrestador =true;
+    this.navCtrl.push('SolicitacaoServicoDetailsPage',{solicitacao_id:solicitacao_id,viewPrestador})
   }
 
   showListOrcamentos(solicitacaoId:string){
     this.navCtrl.push('OrcamentoListSsPage',{solicitacaoId:solicitacaoId})
   }
-  
+
 }

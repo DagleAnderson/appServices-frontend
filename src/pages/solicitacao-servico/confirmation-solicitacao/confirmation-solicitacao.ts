@@ -68,7 +68,7 @@ export class ConfirmationSolicitacaoPage {
                      itemSolicitacao1:solicitacaoParam.itemSolicitacao1,
                      itemSolicitacao2:solicitacaoParam.itemSolicitacao2,
                      itemSolicitacao3:solicitacaoParam.itemSolicitacao3,
-                     profissao:this.profissao.id,
+                     profissao:solicitacaoParam.profissao,
                      statusSolicitacao:"1"
                     }; 
               },

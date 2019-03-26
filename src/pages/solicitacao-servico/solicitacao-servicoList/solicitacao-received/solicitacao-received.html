@@ -1,0 +1,41 @@
+
+<ion-header>
+    <ion-navbar>
+          <button  ion-button menuToggle>
+                  <ion-icon name="menu"></ion-icon>
+          </button> 
+      <ion-title >Solicitações Recebidas</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding>
+    <br/>  
+    <ion-item style="margin-bottom: 30px">
+        <ion-label stacked> Filtro de vizualiação : </ion-label>
+        <ion-select>
+            <ion-option  [selected]=true>Todas</ion-option>
+            <ion-option  >Abertas</ion-option>
+            <ion-option  >Fechadas</ion-option>
+        </ion-select>
+      
+    </ion-item>  
+    
+   <ion-grid>
+      <ion-row text-center  *ngFor="let solicitacao of solicitacoes ;">  
+            <button ion-item  (click)="showSolicitacao(solicitacao.id)">   
+              <h1 style="margin-bottom:10px">Solicitação #{{solicitacao.id}}</h1>
+              <p>Produto / Serviço : {{solicitacao.produtoServico}} </p>
+              <p>Cliente : {{solicitacao.cliente}}</p>
+              <p *ngIf="solicitacao.statusSolicitacao == 'ABERTA'">
+                  Status:<b style="color:rgb(0, 199, 10)">{{solicitacao.statusSolicitacao}}</b></p>
+              <p *ngIf="solicitacao.statusSolicitacao == 'FECHADA'">
+                  Status:<b style="color:red">{{solicitacao.statusSolicitacao}}</b></p> 
+              <p style="font-weight: bold" text-center>...</p>
+              <p style="float:right;color: blue"> ver detalhes</p>        
+          </button> 
+          <button *ngIf="solicitacao.statusSolicitacao == 'ABERTA'"  block  ion-button (click)="showListOrcamentos(solicitacao.id)">Ver Orçamentos!</button> 
+      </ion-row>
+          
+   </ion-grid>   
+  </ion-content>
+  

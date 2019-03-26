@@ -21,7 +21,6 @@ export class SolicitacaoServicoService{
             },            
         )
     }
-
     
     findById(solicitacao_id:string):Observable<SolicitacaoServicoDTO>{
         return this.http.get<SolicitacaoServicoDTO>(`${API_CONFIG.baseUrl}/solicitacao/${solicitacao_id}`)    
@@ -31,6 +30,14 @@ export class SolicitacaoServicoService{
         return this.http.get<SolicitacaoServicoDTO[]>(`${API_CONFIG.baseUrl}/solicitacao`);
     }
 
+
+    findAllByCliente(cliente_id:string): Observable<SolicitacaoServicoDTO[]>{
+        return this.http.get<SolicitacaoServicoDTO[]>(`${API_CONFIG.baseUrl}/solicitacao/listCliente?cliente=${cliente_id}`);
+    }
+
+    findAllByProfissao(profissao_id:string): Observable<SolicitacaoServicoDTO[]>{
+        return this.http.get<SolicitacaoServicoDTO[]>(`${API_CONFIG.baseUrl}/solicitacao/listProfissao?profissao=${profissao_id}`);
+    }
 
 
 }
