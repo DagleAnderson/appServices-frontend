@@ -31,6 +31,9 @@ export class ProfileClientComponent {
 
   }
 
+  ngAfterViewInit(){
+}
+
   getImageIfExists(){
     this.clienteService.getImageFromBucket(this.cliente.id)
       .subscribe(response =>{

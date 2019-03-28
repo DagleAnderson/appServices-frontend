@@ -47,7 +47,6 @@ export class ConfirmationSolicitacaoPage {
 
   ionViewDidLoad() {
     this.catSelected = this.navParams.get('catSelected');
-    console.log("passado:"+this.catSelected)
     let solicitacaoParam = this.navParams.get('solicitacao'); 
       let profissao_id= this.navParams.get('profissao_id');
       this.profissaoService.findById(profissao_id)
@@ -65,7 +64,7 @@ export class ConfirmationSolicitacaoPage {
                      id:null,
                      produtoServico:solicitacaoParam.produtoServico,
                      data:this.getDate(),
-                     cliente:response.id,
+                     cliente:{id:response['id']},
                      itemSolicitacao1:solicitacaoParam.itemSolicitacao1,
                      itemSolicitacao2:solicitacaoParam.itemSolicitacao2,
                      itemSolicitacao3:solicitacaoParam.itemSolicitacao3,
@@ -77,6 +76,8 @@ export class ConfirmationSolicitacaoPage {
                      profissao:solicitacaoParam.profissao,
                      statusSolicitacao:"1"
                     }; 
+
+                    console.log(this.solicitacao);
               },
               error => {
                 if(error.status == 403){

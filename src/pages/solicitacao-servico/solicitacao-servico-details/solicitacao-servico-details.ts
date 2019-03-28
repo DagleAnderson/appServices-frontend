@@ -6,6 +6,10 @@ import { ItensSolicitacaoServicoDTO } from '../../../models/ItensSolicitacaoServ
 import { refDTO } from '../../../models/ref.dto';
 import { ProfissaoService } from '../../../services/domain/profissao.service';
 import { ProfissaoDTO } from '../../../models/profissao.dto';
+import { ClienteService } from '../../../services/domain/cliente.service';
+import { ClienteDTO } from '../../../models/cliente.dto';
+import { API_CONFIG } from '../../../config/api.config';
+import { Subscriber } from 'rxjs';
 
 /**
  * Generated class for the SolicitacaoServicoDetailsPage page.
@@ -26,12 +30,16 @@ export class SolicitacaoServicoDetailsPage {
   viewPrestador : boolean =false; 
   profissao_id:refDTO;
   profissao:ProfissaoDTO;
+  cliente_id:refDTO;
+  cliente: ClienteDTO;
+
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public solicitacaoService:SolicitacaoServicoService,
-    public profissaoService : ProfissaoService) {
+    public profissaoService : ProfissaoService,
+    public clienteService : ClienteService) {
   }
 
   ionViewDidLoad() {
@@ -42,12 +50,29 @@ export class SolicitacaoServicoDetailsPage {
         this.solicitacao=response;
         this.itensSolicitacao = response['itemServico'];
         this.profissao_id = response['profissao'];
+        this.cliente_id = response['cliente'];
 
         this.profissaoService.findById(this.profissao_id.id)
         .subscribe(response=>{
           this.profissao = response;
+          
           this.questionsList(this.profissao);
         })
+
+        this.profissaoService.findById(this.profissao_id.id)
+        .subscribe(response=>{
+          this.profissao = response;
+          
+          this.questionsList(this.profissao);
+        })
+
+        this.clienteService.findById(this.cliente_id.id)
+        .subscribe(response=>{
+            this.cliente = response;
+        })
+        this.getImageIfExists();
+
+
        },   
       error =>{})
 
@@ -64,6 +89,14 @@ export class SolicitacaoServicoDetailsPage {
         this.dateFormatBr = day+"-"+month+"-"+yaer;
         console.log(this.dateFormatBr);   
   }*/
+
+  getImageIfExists(){
+    this.clienteService.getImageFromBucket(this.solicitacao.cliente.id)
+      .subscribe(response =>{
+        this.cliente.imageUrl = `${API_CONFIG.bucktBaseURL}/cp${this.solicitacao.cliente.id}.jpg`;
+      },
+    error=>{})
+  }
 
   questionsList(profissao : ProfissaoDTO){
     

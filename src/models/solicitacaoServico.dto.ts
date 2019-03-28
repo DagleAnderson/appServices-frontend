@@ -1,5 +1,7 @@
 import { ItensSolicitacaoServicoDTO } from "./ItensSolicitacaoServico.dto";
 import { refDTO } from "./ref.dto";
+import { ClienteDTO } from "./cliente.dto";
+import { ProfissaoDTO } from "./profissao.dto";
 
 export interface SolicitacaoServicoDTO{
     id:string;
@@ -13,7 +15,7 @@ export interface SolicitacaoServicoDTO{
     itemSolicitacao6:ItensSolicitacaoServicoDTO;
     itemSolicitacao7:ItensSolicitacaoServicoDTO;
     itemSolicitacao8:ItensSolicitacaoServicoDTO;
-    profissao:refDTO;
-    cliente:string;
+    profissao:ProfissaoDTO;
+    cliente:refDTO;
     statusSolicitacao:string;
 }
