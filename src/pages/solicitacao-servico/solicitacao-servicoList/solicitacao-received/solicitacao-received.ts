@@ -22,6 +22,7 @@ import { ClienteDTO } from '../../../../models/cliente.dto';
 export class SolicitacaoReceivedPage {
   solicitacoes : SolicitacaoServicoDTO[];
   idUser : refDTO;
+  cliente:ClienteDTO;
   prestador:refDTO;
   profissao:refDTO;
 
@@ -47,6 +48,7 @@ export class SolicitacaoReceivedPage {
                        this.solicitacoes = response ["content"];
                    },
                   error => {});
+
               },
               
               error => {

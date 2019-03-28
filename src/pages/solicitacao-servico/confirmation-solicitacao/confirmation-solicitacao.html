@@ -15,32 +15,219 @@
 
 <ion-content padding>
     <div>
-         <div *ngIf="!confirmation">
-            <p class="subTitle">Profissional Solicitado</p>
-              <p>{{profissao?.nome}}</p>
-              <p class="subTitle">Produto / Serviço </p> 
-              <p>{{solicitacao?.produtoServico}} </p>
-      
-              <p  class="subTitle" text-center>Questionário da Solicitação</p>
-              <div ion-item style="margin-top: 10px">
-                <p>Detalhes do produto ou serviço:</p>
-                    <p class="area-coments">{{solicitacao?.itemSolicitacao1}}</p>
-              </div>      
-              <div ion-item style="margin-top: 10px">
-                <p>Defeitos e Circunstâncias:</p>
-                    <p class="area-coments">{{solicitacao?.itemSolicitacao2}}</p>
+      <div *ngIf="!confirmation">
+              <div  *ngIf="catSelected==1">
+                  <p class="subTitle">Profissional Solicitado</p>
+                  <p>{{profissao?.nome}}</p>
+                  <p class="subTitle">Produto / Serviço </p> 
+                  <p>{{solicitacao?.produtoServico}} </p>
+                  <p  class="subTitle" text-center>Questionário da Solicitação</p>
+                  <div ion-item style="margin-top: 10px">
+                    <p>Defeitos e Circunstâncias do local:</p>
+                        <p class="area-coments">{{solicitacao?.itemSolicitacao1}}</p>
+                  </div>      
+                  <div ion-item style="margin-top: 10px">
+                    <p>Quantidade de comodos:</p>
+                        <p class="area-coments">{{solicitacao?.itemSolicitacao2}}</p>
+                  </div>
+                  <div ion-item style="margin-top: 10px">      
+                    <p>comodos e medidas:</p>
+                        <p class="area-coments">{{solicitacao?.itemSolicitacao3}}</p>        
+                  </div>    
+                  <div ion-item style="margin-top: 10px">      
+                      <p>Cidade:</p>
+                          <p class="area-coments">{{solicitacao?.itemSolicitacao4}}</p>        
+                  </div> 
+                  <div ion-item style="margin-top: 10px">      
+                      <p>Local do imóvel:</p>
+                          <p class="area-coments">{{solicitacao?.itemSolicitacao5}}</p>        
+                  </div> 
+                  <div ion-item style="margin-top: 10px">      
+                      <p>Prazo de entrega:</p>
+                          <p class="area-coments">{{solicitacao?.itemSolicitacao6}}</p>        
+                  </div>
+                  <div ion-item style="margin-top: 10px">      
+                      <p>Desejo do cliente:</p>
+                          <p class="area-coments">{{solicitacao?.itemSolicitacao7}}</p>        
+                  </div>
+              
+                    
               </div>
-              <div ion-item style="margin-top: 10px">      
-                <p>Desejo do cliente:</p>
-                    <p class="area-coments">{{solicitacao?.itemSolicitacao3}}</p>        
-              </div>    
-              <div  class="datils" style="margin-bottom: 40px">
-                <img style="float:left;margin:20px 10px 20px 10px" width="50px" height="50px"  [src]="'assets/icon/attention.png'">
-                <p > recomendamos que matenha a coerência e clareza entre as respostas  para que os prestadores possam melhor 
-                  ajudá-lo. Boa sorte!</p>
+              <div  *ngIf="catSelected==2">
+                  <p class="subTitle">Profissional Solicitado</p>
+                  <p>{{profissao?.nome}}</p>
+                  <p class="subTitle">Produto / Serviço </p> 
+                  <p>{{solicitacao?.produtoServico}} </p>
+                  <p  class="subTitle" text-center>Questionário da Solicitação</p>
+                  <div ion-item style="margin-top: 10px">
+                    <p>Defeitos e Circunstâncias do produto:</p>
+                        <p class="area-coments">{{solicitacao?.itemSolicitacao1}}</p>
+                  </div>      
+                  <div ion-item style="margin-top: 10px">
+                    <p>Quantidade do produto:</p>
+                        <p class="area-coments">{{solicitacao?.itemSolicitacao2}}</p>
+                  </div>
+                  <div ion-item style="margin-top: 10px">      
+                    <p>Ano do produto:</p>
+                        <p class="area-coments">{{solicitacao?.itemSolicitacao3}}</p>        
+                  </div>  
+                  <div ion-item style="margin-top: 10px">      
+                        <p>Cidade:</p>
+                            <p class="area-coments">{{solicitacao?.itemSolicitacao4}}</p>        
+                    </div> 
+                  <div ion-item style="margin-top: 10px">      
+                      <p>Local de Atendimento:</p>
+                          <p class="area-coments">{{solicitacao?.itemSolicitacao5}}</p>        
+                    </div>   
+                  <div ion-item style="margin-top: 10px">      
+                      <p>Desejo do cliente:</p>
+                          <p class="area-coments">{{solicitacao?.itemSolicitacao6}}</p>        
+                  </div>
+              
               </div>
-              <button ion-button block   style="margin-bottom: 40px" (click)="requestOrcamento()" >Confirmar Solicitação</button>
-          </div>    
+              <div  *ngIf="catSelected==3">
+                  <p class="subTitle">Profissional Solicitado</p>
+                  <p>{{profissao?.nome}}</p>
+                  <p class="subTitle">Produto / Serviço </p> 
+                  <p>{{solicitacao?.produtoServico}} </p>
+                  <p  class="subTitle" text-center>Questionário da Solicitação</p>
+                  <div ion-item style="margin-top: 10px">
+                    <p>Defeitos e Circunstâncias do Veículo:</p>
+                        <p class="area-coments">{{solicitacao?.itemSolicitacao1}}</p>
+                  </div>      
+                  <div ion-item style="margin-top: 10px">
+                    <p>Quantidade de veículos:</p>
+                        <p class="area-coments">{{solicitacao?.itemSolicitacao2}}</p>
+                  </div>
+                  <div ion-item style="margin-top: 10px">      
+                    <p>Ano do veículo:</p>
+                        <p class="area-coments">{{solicitacao?.itemSolicitacao3}}</p>        
+                  </div>  
+                  <div ion-item style="margin-top: 10px">      
+                        <p>Cidade:</p>
+                            <p class="area-coments">{{solicitacao?.itemSolicitacao4}}</p>        
+                    </div> 
+                  <div ion-item style="margin-top: 10px">      
+                      <p>Local de Atendimento:</p>
+                          <p class="area-coments">{{solicitacao?.itemSolicitacao5}}</p>        
+                    </div>   
+                  <div ion-item style="margin-top: 10px">      
+                      <p>Desejo do cliente:</p>
+                          <p class="area-coments">{{solicitacao?.itemSolicitacao6}}</p>        
+                  </div>
+              </div>
+              <div  *ngIf="catSelected==4">
+                  <p class="subTitle">Profissional Solicitado</p>
+                  <p>{{profissao?.nome}}</p>
+                  <p class="subTitle">Produto / Serviço </p> 
+                  <p>{{solicitacao?.produtoServico}} </p>
+                  <p  class="subTitle" text-center>Questionário da Solicitação</p>
+                  <div ion-item style="margin-top: 10px">
+                    <p> causas ou sintomas que o levou a essa solicitação de serviço:</p>
+                        <p class="area-coments">{{solicitacao?.itemSolicitacao1}}</p>
+                  </div>      
+                  <div ion-item style="margin-top: 10px">
+                    <p>Quantidade de pessoas:</p>
+                        <p class="area-coments">{{solicitacao?.itemSolicitacao2}}</p>
+                  </div>
+                  <div ion-item style="margin-top: 10px">      
+                    <p>Média de idade:</p>
+                        <p class="area-coments">{{solicitacao?.itemSolicitacao3}}</p>        
+                  </div>  
+                  <div ion-item style="margin-top: 10px">      
+                        <p>Cidade:</p>
+                            <p class="area-coments">{{solicitacao?.itemSolicitacao4}}</p>        
+                    </div> 
+                  <div ion-item style="margin-top: 10px">      
+                      <p>Local de Atendimento:</p>
+                          <p class="area-coments">{{solicitacao?.itemSolicitacao5}}</p>        
+                    </div>   
+                  <div ion-item style="margin-top: 10px">      
+                      <p>Desejo do cliente:</p>
+                          <p class="area-coments">{{solicitacao?.itemSolicitacao6}}</p>        
+                  </div>
+              </div>
+              <div  *ngIf="catSelected==5">
+                  <p class="subTitle">Profissional Solicitado</p>
+                  <p>{{profissao?.nome}}</p>
+                  <p class="subTitle">Produto / Serviço </p> 
+                  <p>{{solicitacao?.produtoServico}} </p>
+                  <p  class="subTitle" text-center>Questionário da Solicitação</p>
+                  <div ion-item style="margin-top: 10px">
+                    <p> Circunstâncias que o levou a essa solicitação de serviço:</p>
+                        <p class="area-coments">{{solicitacao?.itemSolicitacao1}}</p>
+                  </div>      
+                  <div ion-item style="margin-top: 10px">
+                    <p>Quantidade de pessoas:</p>
+                        <p class="area-coments">{{solicitacao?.itemSolicitacao2}}</p>
+                  </div>
+                  <div ion-item style="margin-top: 10px">      
+                    <p>Média de idade:</p>
+                        <p class="area-coments">{{solicitacao?.itemSolicitacao3}}</p>        
+                  </div>  
+                  <div ion-item style="margin-top: 10px">      
+                        <p>Cidade:</p>
+                            <p class="area-coments">{{solicitacao?.itemSolicitacao4}}</p>        
+                    </div>                 
+                  <div ion-item style="margin-top: 10px">      
+                      <p>Local de Atendimento:</p>
+                          <p class="area-coments">{{solicitacao?.itemSolicitacao5}}</p>        
+                  </div> 
+                  <div ion-item style="margin-top: 10px">      
+                      <p>Nível de conhecimento:</p>
+                          <p class="area-coments">{{solicitacao?.itemSolicitacao6}}</p>        
+                  </div> 
+                  <div ion-item style="margin-top: 10px">      
+                      <p>Desejo do cliente:</p>
+                          <p class="area-coments">{{solicitacao?.itemSolicitacao7}}</p>        
+                  </div>
+              </div>
+              <div  *ngIf="catSelected==6">
+                  <p class="subTitle">Profissional Solicitado</p>
+                  <p>{{profissao?.nome}}</p>
+                  <p class="subTitle">Produto / Serviço </p> 
+                  <p>{{solicitacao?.produtoServico}} </p>
+                  <p  class="subTitle" text-center>Questionário da Solicitação</p>
+                  <div ion-item style="margin-top: 10px">
+                    <p>Defeitos e Circunstâncias do produto ou serviço:</p>
+                        <p class="area-coments">{{solicitacao?.itemSolicitacao1}}</p>
+                  </div>      
+                  <div ion-item style="margin-top: 10px">
+                    <p> Quantidade de itens para serviço:</p>
+                        <p class="area-coments">{{solicitacao?.itemSolicitacao2}}</p>
+                  </div>
+                  <div ion-item style="margin-top: 10px">      
+                    <p>Tempo de uso:</p>
+                        <p class="area-coments">{{solicitacao?.itemSolicitacao3}}</p>        
+                  </div>  
+                  <div ion-item style="margin-top: 10px">      
+                        <p>Cidade:</p>
+                            <p class="area-coments">{{solicitacao?.itemSolicitacao4}}</p>        
+                    </div> 
+                  <div ion-item style="margin-top: 10px">      
+                      <p>Local de Atendimento:</p>
+                          <p class="area-coments">{{solicitacao?.itemSolicitacao5}}</p>        
+                    </div>   
+                  <div ion-item style="margin-top: 10px">      
+                      <p>Desejo do cliente:</p>
+                          <p class="area-coments">{{solicitacao?.itemSolicitacao6}}</p>        
+                  </div>
+              
+          </div>
+
+
+
+
+          <div  class="datils" style="margin-bottom: 40px">
+              <img style="float:left;margin:20px 10px 20px 10px" width="50px" height="50px"  [src]="'assets/icon/attention.png'">
+              <p > recomendamos que matenha a coerência e clareza entre as respostas  para que os prestadores possam melhor 
+              ajudá-lo. Boa sorte!</p>
+          </div>
+        <button ion-button block   style="margin-bottom: 40px" (click)="requestOrcamento()" >Confirmar Solicitação</button>
+      </div> 
+          
+          
+
           <div style=" padding:50px 0px 0px 0px" *ngIf="confirmation">
             <ion-card-header>
               <h1 text-center>Pronto!</h1>

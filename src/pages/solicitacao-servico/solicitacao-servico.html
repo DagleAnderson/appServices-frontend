@@ -12,7 +12,7 @@
    <form  [formGroup]="formGroup">
     <ion-item>
         <ion-label stacked>Selecione uma categoria*</ion-label>
-            <ion-select formControlName="categoria"  (ionChange)="updateProfissoes()">
+            <ion-select [(ngModel)]="catSelected" formControlName="categoria"  (ionChange)="updateProfissoes()">
                 <ion-option *ngFor="let categoria of categorias;first as f" 
                  [value]="categoria.id" >{{categoria.nome}}</ion-option>
             </ion-select>
@@ -25,36 +25,385 @@
                 >{{profissao.nome}}</ion-option>
           </ion-select>
       </ion-item>
-    <ion-item>
-        <ion-label  stacked>
-            De qual tipo de produto ou serviço estamos tratando?*
-        </ion-label>
-            <ion-input formControlName="produtoServico" type="text"></ion-input>
-    </ion-item>
-    <ion-item>
-        <ion-label stacked>
-            Descreva detalhes do produto ou serviço <br/>
-            (quantidade, marca, modelo, tamanho)*
-        </ion-label>
-            <ion-textarea formControlName="itemSolicitacao1" type="text"></ion-textarea>
-    </ion-item>
-        <p class="danger" *ngIf="formGroup.controls.itemSolicitacao1.dirty && formGroup.controls.itemSolicitacao1.errors" margin-left style="color:red;font-size: 12px">Valor inválido( minimo 10 e máximo 255 caracteres)</p>  
-        <ion-item>   
-            <ion-label stacked>
-                Descreva em detalhes o defeitos ou circunstâncias <br/> do produto ou serviço.*
-            </ion-label>
-                <ion-textarea formControlName="itemSolicitacao2" type="text"></ion-textarea>
-        </ion-item>
-            <p class="danger" *ngIf="formGroup.controls.itemSolicitacao2.dirty && formGroup.controls.itemSolicitacao2.errors" margin-left style="color:red;font-size: 12px">Valor inválido(minimo 10 e máximo 255 caracteres)</p>  
-    
-        <ion-item>   
-        <ion-label stacked>
-            Descreva detalhes do que deseja que este<br/> profissional realize.*
-        </ion-label>
-            <ion-textarea formControlName="itemSolicitacao3" type="text"></ion-textarea>
-    </ion-item>
-        <p class="danger" *ngIf="formGroup.controls.itemSolicitacao3.dirty && formGroup.controls.itemSolicitacao3.errors" margin-left style="color:red;font-size: 12px">Valor inválido(minimo 10 e máximo 255 caracteres)</p>  
-   </form> 
-   <br/>
+        <div *ngIf="catSelected==1" >
+            <ion-item>
+                <ion-label  stacked class="area-text">
+                     De qual tipo de estrutura ou serviço estamos tratando? (ex:prédio, reforma de Igreja, consultoria, projeto)*
+                </ion-label>
+                    <ion-input formControlName="produtoServico" type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked class="area-text">
+                    Descreva em detalhes os defeitos, circunstâncias do local ou serviço: (ex:casa má dividida, com pintura desbotada...)*
+                </ion-label>
+                    <ion-textarea formControlName="itemSolicitacao1" type="text"></ion-textarea>
+            </ion-item>
+                <p class="danger" *ngIf="formGroup.controls.itemSolicitacao1.dirty && formGroup.controls.itemSolicitacao1.errors" margin-left style="color:red;font-size: 12px">Valor inválido( minimo 10 e máximo 255 caracteres)</p>  
+                <ion-item>   
+                        <ion-label stacked >
+                            Quantidade de comodos:* <br/>
+                                <ion-icon color="primary"  class="decrement"  name="remove-circle" (click)="decrement()"></ion-icon>
+                                            <strong  style="font-size: 25px;font-weight: 300">{{contador}}</strong>   
+                                <ion-icon color="primary" class="increment" name="add-circle" (click)="increment()"></ion-icon>
+                        </ion-label>
+                </ion-item>
+                <p class="danger" *ngIf="formGroup.controls.itemSolicitacao2.dirty && formGroup.controls.itemSolicitacao2.errors" margin-left style="color:red;font-size: 12px">Valor inválido(minimo 1)</p>
+                <ion-item>   
+                <ion-label stacked class="area-text">
+                   Descreva os comodos e medidas:
+                   (Ex:sala:(3x4, 1 PORTA DE MANDEIRA, 1 JANELA DE FERRO,FORRADA COM GESSO),cozinha:(3x3, SEM FORRO )...)*
+                </ion-label>
+                    <ion-textarea formControlName="itemSolicitacao3" type="text"></ion-textarea>
+             </ion-item>
+                <p class="danger" *ngIf="formGroup.controls.itemSolicitacao3.dirty && formGroup.controls.itemSolicitacao3.errors" margin-left style="color:red;font-size: 12px">Valor inválido(minimo 10 e máximo 255 caracteres)</p> 
+                <ion-item>   
+                        <ion-label stacked>Cidade:*</ion-label>
+                                <ion-select  formControlName="itemSolicitacao4" [(ngModel)]="indexCidade">
+                                   <ion-option [value]=1  >Barreiras</ion-option>
+                                   <ion-option [value]=2  >Luis Eduardo</ion-option>
+                            </ion-select>
+                </ion-item>
+             
+             <ion-item>   
+                <ion-label stacked>Local do imóvel:*</ion-label>
+                        <ion-select  formControlName="itemSolicitacao5" [(ngModel)]="index" >
+                           <ion-option [value]=1  >Dentro da cidade</ion-option>
+                           <ion-option [value]=2 >Fora da cidade</ion-option>
+                    </ion-select>
+             </ion-item>
+             
+             <ion-item>   
+                        <ion-label stacked >
+                            Prazo de entrega.*
+                        </ion-label>
+                       <ion-label>
+                            <ion-icon color="primary" style="margin-top:3px"  class="decrement"  name="remove-circle" (click)="decrementDias()"></ion-icon>
+                                 <strong *ngIf="dias==1" style="font-size: 25px;font-weight: 300">{{dias}} Dia</strong>
+                                 <strong *ngIf="dias>1" style="font-size: 25px;font-weight: 300">{{dias}} Dias</strong>    
+                            <ion-icon color="primary" style="margin-top:-30px" class="increment" name="add-circle" (click)="incrementDias()"></ion-icon>
+                       </ion-label>
+                      
+                </ion-item>
+                        <p class="danger" *ngIf="formGroup.controls.itemSolicitacao6.dirty && formGroup.controls.itemSolicitacao6.errors" margin-left style="color:red;font-size: 12px">Valor inválido(minimo 5 e máximo 255 caracteres)</p>  
+                <ion-item>   
+                <ion-label stacked class="area-text">
+                    Descreva detalhes do que deseja que este profissional realize.*
+                </ion-label>
+                    <ion-textarea formControlName="itemSolicitacao7" type="text"></ion-textarea>
+             </ion-item>
+                <p class="danger" *ngIf="formGroup.controls.itemSolicitacao7.dirty && formGroup.controls.itemSolicitacao7.errors" margin-left style="color:red;font-size: 12px">Valor inválido(minimo 10 e máximo 255 caracteres)</p>        
+        
+             
+            </div>
+        <div *ngIf="catSelected==2">
+               <ion-item>
+                <ion-label  stacked class="area-text">
+                        De qual tipo produto ou serviço estamos tratando?(ex:computador,celular,tablet, notebook)*
+                </ion-label>
+                    <ion-input formControlName="produtoServico" type="text"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked class="area-text">
+                        Descreva em detalhes os defeitos, circunstâncias do produto ou serviço:(ex: computador DELL com lentidão, falhas de sistema...)*
+                </ion-label>
+                    <ion-textarea formControlName="itemSolicitacao1" type="text"></ion-textarea>
+            </ion-item>
+                <p class="danger" *ngIf="formGroup.controls.itemSolicitacao1.dirty && formGroup.controls.itemSolicitacao1.errors" margin-left style="color:red;font-size: 12px">Valor inválido( minimo 10 e máximo 255 caracteres)</p>  
+                <ion-item>   
+                    <ion-label stacked>
+                        Quantidade do produto:* <br/>
+                            <ion-icon color="primary"  class="decrement"  name="remove-circle" (click)="decrement()"></ion-icon>
+                            <strong style="font-size: 25px;font-weight: 300">{{contador}}</strong>  
+                            <ion-icon color="primary" class="increment" name="add-circle" (click)="increment()"></ion-icon>
+                    </ion-label>
+                </ion-item>
+                <p class="danger" *ngIf="formGroup.controls.itemSolicitacao2.dirty && formGroup.controls.itemSolicitacao2.errors" margin-left style="color:red;font-size: 12px">Valor inválido(minimo 1)</p>
+            <ion-item>   
+                    <ion-label stacked>Ano do produto:* <br/>
+                        <ion-select  formControlName="itemSolicitacao3">
+                                <ion-option [value]="2019">2019</ion-option>
+                        </ion-select>
+                    </ion-label>
+                </ion-item>
+                    <p class="danger" *ngIf="formGroup.controls.itemSolicitacao3.dirty && formGroup.controls.itemSolicitacao3.errors" margin-left style="color:red;font-size: 12px">Valor inválido(minimo 10 e máximo 255 caracteres)</p>  
+            
+                    <ion-item>   
+                            <ion-label stacked>Cidade:*</ion-label>
+                                    <ion-select  formControlName="itemSolicitacao4" [(ngModel)]="indexCidade">
+                                       <ion-option [value]=1  >Barreiras</ion-option>
+                                       <ion-option [value]=2  >Luis Eduardo</ion-option>
+                                </ion-select>
+                    </ion-item>
+                 
+
+                    <ion-item>   
+                            <ion-label stacked>Local:*</ion-label>
+                                    <ion-select  formControlName="itemSolicitacao5" [(ngModel)]="index">
+                                       <ion-option [value]=3 >Minha residência</ion-option>
+                                       <ion-option [value]=4 >Minha empresa</ion-option>
+                                       <ion-option [value]=5 >Consigo levar até você</ion-option>
+                                </ion-select>
+                    </ion-item>
+
+                    <ion-item>   
+                        <ion-label stacked class="area-text">
+                            Descreva detalhes do que deseja que este profissional realize.*
+                        </ion-label>
+                            <ion-textarea formControlName="itemSolicitacao6" type="text"></ion-textarea>
+                </ion-item>
+                <p class="danger" *ngIf="formGroup.controls.itemSolicitacao6.dirty && formGroup.controls.itemSolicitacao6.errors" margin-left style="color:red;font-size: 12px">Valor inválido(minimo 10 e máximo 255 caracteres)</p>
+              
+               
+        </div>
+         <div *ngIf="catSelected==3">
+                <ion-item>
+                        <ion-label  stacked class="area-text">
+                                De qual tipo de veículo ou serviço estamos tratando? (ex:troca de óleo, carro,moto, revisão geral)*
+                        </ion-label>
+                            <ion-input formControlName="produtoServico" type="text"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label stacked class="area-text">
+                                Descreva em detalhes o vaículo, os defeitos ou circunstâncias do veículo (ex:saindo muita fumaça do carburador, um barulho estranho no motor...)*
+                        </ion-label>
+                            <ion-textarea formControlName="itemSolicitacao1" type="text"></ion-textarea>
+                    </ion-item>
+                        <p class="danger" *ngIf="formGroup.controls.itemSolicitacao1.dirty && formGroup.controls.itemSolicitacao1.errors" margin-left style="color:red;font-size: 12px">Valor inválido( minimo 10 e máximo 255 caracteres)</p>  
+                        <ion-item>   
+                            <ion-label stacked>
+                                    Quantidade de veículos:* <br/>
+                                    <ion-icon color="primary" class="decrement"  name="remove-circle" (click)="decrement()"></ion-icon>
+                                    <strong style="font-size: 25px;font-weight: 300">{{contador}}</strong>   
+                                    <ion-icon color="primary" class="increment" name="add-circle" (click)="increment()"></ion-icon>
+                            </ion-label>
+                        </ion-item>
+                        <p class="danger" *ngIf="formGroup.controls.itemSolicitacao2.dirty && formGroup.controls.itemSolicitacao2.errors" margin-left style="color:red;font-size: 12px">Valor inválido(minimo 10 e máximo 255 caracteres)</p>  
+                    <ion-item>   
+                            <ion-label stacked>Ano do veículo:* <br/>
+                                <ion-select  formControlName="itemSolicitacao3">
+                                        <ion-option [value]="2019">2019</ion-option>
+                                </ion-select>
+                            </ion-label>
+                        </ion-item>
+                            <p class="danger" *ngIf="formGroup.controls.itemSolicitacao3.dirty && formGroup.controls.itemSolicitacao3.errors" margin-left style="color:red;font-size: 12px">Valor inválido(minimo 10 e máximo 255 caracteres)</p>  
+                            
+                            <ion-item>   
+                                    <ion-label stacked>Cidade:*</ion-label>
+                                            <ion-select  formControlName="itemSolicitacao4" [(ngModel)]="indexCidade">
+                                               <ion-option [value]=1  >Barreiras</ion-option>
+                                               <ion-option [value]=2  >Luis Eduardo</ion-option>
+                                        </ion-select>
+                            </ion-item>
+                            
+                            <ion-item>   
+                                    <ion-label stacked>Local do atendimento:*</ion-label>
+                                            <ion-select  formControlName="itemSolicitacao5" [(ngModel)]="index">
+                                               <ion-option [value]=3>Minha residência</ion-option>
+                                               <ion-option [value]=5>Consigo levar até você</ion-option>
+                                            </ion-select>
+                                 </ion-item>
+                                 <p class="danger" *ngIf="formGroup.controls.itemSolicitacao5.dirty && formGroup.controls.itemSolicitacao5.errors" margin-left style="color:red;font-size: 12px">Valor inválido(minimo 10 e máximo 255 caracteres)</p>
+                       
+                     <ion-item>   
+                        <ion-label stacked class="area-text">
+                            Descreva detalhes do que deseja que este<br/> profissional realize.*
+                        </ion-label>
+                            <ion-textarea formControlName="itemSolicitacao6" type="text"></ion-textarea>
+                     </ion-item>
+                        <p class="danger" *ngIf="formGroup.controls.itemSolicitacao6.dirty && formGroup.controls.itemSolicitacao6.errors" margin-left style="color:red;font-size: 12px">Valor inválido(minimo 10 e máximo 255 caracteres)</p>        
+         
+        </div>
+        <div *ngIf="catSelected==4">
+                <ion-item>
+                        <ion-label  stacked class="area-text">
+                            De qual tipo serviço estamos tratando?(ex:valor de consulta,avaliação física, personal trainer particular)*
+                        </ion-label>
+                            <ion-input formControlName="produtoServico" type="text"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label stacked class="area-text">
+                                Descreva em detalhes as causas ou sintomas que o levou a essa solicitação de serviço: (ex:dores musculares, indicação médica,obesidade ou hipertrofia)*
+                        </ion-label>
+                            <ion-textarea formControlName="itemSolicitacao1" type="text"></ion-textarea>
+                    </ion-item>
+                        <p class="danger" *ngIf="formGroup.controls.itemSolicitacao1.dirty && formGroup.controls.itemSolicitacao1.errors" margin-left style="color:red;font-size: 12px">Valor inválido( minimo 10 e máximo 255 caracteres)</p>  
+                        <ion-item>   
+                            <ion-label stacked>
+                                    Quantidade de pessoas:* <br/>
+                                    <ion-icon color="primary" class="decrement"  name="remove-circle" (click)="decrement()"></ion-icon>
+                                    <strong style="font-size: 25px;font-weight: 300">{{contador}}</strong>   
+                                    <ion-icon color="primary" class="increment" name="add-circle" (click)="increment()"></ion-icon>
+                            </ion-label>
+                        </ion-item>
+                    <ion-item>   
+                            <ion-label stacked>Média de idade:* <br/>
+                                <ion-select  formControlName="itemSolicitacao3" [(ngModel)]="indexIdade" >
+                                        <ion-option [value]=1>Entre 4 e 8 anos</ion-option>
+                                        <ion-option [value]=2>Entre 8 e 12 anos</ion-option>
+                                        <ion-option [value]=3>Entre 12 e 16 anos</ion-option>
+                                        <ion-option [value]=4>acima de 16 anos </ion-option>
+                                </ion-select>
+                            </ion-label>
+                        </ion-item>  
+                       
+                        <ion-item>   
+                                <ion-label stacked>Cidade:*</ion-label>
+                                        <ion-select  formControlName="itemSolicitacao4" [(ngModel)]="indexCidade">
+                                           <ion-option [value]=1  >Barreiras</ion-option>
+                                           <ion-option [value]=2  >Luis Eduardo</ion-option>
+                                    </ion-select>
+                        </ion-item>
+                       
+                        <ion-item>   
+                                <ion-label stacked>Local de atendimento:*</ion-label>
+                                        <ion-select  formControlName="itemSolicitacao5" [(ngModel)]="index">
+                                           <ion-option [value]=3>Minha residência</ion-option>
+                                           <ion-option [value]=6>posso ir até você</ion-option>
+                                        </ion-select>
+                             </ion-item>  
+                      <ion-item>   
+                        <ion-label stacked class="area-text">
+                            Descreva detalhes do que deseja que este<br/> profissional realize.*
+                        </ion-label>
+                            <ion-textarea formControlName="itemSolicitacao6" type="text"></ion-textarea>
+                     </ion-item>
+                        <p class="danger" *ngIf="formGroup.controls.itemSolicitacao6.dirty && formGroup.controls.itemSolicitacao6.errors" margin-left style="color:red;font-size: 12px">Valor inválido(minimo 10 e máximo 255 caracteres)</p>        
+                     
+        </div>
+        <div *ngIf="catSelected==5">
+                <ion-item>
+                        <ion-label  stacked class="area-text">
+                            De qual tipo serviço estamos tratando?(ex:aulas de reforço, dança , palestras)*
+                        </ion-label>
+                            <ion-input formControlName="produtoServico" type="text"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label stacked class="area-text">
+                            Descreva em detalhes as circunstâncias que o levou a essa solicitação serviço: (ex: buscar mais conhecimento, melhorar em matemática, aprender uma nova língua)*
+                        </ion-label>
+                            <ion-textarea formControlName="itemSolicitacao1" type="text"></ion-textarea>
+                    </ion-item>
+                        <p class="danger" *ngIf="formGroup.controls.itemSolicitacao1.dirty && formGroup.controls.itemSolicitacao1.errors" margin-left style="color:red;font-size: 12px">Valor inválido( minimo 10 e máximo 255 caracteres)</p>  
+                        <ion-item>   
+                            <ion-label stacked>
+                                    Quantidade de pessoas:* <br/>
+                                    <ion-icon color="primary" class="decrement"  name="remove-circle" (click)="decrement()"></ion-icon>
+                                    <strong style="font-size: 25px;font-weight: 300">{{contador}}</strong>   
+                                    <ion-icon color="primary" class="increment" name="add-circle" (click)="increment()"></ion-icon>
+                            </ion-label>
+                        </ion-item>
+                        <p class="danger" *ngIf="formGroup.controls.itemSolicitacao2.dirty && formGroup.controls.itemSolicitacao2.errors" margin-left style="color:red;font-size: 12px">Valor inválido(minimo 10 e máximo 255 caracteres)</p> 
+                    <ion-item>   
+                            <ion-label stacked>Média de idade:* <br/>
+                                <ion-select  formControlName="itemSolicitacao3"  [(ngModel)]="indexIdade">
+                                        <ion-option [value]=1>Entre 4 e 8 anos</ion-option>
+                                        <ion-option [value]=2>Entre 8 e 12 anos</ion-option>
+                                        <ion-option [value]=3>Entre 12 e 15 anos</ion-option>
+                                        <ion-option [value]=4>de 15 anos acima</ion-option>
+                                </ion-select>
+                            </ion-label>
+                        </ion-item>
+                            <p class="danger" *ngIf="formGroup.controls.itemSolicitacao3.dirty && formGroup.controls.itemSolicitacao3.errors" margin-left style="color:red;font-size: 12px">Valor inválido(minimo 10 e máximo 255 caracteres)</p>  
+                        <ion-item>   
+                                <ion-label stacked>Nível de conhecimento:* <br/>
+                                    <ion-select  formControlName="itemSolicitacao6"  [(ngModel)]="indexNivel">
+                                        <ion-option [value]=1>Básico</ion-option>
+                                         <ion-option [value]=2>Intermediário</ion-option>
+                                        <ion-option [value]=3>Avançado</ion-option>
+                                    </ion-select>
+                                </ion-label>
+                         </ion-item>
+                            <p class="danger" *ngIf="formGroup.controls.itemSolicitacao6.dirty && formGroup.controls.itemSolicitacao6.errors" margin-left style="color:red;font-size: 12px">Valor inválido(minimo 10 e máximo 255 caracteres)</p>  
+                           
+                             <ion-item>   
+                            <ion-label stacked>Cidade:*</ion-label>
+                                    <ion-select  formControlName="itemSolicitacao4" [(ngModel)]="indexCidade">
+                                       <ion-option [value]=1  >Barreiras</ion-option>
+                                       <ion-option [value]=2  >Luis Eduardo</ion-option>
+                                </ion-select>
+                    </ion-item>
+                           
+                            <ion-item>   
+                                    <ion-label stacked>Local de atendimento:*</ion-label>
+                                            <ion-select  formControlName="itemSolicitacao5" [(ngModel)]="index">
+                                               <ion-option [value]=3>Minha residência</ion-option>
+                                               <ion-option [value]=5>Posso ir até você</ion-option>
+                                            </ion-select>
+                                 </ion-item>
+                                    <p class="danger" *ngIf="formGroup.controls.itemSolicitacao5.dirty && formGroup.controls.itemSolicitacao5.errors" margin-left style="color:red;font-size: 12px">Valor inválido(minimo 10 e máximo 255 caracteres)</p>
+                                       
+                     <ion-item>   
+                        <ion-label stacked class="area-text">
+                            Descreva detalhes do que deseja que este<br/> profissional realize.*
+                        </ion-label>
+                            <ion-textarea formControlName="itemSolicitacao7" type="text"></ion-textarea>
+                     </ion-item>
+                        <p class="danger" *ngIf="formGroup.controls.itemSolicitacao7.dirty && formGroup.controls.itemSolicitacao7.errors" margin-left style="color:red;font-size: 12px">Valor inválido(minimo 10 e máximo 255 caracteres)</p>        
+
+        </div>
+         <div *ngIf="catSelected==6">
+                <ion-item>
+                        <ion-label  stacked class="area-text">
+                                De qual tipo serviço estamos tratando?(reforma  do sofá, encanação , guarda-roupa)*
+                        </ion-label>
+                            <ion-input formControlName="produtoServico" type="text"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label stacked class="area-text">
+                                Descreva em detalhes os produtos, os defeitos, circunstâncias do produto ou serviço: (ex: montar novo guarda-roupas...)*
+                        </ion-label>
+                            <ion-textarea formControlName="itemSolicitacao1" type="text"></ion-textarea>
+                    </ion-item>
+                        <p class="danger" *ngIf="formGroup.controls.itemSolicitacao1.dirty && formGroup.controls.itemSolicitacao1.errors" margin-left style="color:red;font-size: 12px">Valor inválido( minimo 10 e máximo 255 caracteres)</p>  
+                         <ion-item>   
+                            <ion-label stacked>
+                                    Quantidade de itens para serviço:* <br/>
+                                    <ion-icon color="primary" class="decrement"  name="remove-circle" (click)="decrement()"></ion-icon>
+                                    <strong style="font-size: 25px;font-weight: 300">{{contador}}</strong>    
+                                    <ion-icon color="primary" class="increment" name="add-circle" (click)="increment()"></ion-icon>
+                            </ion-label>
+                        </ion-item>
+                          <!--  <p class="danger" *ngIf="formGroup.controls.itemSolicitacao2.dirty && formGroup.controls.itemSolicitacao2.errors" margin-left style="color:red;font-size: 12px">Valor inválido(minimo 10 e máximo 255 caracteres)</p> -->  
+                    <ion-item>   
+                            <ion-label stacked>tempo de uso:* <br/>
+                                <ion-select  formControlName="itemSolicitacao3"   [(ngModel)]="indexAnos" >
+                                        <ion-option [value]=1>Entre 0 e 2 anos</ion-option>
+                                        <ion-option [value]=2>Entre 2 e 5 anos</ion-option>
+                                        <ion-option [value]=3>Entre 5 e 10 anos</ion-option>
+                                        <ion-option [value]=4>de 10 anos acima</ion-option>
+                                </ion-select>
+                            </ion-label>
+                        </ion-item>
+                            <p class="danger" *ngIf="formGroup.controls.itemSolicitacao3.dirty && formGroup.controls.itemSolicitacao3.errors" margin-left style="color:red;font-size: 12px">Valor inválido(minimo 10 e máximo 255 caracteres)</p>  
+                       
+                            <ion-item>   
+                                    <ion-label stacked>Cidade:*</ion-label>
+                                            <ion-select  formControlName="itemSolicitacao4" [(ngModel)]="indexCidade">
+                                               <ion-option [value]=1  >Barreiras</ion-option>
+                                               <ion-option [value]=2  >Luis Eduardo</ion-option>
+                                        </ion-select>
+                            </ion-item>
+
+                            <ion-item>   
+                                    <ion-label stacked>Local:*</ion-label>
+                                        <ion-select  formControlName="itemSolicitacao5" [(ngModel)]="index">
+                                            <ion-option [value]=3>Minha residência</ion-option>
+                                            <ion-option [value]=6>posso levar até você</ion-option>
+                                        </ion-select>
+                            </ion-item>
+                                    <p class="danger" *ngIf="formGroup.controls.itemSolicitacao5.dirty && formGroup.controls.itemSolicitacao5.errors" margin-left style="color:red;font-size: 12px">Valor inválido(minimo 10 e máximo 255 caracteres)</p>  
+                       
+                        <ion-item>   
+                        <ion-label stacked class="area-text">
+                            Descreva detalhes do que deseja que este<br/> profissional realize.*
+                        </ion-label>
+                            <ion-textarea formControlName="itemSolicitacao6" type="text"></ion-textarea>
+                     </ion-item>
+                        <p class="danger" *ngIf="formGroup.controls.itemSolicitacao6.dirty && formGroup.controls.itemSolicitacao6.errors" margin-left style="color:red;font-size: 12px">Valor inválido(minimo 10 e máximo 255 caracteres)</p>        
+
+         </div>
+         
+    </form> 
+    <br/>
    <button ion-button block type="submit" [disabled]="formGroup.invalid" (click)="showConfirmation()">próximo</button>
 </ion-content>

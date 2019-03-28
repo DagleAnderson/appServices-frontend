@@ -26,6 +26,22 @@ export class SolicitacaoServicoPage {
   categorias:CategoriaDTO[];
   profissoes : ProfissaoDTO[];
 
+  catSelected:number=0;
+  contador:number = 1;
+  dias:number =1;
+
+  index:number=0;
+  localAt:string=" ";
+
+  indexIdade:number=0;
+  mediaIdade:string=" ";
+
+  indexNivel:number=0;
+  nivel:string=" ";
+
+  indexCidade:number =0;
+  cidade:string = " ";
+
 
   solicitacao : SolicitacaoServicoDTO;
 
@@ -40,13 +56,19 @@ export class SolicitacaoServicoPage {
      public alertCtrl: AlertController) {
 
     this.formGroup = this.formBuider.group({
-      cliente :['',Validators],
       categoria:['',Validators.required],
       profissao:['',Validators.required],
       produtoServico:['apartamento',[Validators.required,Validators.minLength(5),Validators.maxLength(50)]],
-      itemSolicitacao1:['aaaaaaaaaaaaaaaaaaaaaaaaa',[Validators.required,Validators.minLength(10),Validators.maxLength(255)]],
-      itemSolicitacao2:['aaaaaaaaaaaaaaaaaaaaaaaaa',[Validators.required,Validators.minLength(10),Validators.maxLength(255)]],
-      itemSolicitacao3:['aaaaaaaaaaaaaaaaaaaaaaaaa',[Validators.required,Validators.minLength(10),Validators.maxLength(255)]]
+      itemSolicitacao1:['casa má dividida, com pintura desbotada e parede com danos graves',[Validators.required,Validators.minLength(10),Validators.maxLength(255)]],
+      itemSolicitacao2:[this.contador,[Validators.required]],
+      itemSolicitacao3:['imagens com tamanho da area do local',[Validators.required,Validators.minLength(10),Validators.maxLength(255)]],
+      itemSolicitacao4:["",[Validators.required]],
+      itemSolicitacao5:['15 dias',[Validators.required,Validators.minLength(5),Validators.maxLength(25)]],
+      itemSolicitacao6:['pintura completa do local com detalhes em algumas par',[Validators.required,Validators.minLength(5),Validators.maxLength(255)]],
+      itemSolicitacao7:['-------------------',[Validators.required,Validators.minLength(5),Validators.maxLength(255)]],
+      itemSolicitacao8:['-------------------',[Validators.required,Validators.minLength(10),Validators.maxLength(255)]]
+
+    
     });
   }
 
@@ -75,12 +97,110 @@ export class SolicitacaoServicoPage {
   }
 
   showConfirmation(){
+    this.catSelected = this.formGroup.value.categoria;
+    
+    this.verifyCategoria(this.catSelected);
     this.solicitacao = this.formGroup.value;
-    console.log(this.formGroup.value.profissao);
+
     let profissao_id = this.formGroup.value.profissao;
     this.navCtrl.push('ConfirmationSolicitacaoPage',{
-      solicitacao:this.solicitacao,profissao_id:profissao_id})
+      solicitacao:this.solicitacao,profissao_id:profissao_id,catSelected:this.catSelected})
+  }
+
+  verifyCategoria(catSelected: number): any {
+
+    this.formGroup.value.itemSolicitacao2 = this.contador;
+    this.formGroup.value.itemSolicitacao5 = this.local(this.index);
+    this.formGroup.value.itemSolicitacao4 = this.cidades(this.indexCidade);
+
+    if (catSelected == 1){
+      if(this.dias==1){
+         this.formGroup.value.itemSolicitacao6 = this.dias + " dia";
+      }else{
+        this.formGroup.value.itemSolicitacao6= this.dias + " dias";
+      }
+    }
+    if (catSelected == 4){
+        this.formGroup.value.itemSolicitacao3 = this.mediaDeIdade(this.indexIdade);
+    }if(catSelected ==6){
+      this.formGroup.value.itemSolicitacao3 = this.mediaDeIdade(this.indexIdade);
+      this.formGroup.value.itemSolicitacao6 = this.nivelSelect(this.indexNivel);
+    }
+
+  }
+  cidades(indexCidade: number): any {
+    switch (indexCidade) {
+      case 1: 
+          return this.localAt= "Barreiras";
+      case 2: 
+          return this.localAt= "Luis Eduardo";
+    }
+  }
+
+
+  increment(){this.contador = this.contador + 1;}
+
+  decrement(){ 
+   if(this.contador<=1){  
+   }else{
+    this.contador = this.contador - 1;}
+  }
+
+  incrementDias(){this.dias = this.dias + 1;}
+
+  decrementDias(){ 
+   if(this.dias<=1){  
+   }else{
+    this.dias = this.dias - 1;}
+  }
+
+  local(index:number):string{
+    switch (index) {
+      case 1: 
+          return this.localAt= "Dentro da cidade";
+      case 2: 
+          return this.localAt= "Fora da cidade";
+      case 3: ;
+          return this.localAt="Minha residência";
+      case 4: 
+          return this.localAt= "Minha empresa";
+      case 5:
+          return this.localAt= "Consigo levar até você";
+      case 6:
+          return this.localAt= "Posso ir até você";
+      default:
+          return this.localAt = " ";
+    }
+
   }
   
+
+  mediaDeIdade(indexIdade:number):string{
+    switch (indexIdade) {
+      case 1: 
+          return this.mediaIdade= "Entre 4 e 8 anos";
+      case 2: 
+          return this.mediaIdade= "Entre 8 e 12 anos";
+      case 3: ;
+          return this.mediaIdade="Entre 12 e 16 anos";
+      case 4: 
+          return this.mediaIdade= "Acima de 16 anos";
+      default:
+          return this.mediaIdade = " ";
+    }
+  }
+
+  nivelSelect(indexNivel:number):string{
+    switch (indexNivel) {
+      case 1: 
+          return this.nivel= "Básico";
+      case 2: 
+          return this.nivel= "Intermediário";
+      case 3: ;
+          return this.nivel="Avançado";
+      default:
+          return this.nivel = " ";
+    }
+  }
   
 }

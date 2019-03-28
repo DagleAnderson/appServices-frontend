@@ -29,8 +29,9 @@ export class ConfirmationSolicitacaoPage {
   itensSolicitacao:ItensSolicitacaoServicoDTO[];
   cliente : ClienteDTO;
   profissao:ProfissaoDTO;
-  
   confirmation:string;
+
+  catSelected:number=0;
 
   constructor(
     public navCtrl: NavController,
@@ -45,9 +46,9 @@ export class ConfirmationSolicitacaoPage {
   }
 
   ionViewDidLoad() {
-
+    this.catSelected = this.navParams.get('catSelected');
+    console.log("passado:"+this.catSelected)
     let solicitacaoParam = this.navParams.get('solicitacao'); 
-
       let profissao_id= this.navParams.get('profissao_id');
       this.profissaoService.findById(profissao_id)
       .subscribe(response =>{
@@ -68,6 +69,11 @@ export class ConfirmationSolicitacaoPage {
                      itemSolicitacao1:solicitacaoParam.itemSolicitacao1,
                      itemSolicitacao2:solicitacaoParam.itemSolicitacao2,
                      itemSolicitacao3:solicitacaoParam.itemSolicitacao3,
+                     itemSolicitacao4:solicitacaoParam.itemSolicitacao4,
+                     itemSolicitacao5:solicitacaoParam.itemSolicitacao5,
+                     itemSolicitacao6:solicitacaoParam.itemSolicitacao6,
+                     itemSolicitacao7:solicitacaoParam.itemSolicitacao7,
+                     itemSolicitacao8:solicitacaoParam.itemSolicitacao8,
                      profissao:solicitacaoParam.profissao,
                      statusSolicitacao:"1"
                     }; 
