@@ -1,0 +1,91 @@
+<!--
+  Generated template for the CreateOrcamentoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>Novo Orçamento</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <!-- fab placed to the top end -->
+    <ion-card>
+            <p class="subTitle">Produto / Serviço </p> 
+            <p>{{orcamento?.produtoServico}}</p>
+            <p class="subTitle">Data do orçamento</p>
+            <p> {{orcamento?.data}}</p>   
+ 
+    </ion-card> 
+    <h4 style="margin-top:10px;margin-left: 10px;"> Lista de itens*</h4>
+    
+      <ion-card style="height: auto">  
+          <h3 style="margin: 20px 0px; font-weight:400;font-size: 20px" text-center *ngIf="listaItens == 0"  >Lista Vazia</h3>
+                <div *ngFor="let itens of listaItens;let position = index"> 
+                  <h1 style="margin-top:30px;margin-left:18px">{{itens.item}}</h1>
+                  <div ion-item>
+                      <p>Quantidade : {{itens.quantidade}}</p>
+                      <p>Desconto : {{itens.desconto  | currency}}</p>
+                      <p>Valor : {{itens.valor | currency}}</p>
+                      <p>sub-Total : {{itens.subTotal | currency}}</p>
+                      
+                          <div class="iconStyle" style="">
+                              <ion-icon color="danger" class="iconDetails" style="margin-left:-10px" name="trash" (click)="removeItem(index)"></ion-icon>
+                                <strong style="margin-left: 5px">remover</strong>   
+                          </div> 
+                  </div>
+
+                </div>   
+
+        </ion-card> 
+      
+    <ion-card style="height: auto">
+        <div>
+            <form [formGroup]="formGroup">
+                <ion-item>
+                    <ion-label stacked >Descrição do item*</ion-label>
+                        <ion-input  type="text" formControlName="item">{{item}}</ion-input>
+                </ion-item>
+               <div class="box1"> 
+                   <div class="subBox1">
+                      <ion-label stacked text-center  >
+                              Quantidade:* <br/>
+                                  <ion-icon color="primary"  class="decrement"  name="remove-circle" (click)="decrement()"></ion-icon>
+                                  <strong style="font-size: 25px;font-weight: 300" (ionChange)="clearValues()">{{quantidade}}</strong>  
+                                  <ion-icon color="primary" class="increment" name="add-circle" (click)="increment()" ></ion-icon>
+                      </ion-label>
+                    </div>
+                    <div class="subBox1">
+                      <ion-item>   
+                          <ion-label stacked >Desconto*</ion-label>
+                              <ion-input  text-center  type="number" text-center formControlName="desconto" [(ngModel)]="desconto" (ionChange)="calc()"></ion-input>
+                      </ion-item>
+                    </div> 
+                    <div class="subBox1">
+                        <ion-item>   
+                            <ion-label stacked text-center>Valor*</ion-label>
+                                <ion-input text-center   type="number" formControlName="valor"  [(ngModel)]="valor" (ionChange)="calc()"></ion-input>
+                        </ion-item>
+                      </div> 
+                      
+                      <div class="subBox1" style="margin-right: 4px;width:150px">
+                          <ion-item>   
+                              <ion-label style="font-size:20px;color:blue" text-center  stacked >Sub-total*</ion-label>
+                                  <ion-input [disabled]="true" style="font-size:30px;color:darkblue"  type="number" text-center formControlName="subTotal"  [(ngModel)]="subTotal"></ion-input>
+                            
+                          </ion-item>
+                       </div> 
+                 </div>
+            </form>      
+         </div>  
+      <div class="iconStyle" style="">
+          <ion-icon color="primary" class="iconDetails" style="" name="add-circle" (click)="addItem()"></ion-icon>
+            <strong style="margin-left: 5px">Adicionar</strong>
+      </div> 
+    </ion-card>
+    
+   
+
+</ion-content>

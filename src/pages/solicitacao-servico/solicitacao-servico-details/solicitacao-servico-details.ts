@@ -170,4 +170,10 @@ export class SolicitacaoServicoDetailsPage {
 
         }          
   }
+
+
+  showCreateOrcamento(){
+    this.navCtrl.push('CreateOrcamentoPage');
+  }
+
 }

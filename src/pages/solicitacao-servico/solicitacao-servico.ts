@@ -138,7 +138,9 @@ export class SolicitacaoServicoPage {
   }
 
 
-  increment(){this.contador = this.contador + 1;}
+  increment(){
+    this.contador = this.contador + 1;
+  }
 
   decrement(){ 
    if(this.contador<=1){  

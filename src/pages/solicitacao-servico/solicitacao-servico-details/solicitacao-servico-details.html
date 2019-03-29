@@ -21,7 +21,7 @@
             <div style="margin-bottom: 30px"  *ngIf="viewPrestador">
               <profile-client
               [cliente_nome] = solicitacao?.cliente.nome
-              [cliente_sobrenome] = solicitaca?.cliente.sobrenome
+              [cliente_sobrenome] = solicitacao?.cliente.sobrenome
               [cliente_img] ="cliente?.imageUrl || 'assets/imgs/avatar-blank.png'"
               ></profile-client>
             </div>
@@ -39,7 +39,7 @@
               <p class="area-text">{{item?.descricao}}</p>
           </div> 
           
-          <button *ngIf="viewPrestador"  block  ion-button>Gerar um orçamento</button>     
+          <button *ngIf="viewPrestador"  block  ion-button (click)="showCreateOrcamento()">Gerar um orçamento</button>     
     </div>     
 
 </ion-content>

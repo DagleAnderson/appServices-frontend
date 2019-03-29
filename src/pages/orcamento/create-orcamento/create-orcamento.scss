@@ -1,0 +1,49 @@
+page-create-orcamento {
+    .subTitle{
+        font-family: Verdana, Geneva, Tahoma, sans-serif; 
+        font-size: 14px;
+        color: rgb(75, 75, 75);
+        font-weight: bold;
+        border:#81b7eb solid 0.1px;
+        padding-left: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+     }
+    
+     
+    .iconStyle{
+        float: left; 
+        margin-left: 55px; 
+        height: 100px;
+        margin-top:-30px;
+        margin-left: 10px; 
+        width: 80px;
+    }
+
+    .iconDetails{
+        font-size: 30px;
+        margin-top: 45px;
+        margin-left: 25px;
+    }
+
+    .decrement{
+        float:left;font-size:22px;margin:10px 10px 10px 10px;
+    }
+
+    .increment{
+        font-size:22px;margin:10px 10px 10px 10px; 
+    }
+
+    .box1{
+
+        float: left;
+        height: 170px;
+        width: 300px;
+    }
+
+    .subBox1{
+        float: left;
+        width: 98px;
+        height: 70px;
+    }
+}
