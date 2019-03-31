@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { ItensOrcamentoDTO } from '../../../models/ItensOrcamento.dto';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { isRightSide } from 'ionic-angular/umd/util/util';
@@ -19,21 +19,15 @@ import { isRightSide } from 'ionic-angular/umd/util/util';
 export class CreateOrcamentoPage {
   formGroup: FormGroup;
 
-  quantidade:number = 1;
+  unidadeMd:string = "UN";
+  unidadeSigla:string;
+  quantidade:number = 1.0;
+  quantidadeString:string ='1.0';
   desconto:number=0.00;
   valor:number=0.00;
   subTotal:number=0.00;
 
   newItem = 0;
-
-  /**itemObj:ItensOrcamentoDTO = {
-    id:" ",
-    item:" ",
-    quantidade:0,
-    desconto:0,
-    valor:0,
-    subTotal:0
-  }; */
 
   itemObj:ItensOrcamentoDTO; 
       
@@ -42,10 +36,11 @@ export class CreateOrcamentoPage {
 
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
-     public formBuider:FormBuilder,) {
+     public formBuider:FormBuilder) {
 
     this.formGroup = this.formBuider.group({
       item:['',Validators.required],
+      unidade:[this.unidadeMd,Validators.required],
       quantidade:[ this.quantidade ,Validators.required],
       desconto:[ ,Validators.required],
       valor:[ ,Validators.required],
@@ -60,45 +55,72 @@ export class CreateOrcamentoPage {
   }
 
   increment(){
-    this.quantidade = this.quantidade + 1;
+    if(this.unidadeSigla =="UN"){
+      this.quantidade = this.quantidade + 1;
+      this.quantidadeString = this.quantidade.toFixed(1);
+      this.quantidade = Number(this.quantidadeString);
+
+
+    }else{
+     this.quantidade = this.quantidade + 0.1;
+     this.quantidadeString = this.quantidade.toFixed(1);
+     this.quantidade =  Number(this.quantidadeString);
+
+    }
     this.clearValues();
   }
 
   decrement(){ 
-   if(this.quantidade<=1){  
-   }else{
-    this.quantidade = this.quantidade - 1;
+    if(this.unidadeSigla == "UN"){
+      if(this.quantidade<=1){  
+      }else{
+        this.quantidade = this.quantidade - 1;
+        this.quantidadeString = this.quantidade.toFixed(1);
+        this.quantidade =  Number(this.quantidadeString);
+      }
+    }else{
+      if(this.quantidade<=1){  
+      }else{
+        this.quantidade = this.quantidade - 0.1;
+        this.quantidadeString = this.quantidade.toFixed(1);
+        this.quantidade =  Number(this.quantidadeString);
+      } 
+    }  
+    this.clearValues();
   }
-  this.clearValues();
+
+  unidadeType(){
+    
+    if(this.unidadeMd == "1"){
+      this.quantidade = 1;
+      this.quantidadeString = "1.0";
+      this.unidadeSigla="UN"
+    }else if(this.unidadeMd == "2"){
+      this.quantidade = 1;
+      this.quantidadeString = "1.0";
+      this.unidadeSigla="MT"
+    }else if(this.unidadeMd == "3"){
+      this.quantidade = 1;
+      this.quantidadeString = "1.0";
+      this.unidadeSigla="KG"
+    }else if(this.unidadeMd == "4"){
+      this.quantidade = 1.;
+      this.quantidadeString = "1.0";
+      this.unidadeSigla ="LT"
+    }else{
+      this.quantidade = 1.00;
+      this.unidadeSigla ="UN"
+    }
   }
 
-  /**this.itemObj.id = null,
-        this.itemObj.item= this.formGroup.value.item;
-        this.itemObj.quantidade = this.quantidade;
-        this.itemObj.desconto = this.formGroup.value.desconto;
-        this.itemObj.valor = this.formGroup.value.valor;
-        this.itemObj.subTotal = this.subTotal; */
-
-           /*  this.itemObj = this.listaItens.map(x =>{
-          return{
-            id:null,
-            item :this.formGroup.value.item,
-            quantidade:  this.quantidade,
-            desconto: this.formGroup.value.desconto,
-            valor:  this.formGroup.value.valor ,
-            subTotal: this.subTotal
-          }
-        })  ;*/
-
-
-  addItem(){ 
-
+  addItem(){  
         this.listaItens.push({
             id:null,
             item :this.formGroup.value.item,
             quantidade:  this.quantidade,
+            unidade : this.formGroup.value.unidade,
             desconto: this.formGroup.value.desconto,
-            valor:  this.formGroup.value.valor ,
+            valor:this.formGroup.value.valor,
             subTotal: this.subTotal
         }
         );
@@ -108,12 +130,21 @@ export class CreateOrcamentoPage {
         this.newItem = this.newItem + 1;
   }
 
-  removeItem(idItem:string){
+  removeItem(removeItem:ItensOrcamentoDTO){
     for(let i=0; i < this.listaItens.length;i++){
-      if(this.listaItens[i].id == idItem ){
+      console.log("list:"+this.listaItens[i]);
+      if(this.listaItens[i] == removeItem){
         this.listaItens.splice(i,1)
       }
       console.log(this.listaItens)
+    }
+  }
+
+  viewList(){
+    if(this.listaItens.length>0){
+        return false;
+    }else{
+        return true;
     }
   }
 

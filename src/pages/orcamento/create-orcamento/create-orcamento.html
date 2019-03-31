@@ -23,16 +23,17 @@
     
       <ion-card style="height: auto">  
           <h3 style="margin: 20px 0px; font-weight:400;font-size: 20px" text-center *ngIf="listaItens == 0"  >Lista Vazia</h3>
-                <div *ngFor="let itens of listaItens;let position = index"> 
+                <div *ngFor="let itens of listaItens;"> 
                   <h1 style="margin-top:30px;margin-left:18px">{{itens.item}}</h1>
                   <div ion-item>
                       <p>Quantidade : {{itens.quantidade}}</p>
+                      <p>Unidade : {{item.unidade}}</p>
                       <p>Desconto : {{itens.desconto  | currency}}</p>
                       <p>Valor : {{itens.valor | currency}}</p>
                       <p>sub-Total : {{itens.subTotal | currency}}</p>
                       
                           <div class="iconStyle" style="">
-                              <ion-icon color="danger" class="iconDetails" style="margin-left:-10px" name="trash" (click)="removeItem(index)"></ion-icon>
+                              <ion-icon color="danger" class="iconDetails" style="margin-left:-10px" name="trash" (click)="removeItem(itens)"></ion-icon>
                                 <strong style="margin-left: 5px">remover</strong>   
                           </div> 
                   </div>
@@ -48,33 +49,46 @@
                     <ion-label stacked >Descrição do item*</ion-label>
                         <ion-input  type="text" formControlName="item">{{item}}</ion-input>
                 </ion-item>
-               <div class="box1"> 
+                <p class="danger" *ngIf="formGroup.controls.item.dirty && formGroup.controls.item.errors" margin-left style="color:red;font-size: 12px">Valor inválido(minimo 10 e máximo 255 caracteres)</p> 
+                <div class="box1"> 
+                    <div class="subBox1">
+                        <ion-item>  
+                            <ion-label stacked text-center  >
+                                      Unidade:* <br/>
+                                      <ion-select  (ionChange)="unidadeType()" style="height: 35px;" formControlName="unidade" [(ngModel)]="unidadeMd">
+                                          <ion-option value="1"> UN </ion-option>
+                                          <ion-option value="2"> MT  </ion-option>
+                                          <ion-option value="3"> kG  </ion-option>
+                                          <ion-option value="4"> LT  </ion-option>
+                                      </ion-select>
+                            </ion-label>
+                        </ion-item> 
+                     </div>  
                    <div class="subBox1">
                       <ion-label stacked text-center  >
                               Quantidade:* <br/>
-                                  <ion-icon color="primary"  class="decrement"  name="remove-circle" (click)="decrement()"></ion-icon>
-                                  <strong style="font-size: 25px;font-weight: 300" (ionChange)="clearValues()">{{quantidade}}</strong>  
-                                  <ion-icon color="primary" class="increment" name="add-circle" (click)="increment()" ></ion-icon>
+                                  <ion-icon style="margin-left:20px" color="primary"  class="decrement"  name="remove-circle" (click)="decrement()"></ion-icon>
+                                  <strong style="font-size: 20px;font-weight: 300" (ionChange)="clearValues()">{{quantidadeString}}</strong>  
+                                  <ion-icon  style="margin-right:20px" color="primary" class="increment" name="add-circle" (click)="increment()" ></ion-icon>
                       </ion-label>
                     </div>
-                    <div class="subBox1">
+                    <div class="subBox2">
                       <ion-item>   
-                          <ion-label stacked >Desconto*</ion-label>
+                          <ion-label stacked  text-center>Desconto*</ion-label>
                               <ion-input  text-center  type="number" text-center formControlName="desconto" [(ngModel)]="desconto" (ionChange)="calc()"></ion-input>
                       </ion-item>
                     </div> 
-                    <div class="subBox1">
+                    <div class="subBox2">
                         <ion-item>   
                             <ion-label stacked text-center>Valor*</ion-label>
                                 <ion-input text-center   type="number" formControlName="valor"  [(ngModel)]="valor" (ionChange)="calc()"></ion-input>
                         </ion-item>
                       </div> 
                       
-                      <div class="subBox1" style="margin-right: 4px;width:150px">
+                      <div class="subBox2" style="margin-right: 4px;width:150px">
                           <ion-item>   
                               <ion-label style="font-size:20px;color:blue" text-center  stacked >Sub-total*</ion-label>
                                   <ion-input [disabled]="true" style="font-size:30px;color:darkblue"  type="number" text-center formControlName="subTotal"  [(ngModel)]="subTotal"></ion-input>
-                            
                           </ion-item>
                        </div> 
                  </div>
@@ -85,7 +99,7 @@
             <strong style="margin-left: 5px">Adicionar</strong>
       </div> 
     </ion-card>
-    
+    <button ion-button block [disabled]="viewList()">próximo</button>
    
 
 </ion-content>
