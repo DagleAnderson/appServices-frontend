@@ -1,5 +1,17 @@
 page-categorias {
+
     
+   
+    ion-title{
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 0 90px 1px;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+    }
+ 
     ion-content{
         background-image: url("../assets/imgs/background_1.jpg");
         background-size: 100%;
@@ -8,9 +20,9 @@ page-categorias {
         }
 
     ion-thumbnail{
-        margin-left: auto;
+        margin-left:auto;
         margin-right: auto;
-        width: 90px;
+        width: 110px;
 
     }
 
@@ -24,6 +36,20 @@ page-categorias {
         display: block;
         margin-left: auto;
         margin-right: auto;
+
+    }
+    .img-circle2{
+        border-radius: 50%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .listPrestadores{
+        float: left;
+        margin: 10px 15px;
+        width: 105px;
+        height: autopx;       
     }
 
     h3,p{
@@ -41,18 +67,55 @@ page-categorias {
      div h2{
         font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
         font-size: 20px;
-        color:#000;
+        color:#0f8bff;
+        padding-top: 20px;
      }
     
-    .datils{
+     .box1{
         width: 100%;
+        padding-top: 3px;
+        margin-left: auto;
+        margin-right: auto; 
+        height:140px;
+        margin-bottom: 10px;
+        font-family: sans-serif;
+        font-size: 1.5rem;
+        background:#fff;
+        
+       -webkit-box-shadow: 0px 3px 5px 0px rgba(184,175,184,1);
+       -moz-box-shadow: 0px 3px 5px 0px rgba(184,175,184,1);
+        box-shadow: 0px 3px 5px 0px rgba(184,175,184,1);
+     }
+
+     .box3{
+         margin-top: 5px;
+         height: auto;
+         padding-top: 0px;
+         margin-left: auto;
+         margin-right: auto;
+     }
+
+     .box3 h2{
+        padding-left: 10px;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        color: #0f8bff;
+        border-block-end-style: solid;
+        border-block-end-color:#9cbbff ;
+        border-block-end-width: 2px; 
+    }
+
+    .buttonDestaques{
+        background: transparent;
+    }
+    
+    .datils{
+        width: 115px;
         border-radius: 10%;
         height:auto;
         font-family: sans-serif;
         font-size: 1.5rem;
-        margin:0px 5px 10px;
-            
-        float: left;
+        margin:0px 5px 10px 5px;
         background:#fff;
         
        -webkit-box-shadow: 0px 3px 5px 0px rgba(184,175,184,1);

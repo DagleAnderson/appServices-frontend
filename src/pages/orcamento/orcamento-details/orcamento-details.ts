@@ -5,6 +5,8 @@ import { OrcamentoService } from '../../../services/domain/orcamento.service';
 import { ItensOrcamentoDTO } from '../../../models/ItensOrcamento.dto';
 import { PrestadorService } from '../../../services/domain/prestador.service';
 import { API_CONFIG } from '../../../config/api.config';
+import { PrestadorDTO } from '../../../models/prestador.dto';
+import { refDTO } from '../../../models/ref.dto';
 
 /**
  * Generated class for the OrcamentoDetailsPage page.
@@ -21,6 +23,9 @@ import { API_CONFIG } from '../../../config/api.config';
 export class OrcamentoDetailsPage {
 
   orcamento : OrcamentoDTO;
+  prestador_id : refDTO;
+  prestador : PrestadorDTO;
+
   itensOrcamento : ItensOrcamentoDTO[]; 
   dateFormatBr : string;
   position:number[];
@@ -39,16 +44,26 @@ export class OrcamentoDetailsPage {
       .subscribe(response =>{
         this.orcamento=response;
         this.itensOrcamento = response['itensOrcamento'];
+        
+        this.prestador_id = response['prestador'];
+        this.prestadorService.findByid(this.prestador_id.id)
+        .subscribe(response=>{
+            this.prestador = response;
+        })
+        
         this.getImageIfExists();
+
+        
+
        },   
       error =>{})
      
   }
 
   getImageIfExists(){
-    this.prestadorService.getImageFromBucket(this.orcamento.prestador.id)
+    this.prestadorService.getImageFromBucket(this.prestador_id.id)
       .subscribe(response =>{
-        this.orcamento.prestador.imageUrl = `${API_CONFIG.bucktBaseURL}/cp${this.orcamento.prestador.id}.jpg`;
+        this.prestador.imageUrl = `${API_CONFIG.bucktBaseURL}/cp${this.prestador_id.id}.jpg`;
       },
     error=>{})
   }

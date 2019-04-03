@@ -20,7 +20,13 @@ export class PrestadorService{
         return this.http.get(url,{responseType:'blob'});
     }
 
+
     findByid(prestador_id:string):Observable<PrestadorDTO>{
         return this.http.get<PrestadorDTO>(`${API_CONFIG.baseUrl}/prestador/${prestador_id}`)    
     }
+
+    findbyPage():Observable<PrestadorDTO[]>{
+        return this.http.get<PrestadorDTO[]>(`${API_CONFIG.baseUrl}/prestador/page`)
+    }
+
 }

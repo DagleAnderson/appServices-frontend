@@ -20,17 +20,17 @@
         <div *ngIf="orcamento?.situacao == 'ANALISE'" class="borderEnd ">
             <h2 style="background: rgb(170, 146, 7);color: #ffffff" text-center>Orcamento #{{orcamento?.id}} </h2>         
         </div>
-        <button class="buttonPrestador" (click)="viewPerfilPrestador(orcamento?.prestador.id)"> 
-            <div>
-            <profile-prestador 
-            [prestador_id]= orcamento?.prestador.id 
-            [prestador_nomeFantasia] = orcamento?.prestador.nomeFantasia
-            [prestador_slogan] = orcamento?.prestador.slogan
-            [prestador_img] ="orcamento?.prestador.imageUrl || 'assets/imgs/avatar-blank.png'"
-            ></profile-prestador>
-            <h4 style="color:#0f8bff">Visitar Perfil</h4>
-            </div>
-        </button >    
+      
+          <button class="buttonPrestador" (click)="viewPerfilPrestador(prestador?.id)"> 
+              <profile-prestador 
+              [prestador_id]= prestador?.id 
+              [prestador_nomeFantasia] = prestador?.nomeFantasia
+              [prestador_slogan] = prestador?.slogan
+              [prestador_img] ="prestador?.imageUrl || 'assets/imgs/avatar-blank.png'"
+              ></profile-prestador>
+              <h4 style="color:#0f8bff">Visitar Perfil</h4>
+          </button >
+    
           <p class="subTitle">Produto / Serviço </p> 
           <p>{{orcamento?.produtoServico}}</p>
           <p class="subTitle">Data do orçamento</p>

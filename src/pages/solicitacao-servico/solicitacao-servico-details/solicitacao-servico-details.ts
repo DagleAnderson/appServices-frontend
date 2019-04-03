@@ -172,8 +172,8 @@ export class SolicitacaoServicoDetailsPage {
   }
 
 
-  showCreateOrcamento(){
-    this.navCtrl.push('CreateOrcamentoPage');
+  showCreateOrcamento(solicitacao_id:string){
+    this.navCtrl.push('CreateOrcamentoPage',{solicitacao_id:solicitacao_id});
   }
 
 }

@@ -17,8 +17,8 @@
       <div *ngIf="solicitacao?.statusSolicitacao == 'ABERTA'" class="borderEnd ">
           <h2 style="background: rgb(0, 199, 10);color: #ffffff" text-center>Solicitação #{{solicitacao?.id}} </h2>         
       </div> 
-
-            <div style="margin-bottom: 30px"  *ngIf="viewPrestador">
+    
+            <div *ngIf="viewPrestador">
               <profile-client
               [cliente_nome] = solicitacao?.cliente.nome
               [cliente_sobrenome] = solicitacao?.cliente.sobrenome
@@ -39,7 +39,7 @@
               <p class="area-text">{{item?.descricao}}</p>
           </div> 
           
-          <button *ngIf="viewPrestador"  block  ion-button (click)="showCreateOrcamento()">Gerar um orçamento</button>     
+          <button *ngIf="viewPrestador"  block  ion-button (click)="showCreateOrcamento(solicitacao.id)">Gerar um orçamento</button>     
     </div>     
 
 </ion-content>

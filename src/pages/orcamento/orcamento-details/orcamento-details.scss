@@ -6,6 +6,7 @@ page-orcamento-details {
    profile-prestador p{
       margin-bottom: 20px;
       font-size: 14px;
+
    }
 
    div h2{
@@ -61,8 +62,12 @@ page-orcamento-details {
    }
     
    .buttonPrestador{
-      width: 327px;  
-      background: transparent;
+      width: 100%; 
+      background: transparent;   
+   }
+
+   .boxPrestador{
+    border: solid;
    }
      
      .borderEnd{

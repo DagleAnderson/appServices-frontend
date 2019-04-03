@@ -4,16 +4,17 @@
       <button  ion-button menuToggle>
           <ion-icon name="menu"></ion-icon>
       </button> 
-    <ion-title>Profissões</ion-title>
+    <ion-title>{{categoria?.nome}}</ion-title>
   </ion-navbar>
 </ion-header>
     
 <ion-content padding>
-
+  <div class="page">
      <ion-list>      
         <ion-searchbar placeholder="search"></ion-searchbar>
       <button ion-item  *ngFor="let profissao of profissoes" (click)="showPrestador(profissao.id)">
           <h2>{{profissao.nome}} </h2>
       </button>
-    </ion-list>  
+    </ion-list> 
+  </div>   
 </ion-content>

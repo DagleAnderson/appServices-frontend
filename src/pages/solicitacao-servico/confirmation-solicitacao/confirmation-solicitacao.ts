@@ -89,6 +89,8 @@ export class ConfirmationSolicitacaoPage {
         }
 
   }
+
+
   getDate(): string {
     var data = new Date();
     let newDate =data.getDate()+"/"+"0"+(data.getMonth()+1) +"/"+data.getFullYear();
@@ -97,9 +99,6 @@ export class ConfirmationSolicitacaoPage {
   }
 
   requestOrcamento(){
-    console.log(this.solicitacao);
-    var data = new Date();
-    console.log("data:"+data.getDate()+"/"+"0"+(data.getMonth()+1) +"/"+data.getFullYear())
       this.solicitacaoService.insert(this.solicitacao) 
       .subscribe(response =>{
         this.confirmation = response.headers.get('location');

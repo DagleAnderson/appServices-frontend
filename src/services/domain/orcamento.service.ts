@@ -10,6 +10,18 @@ export class OrcamentoService{
     constructor(public http :HttpClient){
 
     }
+   // http://localhost:8080/orcamento?cliente=1&prestador=1&solicitacaoServico=1
+    insert(obj: OrcamentoDTO){
+        return this.http.post(
+            `${API_CONFIG.baseUrl}/orcamento?cliente=`+obj.cliente.id+"&prestador="+obj.prestador.id+"&solicitacaoServico="+obj.solicitacao.id,
+            obj,
+            {
+                observe:'response',
+                responseType:'text'
+            },            
+        )
+    }
+
     findById(orcamento_id:string):Observable<OrcamentoDTO>{
         return this.http.get<OrcamentoDTO>(`${API_CONFIG.baseUrl}/orcamento/${orcamento_id}`)    
     }

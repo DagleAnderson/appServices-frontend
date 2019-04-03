@@ -9,35 +9,50 @@
     <button  ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>  
-    <ion-title>Painel</ion-title>
+    <ion-title color="warning">Painel</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
+    <div class="page">
       <br/>
-      <div class="datils" style="height: 120px;border-radius: 0%;margin-bottom: 20px">
+      <div class="box1" style="">
+
           <p text-center style="display: block; margin-left: auto;margin-right: auto;width: 90%;">
             Envie uma solicitação para todos os profissionais da área desejada e aguarde seus orçamentos!
           </p>
             <button style="width:85%;display: block; margin-left: auto;margin-right: auto "  ion-button block  outline  (click) = "showSolicitacaoServico()"> 
               Solicitar orçamentos
             </button>
-        </div>      
+      </div>      
       <div class="borderEnd">
           <h2 text-center>Categorias</h2>
       </div>  
-         
-     <ion-grid>
-        <ion-row text-center>  
-            <ion-col size="3" class="datils"  *ngFor="let item of itens" (click)= "showProfissoes(item.id)">
-                    <ion-thumbnail item-start>
-                        <img class="img-circle" src="{{bucketUrl}}/cat{{item.id}}.jpg">
-                    </ion-thumbnail>
-                    <p>{{item.nome}}</p>
-            </ion-col>
-          </ion-row>
-     </ion-grid>   
-    
+      
+      <ion-grid  >     
+          <ion-row text-center>
+                  <ion-col size="3" class="datils"  *ngFor="let item of itens" (click)= "showProfissoes(item.id)">
+                        <ion-thumbnail item-start>
+                            <img class="img-circle" src="{{bucketUrl}}/categorias/cat{{item.id}}.jpg">
+                        </ion-thumbnail>
+                        <p>{{item.nome}}</p>
+                        <p></p>
+                  </ion-col>
+          </ion-row> 
+      </ion-grid>
+      <ion-card>
+          <div class="box3">
+              <h2 text-center> Profissionais em Destaque</h2>
+                <div class="listPrestadores" *ngFor="let prestador of prestadores">
+                    <button class="buttonDestaques" (click)="viewPerfilPrestador(prestador?.id)">
+                      <img  class="img-circle2" src="{{bucketUrl}}/cat{{prestador.id}}.jpg"> 
+                      <p  style="font-size:10px " text-center>{{prestador?.nomeFantasia}}</p>
+                      <p  style="font-size:10px "  text-center>{{prestador?.profissaoNome}}</p>
+                    </button>
+                </div>            
+          </div>
+      </ion-card>  
+    </div>   
 </ion-content>
 
 

@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CategoriaService } from '../../services/domain/categoria.service';
 import { CategoriaDTO } from '../../models/categoria.dto';
 import { API_CONFIG } from '../../config/api.config';
+import { PrestadorDTO } from '../../models/prestador.dto';
+import { PrestadorService } from '../../services/domain/prestador.service';
 
 /**
  * Generated class for the CategoriasPage page.
@@ -20,10 +22,13 @@ export class CategoriasPage {
 
   bucketUrl: string = API_CONFIG.bucktBaseURL;
   itens : CategoriaDTO[];
+  prestadores:PrestadorDTO[];
+
   constructor(
     public navCtrl: NavController,
      public navParams: NavParams,
-     public categoriaService: CategoriaService
+     public categoriaService: CategoriaService,
+     public prestadorService:PrestadorService
     ) {
   }
 
@@ -31,6 +36,11 @@ export class CategoriasPage {
     this.categoriaService.findAll()
     .subscribe(response =>{
       this.itens = response;  
+
+     this.prestadorService.findbyPage()
+     .subscribe(response=>{
+        this.prestadores = response['content'];
+     })
     },
     error => {});
   }
@@ -41,5 +51,9 @@ export class CategoriasPage {
 
   showSolicitacaoServico(){
     this.navCtrl.push('SolicitacaoServicoPage')
+  }
+
+  viewPerfilPrestador(prestador_id:number){
+    this.navCtrl.push('ProfilePrestadorPage',{prestador_id:prestador_id})
   }
 }
