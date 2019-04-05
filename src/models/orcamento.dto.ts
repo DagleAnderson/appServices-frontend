@@ -1,9 +1,8 @@
-import { PrestadorDTO } from "./prestador.dto";
-import { ClienteDTO } from "./cliente.dto";
+
 import { ItensOrcamentoDTO } from "./ItensOrcamento.dto";
 import { refDTO } from "./ref.dto";
-import { FormaPagamentoDTO } from "./FormaPagamento.dto";
-import { SolicitacaoServicoDTO } from "./solicitacaoServico.dto";
+import { FormaDePagamentoDTO } from "./FormaDePagamento.dto";
+
 
 export interface OrcamentoDTO{
     id:string;
@@ -14,7 +13,7 @@ export interface OrcamentoDTO{
     itensOrcamento:ItensOrcamentoDTO[];
     desconto:number;
     total:number;
-    formaDePagamento:FormaPagamentoDTO[];
+    formaDePagamento:FormaDePagamentoDTO[];
     situacao:string;
     solicitacao:refDTO;
 }
