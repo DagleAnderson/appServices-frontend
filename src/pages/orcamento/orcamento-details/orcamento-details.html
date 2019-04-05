@@ -10,7 +10,7 @@
     </ion-navbar>
   </ion-header>
   <ion-content padding>
-      <div>
+      <div class="page">
         <div *ngIf="orcamento?.situacao == 'PENDENTE'" class="borderEnd ">
           <h2 style="background: red;color: #ffffff" text-center>Orcamento #{{orcamento?.id}} </h2>         
         </div> 
@@ -53,8 +53,7 @@
            </div>
 
            <div *ngIf="orcamento?.situacao == 'PENDENTE'" ion-item>
-                <p> Você também pode por esse orçamento </p>
-                <p>em análise para uma futura aprovação!</p> 
+                <p text-center class="area-text"> Você também pode por esse orçamento em análise para uma futura aprovação! </p>
                 <button  block outline ion-button> Desejo por em Análise</button>
                 
            </div>

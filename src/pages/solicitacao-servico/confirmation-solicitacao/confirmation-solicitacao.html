@@ -14,7 +14,7 @@
 </ion-header>
 
 <ion-content padding>
-    <div>
+    <div class="page">
       <div *ngIf="!confirmation">
               <div  *ngIf="catSelected==1">
                   <p class="subTitle">Profissional Solicitado</p>
@@ -219,24 +219,25 @@
 
 
           <div  class="datils" style="margin-bottom: 40px">
-              <img style="float:left;margin:20px 10px 20px 10px" width="50px" height="50px"  [src]="'assets/icon/attention.png'">
+              <img class="atencion"  [src]="'assets/icon/attention.png'">
               <p > recomendamos que matenha a coerência e clareza entre as respostas  para que os prestadores possam melhor 
               ajudá-lo. Boa sorte!</p>
           </div>
         <button ion-button block   style="margin-bottom: 40px" (click)="requestOrcamento()" >Confirmar Solicitação</button>
-      </div> 
+    </div> 
           
-          
-
+        <!-- Confirmação de envio de solicitação-->
           <div style=" padding:50px 0px 0px 0px" *ngIf="confirmation">
             <ion-card-header>
               <h1 text-center>Pronto!</h1>
               <h3 text-center>Sua Solicitação foi enviada</h3>
-              <p text-center>agora é só aguardar seus orçamentos</p>
-              <img  style=" position:absolute; margin-left: 70px;margin-top: 30px; width:150px;height: 300px;" [src]="'assets/icon/mascote.JPEG'"> 
+              <p text-center class="area-confirmation">agora é só aguardar seus orçamentos</p>
+              <div  class="boxMascote">
+                  <img  class="mascote" [src]="'assets/icon/mascote.JPEG'"> 
+              </div>  
             </ion-card-header>
               <div>
-                <button style="margin-top:325px" ion-button block (click)="setCategoriasPage()">ok, vou aguardar meus orçamentos</button>
+                <button  ion-button block (click)="setCategoriasPage()">ok, vou aguardar meus orçamentos</button>
               </div>
           </div>
     

@@ -1,5 +1,16 @@
 page-profile-prestador {
 
+    .planoDeFundo{
+        background-image: url("../assets/imgs/planoDeFundo.png");
+    }
+
+    profile-prestador h2{
+        color: #FFF;
+    }
+
+    profile-prestador p{
+        color: #FFF;
+    }
     .img-circle{
         border-radius: 50%;
     }
@@ -42,9 +53,7 @@ page-profile-prestador {
         white-space: normal; 
         display: block;
         border: solid;
-        border-color: transparent;
-
-        
+        border-color: transparent;  
     }
 
     #divTitle{

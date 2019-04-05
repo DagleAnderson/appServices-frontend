@@ -1,4 +1,4 @@
-import { CurriculoDTO } from "./curriculo.dto";
+
 
 export interface CursosDTO{
     id?:string;

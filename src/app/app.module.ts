@@ -17,9 +17,6 @@ import { PrestadorService } from '../services/domain/prestador.service';
 import { SolicitacaoServicoService } from '../services/domain/solicitacaoServico.service';
 import { OrcamentoService } from '../services/domain/orcamento.service';
 import { PedidoService } from '../services/domain/pedido.service';
-import { ProfileClientComponent } from '../components/profile-client/profile-client';
-
-
 
 
 @NgModule({

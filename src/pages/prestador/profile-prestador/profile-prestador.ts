@@ -8,6 +8,7 @@ import { CursosDTO } from '../../../models/cursos.dto';
 import { ExperienciasDTO } from '../../../models/experiencias.dto';
 import { AvaliacoesDTO } from '../../../models/avaliacoes.dto';
 import { ClienteDTO } from '../../../models/cliente.dto';
+import { isEmpty } from 'rxjs/operator/isEmpty';
 
 
 /**
@@ -31,6 +32,7 @@ export class ProfilePrestadorPage {
   experiencias: ExperienciasDTO[];
   cliente:ClienteDTO[];
   avaliacoes: AvaliacoesDTO[];
+  numAvalicoes:number = 0;
   
   
 
@@ -54,10 +56,22 @@ export class ProfilePrestadorPage {
     this.prestadorService.findByid(prestador_id)
     .subscribe(response =>{
         this.curriculo = response['curriculo'];
-        this.cursos = this.curriculo.cursos;
-        this.experiencias = this.curriculo.experiencias;
+        
+        if(this.curriculo != null){
+           this.cursos = this.curriculo.cursos;
+        }else{
+            this.cursos = Array[' '];
+        }
+        
+        if(this.curriculo != null){
+          this.experiencias = this.curriculo.experiencias;
+        }else{
+          this.experiencias = Array[' '];
+        }
         this.prestador = response;
         this.avaliacoes = response['avaliacoes'];
+        
+        this.numAvalicoes = this.avaliacoes.length;
         this.getImageIfExists();
  
     },

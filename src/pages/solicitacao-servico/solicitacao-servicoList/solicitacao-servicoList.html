@@ -9,33 +9,35 @@
   </ion-header>
   
   <ion-content padding>
-    <br/>  
-    <ion-item style="margin-bottom: 30px">
-        <ion-label stacked> Filtro de vizualiação : </ion-label>
-        <ion-select>
-            <ion-option  [selected]=true>Todas</ion-option>
-            <ion-option  >Abertas</ion-option>
-            <ion-option  >Fechadas</ion-option>
-        </ion-select>
-    </ion-item>  
-    
-   <ion-grid>
-      <ion-row text-center  *ngFor="let item of solicitacoes ;">  
-            <button ion-item  (click)="showSolicitacao(item.id)">   
-              <h1 style="margin-bottom:10px">Solicitação #{{item.id}}</h1>
-              <p>Produto / Serviço : {{item.produtoServico}} </p>
-              <p>Profissional Solicitado : {{item.profissao}}</p>
-              <p *ngIf="item.statusSolicitacao == 'ABERTA'">
-                  Status:<b style="color:rgb(0, 199, 10)">{{item.statusSolicitacao}}</b></p>
-              <p *ngIf="item.statusSolicitacao == 'FECHADA'">
-                  Status:<b style="color:red">{{item.statusSolicitacao}}</b></p> 
-              <p style="font-weight: bold" text-center>...</p>
-              <p style="float:right;color: blue"> ver detalhes</p>        
-          </button> 
-          <button *ngIf="item.statusSolicitacao == 'ABERTA'"  block  ion-button (click)="showListOrcamentos(item.id)">Ver Orçamentos!</button> 
-      </ion-row>
-          
-   </ion-grid> 
+    <div class="page">
+            <br/>  
+            <ion-item style="margin-bottom: 30px">
+                <ion-label stacked> Filtro de vizualiação : </ion-label>
+                <ion-select>
+                    <ion-option  [selected]=true>Todas</ion-option>
+                    <ion-option  >Abertas</ion-option>
+                    <ion-option  >Fechadas</ion-option>
+                </ion-select>
+            </ion-item>  
+            
+        <ion-grid>
+            <ion-row text-center  *ngFor="let item of solicitacoes ;">  
+                    <button ion-item  (click)="showSolicitacao(item.id)">   
+                    <h1 style="margin-bottom:10px">Solicitação #{{item.id}}</h1>
+                    <p>Produto / Serviço : {{item.produtoServico}} </p>
+                    <p>Profissional Solicitado : {{item.profissao}}</p>
+                    <p *ngIf="item.statusSolicitacao == 'ABERTA'">
+                        Status:<b style="color:rgb(0, 199, 10)">{{item.statusSolicitacao}}</b></p>
+                    <p *ngIf="item.statusSolicitacao == 'FECHADA'">
+                        Status:<b style="color:red">{{item.statusSolicitacao}}</b></p> 
+                    <p style="font-weight: bold" text-center>...</p>
+                    <p style="float:right;color: blue"> ver detalhes</p>        
+                </button> 
+                <button *ngIf="item.statusSolicitacao == 'ABERTA'"  block  ion-button (click)="showListOrcamentos(item.id)">Ver Orçamentos!</button> 
+            </ion-row>
+                
+        </ion-grid> 
+     </div>   
 
   </ion-content>
   

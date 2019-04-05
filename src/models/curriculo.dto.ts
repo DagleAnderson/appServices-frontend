@@ -5,6 +5,6 @@ import { ExperienciasDTO } from "./experiencias.dto";
 export interface CurriculoDTO{
     id : string;
     prestador:PrestadorDTO;
-    cursos:CursosDTO[];
-    experiencias:ExperienciasDTO[];
+    cursos?:CursosDTO[];
+    experiencias?:ExperienciasDTO[];
 }

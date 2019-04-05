@@ -11,7 +11,8 @@
 </ion-header>
 
 <ion-content padding>
-    <!-- fab placed to the top end -->
+  <div class="page">
+  <!-- fab placed to the top end -->
 
             <p class="subTitle">Produto / Serviço </p> 
             <p>{{solicitacao?.produtoServico}}</p>
@@ -105,7 +106,7 @@
                         <ion-input  text-center  style="font-size:30px;"  type="number" text-center formControlName="descontoGeral" [(ngModel)]="descontoGeral" (ionChange)="calcTotal()"></ion-input>
                 </ion-item>
             </div>
-            <div class="subBox1" style="margin-right: 4px;width:150px;">
+            <div class="subBox1" style="margin-right: 4px;">
               <ion-item>   
                   <ion-label style="font-size:20px;color:blue" text-center  stacked >Total*</ion-label>
                       <ion-input [disabled]="true" style="font-size:30px;color:darkblue"  type="number" text-center formControlName="total"  [(ngModel)]="total"  (ionChange)="calcTotal()"></ion-input>
@@ -115,6 +116,6 @@
       </form>        
     </ion-card>
     <button ion-button block [disabled]="viewList()" (click)="nextPage()">próximo</button>
-   
+ </div>  
 
 </ion-content>

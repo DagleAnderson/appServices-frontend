@@ -9,31 +9,32 @@
   </ion-header>
   <ion-content padding>
     
-      
-  <ion-item>
-      <ion-label stacked> Filtro de vizualização : </ion-label>
-      <ion-select>
-          <ion-option  [selected]=true>Todos</ion-option>
-          <ion-option  >Pendentes</ion-option>
-          <ion-option  >em Análise</ion-option>
-          <ion-option  >Aprovados</ion-option>
-      </ion-select>
-  </ion-item>
-  <br/><br/>
+    <div class="page">  
+      <ion-item>
+          <ion-label stacked> Filtro de vizualização : </ion-label>
+          <ion-select>
+              <ion-option  [selected]=true>Todos</ion-option>
+              <ion-option  >Pendentes</ion-option>
+              <ion-option  >em Análise</ion-option>
+              <ion-option  >Aprovados</ion-option>
+          </ion-select>
+      </ion-item>
+      <br/><br/>
 
-   <ion-grid>
-      <ion-row text-center>  
-            <button ion-item *ngFor="let orcamento of orcamentos" (click)= " showOrcamento(orcamento.id)">
-              <h1 style="margin-bottom:0px">Orcamento #{{orcamento.id}}</h1>
-              <p style="margin-bottom:10px;font-size:12px">Solicitação #{{solicitacaoId}}</p>
-              <p>Produto / Serviço : {{orcamento.produtoServico}} </p>
-              <p>Prestador : {{orcamento.prestador}}</p>
-              <p>Total: {{orcamento.total}}</p>
-              <p *ngIf="orcamento.situacao =='PENDENTE'">Status:<b style="color:red">{{orcamento.situacao}}</b></p>
-              <p *ngIf="orcamento.situacao =='APROVADO'">Status:<b style="color:rgb(0, 199, 10)">{{orcamento.situacao}}</b></p>
-              <p *ngIf="orcamento.situacao =='ANALISE'">Status:<b style="color:rgb(170, 146, 7)">{{orcamento.situacao}}</b></p>
-          </button>  
-        </ion-row>
-   </ion-grid>   
+      <ion-grid>
+          <ion-row text-center>  
+                <button ion-item *ngFor="let orcamento of orcamentos" (click)= " showOrcamento(orcamento.id)">
+                  <h1 style="margin-bottom:0px">Orcamento #{{orcamento.id}}</h1>
+                  <p style="margin-bottom:10px;font-size:12px">Solicitação #{{solicitacaoId}}</p>
+                  <p>Produto / Serviço : {{orcamento.produtoServico}} </p>
+                  <p>Prestador : {{orcamento.prestador}}</p>
+                  <p>Total: {{orcamento.total}}</p>
+                  <p *ngIf="orcamento.situacao =='PENDENTE'">Status:<b style="color:red">{{orcamento.situacao}}</b></p>
+                  <p *ngIf="orcamento.situacao =='APROVADO'">Status:<b style="color:rgb(0, 199, 10)">{{orcamento.situacao}}</b></p>
+                  <p *ngIf="orcamento.situacao =='ANALISE'">Status:<b style="color:rgb(170, 146, 7)">{{orcamento.situacao}}</b></p>
+              </button>  
+            </ion-row>
+      </ion-grid>   
+    </div>  
   </ion-content>
   

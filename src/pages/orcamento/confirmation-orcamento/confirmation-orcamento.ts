@@ -61,6 +61,9 @@ export class ConfirmationOrcamentoPage {
     });   
   }
 
+  setCategoriasPage(){
+    this.navCtrl.setRoot("CategoriasPage");
+   }
 
 
 }

@@ -38,8 +38,8 @@ export class CategoriasPage {
       this.itens = response;  
 
      this.prestadorService.findbyPage()
-     .subscribe(response=>{
-        this.prestadores = response['content'];
+     .subscribe(response=>{      
+          this.prestadores = response['content'];
      })
     },
     error => {});

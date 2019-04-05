@@ -33,7 +33,7 @@
           <ion-row text-center>
                   <ion-col size="3" class="datils"  *ngFor="let item of itens" (click)= "showProfissoes(item.id)">
                         <ion-thumbnail item-start>
-                            <img class="img-circle" src="{{bucketUrl}}/categorias/cat{{item.id}}.jpg">
+                            <img class="img-circle" src="{{bucketUrl}}/categorias/cat{{item.id}}.png">
                         </ion-thumbnail>
                         <p>{{item.nome}}</p>
                         <p></p>
@@ -44,9 +44,9 @@
           <div class="box3">
               <h2 text-center> Profissionais em Destaque</h2>
                 <div class="listPrestadores" *ngFor="let prestador of prestadores">
-                    <button class="buttonDestaques" (click)="viewPerfilPrestador(prestador?.id)">
+                    <button  class="buttonDestaques" (click)="viewPerfilPrestador(prestador?.id)">
                       <img  class="img-circle2" src="{{bucketUrl}}/cat{{prestador.id}}.jpg"> 
-                      <p  style="font-size:10px " text-center>{{prestador?.nomeFantasia}}</p>
+                      <p  style=" font-weight: bold; font-size:10px " text-center>{{prestador?.nomeFantasia}}</p>
                       <p  style="font-size:10px "  text-center>{{prestador?.profissaoNome}}</p>
                     </button>
                 </div>            

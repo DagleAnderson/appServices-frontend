@@ -14,31 +14,33 @@
 </ion-header>
 
 <ion-content padding>
-    <br/>   
-    <ion-item style="margin-bottom: 30px">
-        <ion-label stacked> Filtro de vizualiação : </ion-label>
-        <ion-select>
-            <ion-option  [selected]=true>Todos</ion-option>
-            <ion-option  >Abertos</ion-option>
-            <ion-option  >Fechados</ion-option>
-        </ion-select>
-    </ion-item>
+    <br/>
+    <div class="page">   
+        <ion-item style="margin-bottom: 30px">
+            <ion-label stacked> Filtro de vizualiação : </ion-label>
+            <ion-select>
+                <ion-option  [selected]=true>Todos</ion-option>
+                <ion-option  >Abertos</ion-option>
+                <ion-option  >Fechados</ion-option>
+            </ion-select>
+        </ion-item>
 
-    <ion-grid>
-        <ion-row text-center>  
-              <button ion-item *ngFor="let pedido of pedidos" (click)= " showPedidos(pedido.id)">
-                <h1 style="margin-bottom:10px">Pedido #{{pedido.id}}</h1>
-                
-                <p>Prestador : {{pedido.prestador}}</p>
-                <p>Produto / Serviço : {{pedido.produtoServico}} </p>
-                <p>Total : {{pedido.total | currency}}</p>
-                <p *ngIf="pedido.situacao == 'FECHADO'">
-                  Status :<b style="color:rgb(0, 199, 10)">{{pedido.statusPagamento}}</b></p>
-                <p *ngIf="pedido.statusPagamento!= 'FECHADO'">
-                  Status do pagamento : <b style="color:red">{{pedido.statusPagamento}}</b></p>
-                <p style="font-weight: bold" text-center>...</p>
-                <p style="float:right;color: blue"> ver detalhes</p>  
-            </button>  
-          </ion-row>
-     </ion-grid>   
+        <ion-grid>
+            <ion-row text-center>  
+                  <button ion-item *ngFor="let pedido of pedidos" (click)= " showPedidos(pedido.id)">
+                    <h1 style="margin-bottom:10px">Pedido #{{pedido.id}}</h1>
+                    
+                    <p>Prestador : {{pedido.prestador}}</p>
+                    <p>Produto / Serviço : {{pedido.produtoServico}} </p>
+                    <p>Total : {{pedido.total | currency}}</p>
+                    <p *ngIf="pedido.situacao == 'FECHADO'">
+                      Status :<b style="color:rgb(0, 199, 10)">{{pedido.statusPagamento}}</b></p>
+                    <p *ngIf="pedido.statusPagamento!= 'FECHADO'">
+                      Status do pagamento : <b style="color:red">{{pedido.statusPagamento}}</b></p>
+                    <p style="font-weight: bold" text-center>...</p>
+                    <p style="float:right;color: blue"> ver detalhes</p>  
+                </button>  
+              </ion-row>
+        </ion-grid>
+   </div>        
 </ion-content>

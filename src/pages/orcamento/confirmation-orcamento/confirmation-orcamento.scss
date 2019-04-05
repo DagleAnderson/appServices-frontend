@@ -69,6 +69,29 @@ page-confirmation-orcamento {
              border-block-end-color:rgb(90, 90, 90);
              border-block-end-width: 0.8px;  
           }
+
+          .boxMascote{
+            margin-top: 50px;
+            height: auto;           
+          }
+
+          .mascote{
+            width:150px;
+            height: 300px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            
+          }
+
+          .area-confirmation{
+            height: auto px; 
+            overflow: hidden;
+            white-space: normal; 
+            display: block;
+            border: solid;
+            border-color: transparent;  
+        }
              
            .footer{
                  background:#2ba0ff;
