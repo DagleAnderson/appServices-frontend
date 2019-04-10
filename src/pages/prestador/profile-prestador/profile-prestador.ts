@@ -13,7 +13,7 @@ import { PagSeguroDTO } from '../../../models/pagSeguro.dto';
 import { StorageService } from '../../../services/storage.service';
 import { ClienteService } from '../../../services/domain/cliente.service';
 import { InAppBrowser} from '@ionic-native/in-app-browser/ngx';
-import { refDTO } from '../../../models/ref.dto';
+import { refDTO } from '../../../models/InternalClasses/ref.dto';
 
 
 /**

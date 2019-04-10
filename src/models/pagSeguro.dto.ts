@@ -1,5 +1,4 @@
-
-import { refDTO } from "./ref.dto";
+import { refDTO } from "./InternalClasses/ref.dto";
 
 export interface PagSeguroDTO{
     id:string;

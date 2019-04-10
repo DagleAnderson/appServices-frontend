@@ -6,8 +6,13 @@ import { ItensOrcamentoDTO } from '../../../models/ItensOrcamento.dto';
 import { PrestadorService } from '../../../services/domain/prestador.service';
 import { API_CONFIG } from '../../../config/api.config';
 import { PrestadorDTO } from '../../../models/prestador.dto';
-import { refDTO } from '../../../models/ref.dto';
+import { refDTO } from '../../../models/InternalClasses/ref.dto';
 import { FormaDePagamentoDTO } from '../../../models/FormaDePagamento.dto';
+import { StorageService } from '../../../services/storage.service';
+import { ClienteService } from '../../../services/domain/cliente.service';
+import { SolicitacaoServicoService } from '../../../services/domain/solicitacaoServico.service';
+import { SituacaoDTO } from '../../../models/InternalClasses/situacao.dto';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 
 /**
  * Generated class for the OrcamentoDetailsPage page.
@@ -26,17 +31,28 @@ export class OrcamentoDetailsPage {
   orcamento : OrcamentoDTO;
   prestador_id : refDTO;
   prestador : PrestadorDTO;
+  cliente_id:refDTO;
+
+
+  situacaoOrc:SituacaoDTO;
 
   itensOrcamento : ItensOrcamentoDTO[]; 
   formaDePagamento: FormaDePagamentoDTO;
   dateFormatBr : string;
   position:number[];
 
+  confirmation:string;
+  aprovado:boolean;
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
+    public alertController: AlertController,
     public orcamentoService:OrcamentoService,
-    public prestadorService:PrestadorService) {
+    public storage : StorageService,
+    public prestadorService:PrestadorService,
+    public clienteService:ClienteService,
+    public solicitacaoService:SolicitacaoServicoService) {
   }
 
   ionViewDidLoad() {
@@ -90,6 +106,83 @@ export class OrcamentoDetailsPage {
   viewPerfilPrestador(prestador_id:number){
     this.navCtrl.push('ProfilePrestadorPage',{prestador_id:prestador_id})
   }
+
+  async refrashStatus(situacao:string){ 
+   
+    const alert = await this.alertController.create({
+      title: '<div align="center">Confirmação</div>',
+      message: '<div align="center">Deseja realmente aprovar este orçamento?</div>',
+      buttons: [{
+        text: 'Sim',
+        handler: () => {
+          console.log('Confirm Okay');                      
+                let localUser = this.storage.getLocalUser();
+                if(localUser &&  localUser.email){
+
+                    this.orcamentoService.findById(this.orcamento.id)
+                    .subscribe(response=>{
+                          this.situacaoOrc = {situacao:response['situacao']};
+
+                          console.log(this.situacaoOrc);
+
+                          this.situacaoOrc.situacao = situacao;
+                          
+                          this.orcamentoService.put(this.orcamento,this.situacaoOrc)
+                        .subscribe(response=>{
+                          this.confirmation = response.headers.get('location');
+                          console.log(this.confirmation);
+                          
+                          if(this.situacaoOrc.situacao=='ANALISE'){
+                          this.navCtrl.setRoot("OrcamentoListPage");
+                          }
+                          console.log(this.aprovado)
+                            if(this.situacaoOrc.situacao=='APROVADO'){
+                            this.aprovado = true;
+
+                            console.log(this.aprovado)
+                            }
+                          
+                        }) 
+
+                    })
+              
+                      
+              }else{
+                this.navCtrl.setRoot("HomePage");
+              }
+        }
+      },
+        {
+          text: 'Não',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel: blah');
+          }
+        }
+     ]
+    });
+
+     await alert.present();
+  }
   
+
+  setCategoriasPage(){
+    this.navCtrl.setRoot("CategoriasPage");
+
+    const alert = this.alertController.create({
+      title: 'Sua Solicitação continuará aberta para novos orçamentos!',
+      message: '<div align="center">Se deseja fechar e não receber mais orçamentos vá em :<strong> Menu  > Minhas solicitações. </strong></div>',
+      buttons: [
+        {   
+            text:'ok'
+        },
+     ]
+    });
+
+     alert.present();
+    
+   }
+
 
 }

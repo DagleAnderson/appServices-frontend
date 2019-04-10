@@ -4,7 +4,7 @@ import { SolicitacaoServicoDTO } from '../../../../models/solicitacaoServico.dto
 import { SolicitacaoServicoService } from '../../../../services/domain/solicitacaoServico.service';
 import { ClienteService } from '../../../../services/domain/cliente.service';
 import { StorageService } from '../../../../services/storage.service';
-import { refDTO } from '../../../../models/ref.dto';
+import { refDTO } from '../../../../models/InternalClasses/ref.dto';
 import { ClienteDTO } from '../../../../models/cliente.dto';
 
 /**

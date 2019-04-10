@@ -9,7 +9,7 @@ import { ClienteService } from '../../../services/domain/cliente.service';
 import { StorageService } from '../../../services/storage.service';
 import { ClienteDTO } from '../../../models/cliente.dto';
 import { PrestadorDTO } from '../../../models/prestador.dto';
-import { refDTO } from '../../../models/ref.dto';
+import { refDTO } from '../../../models/InternalClasses/ref.dto';
 
 /**
  * Generated class for the CreateOrcamentoPage page.
@@ -270,5 +270,6 @@ export class CreateOrcamentoPage {
     this.navCtrl.setRoot("HomePage");
   }
 }
+
 
 }

@@ -29,7 +29,12 @@
                   <p>Valor : {{itemOrcamento?.valor | currency}}</p>
                   <p>sub-Total : {{itemOrcamento?.subTotal | currency}}</p>
               </div> 
-          </div>   
+          </div>  
+          <h3 text-center  class="subTitle" >Forma de Pagamento</h3>
+          <div ion-item >
+              <p>Tipo:{{orcamento?.formaDePagamento['@type']}}</p>
+              <p>Parcelas:{{orcamento?.formaDePagamento.numeroDeParcelas}}</p> 
+          </div>  
           <p style="font-weight: bold">Desconto geral no orcamento : {{orcamento?.desconto  | currency}}</p> 
           <h3 text-center class="subTitle">Totais do Orcamento</h3>
           <div  ion-item >

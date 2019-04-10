@@ -1,5 +1,5 @@
 import { ItensSolicitacaoServicoDTO } from "./ItensSolicitacaoServico.dto";
-import { refDTO } from "./ref.dto";
+import { refDTO } from "./InternalClasses/ref.dto";
 import { ClienteDTO } from "./cliente.dto";
 import { ProfissaoDTO } from "./profissao.dto";
 

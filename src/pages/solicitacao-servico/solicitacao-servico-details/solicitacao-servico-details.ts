@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams} from 'ionic-angular';
 import { SolicitacaoServicoService } from '../../../services/domain/solicitacaoServico.service';
 import { SolicitacaoServicoDTO } from '../../../models/solicitacaoServico.dto';
 import { ItensSolicitacaoServicoDTO } from '../../../models/ItensSolicitacaoServico.dto';
-import { refDTO } from '../../../models/ref.dto';
+import { refDTO } from '../../../models/InternalClasses/ref.dto';
 import { ProfissaoService } from '../../../services/domain/profissao.service';
 import { ProfissaoDTO } from '../../../models/profissao.dto';
 import { ClienteService } from '../../../services/domain/cliente.service';

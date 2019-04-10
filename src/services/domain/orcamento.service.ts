@@ -3,6 +3,7 @@ import { Observable } from "rxjs";
 import { OrcamentoDTO } from "../../models/orcamento.dto";
 import { API_CONFIG } from "../../config/api.config";
 import { HttpClient } from "@angular/common/http";
+import { SituacaoDTO } from "../../models/InternalClasses/situacao.dto";
 
 @Injectable()
 export class OrcamentoService{
@@ -15,6 +16,17 @@ export class OrcamentoService{
         return this.http.post(
             `${API_CONFIG.baseUrl}/orcamento?cliente=`+obj.cliente.id+"&prestador="+obj.prestador.id+"&solicitacaoServico="+obj.solicitacao.id,
             obj,
+            {
+                observe:'response',
+                responseType:'text'
+            },            
+        )
+    }
+
+    put(obj:OrcamentoDTO,objSituacao:SituacaoDTO){
+        return this.http.put(
+            `${API_CONFIG.baseUrl}/orcamento/`+obj.id,
+            objSituacao,
             {
                 observe:'response',
                 responseType:'text'

@@ -32,6 +32,7 @@ export class OrcamentoListPage {
      this.orcamentoService.findAll()
       .subscribe(response =>{
         this.orcamentos = response; 
+        console.log(this.orcamentos)
       },
       error => {});
 

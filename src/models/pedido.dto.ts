@@ -1,6 +1,6 @@
 import { PrestadorDTO } from "./prestador.dto";
 import { ItensPedidoDTO } from "./ItensPedido.dto";
-import { refDTO } from "./ref.dto";
+import { refDTO } from "./InternalClasses/ref.dto";
 
 export interface PedidoDTO{
     id:string;

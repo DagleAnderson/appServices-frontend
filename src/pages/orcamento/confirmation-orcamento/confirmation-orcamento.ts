@@ -38,6 +38,7 @@ export class ConfirmationOrcamentoPage {
     this.orcamento = this.navParams.get('orcamento');
     this.itensOrcamento = this.navParams.get('listaItens');
     this. contItens();
+    this.checkForma(this.orcamento);
 
     console.log(this.orcamento);
   }
@@ -47,9 +48,23 @@ export class ConfirmationOrcamentoPage {
       this.totalDeItens = this.totalDeItens + 1;
     } 
   }
+
+  checkForma(formaDePagamento: OrcamentoDTO): any {
+    if(this.orcamento.formaDePagamento["@type"] == "pagamentoComDinheiro"){
+      this.orcamento.formaDePagamento["@type"] ="Dinheiro";
+    }else{
+      this.orcamento.formaDePagamento["@type"] ="Cartão"
+    }
+}
   
 
   submitOrcamento(){
+    if(this.orcamento.formaDePagamento["@type"] == "Dinheiro"){
+      this.orcamento.formaDePagamento["@type"] ="pagamentoComDinheiro";
+    }else{
+      this.orcamento.formaDePagamento["@type"] ="pagamentoComCartao"
+    }
+
     this.orcamentoService.insert(this.orcamento) 
     .subscribe(response=>{
       this.confirmation = response.headers.get('location');
