@@ -7,6 +7,7 @@ import { PrestadorService } from '../../../services/domain/prestador.service';
 import { API_CONFIG } from '../../../config/api.config';
 import { PrestadorDTO } from '../../../models/prestador.dto';
 import { refDTO } from '../../../models/ref.dto';
+import { FormaDePagamentoDTO } from '../../../models/FormaDePagamento.dto';
 
 /**
  * Generated class for the OrcamentoDetailsPage page.
@@ -27,6 +28,7 @@ export class OrcamentoDetailsPage {
   prestador : PrestadorDTO;
 
   itensOrcamento : ItensOrcamentoDTO[]; 
+  formaDePagamento: FormaDePagamentoDTO;
   dateFormatBr : string;
   position:number[];
 
@@ -44,6 +46,7 @@ export class OrcamentoDetailsPage {
       .subscribe(response =>{
         this.orcamento=response;
         this.itensOrcamento = response['itensOrcamento'];
+        this.checkForma(this.orcamento);
         
         this.prestador_id = response['prestador'];
         this.prestadorService.findByid(this.prestador_id.id)
@@ -52,12 +55,16 @@ export class OrcamentoDetailsPage {
         })
         
         this.getImageIfExists();
-
-        
-
        },   
       error =>{})
      
+  }
+  checkForma(formaDePagamento: OrcamentoDTO): any {
+      if(this.orcamento.formaDePagamento["@type"] == "pagamentoComDinheiro"){
+        this.orcamento.formaDePagamento["@type"] ="Dinheiro";
+      }else{
+        this.orcamento.formaDePagamento["@type"] ="Cartão"
+      }
   }
 
   getImageIfExists(){

@@ -34,6 +34,7 @@ export class PaymentFormPage {
     this.listaItens = this.navParams.get('listaItens')
     console.log(this.orcamento);
     this.formGroup = this.formBuilder.group({
+      
       numeroDeParcelas:[1,Validators.required],
       "@type":["pagamentoComDinheiro",Validators.required]
     })
