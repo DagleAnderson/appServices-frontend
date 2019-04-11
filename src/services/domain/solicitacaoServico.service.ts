@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { SolicitacaoServicoDTO } from "../../models/solicitacaoServico.dto";
 import { API_CONFIG } from "../../config/api.config";
 import { Observable } from "rxjs";
+import { SituacaoDTO } from "../../models/InternalClasses/situacao.dto";
 
 @Injectable()
 export class SolicitacaoServicoService{
@@ -15,6 +16,17 @@ export class SolicitacaoServicoService{
         return this.http.post(
             `${API_CONFIG.baseUrl}/solicitacao?cliente=`+obj.cliente.id+"&profissao="+obj.profissao,
             obj,
+            {
+                observe:'response',
+                responseType:'text'
+            },            
+        )
+    }
+
+    put(obj:SolicitacaoServicoDTO,objSituacao:SituacaoDTO){
+        return this.http.put(
+            `${API_CONFIG.baseUrl}/solicitacao/`+obj.id,
+            objSituacao,
             {
                 observe:'response',
                 responseType:'text'

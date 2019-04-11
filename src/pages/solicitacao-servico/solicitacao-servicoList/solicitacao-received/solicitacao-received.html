@@ -27,10 +27,10 @@
                     <h1 style="margin-bottom:10px">Solicitação #{{solicitacao.id}}</h1>
                     <p>Produto / Serviço : {{solicitacao.produtoServico}} </p>
                     <p>Cliente : {{solicitacao.cliente}}</p>
-                    <p *ngIf="solicitacao.statusSolicitacao == 'ABERTA'">
-                        Status:<b style="color:rgb(0, 199, 10)">{{solicitacao.statusSolicitacao}}</b></p>
-                    <p *ngIf="solicitacao.statusSolicitacao == 'FECHADA'">
-                        Status:<b style="color:red">{{solicitacao.statusSolicitacao}}</b></p> 
+                    <p *ngIf="solicitacao.situacao == 'ABERTA'">
+                        Status:<b style="color:rgb(0, 199, 10)">{{solicitacao.situacao}}</b></p>
+                    <p *ngIf="solicitacao.situacao == 'FECHADA'">
+                        Status:<b style="color:red">{{solicitacao.situacao}}</b></p> 
                     <p style="font-weight: bold" text-center>...</p>
                     <p style="float:right;color: blue"> ver detalhes</p>        
                 </button> 

@@ -18,5 +18,5 @@ export interface SolicitacaoServicoDTO{
     itemSolicitacao8:ItensSolicitacaoServicoDTO;
     profissao:ProfissaoDTO;
     cliente:refDTO;
-    statusSolicitacao:string;
+    situacao:string;
 }

@@ -74,7 +74,7 @@ export class ConfirmationSolicitacaoPage {
                      itemSolicitacao7:solicitacaoParam.itemSolicitacao7,
                      itemSolicitacao8:solicitacaoParam.itemSolicitacao8,
                      profissao:solicitacaoParam.profissao,
-                     statusSolicitacao:"1"
+                     situacao:"1"
                     }; 
 
                     console.log(this.solicitacao);

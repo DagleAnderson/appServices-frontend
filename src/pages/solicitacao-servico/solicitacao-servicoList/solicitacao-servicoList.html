@@ -26,14 +26,14 @@
                     <h1 style="margin-bottom:10px">Solicitação #{{item.id}}</h1>
                     <p>Produto / Serviço : {{item.produtoServico}} </p>
                     <p>Profissional Solicitado : {{item.profissao}}</p>
-                    <p *ngIf="item.statusSolicitacao == 'ABERTA'">
-                        Status:<b style="color:rgb(0, 199, 10)">{{item.statusSolicitacao}}</b></p>
-                    <p *ngIf="item.statusSolicitacao == 'FECHADA'">
-                        Status:<b style="color:red">{{item.statusSolicitacao}}</b></p> 
+                    <p *ngIf="item.situacao == 'ABERTA'">
+                        Status:<b style="color:rgb(0, 199, 10)">{{item.situacao}}</b></p>
+                    <p *ngIf="item.situacao == 'FECHADA'">
+                        Status:<b style="color:red">{{item.situacao}}</b></p> 
                     <p style="font-weight: bold" text-center>...</p>
                     <p style="float:right;color: blue"> ver detalhes</p>        
                 </button> 
-                <button *ngIf="item.statusSolicitacao == 'ABERTA'"  block  ion-button (click)="showListOrcamentos(item.id)">Ver Orçamentos!</button> 
+                <button  block  ion-button (click)="showListOrcamentos(item.id)">Ver Orçamentos!</button> 
             </ion-row>
                 
         </ion-grid> 

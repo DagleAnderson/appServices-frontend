@@ -11,10 +11,10 @@
 </ion-header>
 <ion-content padding>
     <div class="page">
-      <div *ngIf="solicitacao?.statusSolicitacao == 'FECHADA'" class="borderEnd ">
+      <div *ngIf="solicitacao?.situacao == 'FECHADA'" class="borderEnd ">
           <h2 style="background: red;color: #ffffff" text-center>Solicitção #{{solicitacao?.id}} </h2>         
       </div> 
-      <div *ngIf="solicitacao?.statusSolicitacao == 'ABERTA'" class="borderEnd ">
+      <div *ngIf="solicitacao?.situacao == 'ABERTA'" class="borderEnd ">
           <h2 style="background: rgb(0, 199, 10);color: #ffffff" text-center>Solicitação #{{solicitacao?.id}} </h2>         
       </div> 
     
@@ -41,7 +41,7 @@
           
           <button *ngIf="viewPrestador"  block  ion-button (click)="showCreateOrcamento(solicitacao.id)">Gerar um orçamento</button>
 
-          <button *ngIf="!viewPrestador"  block  ion-button (click)="closeSolicitacao()">Fechar Solicitação</button>
+          <button *ngIf="!viewPrestador && solicitacao?.situacao=='ABERTA'"  block  ion-button (click)="closeSolicitacao()">Fechar Solicitação</button>
     </div>     
 
 </ion-content>

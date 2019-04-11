@@ -37,6 +37,7 @@ export class SolicitacaoServicoDetailsPage {
   cliente: ClienteDTO;
   orcamentos:OrcamentoDTO[];
   situacaoOrc:SituacaoDTO;
+  situacaoSolic:SituacaoDTO;
 
   dateFormatBr : string;
   viewPrestador : boolean =false;
@@ -202,8 +203,8 @@ export class SolicitacaoServicoDetailsPage {
     console.log("num:"+ this.orcPendeAnal);
     if(this.orcPendeAnal>0){
       const alert = await this.alertController.create({
-        title: '<div align="center">Atenção! &nbsp;&nbsp;<img  src="assets/icon/attention2.PNG" height="20 width="20" ></div>',
-        message:'<div align="center">ao fechar esta solicitação todos os orcamentos pendentes e em análise serão descartados.Deseja continuar?</div>',
+        title: '<div align="center">Ops!Foram encontrados alguns orçamentos. &nbsp;&nbsp;<img  src="assets/icon/attention2.PNG" height="20 width="20" ></div>',
+        message:'<div align="center">Ao fechar esta solicitação todos os orcamentos pendentes e em análise serão descartados.Deseja continuar?</div>',
         buttons: [{
           text: 'Sim',
           handler: () => {
@@ -225,11 +226,29 @@ export class SolicitacaoServicoDetailsPage {
                                 .subscribe(response=>{
                                 this.confirmation = response.headers.get('location');
                                 console.log(this.confirmation);
-                            
-                                }) 
+                                    })
+                                    
                             })
                           }
-                    }  
+                     } 
+                     
+                      //update de solicitacao para FECHADA
+                      this.solicitacaoService.findById(this.solicitacao.id)
+                      .subscribe(response=>{
+
+                          this.situacaoSolic = {situacao:response['situacao']}
+                          console.log(this.situacaoSolic);
+                          this.situacaoSolic.situacao = "FECHADA";
+                          this.solicitacaoService.put(this.solicitacao, this.situacaoSolic)
+                          .subscribe(response=>{
+                            this.confirmation = response.headers.get('location');
+                            console.log(this.confirmation);
+
+                            this.navCtrl.setRoot("SolicitacaoServicoListPage");
+                          })
+
+                       
+                        }) 
 
               }else{
                   this.navCtrl.setRoot("HomePage");
@@ -251,6 +270,14 @@ export class SolicitacaoServicoDetailsPage {
   }else{
 
     //update de solicitacao para FECHADA
+    this.situacaoSolic.situacao = "FECHADA"
+    this.solicitacaoService.put(this.solicitacao, this.situacaoSolic)
+    .subscribe(response=>{
+      this.confirmation = response.headers.get('location');
+      console.log(this.confirmation);
+
+      this.navCtrl.setRoot("SolicitacaoServicoListPage");
+    })
   }
 
   }
