@@ -108,62 +108,133 @@ export class OrcamentoDetailsPage {
   }
 
   async refrashStatus(situacao:string){ 
-   
-    const alert = await this.alertController.create({
-      title: '<div align="center">Confirmação</div>',
-      message: '<div align="center">Deseja realmente aprovar este orçamento?</div>',
-      buttons: [{
-        text: 'Sim',
-        handler: () => {
-          console.log('Confirm Okay');                      
-                let localUser = this.storage.getLocalUser();
-                if(localUser &&  localUser.email){
+    if(situacao == 'APROVADO'){
+            const alert = await this.alertController.create({
+              title: '<div align="center">Confirmação &nbsp;&nbsp;<img  src="assets/icon/ok.PNG" height="20 width="20" ></div>',
+              message: '<div align="center">Deseja realmente aprovar este orçamento?</div>',
+              buttons: [{
+                text: 'Sim',
+                handler: () => {
+                  console.log('Confirm Okay');                      
+                        let localUser = this.storage.getLocalUser();
+                        if(localUser &&  localUser.email){
 
-                    this.orcamentoService.findById(this.orcamento.id)
-                    .subscribe(response=>{
-                          this.situacaoOrc = {situacao:response['situacao']};
+                            this.orcamentoService.findById(this.orcamento.id)
+                            .subscribe(response=>{
+                                  this.situacaoOrc = {situacao:response['situacao']};
 
-                          console.log(this.situacaoOrc);
+                                  console.log(this.situacaoOrc);
 
-                          this.situacaoOrc.situacao = situacao;
-                          
-                          this.orcamentoService.put(this.orcamento,this.situacaoOrc)
-                        .subscribe(response=>{
-                          this.confirmation = response.headers.get('location');
-                          console.log(this.confirmation);
-                          
-                          if(this.situacaoOrc.situacao=='ANALISE'){
-                          this.navCtrl.setRoot("OrcamentoListPage");
-                          }
-                          console.log(this.aprovado)
-                            if(this.situacaoOrc.situacao=='APROVADO'){
-                            this.aprovado = true;
+                                  this.situacaoOrc.situacao = situacao;
+                                  
+                                  this.orcamentoService.put(this.orcamento,this.situacaoOrc)
+                                  .subscribe(response=>{
+                                  this.confirmation = response.headers.get('location');
+                                  console.log(this.confirmation);
+                                  
+                                    this.aprovado = true;
+ 
+                                }) 
 
-                            console.log(this.aprovado)
-                            }
-                          
-                        }) 
+                            })
+     
+                      }else{
+                        this.navCtrl.setRoot("HomePage");
+                      }
+                }
+              },
+                {
+                  text: 'Não',
+                  role: 'cancel',
+                  cssClass: 'secondary',
+                  handler: () => {
+                    console.log('Confirm Cancel: blah');
+                  }
+                }
+            ]
+            });
 
-                    })
-              
+            await alert.present();
+        }
+      if(situacao=='ANALISE'){
+        let localUser = this.storage.getLocalUser();
+                        if(localUser &&  localUser.email){
+
+                            this.orcamentoService.findById(this.orcamento.id)
+                            .subscribe(response=>{
+                                  this.situacaoOrc = {situacao:response['situacao']};
+
+                                  console.log(this.situacaoOrc);
+
+                                  this.situacaoOrc.situacao = situacao;
+                                  
+                                  this.orcamentoService.put(this.orcamento,this.situacaoOrc)
+                                .subscribe(response=>{
+                                  this.confirmation = response.headers.get('location');
+                                  console.log(this.confirmation);
+                                  
+                                  this.navCtrl.setRoot("OrcamentoListPage");
+                              
+                                }) 
+
+                            })
                       
-              }else{
-                this.navCtrl.setRoot("HomePage");
-              }
-        }
-      },
-        {
-          text: 'Não',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => {
-            console.log('Confirm Cancel: blah');
-          }
-        }
-     ]
-    });
+                              
+                      }else{
+                        this.navCtrl.setRoot("HomePage");
+                      }
+      }  
+      
+      if(situacao == 'REJEITADO'){
+        const alert = await this.alertController.create({
+          title: '<div align="center">Rejeição &nbsp;&nbsp;<img  src="assets/icon/x.PNG" height="20 width="20" ></div>',
+          message: '<div align="center">Deseja realmente rejeitar este orçamento?</div>',
+          buttons: [{
+            text: 'Sim',
+            handler: () => {
+              console.log('Confirm Okay');                      
+                    let localUser = this.storage.getLocalUser();
+                    if(localUser &&  localUser.email){
 
-     await alert.present();
+                        this.orcamentoService.findById(this.orcamento.id)
+                        .subscribe(response=>{
+                              this.situacaoOrc = {situacao:response['situacao']};
+
+                              console.log(this.situacaoOrc);
+
+                              this.situacaoOrc.situacao = situacao;
+                              
+                              this.orcamentoService.put(this.orcamento,this.situacaoOrc)
+                            .subscribe(response=>{
+                              this.confirmation = response.headers.get('location');
+                              console.log(this.confirmation);
+                              
+                              this.navCtrl.setRoot("OrcamentoListPage");
+                              
+                            }) 
+
+                        })
+                  
+                          
+                  }else{
+                    this.navCtrl.setRoot("HomePage");
+                  }
+            }
+          },
+            {
+              text: 'Não',
+              role: 'cancel',
+              cssClass: 'secondary',
+              handler: () => {
+                console.log('Confirm Cancel: blah');
+              }
+            }
+        ]
+        });
+
+        await alert.present();
+    }
+
   }
   
 
@@ -171,7 +242,7 @@ export class OrcamentoDetailsPage {
     this.navCtrl.setRoot("CategoriasPage");
 
     const alert = this.alertController.create({
-      title: 'Sua Solicitação continuará aberta para novos orçamentos!',
+      title: '<div align="center">Sua Solicitação continuará aberta para novos orçamentos!</div>',
       message: '<div align="center">Se deseja fechar e não receber mais orçamentos vá em :<strong> Menu  > Minhas solicitações. </strong></div>',
       buttons: [
         {   

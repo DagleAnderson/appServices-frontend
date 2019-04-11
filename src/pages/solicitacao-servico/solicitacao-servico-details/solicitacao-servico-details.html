@@ -39,7 +39,9 @@
               <p class="area-text">{{item?.descricao}}</p>
           </div> 
           
-          <button *ngIf="viewPrestador"  block  ion-button (click)="showCreateOrcamento(solicitacao.id)">Gerar um orçamento</button>     
+          <button *ngIf="viewPrestador"  block  ion-button (click)="showCreateOrcamento(solicitacao.id)">Gerar um orçamento</button>
+
+          <button *ngIf="!viewPrestador"  block  ion-button (click)="closeSolicitacao()">Fechar Solicitação</button>
     </div>     
 
 </ion-content>

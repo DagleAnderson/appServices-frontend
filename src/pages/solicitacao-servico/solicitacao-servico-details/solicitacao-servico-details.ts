@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController} from 'ionic-angular';
 import { SolicitacaoServicoService } from '../../../services/domain/solicitacaoServico.service';
 import { SolicitacaoServicoDTO } from '../../../models/solicitacaoServico.dto';
 import { ItensSolicitacaoServicoDTO } from '../../../models/ItensSolicitacaoServico.dto';
@@ -10,6 +10,11 @@ import { ClienteService } from '../../../services/domain/cliente.service';
 import { ClienteDTO } from '../../../models/cliente.dto';
 import { API_CONFIG } from '../../../config/api.config';
 import { Subscriber } from 'rxjs';
+import { OrcamentoDTO } from '../../../models/orcamento.dto';
+import { OrcamentoService } from '../../../services/domain/orcamento.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { StorageService } from '../../../services/storage.service';
+import { SituacaoDTO } from '../../../models/InternalClasses/situacao.dto';
 
 /**
  * Generated class for the SolicitacaoServicoDetailsPage page.
@@ -25,19 +30,27 @@ import { Subscriber } from 'rxjs';
 })
 export class SolicitacaoServicoDetailsPage {
   solicitacao : SolicitacaoServicoDTO;
-  itensSolicitacao : ItensSolicitacaoServicoDTO[]; 
-  dateFormatBr : string;
-  viewPrestador : boolean =false; 
+  itensSolicitacao : ItensSolicitacaoServicoDTO[];   
   profissao_id:refDTO;
   profissao:ProfissaoDTO;
   cliente_id:refDTO;
   cliente: ClienteDTO;
+  orcamentos:OrcamentoDTO[];
+  situacaoOrc:SituacaoDTO;
+
+  dateFormatBr : string;
+  viewPrestador : boolean =false;
+  orcPendeAnal:number =0;
+  confirmation:string;
 
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
+    public alertController: AlertController,
+    public storage : StorageService,
     public solicitacaoService:SolicitacaoServicoService,
+    public orcamentoService:OrcamentoService,
     public profissaoService : ProfissaoService,
     public clienteService : ClienteService) {
   }
@@ -51,6 +64,11 @@ export class SolicitacaoServicoDetailsPage {
         this.itensSolicitacao = response['itemServico'];
         this.profissao_id = response['profissao'];
         this.cliente_id = response['cliente'];
+
+        this.orcamentoService.findBySolicitacao(response["id"])
+        .subscribe(response=>{
+            this.orcamentos = response['content'];
+        })
 
         this.profissaoService.findById(this.profissao_id.id)
         .subscribe(response=>{
@@ -169,6 +187,72 @@ export class SolicitacaoServicoDetailsPage {
           this.itensSolicitacao[5].questions ="Desejo do cliente:";
 
         }          
+  }
+
+
+  async closeSolicitacao(){
+
+   //Verifica exisitência de orçamentos pendentes
+    for(let i=0;i<this.orcamentos.length;i++){
+      console.log(this.orcamentos[i].situacao);
+      if((this.orcamentos[i].situacao=="PENDENTE") || (this.orcamentos[i].situacao=="ANALISE")){
+        this.orcPendeAnal = this.orcPendeAnal + 1;
+      }
+    }
+    console.log("num:"+ this.orcPendeAnal);
+    if(this.orcPendeAnal>0){
+      const alert = await this.alertController.create({
+        title: '<div align="center">Atenção! &nbsp;&nbsp;<img  src="assets/icon/attention2.PNG" height="20 width="20" ></div>',
+        message:'<div align="center">ao fechar esta solicitação todos os orcamentos pendentes e em análise serão descartados.Deseja continuar?</div>',
+        buttons: [{
+          text: 'Sim',
+          handler: () => {
+            console.log('Confirm Okay');                      
+                  let localUser = this.storage.getLocalUser();
+                  if(localUser &&  localUser.email){
+
+                    for(let i=0;i<this.orcamentos.length;i++){
+                      if(this.orcamentos[i].situacao!="APROVADO"){
+                          this.orcamentoService.findById(this.orcamentos[i].id)
+                          .subscribe(response=>{
+                                this.situacaoOrc = {situacao:response['situacao']};
+
+                                console.log(this.situacaoOrc);
+
+                                this.situacaoOrc.situacao = 'REJEITADO';
+                                
+                                this.orcamentoService.put(this.orcamentos[i],this.situacaoOrc)
+                                .subscribe(response=>{
+                                this.confirmation = response.headers.get('location');
+                                console.log(this.confirmation);
+                            
+                                }) 
+                            })
+                          }
+                    }  
+
+              }else{
+                  this.navCtrl.setRoot("HomePage");
+                }
+          }
+        },
+          {
+            text: 'Não',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: () => {
+              console.log('Confirm Cancel: blah');
+            }
+          }
+      ]
+      });
+
+      await alert.present();
+  }else{
+
+    //update de solicitacao para FECHADA
+  }
+
   }
 
 

@@ -2,6 +2,7 @@ import { ItensSolicitacaoServicoDTO } from "./ItensSolicitacaoServico.dto";
 import { refDTO } from "./InternalClasses/ref.dto";
 import { ClienteDTO } from "./cliente.dto";
 import { ProfissaoDTO } from "./profissao.dto";
+import { OrcamentoDTO } from "./orcamento.dto";
 
 export interface SolicitacaoServicoDTO{
     id:string;
