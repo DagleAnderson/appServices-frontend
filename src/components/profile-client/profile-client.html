@@ -1,7 +1,7 @@
 <!-- Generated template for the ProfilePrestadorComponent component -->
 <div>
     <ion-avatar>  
-        <img class="circle" [src]=cliente_img> 
+        <img class="circle" [src]="cliente_img  || 'assets/imgs/avatar-blank.png'"> 
         <h2 text-center>{{cliente_nome}} {{cliente_sobrenome}}</h2>
     </ion-avatar>
 </div>

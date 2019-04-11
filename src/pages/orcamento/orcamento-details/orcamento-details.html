@@ -23,9 +23,12 @@
         <div *ngIf="orcamento?.situacao == 'ANALISE'" class="borderEnd ">
             <h2 style="background: rgb(170, 146, 7);color: #ffffff" text-center>Orcamento #{{orcamento?.id}} </h2>         
         </div>
+        <div *ngIf="orcamento?.situacao == 'REJEITADO'" class="borderEnd ">
+            <h2 style="background: red;color: #ffffff" text-center>Orcamento #{{orcamento?.id}} </h2>         
+        </div>
       
           <button class="buttonPrestador" (click)="viewPerfilPrestador(prestador?.id)"> 
-            <div class="planoDeFundo">
+            <div *ngIf="!viewPrestador" class="planoDeFundo">
               <profile-prestador
                 [prestador_id]= prestador?.id 
                 [prestador_nomeFantasia] = prestador?.nomeFantasia
@@ -33,7 +36,15 @@
                 [prestador_img] ="prestador?.imageUrl || 'assets/imgs/avatar-blank.png'"
                 ></profile-prestador>
             </div>    
-              <h4 style="color:#0f8bff">Visitar Perfil</h4>
+              <h4  *ngIf="!viewPrestador"  style="color:#0f8bff">Visitar Perfil</h4>
+
+            <div *ngIf="viewPrestador">
+                <profile-client
+                  [cliente_nome] =cliente?.nome
+                  [cliente_sobrenome] =cliente?.sobrenome
+                  [cliente_img] ="cliente?.imageUrl || 'assets/imgs/avatar-blank.png'"
+                ></profile-client>
+            </div>
           </button >
           <div class="content">
               <p class="subTitle">Produto / Serviço </p> 
@@ -69,8 +80,8 @@
                     
               </div>
               <div *ngIf="orcamento?.situacao != 'APROVADO'">
-                  <button  block  ion-button (click)="refrashStatus('APROVADO')">Aprovar</button>  
-                  <button  block  ion-button (click)="refrashStatus('REJEITADO')">Não, Obrigado!</button>
+                  <button  *ngIf="!viewPrestador" block  ion-button (click)="refrashStatus('APROVADO')">Aprovar</button>  
+                  <button  *ngIf="!viewPrestador" block  ion-button (click)="refrashStatus('REJEITADO')">Não, Obrigado!</button>
               </div>
 
               <div  *ngIf="orcamento?.situacao == 'APROVADO' ">

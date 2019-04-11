@@ -45,7 +45,7 @@ export class MyApp {
     this.pagesPrestador = [
       { title: 'Meu Perfil Profissional', component: '' },
       {title: 'Solicitações Recebidas',component:'SolicitacaoReceivedPage'},
-      {title: 'Orçamentos Enviadas',component:''},
+      {title: 'Orçamentos Enviadas',component:'OrcamentoSendPage'},
       {title: 'Pedidos Enviados',component:''},
       { title: 'Sair', component:''}
     ];

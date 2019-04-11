@@ -13,6 +13,7 @@ import { ClienteService } from '../../../services/domain/cliente.service';
 import { SolicitacaoServicoService } from '../../../services/domain/solicitacaoServico.service';
 import { SituacaoDTO } from '../../../models/InternalClasses/situacao.dto';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
+import { ClienteDTO } from '../../../models/cliente.dto';
 
 /**
  * Generated class for the OrcamentoDetailsPage page.
@@ -32,6 +33,7 @@ export class OrcamentoDetailsPage {
   prestador_id : refDTO;
   prestador : PrestadorDTO;
   cliente_id:refDTO;
+  cliente : ClienteDTO;
 
 
   situacaoOrc:SituacaoDTO;
@@ -43,6 +45,7 @@ export class OrcamentoDetailsPage {
 
   confirmation:string;
   aprovado:boolean;
+  viewPrestador:boolean=false;
 
   constructor(
     public navCtrl: NavController, 
@@ -56,7 +59,7 @@ export class OrcamentoDetailsPage {
   }
 
   ionViewDidLoad() {
- 
+    this.viewPrestador = this.navParams.get("viewPrestador");
     let orcamento_id = this.navParams.get('orcamento_id');
     this.orcamentoService.findById(orcamento_id)
       .subscribe(response =>{
@@ -68,7 +71,17 @@ export class OrcamentoDetailsPage {
         this.prestadorService.findByid(this.prestador_id.id)
         .subscribe(response=>{
             this.prestador = response;
-        })
+        },
+        error=>{})
+
+        this.cliente_id = response['cliente'];
+        this.clienteService.findById(this.cliente_id.id)
+        .subscribe(response =>{
+
+          this.cliente = response;
+
+        },
+        error=>{})
         
         this.getImageIfExists();
        },   
@@ -84,11 +97,20 @@ export class OrcamentoDetailsPage {
   }
 
   getImageIfExists(){
-    this.prestadorService.getImageFromBucket(this.prestador_id.id)
-      .subscribe(response =>{
-        this.prestador.imageUrl = `${API_CONFIG.bucktBaseURL}/cp${this.prestador_id.id}.jpg`;
-      },
-    error=>{})
+      if(!this.viewPrestador){
+          this.prestadorService.getImageFromBucket(this.prestador_id.id)
+            .subscribe(response =>{
+              this.prestador.imageUrl = `${API_CONFIG.bucktBaseURL}/cp${this.prestador_id.id}.jpg`;
+            },
+          error=>{})
+      }else{
+        this.clienteService.findById(this.cliente_id.id)
+        .subscribe(response =>{
+
+          this.cliente.imageUrl = `${API_CONFIG.bucktBaseURL}/cp${this.cliente.id}.jpg`;
+
+        },error=>{})
+      }    
   }
 
  /**  formatDate(obj:OrcamentoDTO){
