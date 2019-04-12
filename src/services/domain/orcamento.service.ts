@@ -46,4 +46,8 @@ export class OrcamentoService{
         return this.http.get<OrcamentoDTO[]>(`${API_CONFIG.baseUrl}/orcamento`);
     }
 
+    delete(orcamento_id:string){
+        return this.http.delete<OrcamentoDTO>(`${API_CONFIG.baseUrl}/orcamento/${orcamento_id}`) 
+    }
+
 }

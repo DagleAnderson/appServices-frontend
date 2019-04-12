@@ -29,21 +29,26 @@
         
       <ion-grid>
           <ion-row text-center>  
-                <button ion-item *ngFor="let orcamento of orcamentos" (click)= " showOrcamento(orcamento.id)">
+                 <ion-item  *ngFor="let orcamento of orcamentos" >
                   <h1 style="margin-bottom:10px">Orcamento #{{orcamento.id}}</h1>
-                  
-                  <p>Produto / Serviço : {{orcamento.produtoServico}} </p>
-                  <p>Prestador : {{orcamento.prestador}}</p>
-                  <p>Total : {{orcamento.total  | currency}}</p>
-                  <p *ngIf="orcamento.situacao == 'APROVADO'">
-                    Status : <b style="color:rgb(0, 199, 10)">{{orcamento.situacao}}</b></p>
-                  <p *ngIf="orcamento.situacao != 'APROVADO'  && orcamento.situacao != 'ANALISE'">
-                    Status : <b style="color:red">{{orcamento.situacao}}</b></p> 
-                  <p *ngIf="orcamento.situacao == 'ANALISE'">
-                    Status : <b style="color:rgb(170, 146, 7)">{{orcamento.situacao}}</b></p>
-                  <p style="font-weight: bold" text-center>...</p>
-                  <p style="float:right;color: blue"> ver detalhes</p>      
-              </button>  
+                  <div *ngIf="orcamento.situacao != 'APROVADO'  && orcamento.situacao != 'ANALISE'" class="iconStyle" >
+                      <ion-icon color="danger" class="iconDetails" style="margin-left:-10px" name="trash" (click)="removeOrcamento(orcamento.id)"></ion-icon>
+                  </div> 
+                      <button ion-item (click)= " showOrcamento(orcamento.id)">
+                          <p>Produto / Serviço : {{orcamento.produtoServico}} </p>
+                          <p>Prestador : {{orcamento.prestador}}</p>
+                          <p>Total : {{orcamento.total  | currency}}</p>
+                          <p *ngIf="orcamento.situacao == 'APROVADO'">
+                            Status : <b style="color:rgb(0, 199, 10)">{{orcamento.situacao}}</b></p>
+                          <p *ngIf="orcamento.situacao != 'APROVADO'  && orcamento.situacao != 'ANALISE'">
+                            Status : <b style="color:red">{{orcamento.situacao}}</b></p> 
+                          <p *ngIf="orcamento.situacao == 'ANALISE'">
+                            Status : <b style="color:rgb(170, 146, 7)">{{orcamento.situacao}}</b></p>
+                          <p style="font-weight: bold" text-center>...</p>
+                          <p style="float:right;color: blue"> ver detalhes</p>
+                    </button>              
+                </ion-item>          
+                
             </ion-row>
       </ion-grid>  
      </div>  

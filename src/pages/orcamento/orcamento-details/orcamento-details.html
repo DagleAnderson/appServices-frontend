@@ -75,8 +75,8 @@
                     <p>Total   : {{orcamento?.total  | currency}}</p>
               </div>
               <div *ngIf="orcamento?.situacao == 'PENDENTE'" ion-item>
-                    <p text-center class="area-text"> Você também pode por esse orçamento em análise para uma futura aprovação! </p>
-                    <button  block outline ion-button name="analise" (click)="refrashStatus('ANALISE')"> Desejo por em Análise</button>
+                    <p *ngIf="!viewPrestador" text-center class="area-text"> Você também pode por esse orçamento em análise para uma futura aprovação! </p>
+                    <button  *ngIf="!viewPrestador"  block outline ion-button name="analise" (click)="refrashStatus('ANALISE')"> Desejo por em Análise</button>
                     
               </div>
               <div *ngIf="orcamento?.situacao != 'APROVADO'">

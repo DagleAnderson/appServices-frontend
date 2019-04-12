@@ -151,14 +151,14 @@ export class OrcamentoDetailsPage {
                                   
                                   this.orcamentoService.put(this.orcamento,this.situacaoOrc)
                                   .subscribe(response=>{
-                                  this.confirmation = response.headers.get('location');
-                                  console.log(this.confirmation);
+                                      this.confirmation = response.headers.get('location');
+                                      console.log(this.confirmation);
                                   
                                     this.aprovado = true;
  
                                 }) 
 
-                            })
+                            },error=>{})
      
                       }else{
                         this.navCtrl.setRoot("HomePage");
