@@ -14,6 +14,7 @@ import { StorageService } from '../../../services/storage.service';
 import { ClienteService } from '../../../services/domain/cliente.service';
 import { InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 import { refDTO } from '../../../models/InternalClasses/ref.dto';
+import { EnderecoDTO } from '../../../models/endereco';
 
 
 /**
@@ -36,7 +37,9 @@ export class ProfilePrestadorPage {
   cursos : CursosDTO[];
   experiencias: ExperienciasDTO[];
   cliente:ClienteDTO;
+  endereco:EnderecoDTO;
   avaliacoes: AvaliacoesDTO[];
+
   numAvalicoes:number = 0;
   createadPag_id:refDTO;
   url:string;
@@ -77,6 +80,8 @@ export class ProfilePrestadorPage {
               
                 this.prestadorService.findByid(prestador_id)
                 .subscribe(response =>{
+                        
+                        this.endereco = response['endereco'];
                         this.curriculo = response['curriculo'];
                         
                         if(this.curriculo != null){

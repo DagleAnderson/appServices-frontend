@@ -51,7 +51,7 @@ export class OrcamentoSendPage {
     console.log("passei aqui")
     const alert = await this.alertController.create({
       title: '<div align="center">Confirmação &nbsp;&nbsp;<img  src="assets/icon/ok.PNG" height="20 width="20" ></div>',
-      message: '<div align="center">Deseja realmente deletar este orçamento?</div>',
+      message: '<div align="center">Deseja realmente apagar o orcamento #'+id+'</div>',
       buttons: [{
         text: 'Sim',
         handler: () => {

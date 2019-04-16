@@ -35,7 +35,7 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pagesCliente = [
       { title: 'Perfil', component: 'ProfilePage' },
-      { title: 'Categarias', component: 'CategoriasPage' },
+      { title: 'Categorias', component: 'CategoriasPage' },
       {title: 'Minhas Solicitações',component:'SolicitacaoServicoListPage'},
       {title: 'Meus Orçamentos',component:'OrcamentoListPage'},
       {title: 'Meus Pedidos',component:'PedidoListPage'},

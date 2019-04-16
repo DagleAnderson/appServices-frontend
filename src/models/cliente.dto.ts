@@ -1,4 +1,6 @@
 
+import { EnderecoDTO } from "./endereco";
+
 export interface ClienteDTO{
     id:string;
     nome:string;
@@ -6,4 +8,6 @@ export interface ClienteDTO{
     data_nascimento:Date;
     email:string;
     imageUrl? :string;
+    endereco : EnderecoDTO;
+    telefones:string[];
 } 

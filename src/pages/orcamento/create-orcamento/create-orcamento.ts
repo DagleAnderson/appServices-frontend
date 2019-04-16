@@ -80,6 +80,7 @@ export class CreateOrcamentoPage {
       this.solicitacaoService.findById(solicitacao_id)
       .subscribe(response =>{
               this.solicitacao = response;
+              this.cliente = {id:response['cliente'].id};
       })
 
   
@@ -230,9 +231,7 @@ export class CreateOrcamentoPage {
     if(localUser &&  localUser.email){
         this.clienteService.findByEmail(localUser.email)
         .subscribe(response =>{
-            this.cliente ={id:response['id']};
             this.Prestador ={id :response['prestador'].id};
-            
             this.orcamento = {
               id:null,
               produtoServico:this.solicitacao.produtoServico,

@@ -3,7 +3,7 @@
     <button  ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
     </button> 
-      <ion-title></ion-title>
+      <ion-title> Perfil do Prestador</ion-title>
     </ion-navbar>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,6 +18,8 @@
                 [prestador_slogan] = prestador?.slogan
                 [prestador_img] = "prestador?.imageUrl || 'assets/imgs/avatar-blank.png'"
                 ></profile-prestador>
+                <p style=" margin-top:-25px; font-size:14px;color:#fff" text-center><strong>{{endereco?.cidade}} - {{endereco?.estado}}</strong></p>
+
             </div>  
             
                 <div>

@@ -19,6 +19,7 @@ import { PedidoDTO } from '../../../models/pedido.dto';
 export class PedidoListPage {
   pedidos: PedidoDTO[];
 
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,

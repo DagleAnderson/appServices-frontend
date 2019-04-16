@@ -12,6 +12,7 @@ export interface PrestadorDTO{
 	rua:string;
 	numero:string;
     complemento:string; 
+    telefones:string[];
     imageUrl?:string;
 
     curriculo:CurriculoDTO;

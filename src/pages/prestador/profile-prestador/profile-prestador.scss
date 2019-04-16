@@ -2,6 +2,7 @@ page-profile-prestador {
 
     .planoDeFundo{
         background-image: url("../assets/imgs/planoDeFundo.png");
+        padding-bottom: 0.2px;
     }
 
     profile-prestador h2{
@@ -10,6 +11,8 @@ page-profile-prestador {
 
     profile-prestador p{
         color: #FFF;
+        font-size: 15px;
+        margin-top: -3px;
     }
     
     .img-circle{

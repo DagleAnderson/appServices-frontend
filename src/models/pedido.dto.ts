@@ -1,15 +1,17 @@
-import { PrestadorDTO } from "./prestador.dto";
 import { ItensPedidoDTO } from "./ItensPedido.dto";
 import { refDTO } from "./InternalClasses/ref.dto";
+import { FormaDePagamentoDTO } from "./FormaDePagamento.dto";
 
 export interface PedidoDTO{
     id:string;
-    produtoServico;string;
-    prestador:PrestadorDTO;
-    data:Date;
+    produtoServico:string;
+    prestador:refDTO;
+    data:string;
     cliente:refDTO;
-    itemPedido:ItensPedidoDTO[];
+    itensPedido:ItensPedidoDTO[];
     desconto:number;
     total:number;
-    situacao:string;
+    formaDePagamento:FormaDePagamentoDTO[];
+    atendimento:string;
+    orcamento:refDTO;
 }

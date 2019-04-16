@@ -1,18 +1,24 @@
 page-pedido-details {
     
-   profile-prestador h2{
+   profile-prestador h2 {
       margin-bottom: -5px;
+      color: #FFF;
+      text-align: center;
    }
    profile-prestador p{
       margin-bottom: 20px;
       font-size: 14px;
+      color: #FFF;
+      padding-left: 0px;
    }
-
+   
+   .planoDeFundo{
+      background-image: url("../assets/imgs/planoDeFundo.png");
+  }
       
      div h2{
         font-family: Arial, Helvetica, sans-serif; 
         font-size: 20px;
-        color: #000000;
      }
   
       h1{

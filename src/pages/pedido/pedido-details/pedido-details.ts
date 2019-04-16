@@ -5,6 +5,12 @@ import { PedidoDTO } from '../../../models/pedido.dto';
 import { ItensPedidoDTO } from '../../../models/ItensPedido.dto';
 import { PrestadorService } from '../../../services/domain/prestador.service';
 import { API_CONFIG } from '../../../config/api.config';
+import { PrestadorDTO } from '../../../models/prestador.dto';
+import { ClienteDTO } from '../../../models/cliente.dto';
+import { ClienteService } from '../../../services/domain/cliente.service';
+import { refDTO } from '../../../models/InternalClasses/ref.dto';
+import { EnderecoDTO } from '../../../models/endereco';
+import { TelefoneDTO } from '../../../models/Telefone.dto';
 
 /**
  * Generated class for the PedidoDetailsPage page.
@@ -21,14 +27,20 @@ import { API_CONFIG } from '../../../config/api.config';
 export class PedidoDetailsPage {
 
   pedido:PedidoDTO;
+  prestador:PrestadorDTO;
+  cliente:ClienteDTO;
+  endereco:EnderecoDTO;
   itensPedido:ItensPedidoDTO[];
   dateFormatBr:string;
+
+  telefones:string[];
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public pedidoService:PedidoService,
-    public prestadorService:PrestadorService) {
+    public prestadorService:PrestadorService,
+    public clienteService:ClienteService) {
   }
 
   ionViewDidLoad() {
@@ -39,17 +51,26 @@ export class PedidoDetailsPage {
         this.pedido=response;
         this.formatDate(this.pedido);
         this.itensPedido = response['itensPedido'];
-        this.getImageIfExists();
 
+        this.prestadorService.findByid(response['prestador'].id)
+        .subscribe(response=>{
+           this.prestador = response;
+           this.telefones = response['telefones'];
+          
+           console.log(this.telefones);
+           this.endereco = response['endereco'];
+           this.getImageIfExists();
+
+        })
        },   
       error =>{})
      
   }
 
   getImageIfExists(){
-    this.prestadorService.getImageFromBucket(this.pedido.prestador.id)
+    this.prestadorService.getImageFromBucket(this.prestador.id)
       .subscribe(response =>{
-        this.pedido.prestador.imageUrl = `${API_CONFIG.bucktBaseURL}/cp${this.pedido.prestador.id}.jpg`;
+        this.prestador.imageUrl = `${API_CONFIG.bucktBaseURL}/cp${this.prestador.id}.jpg`;
       },
     error=>{})
   }

@@ -12,29 +12,64 @@
 
 <ion-content padding>
     <div class="page">
-        <div *ngIf="pedido?.statusPagamento == 'ABERTO'" class="borderEnd ">
+        <div *ngIf="pedido?.atendimento == 'PENDENTE'" class="borderEnd ">
           <h2 style="background: red;color: #ffffff" text-center>Pedido #{{pedido?.id}} </h2>         
         </div> 
-        <div *ngIf="pedido?.statusPagamento == 'FECHADO'" class="borderEnd ">
+        <div *ngIf="pedido?.atendimento == 'CONFIRMADO'" class="borderEnd ">
             <h2 style="background: rgb(0, 199, 10);color: #ffffff" text-center>Pedido #{{pedido?.id}} </h2>         
         </div> 
 
-        <div>
+        <div class="planoDeFundo">
             <profile-prestador 
-            [prestador_id]= pedido?.prestador.id 
-            [prestador_nomeFantasia] = pedido?.prestador.nomeFantasia
-            [prestador_slogan] = pedido?.prestador.slogan
-            [prestador_img] ="pedido?.prestador.imageUrl || 'assets/imgs/avatar-blank.png'"
+            [prestador_id]= prestador?.id 
+            [prestador_nomeFantasia] = prestador?.nomeFantasia
+            [prestador_slogan] = prestador?.slogan
+            [prestador_img] ="prestador?.imageUrl || 'assets/imgs/avatar-blank.png'"
             ></profile-prestador>
-        </div>     
         
-           <p class="subTitle">Produto / Serviço </p> 
+        </div>
+
+        <div *ngIf="viewPrestador">
+          <profile-client
+            [cliente_nome] =cliente?.nome
+            [cliente_sobrenome] =cliente?.sobrenome
+            [cliente_img] ="cliente?.imageUrl || 'assets/imgs/avatar-blank.png'"
+          ></profile-client>
+          
+      </div>
+
+        <div  style="margin-top:20px;margin-bottom: 30px">
+            <h3  class="subTitle">Endereço</h3>
+              <div >
+                <p><strong>Cidade :</strong>{{endereco?.cidade}}</p>
+                <p><strong>Estado :</strong>{{endereco?.estado}}</p>
+                <p><strong>CEP :</strong>   {{endereco?.cep}}</p>
+                <p><strong>Bairro :</strong>{{endereco?.bairro}}</p>
+                <p><strong>Rua :</strong>   {{endereco?.rua}}</p>
+                <p><strong>Número :</strong>{{endereco?.numero}}</p>
+                <p><strong>Complemento</strong> :{{endereco?.complemento}}</p>
+              </div>
+        </div>
+
+        <div  style="margin-top:10px;margin-bottom: 30px">
+          <h3  class="subTitle">Contatos </h3>
+              <div *ngFor="let telefone of telefones;let index = index">
+                <p><strong>Telefone {{index+1}}:</strong> {{telefone}}</p>
+              </div>
+        </div>
+
+        <div style="margin-top:10px;margin-bottom: 30px">
+          <h3 class="subTitle">Produto / Serviço </h3>   
           <p>{{pedido?.produtoServico}}</p>
-          <p class="subTitle">Data do orçamento</p>
+        </div>
+        <div style="margin-top:10px;margin-bottom: 30px">  
+          <h3 class="subTitle">Data do orçamento</h3>
           <p> {{dateFormatBr}}</p> 
-          <h3 text-center  class="subTitle" >Itens do Pedido</h3>
-          <div *ngFor="let itemPedido of itensPedido;">  
-              <h6>{{itemPedido?.item}}</h6>
+        </div>
+
+        <h3 text-center  class="subTitle" >Itens do Pedido</h3> 
+          <div *ngFor="let itemPedido of itensPedido;"> 
+            <h6>{{itemPedido?.item}}</h6>
               <div ion-item>
                   <p>Quantidade : {{itemPedido?.quantidade}}</p>
                   <p>Desconto : {{itemPedido?.desconto| currency}}</p>
@@ -49,13 +84,13 @@
                 <p>Total   : {{pedido?.total| currency}}</p>
            </div>
 
-           <div *ngIf="pedido?.statusPagamento != 'FECHADO'">
-              <button  block  ion-button>confirmar pagamento do pedido?</button>  
-              <button  block  ion-button> o atendimento não foi realizado!</button>
+           <div *ngIf="pedido?.atendimento == 'PENDENTE'">
+              <button  block  ion-button>Atendimento realizado</button>  
+              <button  block  ion-button> Atendimento não foi realizado!</button>
            </div>
 
-           <div  *ngIf="pedido?.statusPagamento == 'FECHADO' ">
-              <h6 text-center style="color: rgb(0, 199, 10)">Este pedido já foi finalizado e pago!</h6>
+           <div  *ngIf="pedido?.atendimento == 'REALIZADO' ">
+              <h6 text-center style="color: rgb(0, 199, 10)">Este pedido já foi atendido!</h6>
            </div>   
       </div>     
 </ion-content>
