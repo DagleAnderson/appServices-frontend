@@ -17,6 +17,7 @@ import { ClienteDTO } from '../../../models/cliente.dto';
 import { PedidoDTO } from '../../../models/pedido.dto';
 import { PedidoService } from '../../../services/domain/pedido.service';
 import { EnderecoDTO } from '../../../models/endereco';
+import { NgLocalization } from '@angular/common';
 
 /**
  * Generated class for the OrcamentoDetailsPage page.
@@ -50,9 +51,11 @@ export class OrcamentoDetailsPage {
   position:number[];
 
   confirmation:string;
-  aprovado:boolean;
+  aprovado:boolean =false;;
+  confirmationAtendimento:Boolean = false;
   viewPrestador:boolean=false;
   data:string;
+  codigo: string;
 
   constructor(
     public navCtrl: NavController, 
@@ -168,9 +171,8 @@ export class OrcamentoDetailsPage {
                                   
                                   this.orcamentoService.put(this.orcamento,this.situacaoOrc)
                                   .subscribe(response=>{
-                                      this.confirmation = response.headers.get('location');
-                                      console.log(this.confirmation);
-                                  
+                                    this.codigo = this.orcamento.id;  
+                                    console.log(this.codigo);
                                     this.aprovado = true;
  
                                 }) 
@@ -209,8 +211,8 @@ export class OrcamentoDetailsPage {
                                   
                                   this.orcamentoService.put(this.orcamento,this.situacaoOrc)
                                 .subscribe(response=>{
-                                  this.confirmation = response.headers.get('location');
-                                  console.log(this.confirmation);
+                                  this.codigo = this.orcamento.id;   
+                                  console.log(this.codigo);
                                   
                                   this.navCtrl.setRoot("OrcamentoListPage");
                               
@@ -245,8 +247,8 @@ export class OrcamentoDetailsPage {
                               
                               this.orcamentoService.put(this.orcamento,this.situacaoOrc)
                             .subscribe(response=>{
-                              this.confirmation = response.headers.get('location');
-                              console.log(this.confirmation);
+                              this.codigo = this.orcamento.id;   
+                                console.log(this.codigo);
                               
                               this.navCtrl.setRoot("OrcamentoListPage");
                               
@@ -321,17 +323,24 @@ export class OrcamentoDetailsPage {
           
            this.pedidoService.insert(this.pedido)
           .subscribe(response=>{
-            this.confirmation = response.headers.get('location');
-            console.log(this.confirmation);
-         
-          })   
+            this.codigo = this.extractId(response.headers.get('location'));  
+            console.log(this.codigo);      
+          })  
 
+         this.confirmationAtendimento = true;
    
         })      
   }else{
     this.navCtrl.setRoot("HomePage");
   }
 
+  }
+
+  extractId(location:string):string{
+    let positionI =  location.lastIndexOf('/');
+    let positionF = location.lastIndexOf('?');
+
+    return location.substring(positionI+1,positionF);
   }
   
 
@@ -349,6 +358,10 @@ export class OrcamentoDetailsPage {
     });
 
      alert.present();
+   }
+
+   setPedido(){
+    this.navCtrl.setRoot("PedidoDetailsPage",{pedido_id:this.codigo,viewPrestador:this.confirmationAtendimento});
    }
 
 

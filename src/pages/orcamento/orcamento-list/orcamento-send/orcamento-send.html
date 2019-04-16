@@ -36,7 +36,7 @@
                   </div> 
                       <button ion-item (click)= " showOrcamento(orcamento.id)">
                           <p>Produto / Serviço : {{orcamento.produtoServico}} </p>
-                          <p>Prestador : {{orcamento.prestador}}</p>
+                          <p>Cliente : {{orcamento.cliente}}</p>
                           <p>Total : {{orcamento.total  | currency}}</p>
                           <p *ngIf="orcamento.situacao == 'APROVADO'">
                             Status : <b style="color:rgb(0, 199, 10)">{{orcamento.situacao}}</b></p>

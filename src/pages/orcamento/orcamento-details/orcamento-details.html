@@ -5,118 +5,135 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-    <ion-navbar>
-      <ion-title *ngIf="!aprovado">Destalhes do Orçamento</ion-title>
-
-      <ion-title text-center *ngIf="aprovado">Orçamento Aprovado</ion-title>
+  <div  *ngIf="!confirmationAtendimento">
+    <ion-navbar *ngIf="!aprovado">
+      <ion-title>Destalhes do Orçamento</ion-title>
     </ion-navbar>
+  </div>
+    
   </ion-header>
   <ion-content padding>
     <div class="page">
-      <div  *ngIf="!aprovado">
-        <div *ngIf="orcamento?.situacao == 'PENDENTE'" class="borderEnd ">
-          <h2 style="background: red;color: #ffffff" text-center>Orcamento #{{orcamento?.id}} </h2>         
-        </div> 
-        <div *ngIf="orcamento?.situacao == 'APROVADO'" class="borderEnd ">
-            <h2 style="background: rgb(0, 199, 10);color: #ffffff" text-center>Orcamento #{{orcamento?.id}} </h2>         
-        </div> 
-        <div *ngIf="orcamento?.situacao == 'ANALISE'" class="borderEnd ">
-            <h2 style="background: rgb(170, 146, 7);color: #ffffff" text-center>Orcamento #{{orcamento?.id}} </h2>         
-        </div>
-        <div *ngIf="orcamento?.situacao == 'REJEITADO'" class="borderEnd ">
-            <h2 style="background: red;color: #ffffff" text-center>Orcamento #{{orcamento?.id}} </h2>         
-        </div>
-      
-          <button class="buttonPrestador" (click)="viewPerfilPrestador(prestador?.id)"> 
-            <div *ngIf="!viewPrestador" class="planoDeFundo">
-              <profile-prestador
-                [prestador_id]= prestador?.id 
-                [prestador_nomeFantasia] = prestador?.nomeFantasia
-                [prestador_slogan] = prestador?.slogan
-                [prestador_img] ="prestador?.imageUrl || 'assets/imgs/avatar-blank.png'"
-                ></profile-prestador>
-                <p style="margin-left: -15px; margin-top:-10px; font-size:12px;color:#fff" text-center><strong>{{endereco?.cidade}} - {{endereco?.estado}}</strong></p>
-
-            </div>    
-              <h4  *ngIf="!viewPrestador"  style="color:#0f8bff">Visitar Perfil</h4>
-            </button >
-            <div *ngIf="viewPrestador "  style="margin-bottom: 30px">
-                <profile-client
-                  [cliente_nome] =cliente?.nome
-                  [cliente_sobrenome] =cliente?.sobrenome
-                  [cliente_img] ="cliente?.imageUrl || 'assets/imgs/avatar-blank.png'"
-                ></profile-client>
-                <p style="margin-top:-5px;font-size:12px;color:#0f8bff" text-center><strong>{{endereco?.cidade}} - {{endereco?.estado}}</strong></p>
-
+      <div *ngIf="!confirmationAtendimento">
+          <div  *ngIf="!aprovado">
+            <div *ngIf="orcamento?.situacao == 'PENDENTE'" class="borderEnd ">
+              <h2 style="background: red;color: #ffffff" text-center>Orcamento #{{orcamento?.id}} </h2>         
+            </div> 
+            <div *ngIf="orcamento?.situacao == 'APROVADO'" class="borderEnd ">
+                <h2 style="background: rgb(0, 199, 10);color: #ffffff" text-center>Orcamento #{{orcamento?.id}} </h2>         
+            </div> 
+            <div *ngIf="orcamento?.situacao == 'ANALISE'" class="borderEnd ">
+                <h2 style="background: rgb(170, 146, 7);color: #ffffff" text-center>Orcamento #{{orcamento?.id}} </h2>         
+            </div>
+            <div *ngIf="orcamento?.situacao == 'REJEITADO'" class="borderEnd ">
+                <h2 style="background: red;color: #ffffff" text-center>Orcamento #{{orcamento?.id}} </h2>         
             </div>
           
-          <div class="content">
-            <div style="margin-top:10px;margin-bottom: 30px">
-              <h3 class="subTitle">Produto / Serviço </h3> 
-              <p>{{orcamento?.produtoServico}}</p>
-            </div> 
-            <div style="margin-top:10px;margin-bottom: 30px">
-              <h3 class="subTitle">Data do orçamento</h3>
-              <p> {{orcamento?.data}}</p> 
-            </div>  
-              <h3 text-center  class="subTitle" >Itens do Orçamento</h3>
-              <div *ngFor="let itemOrcamento of itensOrcamento;">  
-                  <h6>{{itemOrcamento?.item}}</h6>
-                  <div ion-item>
-                      <p>Quantidade : {{itemOrcamento?.quantidade}}</p>
-                      <p>Desconto : {{itemOrcamento?.desconto  | currency}}</p>
-                      <p>Valor : {{itemOrcamento?.valor | currency}}</p>
-                      <p>sub-Total : {{itemOrcamento?.subTotal | currency}}</p>
+              <button class="buttonPrestador" (click)="viewPerfilPrestador(prestador?.id)"> 
+                <div *ngIf="!viewPrestador" class="planoDeFundo">
+                  <profile-prestador
+                    [prestador_id]= prestador?.id 
+                    [prestador_nomeFantasia] = prestador?.nomeFantasia
+                    [prestador_slogan] = prestador?.slogan
+                    [prestador_img] ="prestador?.imageUrl || 'assets/imgs/avatar-blank.png'"
+                    ></profile-prestador>
+                    <p style="margin-left: -15px; margin-top:-10px; font-size:12px;color:#fff" text-center><strong>{{endereco?.cidade}} - {{endereco?.estado}}</strong></p>
+
+                </div>    
+                  <h4  *ngIf="!viewPrestador"  style="color:#0f8bff">Visitar Perfil</h4>
+                </button >
+                <div *ngIf="viewPrestador "  style="margin-bottom: 30px">
+                    <profile-client
+                      [cliente_nome] =cliente?.nome
+                      [cliente_sobrenome] =cliente?.sobrenome
+                      [cliente_img] ="cliente?.imageUrl || 'assets/imgs/avatar-blank.png'"
+                    ></profile-client>
+                    <p style="margin-top:-5px;font-size:12px;color:#0f8bff" text-center><strong>{{endereco?.cidade}} - {{endereco?.estado}}</strong></p>
+
+                </div>
+              
+              <div class="content">
+                <div style="margin-top:10px;margin-bottom: 30px">
+                  <h3 class="subTitle">Produto / Serviço </h3> 
+                  <p>{{orcamento?.produtoServico}}</p>
+                </div> 
+                <div style="margin-top:10px;margin-bottom: 30px">
+                  <h3 class="subTitle">Data do orçamento</h3>
+                  <p> {{orcamento?.data}}</p> 
+                </div>  
+                  <h3 text-center  class="subTitle" >Itens do Orçamento</h3>
+                  <div *ngFor="let itemOrcamento of itensOrcamento;">  
+                      <h6>{{itemOrcamento?.item}}</h6>
+                      <div ion-item>
+                          <p>Quantidade : {{itemOrcamento?.quantidade}}</p>
+                          <p>Desconto : {{itemOrcamento?.desconto  | currency}}</p>
+                          <p>Valor : {{itemOrcamento?.valor | currency}}</p>
+                          <p>sub-Total : {{itemOrcamento?.subTotal | currency}}</p>
+                      </div> 
+                  </div>   
+                  <h3 text-center  class="subTitle" >Forma de Pagamento</h3>
+                  <div ion-item >
+                      <p>Tipo:{{orcamento?.formaDePagamento['@type']}}</p>
+                      <p>Parcelas:{{orcamento?.formaDePagamento.numeroDeParcelas}}</p> 
                   </div> 
-              </div>   
-              <h3 text-center  class="subTitle" >Forma de Pagamento</h3>
-              <div ion-item >
-                  <p>Tipo:{{orcamento?.formaDePagamento['@type']}}</p>
-                  <p>Parcelas:{{orcamento?.formaDePagamento.numeroDeParcelas}}</p> 
-              </div> 
-              <div style="margin-top:10px;margin-bottom: 30px">
-                  <p style="font-weight: bold">Desconto geral : {{orcamento?.desconto  | currency}}</p> 
+                  <div style="margin-top:10px;margin-bottom: 30px">
+                      <p style="font-weight: bold">Desconto geral : {{orcamento?.desconto  | currency}}</p> 
+                  </div>
+                  <h3 text-center class="subTitle">Totais do Orcamento</h3>
+                  <div  ion-item >
+                        <p>Desconto : </p> 
+                        <p>Total   : {{orcamento?.total  | currency}}</p>
+                  </div>
+                  <div *ngIf="orcamento?.situacao == 'PENDENTE'" ion-item>
+                        <p *ngIf="!viewPrestador" text-center class="area-text"> Você também pode por esse orçamento em análise para uma futura aprovação! </p>
+                        <button  *ngIf="!viewPrestador"  block outline ion-button name="analise" (click)="refrashStatus('ANALISE')"> Desejo por em Análise</button>
+                        
+                  </div>
+                  <div *ngIf="orcamento?.situacao != 'APROVADO'">
+                      <button  *ngIf="!viewPrestador" block  ion-button (click)="refrashStatus('APROVADO')">Aprovar</button>  
+                      <button  *ngIf="!viewPrestador" block  ion-button (click)="refrashStatus('REJEITADO')">Não, Obrigado!</button>
+                  </div>
+                  <div>
+                      <button  *ngIf=" viewPrestador && orcamento?.situacao == 'APROVADO'" block  ion-button (click)="generatePedido()">confirmar Atendimento</button>
+                  </div>
+
+                  <div  *ngIf="orcamento?.situacao == 'APROVADO' ">
+                      <h6 *ngIf="!viewPrestador" text-center style="color: rgb(0, 199, 10);font-size: 14px">Este orçamento já foi aprovado!</h6>
+                  </div>   
+                  <br/>
               </div>
-              <h3 text-center class="subTitle">Totais do Orcamento</h3>
-              <div  ion-item >
-                    <p>Desconto : </p> 
-                    <p>Total   : {{orcamento?.total  | currency}}</p>
-              </div>
-              <div *ngIf="orcamento?.situacao == 'PENDENTE'" ion-item>
-                    <p *ngIf="!viewPrestador" text-center class="area-text"> Você também pode por esse orçamento em análise para uma futura aprovação! </p>
-                    <button  *ngIf="!viewPrestador"  block outline ion-button name="analise" (click)="refrashStatus('ANALISE')"> Desejo por em Análise</button>
-                    
-              </div>
-              <div *ngIf="orcamento?.situacao != 'APROVADO'">
-                  <button  *ngIf="!viewPrestador" block  ion-button (click)="refrashStatus('APROVADO')">Aprovar</button>  
-                  <button  *ngIf="!viewPrestador" block  ion-button (click)="refrashStatus('REJEITADO')">Não, Obrigado!</button>
-              </div>
+          </div>     
+                  
+              <!-- Aprovação de orçamento -->
+            <div style=" padding:50px 0px 0px 0px" *ngIf="aprovado">
+              <ion-card-header>
+              <h1 text-center>Aprovado!</h1>
+              <h3 text-center class="area-confirmation">Orçamento #{{codigo}}</h3>
+              <p text-center class="area-confirmation">Em breve este prestador confirmará seu pedido!</p>
+              <div  class="boxMascote">
+                <img  style="" class="mascote" [src]="'assets/icon/mascote.JPEG'"> 
+              </div>  
+              </ion-card-header>
               <div>
-                  <button  *ngIf=" viewPrestador && orcamento?.situacao == 'APROVADO'" block  ion-button (click)="generatePedido()">confirmar Atendimento</button>
+                <button  ion-button block (click)="setCategoriasPage()">ok, vou aguardar</button>
               </div>
+            </div>
+      </div>
 
-              <div  *ngIf="orcamento?.situacao == 'APROVADO' ">
-                  <h6 *ngIf="!viewPrestador" text-center style="color: rgb(0, 199, 10);font-size: 14px">Este orçamento já foi aprovado!</h6>
-              </div>   
-              <br/>
-          </div>
-      </div>     
-          
-           <!-- Confirmação de aprovação  de orçamento -->
-        <div style=" padding:50px 0px 0px 0px" *ngIf="aprovado">
-          <ion-card-header>
-           <h1 text-center>Pronto!</h1>
-           <h3 text-center>Sua aprovação foi enviada</h3>
-           <p text-center class="area-confirmation">Em breve este prestador confirmará seu pedido!</p>
-           <div  class="boxMascote">
-             <img  style="" class="mascote" [src]="'assets/icon/mascote.JPEG'"> 
-           </div>  
-           </ion-card-header>
-           <div>
-             <button  ion-button block (click)="setCategoriasPage()">ok, vou aguardar</button>
-           </div>
-       </div>
-
+          <!-- Confirmação do Atendimento -->
+          <div style=" padding:50px 0px 0px 0px" *ngIf="confirmationAtendimento">
+              <ion-card-header>
+              <h1 text-center>Atendimento Confirmado!</h1>
+              <h3 text-center>Pedido #{{codigo}}</h3>
+              <p text-center class="area-confirmation">Sua confirmação foi enviada. Confira no pedido os dados do cliente para entrar em contato.</p>
+              <div  class="boxMascote">
+                <img  style="" class="mascote" [src]="'assets/icon/mascote.JPEG'"> 
+              </div>  
+              </ion-card-header>
+              <div>
+                <button  ion-button block (click)="setPedido()">Ver meu pedido</button>
+              </div>
+            </div>
     
   </div> 
 

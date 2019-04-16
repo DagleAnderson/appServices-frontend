@@ -35,6 +35,10 @@ export class PedidoDetailsPage {
 
   telefones:string[];
 
+  viewPrestador:Boolean = false;
+  atendimentoRealizado: boolean =false;
+  atendimentoNaoRealizado: boolean =false;
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
@@ -46,36 +50,53 @@ export class PedidoDetailsPage {
   ionViewDidLoad() {
  
     let pedido_id = this.navParams.get('pedido_id');
+     this.viewPrestador = this.navParams.get('viewPrestador');
     this.pedidoService.findById(pedido_id)
       .subscribe(response =>{
         this.pedido=response;
-        this.formatDate(this.pedido);
         this.itensPedido = response['itensPedido'];
 
-        this.prestadorService.findByid(response['prestador'].id)
-        .subscribe(response=>{
-           this.prestador = response;
-           this.telefones = response['telefones'];
-          
-           console.log(this.telefones);
-           this.endereco = response['endereco'];
-           this.getImageIfExists();
+        if(this.viewPrestador){
+            this.clienteService.findById(response['cliente'].id)
+            .subscribe(response=>{
+                this.cliente = response;
+                this.endereco = response['endereco'];
+                this.telefones = response['telefones']
+                this.getImageIfExists();
+            })
+        }else{
+            this.prestadorService.findByid(response['prestador'].id)
+            .subscribe(response=>{
+              this.prestador = response;
+              this.telefones = response['telefones'];
+              this.endereco = response['endereco'];
+              this.getImageIfExists();
 
-        })
+            })
+          }
        },   
       error =>{})
      
   }
 
   getImageIfExists(){
-    this.prestadorService.getImageFromBucket(this.prestador.id)
+    if(this.viewPrestador){
+      this.clienteService.getImageFromBucket(this.cliente.id)
       .subscribe(response =>{
-        this.prestador.imageUrl = `${API_CONFIG.bucktBaseURL}/cp${this.prestador.id}.jpg`;
+        this.cliente.imageUrl = `${API_CONFIG.bucktBaseURL}/cp${this.cliente.id}.jpg`;
       },
     error=>{})
+
+    }else{
+      this.prestadorService.getImageFromBucket(this.prestador.id)
+        .subscribe(response =>{
+          this.prestador.imageUrl = `${API_CONFIG.bucktBaseURL}/cp${this.prestador.id}.jpg`;
+        },
+      error=>{})
+    }
   }
 
-  formatDate(obj:PedidoDTO){
+  /** formatDate(obj:PedidoDTO){
     let dateRead;
 
         dateRead = obj.data.toString();
@@ -86,5 +107,21 @@ export class PedidoDetailsPage {
         this.dateFormatBr = day+"-"+month+"-"+yaer;
         console.log(this.dateFormatBr);   
   }
+*/
 
+atendimentoStatus(status:string){
+  this.pedido.atendimento = status;
+  this.pedidoService.put(this.pedido)
+  .subscribe(response =>{
+  })
+
+  if(status == 'REALIZADO'){
+    this.atendimentoNaoRealizado = true;
+    // this.navCtrl
+   
+  }else{
+    this.atendimentoNaoRealizado = true;
+  }
+
+}
 }

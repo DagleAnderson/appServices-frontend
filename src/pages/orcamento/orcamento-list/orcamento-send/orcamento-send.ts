@@ -3,6 +3,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { OrcamentoService } from '../../../../services/domain/orcamento.service';
 import { OrcamentoDTO } from '../../../../models/orcamento.dto';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
+import { ClienteDTO } from '../../../../models/cliente.dto';
+import { refDTO } from '../../../../models/InternalClasses/ref.dto';
+import { ClienteService } from '../../../../services/domain/cliente.service';
 
 /**
  * Generated class for the OrcamentoSendPage page.
@@ -19,13 +22,16 @@ import { AlertController } from 'ionic-angular/components/alert/alert-controller
 export class OrcamentoSendPage {
 
   orcamentos : OrcamentoDTO[];
+  cliente_id: refDTO;
+  cliente:ClienteDTO;
   status:string;
 
   constructor(
     public navCtrl: NavController,
      public navParams: NavParams,
      public orcamentoService:OrcamentoService,
-     public alertController: AlertController
+     public alertController: AlertController,
+     public clienteService:ClienteService
     ) {
   }
 

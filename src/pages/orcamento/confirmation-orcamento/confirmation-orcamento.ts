@@ -26,7 +26,8 @@ export class ConfirmationOrcamentoPage {
   descTotalItem:number = 0.00;
   totalDeItens: number=0.00;
 
-  confirmation:string;
+  confirmation:boolean = false;
+  codigo:string;
 
   constructor(
     public navCtrl: NavController, 
@@ -67,13 +68,20 @@ export class ConfirmationOrcamentoPage {
 
     this.orcamentoService.insert(this.orcamento) 
     .subscribe(response=>{
-      this.confirmation = response.headers.get('location');
-      console.log(this.confirmation);
+      console.log(response.headers.get('location'));
+      this.confirmation = true;
     },error =>{
       if (error.status == 403){
         this.navCtrl.setRoot("HomePage");
       }
     });   
+  }
+
+  extractId(location:string):string{
+    let positionI =  location.lastIndexOf('/');
+    let positionF = location.lastIndexOf('?');
+
+    return location.substring(positionI+1,positionF);
   }
 
   setCategoriasPage(){

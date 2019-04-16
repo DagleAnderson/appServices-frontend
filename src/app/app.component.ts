@@ -46,7 +46,7 @@ export class MyApp {
       { title: 'Meu Perfil Profissional', component: '' },
       {title: 'Solicitações Recebidas',component:'SolicitacaoReceivedPage'},
       {title: 'Orçamentos Enviadas',component:'OrcamentoSendPage'},
-      {title: 'Pedidos Enviados',component:''},
+      {title: 'Pedidos Enviados',component:'PedidoSendPage'},
       { title: 'Sair', component:''}
     ];
 

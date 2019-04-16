@@ -9,7 +9,7 @@
         <button  ion-button menuToggle>
                 <ion-icon name="menu"></ion-icon>
         </button> 
-    <ion-title >Meus Pedidos</ion-title>
+    <ion-title >Pedidos Enviados</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -20,19 +20,18 @@
             <ion-label stacked> Filtro de vizualiação : </ion-label>
             <ion-select>
                 <ion-option  [selected]=true>Todos</ion-option>
-                <ion-option  >Pendente</ion-option>
-                <ion-option  >Realizado</ion-option>
-                <ion-option  >Cancelado</ion-option>
-                
+                <ion-option  >Pendentes</ion-option>
+                <ion-option  >Atendidoss</ion-option>
+                <ion-option  >Cancelados</ion-option>
             </ion-select>
         </ion-item>
 
         <ion-grid>
             <ion-row text-center>  
-                  <button ion-item *ngFor="let pedido of pedidos" (click)= " showPedidos(pedido.id)">
+                  <button ion-item *ngFor="let pedido of pedidos" (click)= " showPedido(pedido.id)">
                     <h1 style="margin-bottom:10px">Pedido #{{pedido.id}}</h1>
                     
-                    <p>Prestador : {{pedido.prestador}}</p>
+                    <p>Cliente:{{pedido.cliente}}</p>
                     <p>Produto / Serviço : {{pedido.produtoServico}} </p>
                     <p>Total : {{pedido.total | currency}}</p>
                     <p *ngIf="pedido.situacao == 'FECHADO'">
