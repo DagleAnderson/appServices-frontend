@@ -361,7 +361,15 @@ export class OrcamentoDetailsPage {
    }
 
    setPedido(){
-    this.navCtrl.setRoot("PedidoDetailsPage",{pedido_id:this.codigo,viewPrestador:this.confirmationAtendimento});
+
+
+    this.navCtrl.setRoot("PedidoDetailsPage",
+      {
+       pedido_id:this.codigo,
+       viewPrestador:this.confirmationAtendimento,
+       viewPedido:true
+      }
+      );
    }
 
 

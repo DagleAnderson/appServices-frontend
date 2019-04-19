@@ -2,20 +2,35 @@ page-pedido-details {
     
    profile-prestador h2 {
       margin-bottom: -5px;
-      color: #FFF;
+      color: rgb(0, 0, 0);
       text-align: center;
    }
    profile-prestador p{
       margin-bottom: 20px;
       font-size: 14px;
-      color: #FFF;
+      color: rgb(0, 0, 0);
       padding-left: 0px;
    }
    
-   .planoDeFundo{
-      background-image: url("../assets/imgs/planoDeFundo.png");
+   .boxProfile{
+      height: 340px;
+
   }
-      
+
+  .planoDeFundo{
+      background-image: url("../assets/imgs/planoDeFundo.png");
+      background-position-y: -150px;
+      height: 200px;
+
+  } 
+
+  .planoDeFundoCli{
+   background-image: url("../assets/imgs/planoDeFundo2.jpeg");
+   background-position-y: -120px;
+   height: 200px;
+}
+
+
      div h2{
         font-family: Arial, Helvetica, sans-serif; 
         font-size: 20px;
@@ -67,6 +82,19 @@ page-pedido-details {
         padding-bottom: 5px;
      }
        
+     .boxMascote{
+      margin-top: 50px;
+      height: auto;           
+    }
+
+    .mascote{
+      width:150px;
+      height: 300px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      
+    }
        
        .borderEnd{
           border-block-end-style: solid;

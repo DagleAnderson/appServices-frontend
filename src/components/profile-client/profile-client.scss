@@ -2,22 +2,26 @@ profile-client {
     
     .circle{
         border-radius: 50%;
-        margin:70px auto 0 auto;
+        margin:20px auto 0 auto;
+        border: solid 3px #fff;
 
     }
-    
-      img{
+
+    img{
         width: 200px;
         height: 200px;
     }
     
     ion-avatar{
-        margin-top: -40px;
-
-        
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin-left: auto;
+        margin-right:auto;
+        background: transparent;;
     }
 
     h2{
         font-weight: bold;
     }
+
 }

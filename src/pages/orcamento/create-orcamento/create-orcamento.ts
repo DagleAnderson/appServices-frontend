@@ -7,8 +7,6 @@ import { SolicitacaoServicoDTO } from '../../../models/solicitacaoServico.dto';
 import { OrcamentoDTO } from '../../../models/orcamento.dto';
 import { ClienteService } from '../../../services/domain/cliente.service';
 import { StorageService } from '../../../services/storage.service';
-import { ClienteDTO } from '../../../models/cliente.dto';
-import { PrestadorDTO } from '../../../models/prestador.dto';
 import { refDTO } from '../../../models/InternalClasses/ref.dto';
 
 /**

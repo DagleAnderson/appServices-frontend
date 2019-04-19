@@ -8,9 +8,8 @@ import { API_CONFIG } from '../../../config/api.config';
 import { PrestadorDTO } from '../../../models/prestador.dto';
 import { ClienteDTO } from '../../../models/cliente.dto';
 import { ClienteService } from '../../../services/domain/cliente.service';
-import { refDTO } from '../../../models/InternalClasses/ref.dto';
 import { EnderecoDTO } from '../../../models/endereco';
-import { TelefoneDTO } from '../../../models/Telefone.dto';
+import { AtendimentoDTO } from '../../../models/InternalClasses/atendimento.dto';
 
 /**
  * Generated class for the PedidoDetailsPage page.
@@ -31,13 +30,16 @@ export class PedidoDetailsPage {
   cliente:ClienteDTO;
   endereco:EnderecoDTO;
   itensPedido:ItensPedidoDTO[];
-  dateFormatBr:string;
+  atendimento : AtendimentoDTO;
+ 
 
   telefones:string[];
 
+  dateFormatBr:string;
   viewPrestador:Boolean = false;
   atendimentoRealizado: boolean =false;
   atendimentoNaoRealizado: boolean =false;
+  viewPedido:boolean = false;
 
   constructor(
     public navCtrl: NavController, 
@@ -51,6 +53,8 @@ export class PedidoDetailsPage {
  
     let pedido_id = this.navParams.get('pedido_id');
      this.viewPrestador = this.navParams.get('viewPrestador');
+     this.viewPedido = this.navParams.get('viewPedido');
+     console.log(  this.viewPedido );
     this.pedidoService.findById(pedido_id)
       .subscribe(response =>{
         this.pedido=response;
@@ -111,17 +115,34 @@ export class PedidoDetailsPage {
 
 atendimentoStatus(status:string){
   this.pedido.atendimento = status;
-  this.pedidoService.put(this.pedido)
+  console.log(this.pedido);
+  this.pedidoService.findById(this.pedido.id)
   .subscribe(response =>{
+    this.atendimento ={atendimento:response['atendimento']};
+
+    this.atendimento.atendimento = status;
+
+    console.log(this.atendimento)
+   // this.pedidoService.put(this.pedido,this.atendimento)
+   // .subscribe(response =>{
+
+   // })
   })
 
   if(status == 'REALIZADO'){
     this.atendimentoNaoRealizado = true;
-    // this.navCtrl
+
+    this.navCtrl.setRoot("AvaliacaoPage",{pedido:this.pedido,prestador:this.prestador});
+    
    
   }else{
     this.atendimentoNaoRealizado = true;
   }
 
 }
+
+setCategoriasPage(){
+  this.navCtrl.setRoot("CategoriasPage")
+}
+
 }

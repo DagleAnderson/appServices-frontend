@@ -1,16 +1,30 @@
 page-profile-prestador {
+    .pageLocal{
+        width: 98%;
+        background: #fff;
+        margin-left: auto;
+        margin-right: auto;
+    
+    }
+
+    ion-content { 
+        background-image: url("../assets/imgs/background_1.jpg") !important; 
+        }
+    
+    .boxProfile{
+        height: 310px;
+
+    }
 
     .planoDeFundo{
         background-image: url("../assets/imgs/planoDeFundo.png");
-        padding-bottom: 0.2px;
-    }
+        background-position-y: -150px;
+        height: 200px;
 
-    profile-prestador h2{
-        color: #FFF;
     }
 
     profile-prestador p{
-        color: #FFF;
+        color: rgb(0, 0, 0);
         font-size: 15px;
         margin-top: -3px;
     }

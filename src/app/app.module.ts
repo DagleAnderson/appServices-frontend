@@ -19,6 +19,7 @@ import { SolicitacaoServicoService } from '../services/domain/solicitacaoServico
 import { OrcamentoService } from '../services/domain/orcamento.service';
 import { PedidoService } from '../services/domain/pedido.service';
 import { PagSeguroService } from '../services/domain/pagSeguro.service';
+import { avaliacaoService } from '../services/domain/avaliacao.service';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { PagSeguroService } from '../services/domain/pagSeguro.service';
     OrcamentoService,
     PedidoService,
     PagSeguroService,
+    avaliacaoService,
     InAppBrowser
   ]
 })

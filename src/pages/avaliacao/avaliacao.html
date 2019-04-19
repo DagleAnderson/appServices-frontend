@@ -1,0 +1,56 @@
+<!--
+  Generated template for the AvaliacaoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+</ion-header>
+
+<ion-content padding>
+      <div class="page" >
+            <div  *ngIf="!avaliado">
+              <ion-card-header>
+                <h4 text-center style="background: rgb(0, 199, 10);color: #ffffff"  >Atendimento confirmado!</h4>
+                    <div class="boxProfile">
+                      <div class="planoDeFundo"> 
+                          <profile-prestador
+                          [prestador_id]= prestador?.id 
+                          [prestador_nomeFantasia] = prestador?.nomeFantasia
+                          [prestador_slogan] = prestador?.slogan
+                          [prestador_img] ="prestador?.imageUrl || 'assets/imgs/avatar-blank.png'"
+                          ></profile-prestador>
+                          <p style="margin-left: -15px; margin-top:-10px; font-size:12px;color:#fff" text-center><strong>{{endereco?.cidade}} - {{endereco?.estado}}</strong></p>
+                      </div>
+                    </div>
+                <div>
+                      <h5 style="font-weight:550"  text-center class="area-confirmation">Deixe sua avaliação:</h5>
+                </div>     
+                  <ion-rating  [read]=false [value]=0 (ionClick)="clickStars($event)" > </ion-rating>
+                  <form [formGroup]="formGroup">
+                    <ion-textarea formControlName="comentario" class="text-area" type="text"></ion-textarea>
+                    <p class="danger" *ngIf="formGroup.controls.comentario.dirty && formGroup.controls.comentario.errors" margin-left style="color:red;font-size: 12px">|</p>
+                  </form>
+              </ion-card-header>
+                <div>
+                  <button  ion-button block (click)="avaliar()">Avaliar</button>
+                </div>
+          </div>  
+
+                  <!-- Confirmação do Atendimento -->
+          <div *ngIf="avaliado" style=" padding:50px 0px 0px 0px">
+              <ion-card-header>
+              <h1 text-center class="area-confirmation">Obrigado pela sua avaliação!</h1>
+              <p text-center class="area-confirmation">Ficamos felizes em intermediar este serviço.</p>
+              <p text-center class="area-confirmation">Sua avaliação ajuda outros usuários em suas escolhas.</p>
+              <div  class="boxMascote">
+                <img  style="" class="mascote" [src]="'assets/icon/mascote.JPEG'"> 
+              </div>  
+              </ion-card-header>
+              <div>
+                <button  ion-button block (click)="setCategoriasPage()">ok</button>
+              </div>
+          </div>
+      </div>       
+</ion-content>

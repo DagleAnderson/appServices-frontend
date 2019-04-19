@@ -21,22 +21,22 @@
             <ion-select>
                 <ion-option  [selected]=true>Todos</ion-option>
                 <ion-option  >Pendentes</ion-option>
-                <ion-option  >Atendidoss</ion-option>
+                <ion-option  >Atendidos</ion-option>
                 <ion-option  >Cancelados</ion-option>
             </ion-select>
         </ion-item>
 
         <ion-grid>
             <ion-row text-center>  
-                  <button ion-item *ngFor="let pedido of pedidos" (click)= " showPedido(pedido.id)">
+                  <button ion-item *ngFor="let pedido of pedidos" (click)= "showPedido(pedido.id)">
                     <h1 style="margin-bottom:10px">Pedido #{{pedido.id}}</h1>
                     
                     <p>Cliente:{{pedido.cliente}}</p>
                     <p>Produto / Serviço : {{pedido.produtoServico}} </p>
                     <p>Total : {{pedido.total | currency}}</p>
-                    <p *ngIf="pedido.situacao == 'FECHADO'">
-                      Status :<b style="color:rgb(0, 199, 10)">{{pedido.atendimento}}</b></p>
-                    <p *ngIf="pedido.statusPagamento!= 'FECHADO'">
+                    <p *ngIf="pedido.atendimento =='REALIZADO'">
+                        Status do Atendimento :<b style="color:rgb(0, 199, 10)">{{pedido.atendimento}}</b></p>
+                    <p *ngIf="pedido.atendimento !='REALIZADO'">
                       Status do Atendimento : <b style="color:red">{{pedido.atendimento}}</b></p>
                     <p style="font-weight: bold" text-center>...</p>
                     <p style="float:right;color: blue"> ver detalhes</p>  

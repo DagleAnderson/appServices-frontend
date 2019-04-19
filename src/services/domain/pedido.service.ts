@@ -3,6 +3,7 @@ import { PedidoDTO } from "../../models/pedido.dto";
 import { Observable } from "rxjs";
 import { API_CONFIG } from "../../config/api.config";
 import { Injectable } from "@angular/core";
+import { AtendimentoDTO } from "../../models/InternalClasses/atendimento.dto";
 
 @Injectable() 
 export class PedidoService{
@@ -20,10 +21,10 @@ export class PedidoService{
         )
     }
 
-    put(obj:PedidoDTO){
+    put(obj:PedidoDTO,objAt:AtendimentoDTO){
         return this.http.put(
             `${API_CONFIG.baseUrl}/pedido/`+obj.id,
-            obj,
+            objAt,
             {
                 observe:'response',
                 responseType:'text'

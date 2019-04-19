@@ -1,4 +1,6 @@
 import { Component,Input,Output,EventEmitter } from '@angular/core';
+import { NavController } from 'ionic-angular/navigation/nav-controller';
+import { NavParams } from 'ionic-angular/navigation/nav-params';
 
 
 /**
@@ -22,7 +24,9 @@ export class IonRatingComponent {
   
   stars: string[] = [];
 
-  constructor() {
+  constructor(
+    public navCtrl: NavController
+  ) {
   }
 
   ngAfterViewInit(){
@@ -47,7 +51,7 @@ export class IonRatingComponent {
   starCliked(index){
     if(!this.read){
       this.value = index + 1;
-      console.log(this.value);
+      console.log(this.value);      
       this.ionClick.emit(this.value);
       this.calc();
     }

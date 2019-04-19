@@ -28,29 +28,31 @@
             <div *ngIf="orcamento?.situacao == 'REJEITADO'" class="borderEnd ">
                 <h2 style="background: red;color: #ffffff" text-center>Orcamento #{{orcamento?.id}} </h2>         
             </div>
-          
-              <button class="buttonPrestador" (click)="viewPerfilPrestador(prestador?.id)"> 
-                <div *ngIf="!viewPrestador" class="planoDeFundo">
-                  <profile-prestador
-                    [prestador_id]= prestador?.id 
-                    [prestador_nomeFantasia] = prestador?.nomeFantasia
-                    [prestador_slogan] = prestador?.slogan
-                    [prestador_img] ="prestador?.imageUrl || 'assets/imgs/avatar-blank.png'"
-                    ></profile-prestador>
-                    <p style="margin-left: -15px; margin-top:-10px; font-size:12px;color:#fff" text-center><strong>{{endereco?.cidade}} - {{endereco?.estado}}</strong></p>
-
-                </div>    
-                  <h4  *ngIf="!viewPrestador"  style="color:#0f8bff">Visitar Perfil</h4>
+            
+                <button class="buttonPrestador" (click)="viewPerfilPrestador(prestador?.id)"> 
+                    <div *ngIf="!viewPrestador" class="boxProfile">
+                        <div *ngIf="!viewPrestador" class="planoDeFundo">
+                          <profile-prestador
+                            [prestador_id]= prestador?.id 
+                            [prestador_nomeFantasia] = prestador?.nomeFantasia
+                            [prestador_slogan] = prestador?.slogan
+                            [prestador_img] ="prestador?.imageUrl || 'assets/imgs/avatar-blank.png'"
+                            ></profile-prestador>
+                            <p style="margin-left: -15px; margin-top:-10px; font-size:12px;color:rgb(0, 0, 0)" text-center><strong>{{endereco?.cidade}} - {{endereco?.estado}}</strong></p>
+                        </div> 
+                     </div>    
+                    <h4  *ngIf="!viewPrestador"  style="color:#0f8bff">Visitar Perfil</h4>
                 </button >
-                <div *ngIf="viewPrestador "  style="margin-bottom: 30px">
-                    <profile-client
-                      [cliente_nome] =cliente?.nome
-                      [cliente_sobrenome] =cliente?.sobrenome
-                      [cliente_img] ="cliente?.imageUrl || 'assets/imgs/avatar-blank.png'"
-                    ></profile-client>
-                    <p style="margin-top:-5px;font-size:12px;color:#0f8bff" text-center><strong>{{endereco?.cidade}} - {{endereco?.estado}}</strong></p>
-
-                </div>
+                <div *ngIf="viewPrestador " class="boxProfile">
+                          <div *ngIf="viewPrestador " class="planoDeFundoCli">
+                              <profile-client
+                                [cliente_nome] =cliente?.nome
+                                [cliente_sobrenome] =cliente?.sobrenome
+                                [cliente_img] ="cliente?.imageUrl || 'assets/imgs/avatar-blank.png'"
+                              ></profile-client>
+                              <p style="margin-top:-25px;font-size:12px;color:#000" text-center><strong>{{endereco?.cidade}} - {{endereco?.estado}}</strong></p>
+                          </div>
+                </div>         
               
               <div class="content">
                 <div style="margin-top:10px;margin-bottom: 30px">
@@ -125,7 +127,7 @@
               <ion-card-header>
               <h1 text-center>Atendimento Confirmado!</h1>
               <h3 text-center>Pedido #{{codigo}}</h3>
-              <p text-center class="area-confirmation">Sua confirmação foi enviada. Confira no pedido os dados do cliente para entrar em contato.</p>
+              <p text-center class="area-confirmation">Sua confirmação foi enviada! Confira no pedido os dados do cliente para entrar em contato.</p>
               <div  class="boxMascote">
                 <img  style="" class="mascote" [src]="'assets/icon/mascote.JPEG'"> 
               </div>  

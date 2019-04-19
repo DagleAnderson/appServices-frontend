@@ -9,10 +9,8 @@ import { ProfissaoDTO } from '../../../models/profissao.dto';
 import { ClienteService } from '../../../services/domain/cliente.service';
 import { ClienteDTO } from '../../../models/cliente.dto';
 import { API_CONFIG } from '../../../config/api.config';
-import { Subscriber } from 'rxjs';
 import { OrcamentoDTO } from '../../../models/orcamento.dto';
 import { OrcamentoService } from '../../../services/domain/orcamento.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { StorageService } from '../../../services/storage.service';
 import { SituacaoDTO } from '../../../models/InternalClasses/situacao.dto';
 import { EnderecoDTO } from '../../../models/endereco';
@@ -86,14 +84,14 @@ export class SolicitacaoServicoDetailsPage {
           
           this.questionsList(this.profissao);
         })
-
         this.clienteService.findById(this.cliente_id.id)
         .subscribe(response=>{
             this.cliente = response;
             this.endereco=response['endereco'];
             
+            this.getImageIfExists();
         })
-        this.getImageIfExists();
+
 
 
        },   
@@ -116,6 +114,7 @@ export class SolicitacaoServicoDetailsPage {
   getImageIfExists(){
     this.clienteService.getImageFromBucket(this.solicitacao.cliente.id)
       .subscribe(response =>{
+        console.log(this.solicitacao.cliente.id)
         this.cliente.imageUrl = `${API_CONFIG.bucktBaseURL}/cp${this.solicitacao.cliente.id}.jpg`;
       },
     error=>{})

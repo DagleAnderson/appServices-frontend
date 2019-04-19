@@ -1,20 +1,37 @@
 page-orcamento-details {
 
    
-   .planoDeFundo{
-      background-image: url("../assets/imgs/planoDeFundo.png");
-      padding-bottom: 30px;
+   .boxProfile{
+      height: 330px;
+
+
   }
+
+  .planoDeFundo{
+      background-image: url("../assets/imgs/planoDeFundo.png");
+      background-position-y: -150px;
+      height: 200px;
+    
+
+  }
+
+  .planoDeFundoCli{
+   background-image: url("../assets/imgs/planoDeFundo2.jpeg");
+   background-position-y: -120px;
+   height: 200px;
+
+
+}
 
    profile-prestador h2 {
       margin-bottom: -5px;
-      color: #FFF;
+      color: rgb(0, 0, 0);
       text-align: center;
    }
    profile-prestador p{
       margin-bottom: 0px;
       font-size: 14px;
-      color: #FFF;
+      color: rgb(0, 0, 0);
       padding-left: 0px;
    }
 

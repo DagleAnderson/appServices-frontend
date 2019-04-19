@@ -10,21 +10,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   </ion-header>
   <ion-content>
-        <div class="page">
-            <div class="planoDeFundo">
-                <profile-prestador 
-                [prestador_id]= prestador?.id 
-                [prestador_nomeFantasia] = prestador?.nomeFantasia
-                [prestador_slogan] = prestador?.slogan
-                [prestador_img] = "prestador?.imageUrl || 'assets/imgs/avatar-blank.png'"
-                ></profile-prestador>
-                <p style=" margin-top:-25px; font-size:14px;color:#fff" text-center><strong>{{endereco?.cidade}} - {{endereco?.estado}}</strong></p>
+    <div class="page"> 
+           <ion-card> 
+                <div class="boxProfile">
+                    <div class="planoDeFundo">
+                        <profile-prestador 
+                        [prestador_id]= prestador?.id 
+                        [prestador_nomeFantasia] = prestador?.nomeFantasia
+                        [prestador_slogan] = prestador?.slogan
+                        [prestador_img] = "prestador?.imageUrl || 'assets/imgs/avatar-blank.png'"
+                        ></profile-prestador>
+                        <p style=" margin-top:-25px; font-size:14px;color:rgb(0, 0, 0)" text-center><strong>{{endereco?.cidade}} - {{endereco?.estado}}</strong></p>
 
-            </div>  
-            
+                    </div>  
+                </div>
+            </ion-card> 
+            <ion-card>   
                 <div>
-                    <h4 text-center style="color:#00529e;font-weight: bold;font-size: 16px">Deseja entrar em contato agora?</h4>
-
+                    <h4 text-center style="color:#00529e;font-weight: bold;font-size: 16px">Deseja entrar em contato agora?</h4>        
                     
                 <button ion-button block clear style="height: 50px;margin-top: 0px" (click)="pagSeguroCreate()">
                       <!-- INICIO FORMULARIO BOTAO PAGSEGURO -->
@@ -35,12 +38,11 @@
                       <input type="image" src="https://stc.pagseguro.uol.com.br/public/img/botoes/pagamentos/120x53-comprar-azul.gif" name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!" />
                     </form>
     <!-- FINAL FORMULARIO BOTAO PAGSEGURO -->
-                </button>
-
-                        <ion-rating  [read]=true [value]=prestador?.mediaDeAvaliacao> </ion-rating>
-
-                        
+                </button>    
+                        <ion-rating  [read]=true [value]=prestador?.mediaDeAvaliacao> </ion-rating>         
                 </div>
+            </ion-card>
+         <div class="pageLocal">        
             <div>
                     <ion-slides>
                         <ion-slide>
@@ -137,6 +139,7 @@
                         </ion-slide>
                     </ion-slides>
             </div>
-        </div>            
+        </div> 
+   </div>                
   </ion-content>
   

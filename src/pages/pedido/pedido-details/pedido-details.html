@@ -18,26 +18,25 @@
         <div *ngIf="pedido?.atendimento == 'CONFIRMADO'" class="borderEnd ">
             <h2 style="background: rgb(0, 199, 10);color: #ffffff" text-center>Pedido #{{pedido?.id}} </h2>         
         </div> 
-
-        <div *ngIf="!viewPrestador" class="planoDeFundo">
-            <profile-prestador 
-            [prestador_id]= prestador?.id 
-            [prestador_nomeFantasia] = prestador?.nomeFantasia
-            [prestador_slogan] = prestador?.slogan
-            [prestador_img] ="prestador?.imageUrl || 'assets/imgs/avatar-blank.png'"
-            ></profile-prestador>
-        
+        <div *ngIf="!viewPrestador" class="boxProfile">
+          <div *ngIf="!viewPrestador" class="planoDeFundo">
+              <profile-prestador 
+              [prestador_id]= prestador?.id 
+              [prestador_nomeFantasia] = prestador?.nomeFantasia
+              [prestador_slogan] = prestador?.slogan
+              [prestador_img] ="prestador?.imageUrl || 'assets/imgs/avatar-blank.png'"
+              ></profile-prestador>
+          </div>
+        </div>  
+        <div *ngIf="viewPrestador" class="boxProfile">
+            <div *ngIf="viewPrestador" class="planoDeFundoCli">
+              <profile-client
+                [cliente_nome] =cliente?.nome
+                [cliente_sobrenome] =cliente?.sobrenome
+                [cliente_img] ="cliente?.imageUrl || 'assets/imgs/avatar-blank.png'"
+              ></profile-client>    
+            </div>
         </div>
-
-        <div *ngIf="viewPrestador">
-          <profile-client
-            [cliente_nome] =cliente?.nome
-            [cliente_sobrenome] =cliente?.sobrenome
-            [cliente_img] ="cliente?.imageUrl || 'assets/imgs/avatar-blank.png'"
-          ></profile-client>
-          
-      </div>
-
         <div  style="margin-top:20px;margin-bottom: 30px">
             <h3  class="subTitle">Endereço</h3>
               <div >
@@ -89,8 +88,13 @@
               <div *ngIf="pedido?.atendimento == 'PENDENTE'">
                   <ion-card *ngIf="viewPrestador">
                       <img class="warning"  [src]="'assets/icon/attention.png'">
-                    <p text-center style="color: red;font-weight: bold;margin-top: 12px;">Pedido aguardando confirmação de atendimento ao cliente!</p>
+                    <p text-center style="color: red;font-weight: bold;margin-top: 12px;">aguardando atendimento ser realizado!</p>
                   </ion-card>
+
+                  <!--ver pedido-->
+                  <div *ngIf="viewPedido">     
+                    <button  ion-button block (click)="setCategoriasPage()">ok</button>
+                  </div>
               </div>
               <button *ngIf="!viewPrestador"  block  ion-button (click)="atendimentoStatus('REALIZADO')">Atendimento realizado</button>  
               <button *ngIf="!viewPrestador"  block  ion-button  (click)="atendimentoStatus('CANCELADO')"> Atendimento não foi realizado!</button>
@@ -100,19 +104,5 @@
               <h6 text-center style="color: rgb(0, 199, 10)">Este pedido já foi atendido!</h6>
            </div>  
            
-           <!-- Atendimento diferente de  PENDENTE-->
-           <div *ngIf="responseAtendimento">
-              <ion-card-header>
-                  <h1 text-center>Obrigado por nos ajudar a manter o controle dos atendimentos!</h1>
-                  <h3 text-center></h3>
-                  <p text-center class="area-confirmation">agora é só aguardar seus orçamentos</p>
-                  <div  class="boxMascote">
-                      <img  class="mascote" [src]="'assets/icon/mascote.JPEG'"> 
-                  </div>  
-                </ion-card-header>
-                  <div>
-                    <button  ion-button block (click)="setCategoriasPage()">ok, vou aguardar meus orçamentos</button>
-                  </div>
-           </div>
       </div>     
 </ion-content>
