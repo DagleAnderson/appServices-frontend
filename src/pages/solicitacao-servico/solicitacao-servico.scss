@@ -6,7 +6,19 @@ page-solicitacao-servico {
         display: block;
         border-color: transparent;
     }
-
+    
+    .subTitle{
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 14px;
+        color: rgb(75, 75, 75);
+        font-weight:  600;
+        border:#81b7eb solid 0.1px;
+        padding-left: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        
+     }
+     
     .decrement{
         float:left;font-size:25px;margin:10px 10px 10px 10px;
     }

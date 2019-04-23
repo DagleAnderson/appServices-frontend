@@ -20,16 +20,25 @@ page-confirmation-solicitacao {
       border: solid;
       border-color: transparent;}
 
-   .subTitle{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 14px;
-    color: rgb(75, 75, 75);
-    font-weight:  600;
-    border:#81b7eb solid 0.1px;
-    padding-left: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
- }
+      p{
+         font-family:Verdana, Geneva, Tahoma, sans-serif;
+         font-size: 14px;
+         padding-left:10px;
+         margin-bottom: -10px;
+         
+      }
+
+      .subTitle{
+         font-family: Verdana, Geneva, Tahoma, sans-serif;
+         font-size: 14px;
+         color: rgb(75, 75, 75);
+         font-weight:  600;
+         border:#81b7eb solid 0.1px;
+         padding-left: 10px;
+         padding-top: 5px;
+         padding-bottom: 5px;
+         
+      }
 
  .warning{
    float:left;

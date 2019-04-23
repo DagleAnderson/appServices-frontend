@@ -115,7 +115,7 @@ export class SolicitacaoServicoDetailsPage {
     this.clienteService.getImageFromBucket(this.solicitacao.cliente.id)
       .subscribe(response =>{
         console.log(this.solicitacao.cliente.id)
-        this.cliente.imageUrl = `${API_CONFIG.bucktBaseURL}/cp${this.solicitacao.cliente.id}.jpg`;
+        this.cliente.imageUrl = `${API_CONFIG.bucktBaseURL}/clientprofile/cp${this.solicitacao.cliente.id}.jpg`;
       },
     error=>{})
   }

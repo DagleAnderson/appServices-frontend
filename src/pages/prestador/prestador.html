@@ -18,7 +18,7 @@
     <ion-list>
         <button ion-item *ngFor="let prestador of prestadores" (click)="showProfilePrestador(prestador.id)">
             <ion-thumbnail item-start>
-                <img style="margin-top:-20px" class="img-circle" src="{{bucketUrl}}/cat{{prestador.id}}.jpg">
+                <img style="margin-top:-20px" class="img-circle" src="{{bucketUrl}}/clientprofile/cp{{prestador.id}}.jpg">
             </ion-thumbnail>
             <h2>{{prestador.nomeFantasia}}</h2>
             <p>{{prestador.slogan}}</p>

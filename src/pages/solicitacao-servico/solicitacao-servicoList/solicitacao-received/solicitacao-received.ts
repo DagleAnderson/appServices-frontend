@@ -6,6 +6,10 @@ import { ClienteService } from '../../../../services/domain/cliente.service';
 import { StorageService } from '../../../../services/storage.service';
 import { refDTO } from '../../../../models/InternalClasses/ref.dto';
 import { ClienteDTO } from '../../../../models/cliente.dto';
+import { ProfissaoService } from '../../../../services/domain/profissao.service';
+import { PrestadorService } from '../../../../services/domain/prestador.service';
+import { PrestadorDTO } from '../../../../models/prestador.dto';
+import { ProfissaoDTO } from '../../../../models/profissao.dto';
 
 /**
  * Generated class for the SolicitacaoReceivedPage page.
@@ -23,14 +27,15 @@ export class SolicitacaoReceivedPage {
   solicitacoes : SolicitacaoServicoDTO[];
   idUser : refDTO;
   cliente:ClienteDTO;
-  prestador:refDTO;
-  profissao:refDTO;
+  prestador:PrestadorDTO;
+  profissao:ProfissaoDTO;
 
   constructor(
      public navCtrl: NavController,
      public navParams: NavParams,
-     public servicoService: SolicitacaoServicoService,
+     public solicitacaoService: SolicitacaoServicoService,
      public clienteService : ClienteService,
+     public prestadorService:PrestadorService,
      public storage :StorageService
     ) {
   }
@@ -43,12 +48,22 @@ export class SolicitacaoReceivedPage {
                   this.idUser ={id:response["id"]};
                   this.prestador =response["prestador"];
 
-                  this.servicoService.findAllByProfissao(this.prestador.id)
-                  .subscribe(response =>{
-                       this.solicitacoes = response ["content"];
-                   },
-                  error => {});
+                  console.log(this.prestador.id)
 
+                  this.prestadorService.findByid(this.prestador.id)
+                  .subscribe(response=>{
+
+                    this.profissao = response['profissao'];
+
+                    console.log(this.profissao)
+
+                    this.solicitacaoService.findAllByProfissao(this.profissao.id)
+                    .subscribe(response =>{
+                         this.solicitacoes = response ["content"];
+                     })
+
+                  },
+                   error => {})
               },
               
               error => {

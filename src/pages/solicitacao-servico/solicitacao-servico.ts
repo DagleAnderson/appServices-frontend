@@ -8,6 +8,7 @@ import { StorageService } from '../../services/storage.service';
 import { CategoriaService } from '../../services/domain/categoria.service';
 import { CategoriaDTO } from '../../models/categoria.dto';
 import { SolicitacaoServicoDTO } from '../../models/solicitacaoServico.dto';
+import { ConfirmationSolicitacaoPage } from './confirmation-solicitacao/confirmation-solicitacao';
 
 /**
  * Generated class for the SolicitacaoServicoPage page.
@@ -58,15 +59,15 @@ export class SolicitacaoServicoPage {
     this.formGroup = this.formBuider.group({
       categoria:['',Validators.required],
       profissao:['',Validators.required],
-      produtoServico:['apartamento',[Validators.required,Validators.minLength(5),Validators.maxLength(50)]],
-      itemSolicitacao1:['casa má dividida, com pintura desbotada e parede com danos graves',[Validators.required,Validators.minLength(10),Validators.maxLength(255)]],
+      produtoServico:['',[Validators.required,Validators.minLength(2),Validators.maxLength(50)]],
+      itemSolicitacao1:['',[Validators.required,Validators.minLength(10),Validators.maxLength(255)]],
       itemSolicitacao2:[this.contador,[Validators.required]],
-      itemSolicitacao3:['imagens com tamanho da area do local',[Validators.required,Validators.minLength(10),Validators.maxLength(255)]],
-      itemSolicitacao4:["",[Validators.required]],
-      itemSolicitacao5:['15 dias',[Validators.required,Validators.minLength(5),Validators.maxLength(25)]],
-      itemSolicitacao6:['pintura completa do local com detalhes em algumas par',[Validators.required,Validators.minLength(5),Validators.maxLength(255)]],
-      itemSolicitacao7:['-------------------',[Validators.required,Validators.minLength(5),Validators.maxLength(255)]],
-      itemSolicitacao8:['-------------------',[Validators.required,Validators.minLength(10),Validators.maxLength(255)]]
+      itemSolicitacao3:['',[Validators.required,Validators.minLength(10),Validators.maxLength(255)]],
+      itemSolicitacao4:['',[Validators.required]],
+      itemSolicitacao5:['',[Validators.required,Validators.minLength(5),Validators.maxLength(25)]],
+      itemSolicitacao6:[''],
+      itemSolicitacao7:[''],
+      itemSolicitacao8:['']
 
     
     });
@@ -87,6 +88,8 @@ export class SolicitacaoServicoPage {
   }
 
   updateProfissoes(){
+    this.catSelected = this.formGroup.value.categoria;
+
     let categoria_id= this.formGroup.value.categoria;
     this.profissaoService.findByCategoria(categoria_id)
       .subscribe(response =>{
@@ -96,28 +99,28 @@ export class SolicitacaoServicoPage {
       erro=>{})
   }
 
+
   showConfirmation(){
-    this.catSelected = this.formGroup.value.categoria;
-    
-    this.verifyCategoria(this.catSelected);
     this.solicitacao = this.formGroup.value;
+
+    this.infToCategoria(this.catSelected);
 
     let profissao_id = this.formGroup.value.profissao;
     this.navCtrl.push('ConfirmationSolicitacaoPage',{
       solicitacao:this.solicitacao,profissao_id:profissao_id,catSelected:this.catSelected})
   }
 
-  verifyCategoria(catSelected: number): any {
+  infToCategoria(catSelected: number): any {
 
     this.formGroup.value.itemSolicitacao2 = this.contador;
     this.formGroup.value.itemSolicitacao5 = this.local(this.index);
     this.formGroup.value.itemSolicitacao4 = this.cidades(this.indexCidade);
-
+       console.log(catSelected); 
     if (catSelected == 1){
       if(this.dias==1){
          this.formGroup.value.itemSolicitacao6 = this.dias + " dia";
       }else{
-        this.formGroup.value.itemSolicitacao6= this.dias + " dias";
+         this.formGroup.value.itemSolicitacao6= this.dias + " dias";
       }
     }
     if (catSelected == 4){

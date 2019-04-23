@@ -120,14 +120,14 @@ export class OrcamentoDetailsPage {
       if(!this.viewPrestador){
           this.prestadorService.getImageFromBucket(this.prestador_id.id)
             .subscribe(response =>{
-              this.prestador.imageUrl = `${API_CONFIG.bucktBaseURL}/cp${this.prestador_id.id}.jpg`;
+              this.prestador.imageUrl = `${API_CONFIG.bucktBaseURL}/clientprofile/cp${this.prestador_id.id}.jpg`;
             },
           error=>{})
       }else{
         this.clienteService.findById(this.cliente_id.id)
         .subscribe(response =>{
 
-          this.cliente.imageUrl = `${API_CONFIG.bucktBaseURL}/cp${this.cliente.id}.jpg`;
+          this.cliente.imageUrl = `${API_CONFIG.bucktBaseURL}/clientprofile/cp${this.cliente.id}.jpg`;
 
         },error=>{})
       }    

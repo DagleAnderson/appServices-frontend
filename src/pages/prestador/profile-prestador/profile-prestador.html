@@ -30,14 +30,14 @@
                     <h4 text-center style="color:#00529e;font-weight: bold;font-size: 16px">Deseja entrar em contato agora?</h4>        
                     
                 <button ion-button block clear style="height: 50px;margin-top: 0px" (click)="pagSeguroCreate()">
-                      <!-- INICIO FORMULARIO BOTAO PAGSEGURO -->
-                    <form action="https://pagseguro.uol.com.br/checkout/v2/payment.html" method="post">
-                      <!-- NÃO EDITE OS COMANDOS DAS LINHAS ABAIXO -->
-                      <input type="hidden" name="code" value="D306EE7EC0C0DE9FF4B76F9B648CAFC9"/>
-                      <input type="hidden" name="iot" value="button"/>
-                      <input type="image" src="https://stc.pagseguro.uol.com.br/public/img/botoes/pagamentos/120x53-comprar-azul.gif" name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!" />
+                                    <!-- INICIO FORMULARIO BOTAO PAGSEGURO -->
+                <form action="https://pagseguro.uol.com.br/checkout/v2/payment.html" method="post">
+                    <!-- NÃO EDITE OS COMANDOS DAS LINHAS ABAIXO -->
+                    <input type="hidden" name="code" value="E179883B2525FBD884D15FA1373BC370" />
+                    <input type="hidden" name="iot" value="button" />
+                    <input type="image" src="https://stc.pagseguro.uol.com.br/public/img/botoes/pagamentos/120x53-pagar-azul.gif" name="submit" alt="Pague com PagSeguro - é rápido, grátis e seguro!" />
                     </form>
-    <!-- FINAL FORMULARIO BOTAO PAGSEGURO -->
+                    <!-- FINAL FORMULARIO BOTAO PAGSEGURO -->
                 </button>    
                         <ion-rating  [read]=true [value]=prestador?.mediaDeAvaliacao> </ion-rating>         
                 </div>
@@ -58,10 +58,10 @@
                                     <h5>Cursos</h5>
                                 </div>  
                                 <div ion-item *ngFor="let curso of cursos;">  
-                                    <h2 text-left>{{curso?.curso}}</h2>
+                                    <h2 class="text-area" text-left>{{curso?.curso}}</h2>
                                         <div >
-                                            <p>Instituição : {{curso?.instituicao}}</p>
-                                            <p>Duração : {{curso?.duracao}}</p>
+                                            <p class="text-area">Instituição : {{curso?.instituicao}}</p>
+                                            <p class="text-area">Duração : {{curso?.duracao}}</p>
                                         </div>    
                                 </div>
                             </div>
@@ -70,14 +70,14 @@
                                     <h5>Experiências</h5>
                                 </div>
                                 <div ion-item *ngFor="let experiencia of experiencias;">  
-                                    <h2 text-left>{{experiencia?.funcao}}</h2>
+                                    <h2 class="text-area" text-left>{{experiencia?.funcao}}</h2>
                                     <div >
-                                        <p>Empresa : {{experiencia?.empresa}}</p>
-                                        <p>Periodo : {{experiencia?.periodo}}</p>
+                                        <p class="text-area">Empresa : {{experiencia?.empresa}}</p>
+                                        <p class="text-area">Periodo : {{experiencia?.periodo}}</p>
                                     </div> 
                                 </div>
                             </div>     
-                            <div *ngIf="!curriculo?.cursos && !curriculo?.experiencias">
+                            <div class="text-area" *ngIf="!curriculo?.cursos && !curriculo?.experiencias">
                                 <br/>
                                 <h3>Desculpe!</h3>
                                 <p>Este prestador ainda não disponibilizou seu currículo</p>

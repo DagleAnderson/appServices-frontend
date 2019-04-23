@@ -1,7 +1,7 @@
 <!-- Generated template for the ProfilePrestadorComponent component -->
 <div>
     <ion-avatar>  
-        <img class="circle" [src]=prestador_img> 
+        <img class="circle" [src]="prestador_img || 'assets/imgs/avatar-blank.png'" > 
         <h2 text-center><strong>{{prestador_nomeFantasia}}</strong></h2>
         <p text-center>{{prestador_slogan }}</p>
     </ion-avatar>

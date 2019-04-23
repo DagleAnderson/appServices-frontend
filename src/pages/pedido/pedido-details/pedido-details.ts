@@ -87,14 +87,14 @@ export class PedidoDetailsPage {
     if(this.viewPrestador){
       this.clienteService.getImageFromBucket(this.cliente.id)
       .subscribe(response =>{
-        this.cliente.imageUrl = `${API_CONFIG.bucktBaseURL}/cp${this.cliente.id}.jpg`;
+        this.cliente.imageUrl = `${API_CONFIG.bucktBaseURL}/clientprofile/cp${this.cliente.id}.jpg`;
       },
     error=>{})
 
     }else{
       this.prestadorService.getImageFromBucket(this.prestador.id)
         .subscribe(response =>{
-          this.prestador.imageUrl = `${API_CONFIG.bucktBaseURL}/cp${this.prestador.id}.jpg`;
+          this.prestador.imageUrl = `${API_CONFIG.bucktBaseURL}/clientprofile/cp${this.prestador.id}.jpg`;
         },
       error=>{})
     }

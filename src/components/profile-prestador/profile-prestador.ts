@@ -40,7 +40,7 @@ export class ProfilePrestadorComponent {
   getImageIfExists(){
     this.prestadorService.getImageFromBucket(this.prestador.id)
       .subscribe(response =>{
-        this.prestador.imageUrl = `${API_CONFIG.bucktBaseURL}/cp${this.prestador.id}.jpg`;
+        this.prestador.imageUrl = `${API_CONFIG.bucktBaseURL}/clientprofile/cp${this.prestador.id}.jpg`;
       },
     error=>{})
   }
