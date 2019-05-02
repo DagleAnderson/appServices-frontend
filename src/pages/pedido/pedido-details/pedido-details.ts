@@ -123,10 +123,10 @@ atendimentoStatus(status:string){
     this.atendimento.atendimento = status;
 
     console.log(this.atendimento)
-   // this.pedidoService.put(this.pedido,this.atendimento)
-   // .subscribe(response =>{
-
-   // })
+    this.pedidoService.put(this.pedido,this.atendimento)
+    .subscribe(response =>{
+              
+    })
   })
 
   if(status == 'REALIZADO'){

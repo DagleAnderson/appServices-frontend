@@ -8,7 +8,6 @@ import { StorageService } from '../../services/storage.service';
 import { CategoriaService } from '../../services/domain/categoria.service';
 import { CategoriaDTO } from '../../models/categoria.dto';
 import { SolicitacaoServicoDTO } from '../../models/solicitacaoServico.dto';
-import { ConfirmationSolicitacaoPage } from './confirmation-solicitacao/confirmation-solicitacao';
 
 /**
  * Generated class for the SolicitacaoServicoPage page.

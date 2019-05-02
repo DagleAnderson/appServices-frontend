@@ -8,7 +8,9 @@
     </ion-navbar>
   </ion-header>
   <ion-content padding>
-    
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>  
     <div class="page">  
       <ion-item>
           <ion-label stacked> Filtro de vizualização : </ion-label>

@@ -27,17 +27,28 @@ export class PedidoSendPage {
   }
 
   ionViewDidLoad() {
-      this.pedidoService.findAll()
-      .subscribe(response =>{
-        this.pedidos = response['content'];
-      },
-      error => {});
+    this.loadPedidos();
+  }
+
+  loadPedidos(){
+    this.pedidoService.findAll()
+    .subscribe(response =>{
+      this.pedidos = response['content'];
+    },
+    error => {});
   }
 
   
   showPedido(pedido_id:string){
     let viewPrestador = true;
     this.navCtrl.push('PedidoDetailsPage',{pedido_id:pedido_id,viewPrestador:viewPrestador})
+  }
+
+  doRefresh(refresher) {
+    this.loadPedidos();
+    setTimeout(() => {
+      refresher.complete();
+    }, 1000);
   }
 
 }

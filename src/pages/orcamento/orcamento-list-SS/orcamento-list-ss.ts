@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { OrcamentoDTO } from '../../../models/orcamento.dto';
 import { OrcamentoService } from '../../../services/domain/orcamento.service';
 
@@ -24,20 +24,38 @@ export class OrcamentoListSsPage {
   constructor(
     public navCtrl: NavController,
      public navParams: NavParams,
-     public orcamentoService:OrcamentoService
+     public orcamentoService:OrcamentoService,
+     public loadingCtrl:LoadingController
     ) {
   }
 
   ionViewDidLoad() {
+   this.loadOrcamentos();
+    
+  }
+
+  loadOrcamentos(){
     this.solicitacaoId =this.navParams.get('solicitacaoId');
     let solicitacao_id = this.navParams.get('solicitacaoId');
+    let load = this.presentLoading();  
       this.orcamentoService.findBySolicitacao(solicitacao_id)
       .subscribe(response =>{
         this.orcamentos = response["content"]; 
-        this.statusDoOrcamento(this.orcamentos)
+        this.statusDoOrcamento(this.orcamentos);
+
+        load.dismiss();
       },
       error => {});
-    
+  }
+
+  presentLoading(){
+    let loader = this.loadingCtrl.create({
+      content:"Aguarde..."
+    });
+
+    loader.present();
+
+    return loader;
   }
  
  
@@ -52,5 +70,12 @@ export class OrcamentoListSsPage {
 }
   showOrcamento(orcamento_id:string){
     this.navCtrl.push('OrcamentoDetailsPage',{orcamento_id:orcamento_id})
+  }
+
+  doRefresh(refresher) {
+    this.loadOrcamentos();
+    setTimeout(() => {
+      refresher.complete();
+    }, 1000);
   }
 }

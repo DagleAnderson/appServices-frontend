@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { SolicitacaoServicoDTO } from '../../../models/solicitacaoServico.dto';
 import { SolicitacaoServicoService } from '../../../services/domain/solicitacaoServico.service';
 import { ClienteService } from '../../../services/domain/cliente.service';
@@ -30,16 +30,18 @@ export class SolicitacaoServicoListPage {
      public navParams: NavParams,
      public servicoService: SolicitacaoServicoService,
      public clienteService : ClienteService,
-     public storage :StorageService
+     public storage :StorageService,
+     public loadingCtrl:LoadingController
     ) {
   }
 
   ionViewDidLoad() {
-    this.getUser();
+    this.loadSolicitacao();
    
   }
-  getUser(){
+   loadSolicitacao(){
     let localUser = this.storage.getLocalUser();
+    let load = this.presentLoading(); 
         if(localUser &&  localUser.email){
             this.clienteService.findByEmail(localUser.email)
               .subscribe(response =>{
@@ -48,7 +50,9 @@ export class SolicitacaoServicoListPage {
 
                    this.servicoService.findAllByCliente(this.cliente.id)
                   .subscribe(response =>{
+
                   this.solicitacoes = response ["content"];
+                  load.dismiss();
               },
                error => {});  
               },
@@ -66,6 +70,16 @@ export class SolicitacaoServicoListPage {
         }     
   }
 
+  presentLoading(){
+    let loader = this.loadingCtrl.create({
+      content:"Aguarde..."
+    });
+
+    loader.present();
+
+    return loader;
+  }
+
   SolicitacaoList(cliente:ClienteDTO){
     
   }
@@ -76,6 +90,13 @@ export class SolicitacaoServicoListPage {
 
   showListOrcamentos(solicitacaoId:string){
     this.navCtrl.push('OrcamentoListSsPage',{solicitacaoId:solicitacaoId})
+  }
+
+  doRefresh(refresher) {
+    this.loadSolicitacao();
+    setTimeout(() => {
+      refresher.complete();
+    }, 1000);
   }
   
 }

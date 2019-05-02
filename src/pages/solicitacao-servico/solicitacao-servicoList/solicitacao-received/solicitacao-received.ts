@@ -41,6 +41,10 @@ export class SolicitacaoReceivedPage {
   }
 
   ionViewDidLoad() {
+    this.loadSolicitacaoes(); 
+  }
+
+  loadSolicitacaoes(){
     let localUser = this.storage.getLocalUser();
         if(localUser &&  localUser.email){
             this.clienteService.findByEmail(localUser.email)
@@ -88,4 +92,10 @@ export class SolicitacaoReceivedPage {
     this.navCtrl.push('OrcamentoListSsPage',{solicitacaoId:solicitacaoId})
   }
 
+  doRefresh(refresher) {
+    this.loadSolicitacaoes();
+    setTimeout(() => {
+      refresher.complete();
+    }, 1000);
+  }
 }

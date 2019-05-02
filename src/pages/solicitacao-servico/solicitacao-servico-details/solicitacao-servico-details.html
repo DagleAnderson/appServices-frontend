@@ -46,7 +46,7 @@
         <div  ion-item style="margin-top: 10px"  *ngFor="let item of itensSolicitacao;">
               <p class="area-text"><strong>{{item?.questions}}</strong></p>
               <p class="area-text">{{item?.descricao}}</p>
-          </div> 
+        </div> 
           
           <button *ngIf="viewPrestador && solicitacao?.situacao=='ABERTA'"  block  ion-button (click)="showCreateOrcamento(solicitacao.id)">Gerar um orçamento</button>
 

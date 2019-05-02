@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { CategoriaService } from '../../services/domain/categoria.service';
 import { CategoriaDTO } from '../../models/categoria.dto';
 import { API_CONFIG } from '../../config/api.config';
@@ -28,21 +28,37 @@ export class CategoriasPage {
     public navCtrl: NavController,
      public navParams: NavParams,
      public categoriaService: CategoriaService,
-     public prestadorService:PrestadorService
+     public prestadorService:PrestadorService,
+     public loadingCtrl:LoadingController
     ) {
   }
 
   ionViewDidLoad() {
+    let load = this.presentLoading();  
+
     this.categoriaService.findAll()
     .subscribe(response =>{
-      this.itens = response;  
+      this.itens = response; 
+      load.dismiss();
 
      this.prestadorService.findbyPage()
      .subscribe(response=>{      
           this.prestadores = response['content'];
      })
     },
-    error => {});
+    error => {
+      load.dismiss();
+    });
+  }
+
+  presentLoading(){
+    let loader = this.loadingCtrl.create({
+      content:"Aguarde..."
+    });
+
+    loader.present();
+
+    return loader;
   }
 
   showProfissoes(categoria_id:string){
@@ -56,4 +72,5 @@ export class CategoriasPage {
   viewPerfilPrestador(prestador_id:number){
     this.navCtrl.push('ProfilePrestadorPage',{prestador_id:prestador_id})
   }
+
 }

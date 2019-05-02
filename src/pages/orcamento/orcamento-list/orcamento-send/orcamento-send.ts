@@ -36,14 +36,17 @@ export class OrcamentoSendPage {
   }
 
   ionViewDidLoad() {
-   
-     this.orcamentoService.findAll()
-      .subscribe(response =>{
-        this.orcamentos = response; 
-        console.log(this.orcamentos)
-      },
-      error => {});
+    this.loadOrcamentos();
+  }
 
+  loadOrcamentos(){
+       
+    this.orcamentoService.findAll()
+    .subscribe(response =>{
+      this.orcamentos = response; 
+      console.log(this.orcamentos)
+    },
+    error => {});
   }
   
   showOrcamento(orcamento_id:string){
@@ -80,6 +83,13 @@ export class OrcamentoSendPage {
     ]
     });
      await alert.present();
+  }
+
+  doRefresh(refresher) {
+    this.loadOrcamentos();
+    setTimeout(() => {
+      refresher.complete();
+    }, 1000);
   }
 
 }

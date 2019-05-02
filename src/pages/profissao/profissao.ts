@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { ProfissaoDTO } from '../../models/profissao.dto';
 import { ProfissaoService } from '../../services/domain/profissao.service';
 import { CategoriaService } from '../../services/domain/categoria.service';
@@ -26,22 +26,38 @@ export class ProfissaoPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     public categoriaService:CategoriaService,
-    public profissaoService:ProfissaoService) {
+    public profissaoService:ProfissaoService,
+    public loadingCtrl:LoadingController) {
   }
 
   ionViewDidLoad() {
+    let load = this.presentLoading(); 
     let categoria_id = this.navParams.get('categoria_id');
     
     this.categoriaService.findById(categoria_id)
     .subscribe(response =>{
         this.categoria = response;
+       
     })
 
     this.profissaoService.findByCategoria(categoria_id)
       .subscribe(response =>{
-        this.profissoes=response['content']; 
+        this.profissoes=response['content'];
+        load.dismiss();
        },
-      error =>{})
+      error =>{
+        load.dismiss();
+      })
+  }
+
+  presentLoading(){
+    let loader = this.loadingCtrl.create({
+      content:"Aguarde..."
+    });
+
+    loader.present();
+
+    return loader;
   }
 
   showPrestador(profissao_id:string){
