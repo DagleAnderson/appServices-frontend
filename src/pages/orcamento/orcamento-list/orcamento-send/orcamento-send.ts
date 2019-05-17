@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { OrcamentoService } from '../../../../services/domain/orcamento.service';
 import { OrcamentoDTO } from '../../../../models/orcamento.dto';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { ClienteDTO } from '../../../../models/cliente.dto';
 import { refDTO } from '../../../../models/InternalClasses/ref.dto';
 import { ClienteService } from '../../../../services/domain/cliente.service';
+import { StorageService } from '../../../../services/storage.service';
+import { PrestadorDTO } from '../../../../models/prestador.dto';
 
 /**
  * Generated class for the OrcamentoSendPage page.
@@ -22,7 +24,7 @@ import { ClienteService } from '../../../../services/domain/cliente.service';
 export class OrcamentoSendPage {
 
   orcamentos : OrcamentoDTO[];
-  cliente_id: refDTO;
+  prestador: PrestadorDTO;
   cliente:ClienteDTO;
   status:string;
 
@@ -31,7 +33,9 @@ export class OrcamentoSendPage {
      public navParams: NavParams,
      public orcamentoService:OrcamentoService,
      public alertController: AlertController,
-     public clienteService:ClienteService
+     public clienteService:ClienteService,
+     public loadingCtrl:LoadingController,
+     public storage : StorageService
     ) {
   }
 
@@ -41,20 +45,49 @@ export class OrcamentoSendPage {
 
   loadOrcamentos(){
        
-    this.orcamentoService.findAll()
-    .subscribe(response =>{
-      this.orcamentos = response; 
-      console.log(this.orcamentos)
-    },
-    error => {});
+    let localUser = this.storage.getLocalUser(); 
+    let load = this.presentLoading();
+    
+    if(localUser &&  localUser.email){
+      this.clienteService.findByEmail(localUser.email)
+        .subscribe(response =>{
+            this.prestador=response["prestador"];
+            console.log(this.prestador);
+            console.log(this.prestador.id);
+                this.orcamentoService.findByPrestador(this.prestador.id)
+                .subscribe(response =>{
+                  this.orcamentos = response['content']; 
+                  load.dismiss();
+                  console.log(this.orcamentos)
+              },
+      error => {
+        load.dismiss();
+      });
+    })
   }
+  else{
+      this.navCtrl.setRoot("HomePage");
+    }     
+  }
+
+
+    
+  presentLoading(){
+    let loader = this.loadingCtrl.create({
+      content:"Aguarde..."
+    });
+
+    loader.present();
+
+    return loader;
+  }
+ 
   
   showOrcamento(orcamento_id:string){
 
     let viewPrestador = true;
     this.navCtrl.push('OrcamentoDetailsPage',{orcamento_id:orcamento_id, viewPrestador})
   }
-
 
   async removeOrcamento(id:string){
     console.log("passei aqui")

@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { PedidoService } from '../../../services/domain/pedido.service';
 import { PedidoDTO } from '../../../models/pedido.dto';
+import { ClienteService } from '../../../services/domain/cliente.service';
+import { StorageService } from '../../../services/storage.service';
+import { refDTO } from '../../../models/InternalClasses/ref.dto';
 
 /**
  * Generated class for the PedidoListPage page.
@@ -18,12 +21,15 @@ import { PedidoDTO } from '../../../models/pedido.dto';
 })
 export class PedidoListPage {
   pedidos: PedidoDTO[];
+  cliente:refDTO;
 
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public pedidoService: PedidoService,
+    public clienteService : ClienteService,
+    public storage :StorageService,
     public loadingCtrl:LoadingController) {
   }
 
@@ -33,14 +39,28 @@ export class PedidoListPage {
 
   loadPedidos(){
     let load = this.presentLoading();
-    this.pedidoService.findAll()
-    .subscribe(response =>{
-      this.pedidos = response['content'];
-      load.dismiss();
-    },
-    error => {
-      load.dismiss();
-    });
+    let localUser = this.storage.getLocalUser(); 
+        if(localUser &&  localUser.email){
+            this.clienteService.findByEmail(localUser.email)
+              .subscribe(response =>{
+                  this.cliente={id:response["id"]};
+                  console.log(this.cliente);
+
+                  this.pedidoService.findByClient(this.cliente.id)
+                  .subscribe(response =>{
+                    this.pedidos = response['content'];
+                    load.dismiss();
+                  },
+                  error => {
+                    load.dismiss();
+                  });
+          })
+        }else{
+          this.navCtrl.setRoot("HomePage");
+        }              
+
+
+       
   }
 
   presentLoading(){

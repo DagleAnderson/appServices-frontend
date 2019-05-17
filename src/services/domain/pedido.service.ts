@@ -41,7 +41,11 @@ export class PedidoService{
        return this.http.get<PedidoDTO[]>(`${API_CONFIG.baseUrl}/pedido?orcamento=${orcamento_id}`);     
     }
     
-    findAll() : Observable<PedidoDTO[]>{
-        return this.http.get<PedidoDTO[]>(`${API_CONFIG.baseUrl}/pedido`);
+    findByClient(cliente_id) : Observable<PedidoDTO[]>{
+        return this.http.get<PedidoDTO[]>(`${API_CONFIG.baseUrl}/pedido/listPedidoClient?cliente=${cliente_id}`);
+    }
+
+    findByPrestador(prestador_id) : Observable<PedidoDTO[]>{
+        return this.http.get<PedidoDTO[]>(`${API_CONFIG.baseUrl}/pedido/listPedidoPrestador?prestador=${prestador_id}`);
     }
 }

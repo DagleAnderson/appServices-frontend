@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { OrcamentoDTO } from '../../../models/orcamento.dto';
 import { OrcamentoService } from '../../../services/domain/orcamento.service';
+import { ClienteService } from '../../../services/domain/cliente.service';
+import { refDTO } from '../../../models/InternalClasses/ref.dto';
+import { StorageService } from '../../../services/storage.service';
 
 /**
  * Generated class for the OrcamentoListPage page.
@@ -19,12 +22,15 @@ export class OrcamentoListPage {
 
   orcamentos : OrcamentoDTO[];
   status:string;
+  cliente:refDTO;
 
   constructor(
     public navCtrl: NavController,
      public navParams: NavParams,
      public orcamentoService:OrcamentoService,
-     public loadingCtrl:LoadingController
+     public loadingCtrl:LoadingController,
+     public clienteService:ClienteService,
+     public storage : StorageService
     ) {
   }
 
@@ -33,16 +39,28 @@ export class OrcamentoListPage {
   }
 
   loadOrcamentos(){
+    let localUser = this.storage.getLocalUser(); 
     let load = this.presentLoading();
-    this.orcamentoService.findAll()
-     .subscribe(response =>{
-       this.orcamentos = response; 
-       load.dismiss();
-       console.log(this.orcamentos)
-     },
-     error => {
-       load.dismiss();
-     });
+    
+    if(localUser &&  localUser.email){
+      this.clienteService.findByEmail(localUser.email)
+        .subscribe(response =>{
+            this.cliente={id:response["id"]};
+            console.log(this.cliente);
+                this.orcamentoService.findByCliente(this.cliente.id)
+                .subscribe(response =>{
+                  this.orcamentos = response['content']; 
+                  load.dismiss();
+                  console.log(this.orcamentos)
+              },
+      error => {
+        load.dismiss();
+      });
+    })
+  }
+  else{
+      this.navCtrl.setRoot("HomePage");
+    }     
   }
 
   
