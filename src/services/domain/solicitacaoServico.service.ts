@@ -12,6 +12,7 @@ export class SolicitacaoServicoService{
 
     }
 
+    //ex: http://localhost:8080//solicitacao?cliente=1&profissao=1
     insert(obj: SolicitacaoServicoDTO){
         return this.http.post(
             `${API_CONFIG.baseUrl}/solicitacao?cliente=`+obj.cliente.id+"&profissao="+obj.profissao,
@@ -23,6 +24,7 @@ export class SolicitacaoServicoService{
         )
     }
 
+    //ex: http://localhost:8080/solicitacao/1
     put(obj:SolicitacaoServicoDTO,objSituacao:SituacaoDTO){
         return this.http.put(
             `${API_CONFIG.baseUrl}/solicitacao/`+obj.id,
@@ -33,23 +35,34 @@ export class SolicitacaoServicoService{
             },            
         )
     }
-    
+    //ex: http://localhost:8080/solicitacao/1
     findById(solicitacao_id:string):Observable<SolicitacaoServicoDTO>{
         return this.http.get<SolicitacaoServicoDTO>(`${API_CONFIG.baseUrl}/solicitacao/${solicitacao_id}`)    
     }
     
+    //ex: http://localhost:8080/solicitacao/
     findAll() : Observable<SolicitacaoServicoDTO[]>{
         return this.http.get<SolicitacaoServicoDTO[]>(`${API_CONFIG.baseUrl}/solicitacao`);
     }
 
-
+    //ex: http://localhost:8080/solicitacao/listByCliente?cliente=1
     findAllByCliente(cliente_id:string): Observable<SolicitacaoServicoDTO[]>{
-        return this.http.get<SolicitacaoServicoDTO[]>(`${API_CONFIG.baseUrl}/solicitacao/listCliente?cliente=${cliente_id}`);
+        return this.http.get<SolicitacaoServicoDTO[]>(`${API_CONFIG.baseUrl}/solicitacao/listByCliente?cliente=${cliente_id}`);
     }
 
+    //ex: http://localhost:8080/solicitacao/listCliBySituacao?cliente=1&situacao=1
+    findByCliAndSituacao(cliente_id:string, status:string): Observable<SolicitacaoServicoDTO[]>{
+        return this.http.get<SolicitacaoServicoDTO[]>(`${API_CONFIG.baseUrl}/solicitacao/listByCliAndSituacao?cliente=${cliente_id}&situacao=${status}`);
+    }
+
+
+    //ex: http://localhost:8080/solicitacao/listByProfissao?profissao=1
     findAllByProfissao(profissao_id:string): Observable<SolicitacaoServicoDTO[]>{
-        return this.http.get<SolicitacaoServicoDTO[]>(`${API_CONFIG.baseUrl}/solicitacao/listProfissao?profissao=${profissao_id}`);
+        return this.http.get<SolicitacaoServicoDTO[]>(`${API_CONFIG.baseUrl}/solicitacao/listByProfissao?profissao=${profissao_id}`);
     }
 
-
+      //ex: http://localhost:8080/solicitacao/listByProAndSituacao?profissao=1&situacao=1
+      findByProAndSituacao(profissao_id:string,status:string): Observable<SolicitacaoServicoDTO[]>{
+        return this.http.get<SolicitacaoServicoDTO[]>(`${API_CONFIG.baseUrl}/solicitacao/listByProAndSituacao?profissao=${profissao_id}&situacao=${status}`);
+    }
 }

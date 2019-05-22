@@ -47,17 +47,25 @@ export class OrcamentoService{
     }
 
     
-    //ex: http://localhost:8080/orcamento/listOrcamentoClient?cliente=1
+    //ex: http://localhost:8080/orcamento/listOrcamentoByClient?cliente=1
     findByCliente(cliente_id:string):Observable<OrcamentoDTO[]>{
-        return this.http.get<OrcamentoDTO[]>(`${API_CONFIG.baseUrl}/orcamento/listOrcamentoClient?cliente=${cliente_id}`);     
+        return this.http.get<OrcamentoDTO[]>(`${API_CONFIG.baseUrl}/orcamento/listOrcamentoByClient?cliente=${cliente_id}`);     
      }
      
+    //ex: http://localhost:8080/orcamento/listByCliAndSituacao?cliente=1&situacao=1
+    findByCliAndSituacao(cliente_id:string, status:string): Observable<OrcamentoDTO[]>{
+        return this.http.get<OrcamentoDTO[]>(`${API_CONFIG.baseUrl}/orcamento/listByCliAndSituacao?cliente=${cliente_id}&situacao${status}`);
+    }
 
-    //ex: http://localhost:8080/orcamento/listOrcamentoPrestador?cliente=1
+    //ex: http://localhost:8080/orcamento/listOrcamentoByPrestador?cliente=1
     findByPrestador(prestador_id:string):Observable<OrcamentoDTO[]>{
-        return this.http.get<OrcamentoDTO[]>(`${API_CONFIG.baseUrl}/orcamento/listOrcamentoPrestador?prestador=${prestador_id}`);     
+        return this.http.get<OrcamentoDTO[]>(`${API_CONFIG.baseUrl}/orcamento/listOrcamentoByPrestador?prestador=${prestador_id}`);     
      }
 
+    //ex: http://localhost:8080/pedido/listByPrestAndSituacao?prestador=1&situacao=1
+    findByPrestAndSituacao(profissao_id:string,stauts:string): Observable<OrcamentoDTO[]>{
+        return this.http.get<OrcamentoDTO[]>(`${API_CONFIG.baseUrl}/orcamento/listByPrestAndSituacao?prestador=${profissao_id}&situacao=${status}`);
+    }
 
      //ex: http://localhost:8080/orcamento
     findAll() : Observable<OrcamentoDTO[]>{

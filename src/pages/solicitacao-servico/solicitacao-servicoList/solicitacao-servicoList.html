@@ -16,14 +16,18 @@
 
     <div class="page">
             <br/>  
+
+        <form  [formGroup]="formGroup">   
             <ion-item style="margin-bottom: 30px">
-                <ion-label stacked> Filtro de vizualiação : </ion-label>
-                <ion-select>
-                    <ion-option  [selected]=true>Todas</ion-option>
-                    <ion-option  >Abertas</ion-option>
-                    <ion-option  >Fechadas</ion-option>
+                <ion-label stacked > Filtro de vizualiação : </ion-label>
+                <ion-select  formControlName="filtro" (ionChange)="findByCliAndSituacao()">
+                    <ion-option  [value]=0  [selected]=true >Todas</ion-option>
+                    <ion-option  [value]=1  >Abertas</ion-option>
+                    <ion-option  [value]=2 >Fechadas</ion-option>
                 </ion-select>
-            </ion-item>  
+            </ion-item> 
+        </form>
+         
             
         <ion-grid>
             <ion-row text-center  *ngFor="let item of solicitacoes ;">  

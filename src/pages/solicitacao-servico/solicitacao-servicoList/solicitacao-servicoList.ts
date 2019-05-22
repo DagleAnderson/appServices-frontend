@@ -6,6 +6,7 @@ import { ClienteService } from '../../../services/domain/cliente.service';
 import { StorageService } from '../../../services/storage.service';
 import { ClienteDTO } from '../../../models/cliente.dto';
 import { refDTO } from '../../../models/InternalClasses/ref.dto';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 /**
  * Generated class for the SolicitacaoServicoPage page.
@@ -24,15 +25,21 @@ export class SolicitacaoServicoListPage {
   solicitacoes : SolicitacaoServicoDTO[];
   cliente : refDTO;
   userId:string;
+  formGroup:FormGroup;
 
   constructor(
      public navCtrl: NavController,
      public navParams: NavParams,
-     public servicoService: SolicitacaoServicoService,
+     public formBuider:FormBuilder,
+     public solicitacaoService: SolicitacaoServicoService,
      public clienteService : ClienteService,
      public storage :StorageService,
      public loadingCtrl:LoadingController
     ) {
+
+      this.formGroup = this.formBuider.group({
+        filtro:['',Validators.required]
+      });
   }
 
   ionViewDidLoad() {
@@ -48,7 +55,7 @@ export class SolicitacaoServicoListPage {
                   this.cliente={id:response["id"]};
                   console.log(this.cliente);
 
-                   this.servicoService.findAllByCliente(this.cliente.id)
+                   this.solicitacaoService.findAllByCliente(this.cliente.id)
                   .subscribe(response =>{
 
                   this.solicitacoes = response ["content"];
@@ -80,8 +87,26 @@ export class SolicitacaoServicoListPage {
     return loader;
   }
 
-  SolicitacaoList(cliente:ClienteDTO){
-    
+
+  findByCliAndSituacao(){
+    let cli =  this.cliente.id;
+    let situacao = this.formGroup.value.filtro;
+    let load = this.presentLoading(); 
+
+    if(situacao==0){
+      this.solicitacaoService.findAllByCliente(cli)
+      .subscribe(response =>{
+          this.solicitacoes = response ["content"];
+          load.dismiss();
+      })
+    }else{
+      this.solicitacaoService.findByCliAndSituacao(cli,situacao)
+      .subscribe(response =>{
+          this.solicitacoes = response ["content"];
+          load.dismiss();
+      })
+   }
+
   }
 
   showSolicitacao(solicitacao_id:string){
