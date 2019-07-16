@@ -19,15 +19,17 @@
     </ion-refresher>  
     <br/>
     <div class="page">   
-        <ion-item style="margin-bottom: 30px">
-            <ion-label stacked> Filtro de vizualiação : </ion-label>
-            <ion-select>
-                <ion-option  [selected]=true>Todos</ion-option>
-                <ion-option  >Pendentes</ion-option>
-                <ion-option  >Atendidos</ion-option>
-                <ion-option  >Cancelados</ion-option>
-            </ion-select>
-        </ion-item>
+        <form  [formGroup]="formGroup">   
+            <ion-item style="margin-bottom: 30px">
+                <ion-label stacked > Filtro de vizualiação : </ion-label>
+                <ion-select  formControlName="filtro" (ionChange)="findByPrestAndSituacao()">
+                    <ion-option  [value]=0  [selected]=true >Todas</ion-option>
+                    <ion-option  [value]=1 >Pendentes</ion-option>
+                    <ion-option  [value]=2 >Realizados</ion-option>
+                    <ion-option  [value]=3 >Cancelados</ion-option>
+                </ion-select>
+            </ion-item> 
+        </form>
 
         <ion-grid>
             <ion-row text-center>  
@@ -47,4 +49,12 @@
               </ion-row>
         </ion-grid>
    </div>        
+
+   
+   <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Carregando mais Pedidos...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

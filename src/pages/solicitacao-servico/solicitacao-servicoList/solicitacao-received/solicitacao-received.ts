@@ -25,12 +25,14 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   templateUrl: 'solicitacao-received.html',
 })
 export class SolicitacaoReceivedPage {
-  solicitacoes : SolicitacaoServicoDTO[];
+  solicitacoes : SolicitacaoServicoDTO[]=[];
   idUser : refDTO;
   cliente:ClienteDTO;
   prestador:PrestadorDTO;
   profissao:ProfissaoDTO;
   formGroup : FormGroup;
+
+  page:number = 0;
 
   constructor(
      public navCtrl: NavController,
@@ -71,7 +73,7 @@ export class SolicitacaoReceivedPage {
 
                     console.log(this.profissao)
 
-                    this.solicitacaoService.findAllByProfissao(this.profissao.id)
+                    this.solicitacaoService.findAllByProfissao(this.profissao.id,this.page)
                     .subscribe(response =>{
                          this.solicitacoes = response ["content"];
                      })
@@ -123,13 +125,13 @@ export class SolicitacaoReceivedPage {
     let load = this.presentLoading(); 
 
     if(situacao==0){
-      this.solicitacaoService.findAllByProfissao(prof)
+      this.solicitacaoService.findAllByProfissao(prof,this.page)
       .subscribe(response =>{
           this.solicitacoes = response ["content"];
           load.dismiss();
       })
     }else{
-      this.solicitacaoService.findByProAndSituacao(prof,situacao)
+      this.solicitacaoService.findByProAndSituacao(prof,situacao,this.page)
       .subscribe(response =>{
           this.solicitacoes = response ["content"];
           load.dismiss();
@@ -139,9 +141,21 @@ export class SolicitacaoReceivedPage {
 
 
   doRefresh(refresher) {
+    this.page = 0;
+    this.solicitacoes= [];
+
     this.loadSolicitacaoes();
     setTimeout(() => {
       refresher.complete();
+    }, 1000);
+  }
+
+  
+  doInfinite(infiniteScroll){
+    this.page++;
+    this.loadSolicitacaoes();
+    setTimeout(() => {
+      infiniteScroll.complete();
     }, 1000);
   }
 }

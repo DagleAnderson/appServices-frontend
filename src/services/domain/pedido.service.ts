@@ -38,30 +38,30 @@ export class PedidoService{
         return this.http.get<PedidoDTO>(`${API_CONFIG.baseUrl}/pedido/${pedido_id}`)    
     }
 
-     //ex: http://localhost:8080/pedido?orcamento=1
-    findByOrcamento(orcamento_id:string):Observable<PedidoDTO[]>{
-       return this.http.get<PedidoDTO[]>(`${API_CONFIG.baseUrl}/pedido?orcamento=${orcamento_id}`);     
+     //ex: http://localhost:8080/pedido?orcamento=1&page=0&linesPerPage=10
+    findByOrcamento(orcamento_id:string,page:number=0 ,linesPerPage:number=10):Observable<PedidoDTO[]>{
+       return this.http.get<PedidoDTO[]>(`${API_CONFIG.baseUrl}/pedido?orcamento=${orcamento_id}&page=${page}&linesPerPage=${linesPerPage}`);     
     }
     
-     //ex: http://localhost:8080/pedido/listPedidoClient?cliente=1
-    findByClient(cliente_id) : Observable<PedidoDTO[]>{
-        return this.http.get<PedidoDTO[]>(`${API_CONFIG.baseUrl}/pedido/listPedidoClient?cliente=${cliente_id}`);
+     //ex: http://localhost:8080/pedido/listPedidoClient?cliente=1&page=0&linesPerPage=10
+    findByClient(cliente_id,page:number=0 ,linesPerPage:number=10) : Observable<PedidoDTO[]>{
+        return this.http.get<PedidoDTO[]>(`${API_CONFIG.baseUrl}/pedido/listPedidoClient?cliente=${cliente_id}&page=${page}&linesPerPage=${linesPerPage}`);
     }
 
 
-    //ex: http://localhost:8080/pedido/listByCliAndSituacao?cliente=1&situacao=1
-    findByCliAndSituacao(cliente_id:string, status:string): Observable<PedidoDTO[]>{
-    return this.http.get<PedidoDTO[]>(`${API_CONFIG.baseUrl}/pedido/listByCliAndSituacao?cliente=${cliente_id}&situacao${status}`);
+    //ex: http://localhost:8080/pedido/listByCliAndSituacao?cliente=1&situacao=1&situacao=1&page=0&linesPerPage=10
+    findByCliAndSituacao(cliente_id:string, status:string,page:number=0 ,linesPerPage:number=10): Observable<PedidoDTO[]>{
+    return this.http.get<PedidoDTO[]>(`${API_CONFIG.baseUrl}/pedido/listByCliAndSituacao?cliente=${cliente_id}&situacao=${status}&page=${page}&linesPerPage=${linesPerPage}`);
     }
 
     //ex: http://localhost:8080/listPedidoPrestador?prestador=1
-    findByPrestador(prestador_id) : Observable<PedidoDTO[]>{
-        return this.http.get<PedidoDTO[]>(`${API_CONFIG.baseUrl}/pedido/listPedidoPrestador?prestador=${prestador_id}`);
+    findByPrestador(prestador_id,page:number=0 ,linesPerPage:number=10) : Observable<PedidoDTO[]>{
+        return this.http.get<PedidoDTO[]>(`${API_CONFIG.baseUrl}/pedido/listPedidoPrestador?prestador=${prestador_id}&page=${page}&linesPerPage=${linesPerPage}`);
     }
 
 
-      //ex: http://localhost:8080/pedido/listByPrestAndSituacao?prestador=1&situacao=1
-      findByPrestAndSituacao(profissao_id:string,stauts:string): Observable<PedidoDTO[]>{
-        return this.http.get<PedidoDTO[]>(`${API_CONFIG.baseUrl}/pedido/listByPrestAndSituacao?prestador=${profissao_id}&situacao=${status}`);
+      //ex: http://localhost:8080/pedido/listByPrestAndSituacao?prestador=1&situacao=1&page=0&linesPerPage=10
+      findByPrestAndSituacao(profissao_id:string,status:string,page:number=0 ,linesPerPage:number=10): Observable<PedidoDTO[]>{
+        return this.http.get<PedidoDTO[]>(`${API_CONFIG.baseUrl}/pedido/listByPrestAndSituacao?prestador=${profissao_id}&situacao=${status}&page=${page}&linesPerPage=${linesPerPage}`);
     }
 }

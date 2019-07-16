@@ -8,6 +8,7 @@ import { refDTO } from '../../../../models/InternalClasses/ref.dto';
 import { ClienteService } from '../../../../services/domain/cliente.service';
 import { StorageService } from '../../../../services/storage.service';
 import { PrestadorDTO } from '../../../../models/prestador.dto';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 /**
  * Generated class for the OrcamentoSendPage page.
@@ -23,20 +24,27 @@ import { PrestadorDTO } from '../../../../models/prestador.dto';
 })
 export class OrcamentoSendPage {
 
-  orcamentos : OrcamentoDTO[];
+  orcamentos : OrcamentoDTO[]=[];
   prestador: PrestadorDTO;
   cliente:ClienteDTO;
   status:string;
+  formGroup:FormGroup;
+
+  page:number = 0;
 
   constructor(
     public navCtrl: NavController,
      public navParams: NavParams,
+     public formBuilder:FormBuilder,
      public orcamentoService:OrcamentoService,
      public alertController: AlertController,
      public clienteService:ClienteService,
      public loadingCtrl:LoadingController,
      public storage : StorageService
     ) {
+      this.formGroup = this.formBuilder.group({
+        filtro:['',Validators.required]
+      });
   }
 
   ionViewDidLoad() {
@@ -54,7 +62,7 @@ export class OrcamentoSendPage {
             this.prestador=response["prestador"];
             console.log(this.prestador);
             console.log(this.prestador.id);
-                this.orcamentoService.findByPrestador(this.prestador.id)
+                this.orcamentoService.findByPrestador(this.prestador.id,this.page)
                 .subscribe(response =>{
                   this.orcamentos = response['content']; 
                   load.dismiss();
@@ -82,7 +90,35 @@ export class OrcamentoSendPage {
     return loader;
   }
  
-  
+  findByPrestAndSituacao(){
+    let prest =  this.prestador.id;
+    console.log(prest)
+    let situacao = this.formGroup.value.filtro;
+    console.log(situacao)
+    let load = this.presentLoading(); 
+    let localUser = this.storage.getLocalUser();
+    
+    if(localUser && localUser.email){
+        if(situacao==0){
+          this.orcamentoService.findByPrestador(prest)
+          .subscribe(response =>{
+              this.orcamentos = response ["content"];
+              load.dismiss();
+          })
+        }else{
+          this.orcamentoService.findByPrestAndSituacao(prest,situacao,this.page)
+          .subscribe(response =>{
+              this.orcamentos = response ["content"];
+              load.dismiss();
+          })
+      }
+   }else{
+    this.navCtrl.setRoot("HomePage");
+  }  
+
+  }
+
+
   showOrcamento(orcamento_id:string){
 
     let viewPrestador = true;
@@ -119,10 +155,23 @@ export class OrcamentoSendPage {
   }
 
   doRefresh(refresher) {
+    this.page = 0;
+    this.orcamentos= [];
+
     this.loadOrcamentos();
     setTimeout(() => {
       refresher.complete();
     }, 1000);
   }
+
+  
+  doInfinite(infiniteScroll){
+    this.page++;
+    this.loadOrcamentos();
+    setTimeout(() => {
+      infiniteScroll.complete();
+    }, 1000);
+  }
+  
 
 }

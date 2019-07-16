@@ -5,8 +5,8 @@ import { PedidoService } from '../../../../services/domain/pedido.service';
 import { ClienteDTO } from '../../../../models/cliente.dto';
 import { ClienteService } from '../../../../services/domain/cliente.service';
 import { StorageService } from '../../../../services/storage.service';
-import { refDTO } from '../../../../models/InternalClasses/ref.dto';
 import { PrestadorDTO } from '../../../../models/prestador.dto';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 /**
  * Generated class for the PedidoSendPage page.
@@ -24,14 +24,22 @@ export class PedidoSendPage {
   pedidos: PedidoDTO[];
   cliente:ClienteDTO;
   prestador:PrestadorDTO;
+  formGroup:FormGroup;
+
+  page:number = 0;
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
+    public formBuilder:FormBuilder,
     public pedidoService: PedidoService,
     public clienteService : ClienteService,
     public storage :StorageService,
     public loadingCtrl:LoadingController) {
+
+      this.formGroup = this.formBuilder.group({
+        filtro:['',Validators.required]
+      });
   }
 
   ionViewDidLoad() {
@@ -47,7 +55,7 @@ export class PedidoSendPage {
                   this.prestador=response["prestador"];
                   console.log(this.prestador);
 
-                  this.pedidoService.findByPrestador(this.prestador.id)
+                  this.pedidoService.findByPrestador(this.prestador.id,this.page)
                   .subscribe(response =>{
                     this.pedidos = response['content'];
                     load.dismiss();
@@ -70,6 +78,33 @@ export class PedidoSendPage {
 
     return loader;
   }
+
+  findByPrestAndSituacao(){
+    let prest =  this.prestador.id;
+    console.log(prest)
+    let situacao = this.formGroup.value.filtro;
+    console.log(situacao)
+    let load = this.presentLoading(); 
+    let localUser = this.storage.getLocalUser();
+    
+    if(localUser && localUser.email){
+        if(situacao==0){
+          this.pedidoService.findByPrestador(prest)
+          .subscribe(response =>{
+              this.pedidos = response ["content"];
+              load.dismiss();
+          })
+        }else{
+          this.pedidoService.findByPrestAndSituacao(prest,situacao,this.page)
+          .subscribe(response =>{
+              this.pedidos = response ["content"];
+              load.dismiss();
+          })
+      }
+   }else{
+    this.navCtrl.setRoot("HomePage");
+  }  
+}
   
   showPedido(pedido_id:string){
     let viewPrestador = true;
@@ -77,10 +112,23 @@ export class PedidoSendPage {
   }
 
   doRefresh(refresher) {
+    this.page = 0;
+    this.pedidos= [];
+
     this.loadPedidos();
     setTimeout(() => {
       refresher.complete();
     }, 1000);
   }
+
+  doInfinite(infiniteScroll){
+    this.page++;
+    this.loadPedidos();
+    setTimeout(() => {
+      infiniteScroll.complete();
+    }, 1000);
+  }
+  
+
 
 }

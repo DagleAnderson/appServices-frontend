@@ -22,10 +22,12 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class SolicitacaoServicoListPage {
 
-  solicitacoes : SolicitacaoServicoDTO[];
+  solicitacoes : SolicitacaoServicoDTO[]=[];
   cliente : refDTO;
   userId:string;
   formGroup:FormGroup;
+
+  page:number = 0;
 
   constructor(
      public navCtrl: NavController,
@@ -53,12 +55,10 @@ export class SolicitacaoServicoListPage {
             this.clienteService.findByEmail(localUser.email)
               .subscribe(response =>{
                   this.cliente={id:response["id"]};
-                  console.log(this.cliente);
 
-                   this.solicitacaoService.findAllByCliente(this.cliente.id)
+                   this.solicitacaoService.findAllByCliente(this.cliente.id,this.page)
                   .subscribe(response =>{
-
-                  this.solicitacoes = response ["content"];
+                  this.solicitacoes =this.solicitacoes.concat(response["content"]);
                   load.dismiss();
               },
                error => {});  
@@ -92,20 +92,25 @@ export class SolicitacaoServicoListPage {
     let cli =  this.cliente.id;
     let situacao = this.formGroup.value.filtro;
     let load = this.presentLoading(); 
-
-    if(situacao==0){
-      this.solicitacaoService.findAllByCliente(cli)
-      .subscribe(response =>{
-          this.solicitacoes = response ["content"];
-          load.dismiss();
-      })
-    }else{
-      this.solicitacaoService.findByCliAndSituacao(cli,situacao)
-      .subscribe(response =>{
-          this.solicitacoes = response ["content"];
-          load.dismiss();
-      })
-   }
+    let localUser = this.storage.getLocalUser();
+    
+    if(localUser && localUser.email){
+        if(situacao==0){
+          this.solicitacaoService.findAllByCliente(cli,this.page)
+          .subscribe(response =>{
+              this.solicitacoes = response ["content"];
+              load.dismiss();
+          })
+        }else{
+          this.solicitacaoService.findByCliAndSituacao(cli,situacao,this.page)
+          .subscribe(response =>{
+              this.solicitacoes = response ["content"];
+              load.dismiss();
+          })
+      }
+   }else{
+    this.navCtrl.setRoot("HomePage");
+  }  
 
   }
 
@@ -118,9 +123,19 @@ export class SolicitacaoServicoListPage {
   }
 
   doRefresh(refresher) {
+    this.page = 0;
+    this.solicitacoes= [];
     this.loadSolicitacao();
     setTimeout(() => {
       refresher.complete();
+    }, 1000);
+  }
+
+  doInfinite(infiniteScroll){
+    this.page++;
+    this.loadSolicitacao();
+    setTimeout(() => {
+      infiniteScroll.complete();
     }, 1000);
   }
   
