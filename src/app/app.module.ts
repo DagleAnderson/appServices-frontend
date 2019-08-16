@@ -20,6 +20,8 @@ import { OrcamentoService } from '../services/domain/orcamento.service';
 import { PedidoService } from '../services/domain/pedido.service';
 import { PagSeguroService } from '../services/domain/pagSeguro.service';
 import { avaliacaoService } from '../services/domain/avaliacao.service';
+import { ImageUtilService } from '../services/image-utl.service';
+import { PhotoViewer } from '@ionic-native/photo-viewer';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,8 @@ import { avaliacaoService } from '../services/domain/avaliacao.service';
     PedidoService,
     PagSeguroService,
     avaliacaoService,
+    ImageUtilService,
+    PhotoViewer,
     InAppBrowser
   ]
 })

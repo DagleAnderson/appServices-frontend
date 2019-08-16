@@ -12,7 +12,7 @@ import { PagSeguroService } from '../../../services/domain/pagSeguro.service';
 import { PagSeguroDTO } from '../../../models/pagSeguro.dto';
 import { StorageService } from '../../../services/storage.service';
 import { ClienteService } from '../../../services/domain/cliente.service';
-import { InAppBrowser} from '@ionic-native/in-app-browser/ngx';
+import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { refDTO } from '../../../models/InternalClasses/ref.dto';
 import { EnderecoDTO } from '../../../models/endereco';
 
@@ -39,6 +39,8 @@ export class ProfilePrestadorPage {
   cliente:ClienteDTO;
   endereco:EnderecoDTO;
   avaliacoes: AvaliacoesDTO[];
+  portImage:string[]=[];
+  TotImages:Number = 4;
 
   numAvalicoes:number = 0;
   createadPag_id:refDTO;
@@ -48,7 +50,6 @@ export class ProfilePrestadorPage {
   pagSeguroUrl:String;
 
   redirect_url:string;
-  
   
 
   bucketUrl: string = API_CONFIG.bucktBaseURL;
@@ -60,11 +61,11 @@ export class ProfilePrestadorPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private inAppBrowser:InAppBrowser,
     public prestadorService:PrestadorService,
     public pagSeguroService:PagSeguroService,
     public storage : StorageService,
-    public clienteService:ClienteService ) {
+    public clienteService:ClienteService,
+    private photoViewer :PhotoViewer ) {
   }
 
   log(valor){
@@ -73,7 +74,8 @@ export class ProfilePrestadorPage {
   ionViewDidLoad() {
     let localUser = this.storage.getLocalUser();
     if(localUser &&  localUser.email){ 
-          let prestador_id = this.navParams.get('prestador_id');
+        let prestador_id = this.navParams.get('prestador_id');
+          
           this.clienteService.findByEmail(localUser.email)
           .subscribe(response =>{
               this.cliente =response;
@@ -102,7 +104,6 @@ export class ProfilePrestadorPage {
                         
                         this.numAvalicoes = this.avaliacoes.length;
                         this.getImageIfExists();
-                
                     },
                     error => {
                       if(error.status == 403){
@@ -116,12 +117,32 @@ export class ProfilePrestadorPage {
     }
 
     getImageIfExists(){
+      //Teste par aimplementação de portfólio real
+      if(this.prestador.id == '1'){
+          for(let cont=0;cont<=this.TotImages;cont++ ){
+          
+              this.portImage[cont] =`${API_CONFIG.bucktBaseURL}/portfolio/pp${this.prestador.id}/image${cont}.jpeg`;  
+                console.log(this.portImage)     
+          }
+        }else{
+          this.TotImages = 0;
+          for(let cont=0;cont<this.TotImages;cont++ ){
+          
+            this.portImage[cont] =`${API_CONFIG.bucktBaseURL}/portfolio/pp${this.prestador.id}/image${cont}.jpeg`;  
+              console.log(this.portImage)     
+        }
+        }
+
+
+
+
+      
       this.prestadorService.getImageFromBucket(this.prestador.id)
         .subscribe(response =>{
-          this.prestador.imageUrl = `${API_CONFIG.bucktBaseURL}/clientprofile/cp${this.prestador.id}.jpg`;
+          this.prestador.imageUrl = `${API_CONFIG.bucktBaseURL}/clientprofile/cp${this.prestador.id}.jpg`;                      
         },
       error=>{})
-  }
+}
 
    pagSeguroCreate(){
     this.pagSeguroService.createPayment(this.cliente)
@@ -143,5 +164,10 @@ export class ProfilePrestadorPage {
      
     })
   } 
+
+  photoViewerShow(){
+    let url = `${API_CONFIG.bucktBaseURL}/portfolio/pp$1/image1.jpeg`;
+    this.photoViewer.show('https://appservicesba.s3-sa-east-1.amazonaws.com/portfolio/pp1/image0.jpeg', 'My image title', {share: false});
+  }
   
 }

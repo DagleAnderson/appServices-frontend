@@ -24,7 +24,10 @@
           </ion-item>
           <ion-item>
             <button ion-button block (click)="getCameraPicture()">Câmera</button>
+            <button *ngIf="picture" ion-button  block (click)="sendPicture()">Enviar Imagem</button>
+            <button *ngIf="picture" ion-button  block (click)="cancel()">Cancelar envio</button>
           </ion-item>
+          
         </ion-card> 
      </div> 
 

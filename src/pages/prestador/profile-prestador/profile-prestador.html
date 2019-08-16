@@ -93,11 +93,20 @@
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  >>                        
                             </h5>
                             </div>
-                            <div >
+                                <ion-grid *ngIf="TotImages>0" >     
+                                    <ion-row  >
+                                            <ion-col   size="3" offset="3" *ngFor="let image of portImage;let i=index">
+                                                <div class="divPort" (click)="photoViewerShow()">    
+                                                        <img  class="imagePort"  src="{{image}}">
+                                                </div>   
+                                            </ion-col>
+                                     </ion-row>                      
+                               </ion-grid>     
+                            <div *ngIf="TotImages==0">
                                     <br/>
                                     <h3>Desculpe!</h3>
                                     <p>Este prestador ainda não disponibilizou seu portfólio</p>
-                                    <img style="margin-top:50px" src="assets/icon/portfolio.png">
+                                    <img src="assets/icon/portfolio.png">
                             </div>
                             <h1></h1>
                         </ion-slide>
